@@ -8,6 +8,7 @@ import ForgotPassword from "../views/ForgotPassword.vue";
 import ResetLink from "../views/ResetLink.vue"; 
 import ResetPassword from "../views/ResetPassword.vue";
 import PasswordUpdation from "../views/PasswordUpdation.vue";
+import Dashboard from '../views/Dashboard.vue'
 
 const routes = [
   { path: "/signup", name: "SignUp", component: SignUp, },
@@ -18,6 +19,7 @@ const routes = [
   { path: "/reset-link", name: "ResetLink", component: ResetLink, },
   { path: "/reset-password", name: "ResetPassword", component: ResetPassword, },
   { path: "/password-updation", name: "PasswordUpdation", component: PasswordUpdation, },
+  { path: "/dashboard", name: "Dashboard", component: Dashboard,},
 ];
 
 const router = createRouter({

@@ -1,0 +1,1 @@
+<template>product view tab</template>
