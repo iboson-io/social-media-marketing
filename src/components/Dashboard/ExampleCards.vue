@@ -1,35 +1,54 @@
 <template>
-  <div class="mt-10">
+  <div class="mx-auto mt-10 max-w-3xl">
     <p class="mb-4 text-left text-sm text-gray-500">
       Start with the example below
     </p>
 
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <Card
-        title="Set Up Your Brand"
-        desc="Let me learn your brand's style, tone, and personality."
-      />
-      <Card
-        title="Plan Weekly Posts"
-        desc="AI suggests days, times, and post ideas."
-      />
-      <Card
-        title="Create Social Media Posts"
-        desc="AI generates engaging posts and captions."
-      />
+      <section class="mt-10">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="card">
+        <div>
+          <img :src="TickIcon" class="icon mb-2" />
+        </div>
+        <div class="flex text-start flex-col">
+        <h3 class="label_1_semibold mb-2">Set Up Your Brand</h3>
+        <p class="label_2_regular ">
+          Let me learn your brand’s style, tone, and personality.
+        </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div>
+          <img :src="TickIcon" class="icon mb-2" />
+        </div>
+        <div class="flex text-start flex-col ">
+        <h3 class="label_1_semibold mb-2">Plan Weekly Posts</h3>
+        <p class="label_2_regular">
+          AI suggests days, times, and post ideas for your brand.
+        </p>
+      </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div>
+          <img :src="TickIcon" class="icon mb-2" />
+        </div>
+        <div class="flex text-start flex-col">
+        <h3 class="label_1_semibold mb-2">Create Social Media Posts</h3>
+        <p class="label_2_regular">
+          AI generates engaging posts, and captions for your brand.
+        </p>
+      </div>
+      </div>
     </div>
+  </section>
   </div>
 </template>
-
 <script setup>
-const Card = {
-  props: ["title", "desc"],
-  template: `
-    <div class="rounded-xl border bg-white p-5 shadow-sm">
-      <div class="mb-3 h-8 w-8 rounded-lg bg-purple-100"></div>
-      <h3 class="font-semibold text-gray-900">{{ title }}</h3>
-      <p class="mt-2 text-sm text-gray-500">{{ desc }}</p>
-    </div>
-  `,
-};
+import TickIcon from "../../assets/images/TickIcon.svg"
 </script>
+

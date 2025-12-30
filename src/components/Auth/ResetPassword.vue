@@ -37,7 +37,7 @@
         </div>
 
         <!-- Error Message -->
-        <p v-if="errorMessage" class="error_text">
+        <p v-if="errorMessage" class="error_text error_message_text_alignment">
           {{ errorMessage }}
         </p>
       </div>
@@ -78,7 +78,8 @@ const password = ref("");
 const errorMessage = ref("");
 
 /* Password Regex */
-const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#()_\-+=]).{8,}$/;
 
 /* Toggle Password */
 const togglePassword = () => {
@@ -96,7 +97,7 @@ const handleSubmit = () => {
 
   if (!passwordRegex.test(password.value)) {
     errorMessage.value =
-      "Password must be at least 8 characters long and include one uppercase letter and one number";
+     "Oops! The password you entered is incorrect.";
     return;
   }
   router.push('/password-updation');

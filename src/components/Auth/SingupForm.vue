@@ -151,7 +151,8 @@ const errors = reactive({
 
 /* Regex */
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#()_\-+=]).{8,}$/;
 
 /* Password Toggle */
 const showPassword = ref(false)
@@ -202,7 +203,7 @@ const handleSubmit = () => {
     isValid = false
   } else if (!passwordRegex.test(form.password)) {
     errors.password =
-      "Password must be at least 8 characters long and include one uppercase letter and one number"
+      "Oops! The password you entered is incorrect."
     isValid = false
   }
 

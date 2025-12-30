@@ -15,22 +15,47 @@
   .gradient_text_color{
     @apply bg-gradient-to-r from-[#CD519D] to-[#7950F2] bg-clip-text text-transparent ;
   }
+  .heading_h3_semibold{
+  @apply font-semibold text-[2.5em] tracking-[-0.3px]
+  }
   .heading_h4_bold{
     @apply font-extrabold text-[2em] tracking-[0.2px];
   }
   .heading_h5_semibold{
     @apply font-semibold text-[1.5em] tracking-[0.18px] text-[#1D2125];
   }
-  
+  .heading_h5_semibold_logo{
+    @apply font-semibold text-[1.5em] tracking-[0.18px]
+  }
+  .label_1_medium{
+ @apply font-medium text-[1em] tracking-[0.18px] text-[#454F59]
+  }
   .label_1_regular{
     @apply font-normal text-[1em] tracking-[0.15px] text-[#38414A];
+  }
+  .label_1_semibold{
+  @apply font-semibold text-[1em] tracking-[-0.18px] text-[#1D2125]
   }
   .label_2_regular{
     @apply font-normal text-[0.875em] tracking-[-0.16px] text-[#38414A];
   }
   .label_2_medium{
     @apply font-medium text-[0.875em] tracking-[-0.16px] text-[#1D2125];
-
+  }
+  .label_2_semibold{
+    @apply text-[0.875em] font-semibold tracking-[0.16px] text-[#454F59];
+  }
+  .label_3_regular{
+    @apply text-[#596773] font-normal text-[0.75em] tracking-[0.12px];
+  }
+  .secondary_label_medium{
+    @apply text-[1em] font-bold 
+  }
+  .Body_2_Medium {
+    @apply font-medium text-[1em] text-[#8590A2]
+  }
+  .body_3_regular{
+    @apply font-normal text-[0.875em] text-[#1F2937]
   }
   /* button styles */
   .secondary_google_button {
@@ -42,6 +67,12 @@
  }
   .disabled_primary_button {
     @apply bg-[#7950F2] text-[#ffffff] font-bold cursor-pointer text-[1em] h-[3em] rounded-[8px] opacity-50;
+  }
+  .secondary_text_color{
+    @apply text-[#7950F2]
+  }
+  .secondary_bg_color{
+    @apply bg-[#F3F0FF]
   }
   .text_color{
     @apply text-[#38414A];
@@ -55,8 +86,20 @@
   .error_text{
     @apply text-[#DC2626] text-[0.875em] mt-1;
   }
+  .error_message_text_alignment{
+    @apply flex justify-end;
+  }
   .input_box{
     @apply w-full rounded-md  border border-[#D1D5DB] h-[3.125em] focus:outline-none px-3 font-normal text-[1em] text-[#1D2125];
   }
+
+  .card {
+  @apply rounded-xl border border-[#F1F2F4] p-6 shadow-sm transition cursor-pointer;
+}
+
+
+.icon {
+  @apply h-9 w-9;
+}
 } 
 

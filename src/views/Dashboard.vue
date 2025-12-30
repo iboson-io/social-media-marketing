@@ -22,7 +22,7 @@
         class="flex items-center gap-3 border-b bg-white px-4 py-3 lg:hidden"
       >
         <button @click="showMobileSidebar = true" class="text-xl">
-          ☰
+          <img :src="SidebarIcon" alt="">
         </button>
         <span class="font-semibold">Genius AI</span>
       </header>
@@ -52,6 +52,7 @@ import AnalyticsView from "../components/Dashboard/AnalyticsView.vue";
 import ProductsView from "../components/Dashboard/ProductsView.vue";
 import SettingsView from "../components/Dashboard/SettingsView.vue";
 import NotificationsView from "../components/Dashboard/NotificationsView.vue";
+import SidebarIcon from "../assets/images/SidebarIcon.svg"
 
 const activeTab = ref("chat");
 const showMobileSidebar = ref(false);
