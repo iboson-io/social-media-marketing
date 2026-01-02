@@ -30,6 +30,9 @@
   .heading_h6_semibold{
     @apply font-semibold text-[1.25em]
   }
+  .heading_h6_bold{
+    @apply font-bold text-[1.25em]
+  }
   .label_1_medium{
  @apply font-medium text-[1em] tracking-[0.18px] text-[#454F59]
   }
@@ -51,6 +54,10 @@
   .label_3_regular{
     @apply text-[#596773] font-normal text-[0.75em] tracking-[0.12px];
   }
+  .label_3_medium{
+    @apply font-medium text-[0.75em] text-[#555963] tracking-[-0.12px]
+  }
+
   .secondary_label_medium{
     @apply text-[1em] font-bold 
   }
@@ -86,6 +93,19 @@
   .primary_text_color{
     @apply text-[#1D2125];
   }
+  .bg_primary_color {
+    @apply bg-[#F7F8F9]
+  }
+  .bg_secondary_color{
+    @apply bg-[#F1F2F4]
+  }
+  .bg_white{
+   @apply bg-[#FFFFFF]
+  }
+
+  .primary_border_color{
+    @apply border border-[#F1F2F4]
+  }
   .or_text{
     @apply text-[#6B7280] text-[14px] font-medium
   }
@@ -98,6 +118,14 @@
   .input_box{
     @apply w-full rounded-md  border border-[#D1D5DB] h-[3.125em] focus:outline-none px-3 font-normal text-[1em] text-[#1D2125];
   }
+  .paragraph_p7_medium{
+  @apply text-[0.75em] text-[#555963] font-medium
+  }
+  .paragraph_p5_medium{
+  @apply text-[0.875em] text-[#22272B] font-medium
+  }
+
+  /* --------------------------------------------------------------------------------------- */
 
   .card {
   @apply rounded-xl border border-[#F1F2F4] p-6 shadow-sm transition cursor-pointer;
