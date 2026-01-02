@@ -10,13 +10,13 @@
   <!-- Popup -->
   <div
     v-if="open"
-    class="fixed top-3 z-50 w-[40%] rounded-xl bg-white shadow-2xl"
+    class="fixed top-2 z-50 w-[40%] rounded-xl bg-white shadow-2xl"
     :class="isCollapsed ? 'left-20' : 'left-[16.5em]'"
   >
     <!-- Header -->
     <div class="flex items-start justify-between border-b p-4">
       <div>
-        <h2 class="primary_text_color heading_h6_semibold">Notifications</h2>
+        <h2 class="heading_h6_semibold">Notifications</h2>
         <p class="body_3_regular">
           Stay updated with your latest activities
         </p>
@@ -28,68 +28,99 @@
     </div>
 
     <!-- Tabs -->
-    <div class="flex gap-2 border-b px-4 py-3 bg-[#F1F2F4]">
+    <div class="flex gap-2 border-b bg-[#F1F2F4] px-4 py-3">
       <button
         v-for="tab in tabs"
         :key="tab.key"
         @click="activeTab = tab.key"
-        class="rounded-md px-2 py-1 flex text-center items-center"
+        class="flex items-center gap-1 rounded-md px-2 py-1"
         :class="
           activeTab === tab.key
-            ? 'bg-[#fff] '
+            ? 'bg-white'
             : 'hover:bg-gray-100'
         "
-       >
-        <span class="label_2_semibold">{{ tab.label }} </span> <span class="label_3_regular">({{ tab.count }})</span>
+      >
+        <span class="label_2_semibold">{{ tab.label }}</span>
+        <span class="label_3_regular">({{ tab.count }})</span>
       </button>
     </div>
 
-    <!-- List -->
-    <div class="max-h-[420px] space-y-2 overflow-y-auto p-4">
+    <!-- CONTENT -->
+    <div class="p-4">
+      <!-- EMPTY STATE -->
       <div
-        v-for="item in filteredNotifications"
-        :key="item.id"
-        class="relative rounded-lg border p-4"
+        v-if="filteredNotifications.length === 0"
+        class="flex h-[68vh] flex-col items-center justify-center text-center"
       >
-        <!-- Status Dot -->
-        <span
-          class="absolute right-3 top-3 h-2 w-2 rounded-full bg-[#155DFC]"
-        ></span>
-
-        <!-- Title -->
-        <div class="mb-1 flex items-center gap-2">
-          <p class="label_2_semibold">{{ item.title }}</p>
-
-          <span
-            class="rounded px-2 py-[2px] caption_1_medium"
-            :class="item.badgeClass"
-          >
-            {{ item.badge }}
-          </span>
+        <div
+          class="mb-4 flex items-center justify-center rounded-full"
+        >
+         <img :src="BellIcon" alt="" class="h-32 w-32">
         </div>
 
-        <!-- Description -->
-        <p class="label_2_regular">
-          {{ item.description }}
+        <p class="label_1_medium">Notification</p>
+        <p class="body_3_regular">
+          You have no notifications right now. <br />
+          Come back later.
         </p>
+      </div>
 
-        <!-- Time -->
-        <p class="body_4_regular">
-          {{ item.time }}
-        </p>
+      <!-- NOTIFICATION LIST -->
+      <div
+        v-else
+        class="max-h-[59vh] space-y-2 overflow-y-auto"
+      >
+        <div
+          v-for="item in filteredNotifications"
+          :key="item.id"
+          class="relative rounded-lg border p-4"
+        >
+          <!-- Status Dot -->
+          <span
+            class="absolute right-3 top-2 h-2 w-2 rounded-full bg-[#155DFC]"
+          ></span>
+
+          <!-- Title -->
+          <div class="mb-1 flex items-center gap-2">
+            <p class="label_2_semibold">{{ item.title }}</p>
+
+            <span
+              class="rounded px-2 py-[2px] caption_1_medium"
+              :class="item.badgeClass"
+            >
+              {{ item.badge }}
+            </span>
+          </div>
+
+          <!-- Description -->
+          <p class="label_2_regular">
+            {{ item.description }}
+          </p>
+
+          <!-- Time -->
+          <p class="body_4_regular">
+            {{ item.time }}
+          </p>
+        </div>
       </div>
     </div>
 
     <!-- Footer -->
-    <div class="border border-[#D1D5DB] p-1 flex items-center text-[#374151] bg-[#F3F4F6] flex justify-center gap-2 m-2 rounded rounded-md">
-        <img :src="ClearIcon" alt=""> <span>Clear All</span>
+    <div
+      v-if="notifications.length"
+      class="m-2 flex cursor-pointer items-center justify-center gap-2 rounded-md border bg-[#F3F4F6] p-2 text-[#374151]"
+      @click="clearAll"
+    >
+      <img :src="ClearIcon" />
+      <span class="label_2_medium">Clear All</span>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
-import ClearIcon from "../../assets/images/ClearIcon.svg"
+import ClearIcon from "../../assets/images/ClearIcon.svg";
+import BellIcon from "../../assets/images/BellIcon.svg"
 
 defineProps({
   open: Boolean,
@@ -98,14 +129,8 @@ defineProps({
 
 const activeTab = ref("all");
 
-const tabs = [
-  { key: "all", label: "All", count: 10 },
-  { key: "review", label: "Drafts & Review", count: 2 },
-  { key: "reminder", label: "Reminders", count: 1 },
-  { key: "error", label: "System Errors", count: 2 },
-];
-
-const notifications = [
+/* 🔥 REACTIVE DATA */
+const notifications = ref([
   {
     id: 1,
     type: "review",
@@ -146,20 +171,37 @@ const notifications = [
     badgeClass: "bg-[#FFECEB] text-[#E2483D] border border-[#F87168]",
     time: "2 hours ago",
   },
-  {
-    id: 5,
-    type: "success",
-    title: "Post published successfully",
-    description:
-      'Your LinkedIn post for "Meet Our Team" is now live.',
-    badge: "Success",
-    badgeClass: "bg-[#FFECEB] text-[#E2483D] border border-[#F87168]",
-    time: "2 days ago",
-  },
-];
+]);
 
+/* TABS (AUTO COUNTS) */
+const tabs = computed(() => [
+  { key: "all", label: "All", count: notifications.value.length },
+  {
+    key: "review",
+    label: "Drafts & Review",
+    count: notifications.value.filter(n => n.type === "review").length,
+  },
+  {
+    key: "reminder",
+    label: "Reminders",
+    count: notifications.value.filter(n => n.type === "reminder").length,
+  },
+  {
+    key: "error",
+    label: "System Errors",
+    count: notifications.value.filter(n => n.type === "error").length,
+  },
+]);
+
+/* FILTER */
 const filteredNotifications = computed(() => {
-  if (activeTab.value === "all") return notifications;
-  return notifications.filter(n => n.type === activeTab.value);
+  if (activeTab.value === "all") return notifications.value;
+  return notifications.value.filter(n => n.type === activeTab.value);
 });
+
+/* CLEAR ALL */
+const clearAll = () => {
+  notifications.value = [];
+  activeTab.value = "all";
+};
 </script>
