@@ -4,7 +4,6 @@
 
 <template>
   <div>
-    <router-link to="/home">Home</router-link>
     <RouterView />
   </div>
 </template>
