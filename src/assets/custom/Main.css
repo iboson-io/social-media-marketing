@@ -27,6 +27,9 @@
   .heading_h5_semibold_logo{
     @apply font-semibold text-[1.5em] tracking-[0.18px]
   }
+  .heading_h5_bold{
+    @apply font-bold text-[1.5em] text-[#1D2125] tracking-[-0.15px]
+  }
   .heading_h6_semibold{
     @apply font-semibold text-[1.25em]
   }

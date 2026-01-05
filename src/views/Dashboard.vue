@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen bg-white">
+  <div class="flex min-h-screen bg_white overflow-hidden">
     <!-- Desktop Sidebar -->
     <Sidebar
       class="hidden lg:flex"
@@ -16,10 +16,10 @@
     />
 
     <!-- Main Area -->
-    <div class="flex flex-1 flex-col">
+    <div class="flex flex-1 flex-col overflow-y-auto">
       <!-- Mobile Header -->
       <header
-        class="flex items-center gap-3 border-b bg-white px-4 py-3 lg:hidden"
+        class="flex items-center gap-3 border-b bg_white px-4 py-3 lg:hidden"
       >
         <button @click="showMobileSidebar = true" class="text-xl">
           <img :src="SidebarIcon" alt="">
