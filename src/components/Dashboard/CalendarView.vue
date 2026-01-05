@@ -1,4 +1,5 @@
 <template>
+  <main class="flex-1 bg_primary_color  px-6 py-10">
   <div class="space-y-6">
     <!-- Header -->
     <div class="rounded-xl bg_primary_color p-6 shadow primary_border_color">
@@ -39,7 +40,7 @@
           <option value="all">All products</option>
         </select>
 
-        <button class="rounded-md px-4 py-2 primary_button flex items-center">
+        <button class="rounded-md px-4 py-2 primary_button flex items-center" @click="showPopup = true">
           <img :src="WhitePlusIcon"  alt="" class="mr-2"> Create new post
         </button>
       </div>
@@ -48,7 +49,7 @@
     <!-- MONTH VIEW -->
     <div
       v-if="activeView === 'Month'"
-      class="rounded-xl bg_white shadow"
+      class="rounded-xl bg_white shadow primary_border_color"
     >
       <!-- Month Header -->
       <div class="flex items-center justify-between border-b p-4">
@@ -58,7 +59,7 @@
       </div>
 
       <!-- Week Days -->
-      <div class="grid grid-cols-7 border-b text-center">
+      <div class="grid grid-cols-7 border-b text-center bg_primary_color">
         <div v-for="day in weekDays" :key="day" class="py-2 paragraph_p7_medium">
           {{ day }}
         </div>
@@ -86,7 +87,7 @@
     <!-- WEEK VIEW -->
     <div
       v-if="activeView === 'Week'"
-      class="rounded-xl bg_white p-6 shadow"
+      class="rounded-xl bg_white  shadow"
     >
       <div class="flex items-center justify-between border-b p-4">
   <button @click="prevWeek">‹</button>
@@ -121,7 +122,7 @@
         <div
           v-for="hour in 24"
           :key="hour"
-          class="flex h-12 items-center border-b label_2_regular"
+          class="flex h-12 items-center border-b label_2_regular ml-1"
         >
           {{ hour }}:00
         </div>
@@ -131,7 +132,7 @@
     <!-- DAY VIEW -->
     <div
   v-if="activeView === 'Day'"
-  class="rounded-xl bg_white p-6 shadow"
+  class="rounded-xl bg_white primary_border_color shadow"
 >
 
   <!-- Day Header -->
@@ -147,11 +148,11 @@
 
 
   
-  <div class="mb-6 flex flex-col items-center justify-center border-b pb-4">
-    <p class="heading_h5_semibold">
+  <div class="mb-6 flex flex-col items-start justify-center border-b pb-2 pt-2 bg_primary_color">
+    <p class="heading_h5_semibold ml-1">
       {{ dayNumber }}
     </p>
-    <p class="label_3_medium">
+    <p class="label_3_medium ml-1">
       {{ dayShort }}
     </p>
   </div>
@@ -161,7 +162,7 @@
     <div
       v-for="hour in 24"
       :key="hour"
-      class="flex h-12 items-center border-b label_2_regular"
+      class="flex h-12 items-center border-b label_2_regular ml-1"
     >
       {{ hour }}:00
     </div>
@@ -169,6 +170,43 @@
 </div>
 
   </div>
+
+  <!-- Popup for Create New Post -->
+  <div v-if="showPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+      <h2 class="mb-4">Create New Post</h2>
+      <p class="mb-4">Selected Date: {{ selectedDate ? selectedDate.toLocaleDateString() : 'None' }}</p>
+      
+      <!-- Mini Calendar -->
+      <div class="mb-4">
+        <h3 class="text-md font-semibold mb-2">{{ monthYear }}</h3>
+        <div class="grid grid-cols-7 gap-1 label_2_regular">
+          <div v-for="day in weekDays" :key="day" class="label_2_regular">{{ day }}</div>
+        </div>
+        <div class="grid grid-cols-7 gap-1">
+          <div
+            v-for="date in calendarDays"
+            :key="date.key"
+            class="py-2 text-center cursor-pointer "
+            :class="[
+              date.isToday ? 'bg-purple-50 border-purple-300' : '',
+              !date.isCurrentMonth ? 'text-gray-400 bg-gray-50' : '',
+              selectedDate && date.fullDate && selectedDate.getTime() === date.fullDate.getTime() ? 'bg-blue-200' : ''
+            ]"
+            @click="selectDate(date)"
+          >
+            {{ date.day }}
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-end gap-2">
+        <button @click="showPopup = false" class="px-4 py-2 label_2_regular rounded primary_border_color">Cancel</button>
+        <button @click="createPost" class="primary_button w-20">Create</button>
+      </div>
+    </div>
+  </div>
+  </main>
 </template>
 
 <script setup>
@@ -179,6 +217,10 @@ import WhitePlusIcon from "../../assets/images/WhitePlusIcon.svg"
 /* Views */
 const views = ["Day", "Week", "Month"];
 const activeView = ref("Month");
+
+/* Popup */
+const showPopup = ref(false);
+const selectedDate = ref(null);
 
 /* Selected Product */
 const selectedProduct = ref("all");
@@ -323,6 +365,7 @@ const calendarDays = computed(() => {
       day: d.getDate(),
       isToday,
       isCurrentMonth,
+      fullDate: new Date(d),
     });
   }
 
@@ -346,5 +389,21 @@ const currentWeek = computed(() => {
     };
   });
 });
+
+/* Select Date */
+const selectDate = (date) => {
+  selectedDate.value = date.fullDate;
+};
+
+/* Create Post */
+const createPost = () => {
+  if (selectedDate.value) {
+    alert(`Post created for ${selectedDate.value.toLocaleDateString()}`);
+    showPopup.value = false;
+    selectedDate.value = null;
+  } else {
+    alert('Please select a date');
+  }
+};
 
 </script>

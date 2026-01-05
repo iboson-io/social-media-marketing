@@ -28,14 +28,13 @@
       </header>
 
       <!-- Content -->
-      <main class="flex-1 bg-gradient-to-br from-[#F6F3FF] to-white px-6 py-10">
+      
         <ChatView v-if="activeTab === 'chat'" />
         <CalendarView v-else-if="activeTab === 'calendar'" />
         <AnalyticsView v-else-if="activeTab === 'analytics'" />
         <ProductsView v-else-if="activeTab === 'products'" />
         <SettingsView v-else-if="activeTab === 'settings'" />
         <NotificationsView v-if="activeTab === 'notifications'" :open="true" :isCollapsed="false" @close="activeTab = 'chat'" class="lg:hidden" />
-      </main>
     </div>
   </div>
 </template>

@@ -1,4 +1,5 @@
 <template>
+  <main class="flex-1 bg-gradient-to-br from-[#F6F3FF] to-white px-6 py-10">
   <div class="mx-auto max-w-5xl text-center">
     <div class="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-tr from-pink-400 via-purple-400 to-indigo-400"></div>
 
@@ -11,6 +12,7 @@
     <PromptBox />
     <ExampleCards />
   </div>
+  </main>
 </template>
 
 <script setup>
