@@ -65,12 +65,7 @@
 
         <!-- Billing & Plan Tab Content -->
         <div v-else-if="activeTab === 'billing'">
-          <div class="bg_white rounded-2xl py-7 px-4 border border-[#F1F2F4]">
-            <h2 class="heading_h5_bold mb-2">Billing & Plan</h2>
-            <p class="label_1_regular">
-              Manage your subscription and billing information.
-            </p>
-          </div>
+          <Billing/>
         </div>
 
         <!-- Localization Tab Content -->
@@ -110,6 +105,7 @@
 <script setup>
 import { ref, reactive, h, onMounted, nextTick } from "vue";
 import UserProfile from "../../components/Dashboard/Settings/UserProfile.vue"
+import Billing from "../../components/Dashboard/Settings/Billing.vue"
 
 const PersonIcon = (props) =>
   h("svg", { 

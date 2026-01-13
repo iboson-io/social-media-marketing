@@ -26,6 +26,9 @@
   .gradient_text_color{
     @apply bg-gradient-to-r from-[#CD519D] to-[#7950F2] bg-clip-text text-transparent ;
   }
+  .disable_text_color{
+    @apply text-[#B3B9C4]
+  }
   .heading_h3_semibold{
   @apply font-semibold text-[2.5em] tracking-[-0.3px]
   }
@@ -100,6 +103,9 @@
   .sub_text_color{
     @apply text-[#596773]
   }
+  .seconary_title_text_color{
+    @apply text-[#15172E]
+  }
   .secondary_bg_color{
     @apply bg-[#F3F0FF]
   }
@@ -123,6 +129,9 @@
   }
   .bg_brand_color{
     @apply bg-[#7950F2]
+  }
+  .bg_bar_color{
+   @apply bg-[#845EF7]
   }
 
   .primary_border_color{
@@ -176,6 +185,24 @@
   }
   .common_gap{
     @apply mt-5
+  }
+  .regular_gap{
+    @apply mt-1
+  }
+  .common_inner_gap{
+    @apply p-5
+  }
+  .medium_gap{
+   @apply mt-3
+  }
+  .button_thin{
+    @apply p-2
+  }
+  .button_width{
+    @apply w-1/3
+  }
+  .dot_text_style{
+    @apply text-[#9CA3AF]
   }
   .card {
   @apply rounded-xl border border-[#F1F2F4] p-6 shadow-sm transition cursor-pointer;
