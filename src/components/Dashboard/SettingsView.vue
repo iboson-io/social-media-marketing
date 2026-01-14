@@ -80,12 +80,7 @@
 
         <!-- Data & Privacy Settings Tab Content -->
         <div v-else-if="activeTab === 'data-privacy'">
-          <div class="bg_white rounded-2xl py-7 px-4 border border-[#F1F2F4]">
-            <h2 class="heading_h5_bold mb-2">Data & Privacy Settings</h2>
-            <p class="label_1_regular">
-              Control your data and privacy preferences.
-            </p>
-          </div>
+          <DataPrivacySettings/>
         </div>
       </div>
     </div>
@@ -98,6 +93,7 @@ import UserProfile from "../../components/Dashboard/Settings/UserProfile.vue"
 import Billing from "../../components/Dashboard/Settings/Billing.vue"
 import Localization from "../../components/Dashboard/Settings/localization.vue"
 import Security from "../../components/Dashboard/Settings/Security.vue"
+import DataPrivacySettings from "../../components/Dashboard/Settings/DataPrivacySettings.vue"
 
 const PersonIcon = (props) =>
   h("svg", { 
