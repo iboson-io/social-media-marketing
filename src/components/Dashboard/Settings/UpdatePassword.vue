@@ -3,8 +3,8 @@
     <!-- Password Success Modal -->
     <PasswordSuccessModal
       :open="showSuccessModal"
-      title="Password updated!"
-      message="You have successfully updated your password."
+      title="Password changed successfully!"
+      message="Please login to your email account again"
       button-text="Login Now"
       @close="showSuccessModal = false"
       @action="handleLoginNow"
@@ -21,14 +21,45 @@
 
     <!-- Form -->
     <div class="space-y-9 lg:w-1/2">
+      <!-- Current Password Field -->
+      <div>
+        <label class="label_2_medium block">Current password:</label>
+        <div class="relative common_gap">
+          <input
+            v-model="currentPassword"
+            :type="showCurrentPassword ? 'text' : 'password'"
+            placeholder="Enter Current Password"
+            class="input_box w-full pr-10"
+            :class="errors.currentPassword ? '!border-[#E2483D]' : 'inputbox_border_color'"
+            @input="validateCurrentPassword"
+          />
+          <button
+            type="button"
+            @click="showCurrentPassword = !showCurrentPassword"
+            class="absolute right-3 top-1/2 -translate-y-1/2"
+          >
+            <img
+              v-if="!showCurrentPassword"
+              :src="EyeOpenIcon"
+              alt="Show password"
+              class="w-5 h-5"
+            />
+            <img v-else :src="EyeCloseIcon" alt="">
+          </button>
+        </div>
+        <p v-if="errors.currentPassword" class="error_text mt-1">
+          {{ errors.currentPassword }}
+        </p>
+      </div>
+
       <!-- New Password Field -->
       <div>
-        <label class="label_2_medium block ">New Password:</label>
+        <label class="label_2_medium block">New Password:</label>
         <div class="relative common_gap">
           <input
             v-model="newPassword"
             :type="showNewPassword ? 'text' : 'password'"
-            placeholder="Enter new password"
+            placeholder="Enter New Password"
             class="input_box w-full pr-10"
             :class="errors.newPassword ? '!border-[#E2483D]' : 'inputbox_border_color'"
             @input="validateNewPassword"
@@ -44,7 +75,7 @@
               alt="Show password"
               class="w-5 h-5"
             />
-           <img  v-else :src="EyeCloseIcon" alt="">
+            <img v-else :src="EyeCloseIcon" alt="">
           </button>
         </div>
         <p v-if="errors.newPassword" class="error_text mt-1">
@@ -59,7 +90,7 @@
           <input
             v-model="confirmPassword"
             :type="showConfirmPassword ? 'text' : 'password'"
-            placeholder="Confirm new password"
+            placeholder="Enter Confirm Password"
             class="input_box w-full pr-10"
             :class="errors.confirmPassword ? '!border-[#E2483D]' : 'inputbox_border_color'"
             @input="validateConfirmPassword"
@@ -75,7 +106,7 @@
               alt="Show password"
               class="w-5 h-5"
             />
-            <img  v-else :src="EyeCloseIcon" alt="">
+            <img v-else :src="EyeCloseIcon" alt="">
           </button>
         </div>
         <p v-if="errors.confirmPassword" class="error_text mt-1">
@@ -102,20 +133,32 @@ import BackButtonArrow from "../../../assets/images/BackButtonArrow.svg";
 import EyeCloseIcon from "../../../assets/images/EyeCloseIcon.svg";
 import PasswordSuccessModal from "./PasswordSuccessModal.vue";
 
-const emit = defineEmits(["back", "passwordCreated"]);
+const emit = defineEmits(["back", "passwordUpdated"]);
 
 // State
+const showCurrentPassword = ref(false);
 const showNewPassword = ref(false);
 const showConfirmPassword = ref(false);
+const currentPassword = ref("");
 const newPassword = ref("");
 const confirmPassword = ref("");
 const showSuccessModal = ref(false);
 const errors = reactive({
+  currentPassword: "",
   newPassword: "",
   confirmPassword: "",
 });
 
 // Validation
+const validateCurrentPassword = () => {
+  errors.currentPassword = "";
+  if (!currentPassword.value) {
+    errors.currentPassword = "Current password is required";
+    return false;
+  }
+  return true;
+};
+
 const validateNewPassword = () => {
   errors.newPassword = "";
   if (!newPassword.value) {
@@ -167,19 +210,20 @@ const validateConfirmPassword = () => {
 };
 
 const handleResetPassword = () => {
+  const isCurrentPasswordValid = validateCurrentPassword();
   const isNewPasswordValid = validateNewPassword();
   const isConfirmPasswordValid = validateConfirmPassword();
 
-  if (isNewPasswordValid && isConfirmPasswordValid) {
+  if (isCurrentPasswordValid && isNewPasswordValid && isConfirmPasswordValid) {
     // Handle password reset logic here
     console.log("Password reset:", {
+      currentPassword: currentPassword.value,
       newPassword: newPassword.value,
       confirmPassword: confirmPassword.value,
     });
     // Show success modal
     showSuccessModal.value = true;
-    // You can emit an event or call an API here
-    // For now, we'll just log it
+    // Don't emit passwordUpdated here - wait until modal is closed
   }
 };
 
@@ -188,8 +232,8 @@ const handleLoginNow = () => {
   console.log("Login Now clicked");
   // Close modal
   showSuccessModal.value = false;
-  // Emit event to notify parent that password was created (after modal is shown)
-  emit("passwordCreated");
+  // Emit event to notify parent that password was updated (after modal is shown)
+  emit("passwordUpdated");
   // Go back to security
   emit("back");
   // You can navigate to login page or emit an event

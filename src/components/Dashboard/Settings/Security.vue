@@ -1,28 +1,39 @@
 <template>
   <!-- Show Create Password Form -->
-  <CreatePassword v-if="showCreatePassword" @back="showCreatePassword = false" />
+  <CreatePassword 
+    v-if="showCreatePassword && !hasPasswordCreated" 
+    @back="showCreatePassword = false"
+    @passwordCreated="handlePasswordCreated"
+  />
+  
+  <!-- Show Update Password Form -->
+  <UpdatePassword 
+    v-else-if="showUpdatePassword && hasPasswordCreated" 
+    @back="showUpdatePassword = false"
+    @passwordUpdated="handlePasswordUpdated"
+  />
   
   <!-- Show Security Settings -->
-  <div v-else class="rounded-2xl bg_white common_inner_gap shadow-sm">
+  <div v-if="!showCreatePassword && !showUpdatePassword" class="rounded-2xl bg_white common_inner_gap shadow-sm">
     <!-- Header -->
     <h2 class="heading_h6_bold">Security</h2>
     <p class="label_1_regular regular_gap medium_mb">
       Manage your password and login sessions securely.
     </p>
 
-    <!-- Create your password -->
+    <!-- Create/Update your password -->
     <div class="flex flex-col items-start md:flex-row  md:justify-between gap-4 mb-8">
       <div class="flex-1">
-        <h3 class="label_1_semibold">Create your password</h3>
+        <h3 class="label_1_semibold">{{ hasPasswordCreated ? 'Update your password' : 'Create your password' }}</h3>
         <p class="label_1_regular regular_gap">
-          Create a strong password to keep your account safe.
+          {{ hasPasswordCreated ? 'Update your password to keep your account secure.' : 'Create a strong password to keep your account safe.' }}
         </p>
       </div>
       <button
-        @click="showCreatePassword = true"
+        @click="hasPasswordCreated ? showUpdatePassword = true : showCreatePassword = true"
         class="button_thin px-5 rounded-lg inputbox_border_color bg_white sub_button_semibold "
       >
-        Create password
+        {{ hasPasswordCreated ? 'Update password' : 'Create password' }}
       </button>
     </div>
 
@@ -76,7 +87,20 @@
 <script setup>
 import { ref } from "vue";
 import CreatePassword from "./CreatePassword.vue";
+import UpdatePassword from "./UpdatePassword.vue";
 
 const showCreatePassword = ref(false);
+const showUpdatePassword = ref(false);
+const hasPasswordCreated = ref(false);
+
+const handlePasswordCreated = () => {
+  hasPasswordCreated.value = true;
+  showCreatePassword.value = false;
+};
+
+const handlePasswordUpdated = () => {
+  // Password was updated, you can add any additional logic here
+  showUpdatePassword.value = false;
+};
 </script>
 
