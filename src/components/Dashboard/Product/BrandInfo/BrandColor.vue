@@ -1,14 +1,14 @@
 <template>
-  <div class="bg_white rounded-2xl py-7 px-4 brand_section_height">
-    <ul class="space-y-6">
+  <div class="bg_white rounded-2xl py-7 px-4 brand_section_height primary_border_color">
+    <ul class="space-y-9">
       <!-- Primary -->
-      <div class="gap-3 flex flex-col items-start justify-between lg:flex-row">
+      <div class="gap-3 flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Primary
         </span>
 
         <div
-          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] lg:w-[70%]"
+          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] md:w-[70%]"
           :style="{ backgroundColor: colors.primary }"
         >
           <input
@@ -23,13 +23,13 @@
     </div>
 
       <!-- Secondary -->
-      <div class="gap-3 flex flex-col items-start justify-between lg:flex-row">
+      <div class="gap-3 flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Secondary
         </span>
 
         <div
-          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] lg:w-[70%]"
+          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] md:w-[70%]"
           :style="{ backgroundColor: colors.secondary }"
         >
           <input
@@ -44,13 +44,13 @@
     </div>
 
       <!-- Font -->
-      <li class="gap-3 flex flex-col items-start justify-between lg:flex-row">
+      <li class="gap-3 flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Font
         </span>
 
         <div
-          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] lg:w-[70%]"
+          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] md:w-[70%]"
           :style="{ backgroundColor: colors.font }"
         >
           <input

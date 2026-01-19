@@ -1,8 +1,8 @@
 <template>
-    <div class="flex min-h-screen items-center justify-center bg_primary_color px-4">
+    <div class="flex min-h-screen items-center justify-center bg_primary_color px-4 py-12 md:px-10 lg:py-7">
     <!-- Card -->
     <div
-      class="w-full  rounded-2xl bg_white px-6 h-[90%] shadow-sm flex items-center justify-center"
+      class="w-full  rounded-2xl bg_white px-6 h-[100%] shadow-sm flex items-center justify-center"
     >
       <div class="flex flex-col items-center text-center">
         <!-- Illustration -->

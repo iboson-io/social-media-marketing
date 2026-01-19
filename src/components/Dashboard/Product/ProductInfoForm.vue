@@ -1,9 +1,9 @@
 <template>
-  <div class="flex min-h-screen items-center justify-center bg_primary_color px-4 py-8">
+  <div class="flex min-h-screen items-center justify-center bg_primary_color px-4 md:px-10 py-12 lg:py-7">
     <!-- Card -->
-    <div class="w-full   h-[96%]  flex flex-col justify-center">
+    <div class="w-full   h-[100%]  flex flex-col justify-center">
       <!-- Header Section -->
-      <div class="mb-4 bg_white rounded-2xl p-6">
+      <div class=" bg_white rounded-2xl common_inner_gap primary_border_color">
         <h1 class="heading_h6_bold primary_text_color">
           Create a new product
         </h1>
@@ -16,7 +16,7 @@
           <!-- Step 1: Brand Info -->
           <div ref="step1Ref" class="flex items-center flex-shrink-0">
             <div
-              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap"
+              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
               :class="currentStep === 1 ? 'secondary_bg_color' : currentStep > 1 ? 'secondary_bg_color' : 'bg_white'"
             >
               <span class="label_1_semibold secondary_text_color">1. Brand Info</span>
@@ -27,7 +27,7 @@
           <!-- Step 2: Brand Identity -->
           <div ref="step2Ref" class="flex items-center flex-shrink-0">
             <div
-              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap"
+              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
               :class="currentStep === 2 ? 'secondary_bg_color' : currentStep > 2 ? 'secondary_bg_color' : 'bg_white'"
             >
               <span class="label_1_semibold secondary_text_color">2. Brand Identity</span>
@@ -38,7 +38,7 @@
           <!-- Step 3: Social Connections -->
           <div ref="step3Ref" class="flex items-center flex-shrink-0">
             <div
-              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap"
+              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
               :class="currentStep === 3 ? 'secondary_bg_color' : 'bg_white'"
             >
               <span class="label_1_semibold secondary_text_color">3. Social Connections</span>
@@ -47,7 +47,7 @@
         </div>
       </div>
       </div>
-    <div class="h-[100%]">
+    <div class="h-[100%] common_gap">
       <!-- Step 1: Brand Info -->
       <BrandInfo
         v-if="currentStep === 1"

@@ -7,7 +7,7 @@
   >
     <!-- Modal - Positioned on the right -->
     <div
-      class="fixed right-0 top-0 bottom-0 w-full lg:max-w-lg max-h-screen overflow-y-auto bg_white shadow-2xl"
+      class="fixed right-0 top-48 bottom-0 w-full md:top-0 hide-scrollbar md:max-w-lg  max-h-screen overflow-y-auto bg_white shadow-2xl"
       @click.stop
     >
       <!-- Header -->
@@ -15,7 +15,7 @@
         <h2 class="heading_h6_semibold primary_text_color">View post</h2>
         <button
           @click="$emit('close')"
-          class="absolute right-6 secondary_text_color leading-none"
+          class="absolute right-6 primary_text_color leading-none"
         >
           ✕
         </button>
@@ -30,11 +30,11 @@
             This post performed 38% better than your average image post.
           </span>
         </div>
-
+      <div class="bg_white common_inner_gap rounded-2xl common_gap">
         <!-- Status and Post Type -->
-        <div class="flex items-center gap-3 justify-center mt-6">
+        <div class="flex justify-between gap-3 justify-center">
           <span
-            class="rounded-lg px-3 py-1.5 paragraph_p5_regular flex items-center gap-2 w-36 md::w-52"
+            class="rounded-lg px-3 py-1.5 paragraph_p5_regular flex items-center gap-2 w-36 md:min-w-56"
             :class="statusClass(postData?.status)"
           >
             <img :src="PublishIcon" alt="">
@@ -43,10 +43,10 @@
           <div class="relative platform-dropdown-container">
             <button
               @click.stop="togglePlatformDropdown"
-              class="flex items-center gap-2 paragraph_p5_regular primary_text_color primary_border_color p-1"
+              class="flex items-center gap-6 md:gap-2 paragraph_p5_regular primary_text_color primary_border_color p-1"
             >
               <img :src="PostFilter" alt="">
-              <span>{{ getPostType() }}</span>
+              <span class="hidden md:block">{{ getPostType() }}</span>
               <img :src="DownArrow" alt="" class="h-4 w-4" />
             </button>
             
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Post Image -->
-        <div class="rounded-lg overflow-hidden bg_white flex justify-center regular_gap">
+        <div class="rounded-lg overflow-hidden bg_white flex justify-center medium_gap">
           <img
             :src="postData?.image"
             :alt="postData?.title"
@@ -79,19 +79,18 @@
 
         <!-- Caption -->
         <div class="regular_gap">
-          <p class="body_1_regular primary_text_color pt-3 border-b pb-3">
-            {{ getFullCaption() }}
+          <p class="body_1_regular primary_text_color medium_gap" v-html="getFullCaption()">
           </p>
         </div>
-      
+         <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
         <!-- Date/Time -->
          <p class="label_2_semibold common_gap">Date/Time</p>
-        <div class="body_1_regular primary_text_color mt-2 mb-3">
+        <div class="body_1_regular primary_text_color regular_gap">
           {{ formatDateTime() }}
         </div>
-
+      </div>
         <!-- Metrics Grid -->
-        <div class=" flex flex-col justify-center items-center lg:grid grid-cols-1 gap-4 lg:grid-cols-2 ">
+        <div class=" flex flex-col justify-center items-center md:grid md:grid-cols-2 lg:grid grid-cols-1 gap-4 lg:grid-cols-2 common_gap">
 
         <AnalyticsStatCard
           v-for="(stat, index) in stats"
@@ -103,7 +102,7 @@
         <!-- Repost Button -->
         <button
           @click="handleRepost"
-          class="w-full primary_button flex items-center justify-center gap-2 py-3 rounded-lg common_gap"
+          class="w-full primary_button flex items-center justify-center gap-2  rounded-lg common_gap"
         >
           <img :src="RepostBottonIcon" alt="">
           Repost
@@ -180,7 +179,10 @@ const handleClickOutside = (event) => {
 
 const getFullCaption = () => {
   const title = props.postData?.title || 'Big Sale this weekend!';
-  return `${title} Don't miss your chance to grab your favorites at exclusive prices. #WeekendSale #LimitedOffer #ShopSmart`;
+  const caption = `${title} Don't miss your chance to grab your favorites at exclusive prices. #WeekendSale #LimitedOffer #ShopSmart`;
+  
+  // Replace hashtags with styled spans
+  return caption.replace(/#(\w+)/g, '<span class="hashtag_text_color">#$1</span>');
 };
 
 const formatDateTime = () => {
@@ -250,15 +252,17 @@ const baseStats = [
     icon: TotalReach,
     iconBg: 'bg-green-100',
     iconColor: 'text-green-600',
+    mobileWdth: 'w-[100%]',
     valueMonth: '',
     
   },
   {
     title: 'Engagement rate',
-    description: 'Likes, comments, shares vs impressions',
+    description: 'Likes, comments, & impressions',
     icon: MessageIcon,
     iconBg: 'bg-yellow-100',
     iconColor: 'text-yellow-600',
+    mobileWdth: 'w-[100%]',
     valueMonth: '',
     
   },
@@ -268,6 +272,7 @@ const baseStats = [
     icon: LikeIcon,
     iconBg: 'bg-blue-100',
     iconColor: 'text-blue-600',
+    mobileWdth: 'w-[100%]',
     valueMonth: '+1,230',
    
   },
@@ -277,6 +282,7 @@ const baseStats = [
     icon: CommentIcon,
     iconBg: 'bg-pink-100',
     iconColor: 'text-pink-600',
+    mobileWdth: 'w-[100%]',
     valueMonth: '210',
   },
 ];

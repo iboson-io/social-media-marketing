@@ -1,5 +1,5 @@
 <template>
-     <div class="bg_white rounded-2xl common_inner_gap primary_border_color mb-6">
+     <div class="bg_white rounded-2xl common_inner_gap primary_border_color">
             <h2 class="heading_h6_bold">Profile Information</h2>
             <p class="label_1_regular regular_gap medium_mb">
               Update your profile, secure your account, and manage connected apps.
@@ -32,8 +32,8 @@
                 <label class="label_2_medium primary_text_color w-20 flex-shrink-0">
                   Name:
                 </label>
-              <div class="flex w-[100%] gap-3 items-center"> 
-                <div class="flex items-center gap-3 medium_gap w-[100%] md:w-1/2">
+              <div class="flex w-[100%] gap-3 items-center medium_gap"> 
+                <div class="flex items-center gap-3 w-[100%] md:w-1/2">
                   <input
                     v-model="profileForm.name"
                     type="text"
@@ -75,8 +75,8 @@
                 <label class="label_2_medium primary_text_color w-20 flex-shrink-0">
                   Email:
                 </label>
-                <div class="flex w-[100%] gap-3 items-center"> 
-                <div class="flex items-center gap-3 medium_gap w-[100%] md:w-1/2">
+                <div class="flex w-[100%] gap-3 items-center medium_gap" > 
+                <div class="flex items-center gap-3 w-[100%] md:w-1/2">
                   <input
                     v-model="profileForm.email"
                     type="email"

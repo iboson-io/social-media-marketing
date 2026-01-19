@@ -1,19 +1,19 @@
 <template>
-  <div class="bg_white rounded-2xl py-7 px-4 brand_section_height">
-    <ul class="space-y-6">
+  <div class="bg_white rounded-2xl py-7 px-4 brand_section_height primary_border_color">
+    <ul class="space-y-9">
 
       <!-- Secondary -->
-      <div class="gap-3 flex flex-col items-start justify-between lg:flex-row">
+      <div class="gap-3 flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Heading
         </span>
 
         <div
-          class="relative flex items-center rounded-xl w-[100%] lg:w-[70%]"
+          class="relative flex items-center rounded-xl w-[100%] md:w-[70%]"
         >
           <select
             v-model="fonts.body"
-            class="w-full appearance-none rounded-xl inputbox_border_color px-4 py-3 label_2_medium primary_text_color focus:border-[#E5DBFF] focus:outline-none"
+            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color"
           >
             <option value="Open Sans">Open Sans</option>
             <option value="Inter">Inter</option>
@@ -36,17 +36,17 @@
     </div>
 
       <!-- Font -->
-      <li class="gap-3 flex flex-col items-start justify-between lg:flex-row">
+      <li class="gap-3 flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Font
         </span>
 
         <div
-          class="relative flex items-center rounded-xl w-[100%] lg:w-[70%]"
+          class="relative flex items-center rounded-xl w-[100%] md:w-[70%]"
         >
           <select
             v-model="fonts.body"
-            class="w-full appearance-none rounded-xl inputbox_border_color px-4 py-3 label_2_medium primary_text_color focus:border-[#E5DBFF] focus:outline-none"
+            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color "
           >
             <option value="Open Sans">Open Sans</option>
             <option value="Inter">Inter</option>

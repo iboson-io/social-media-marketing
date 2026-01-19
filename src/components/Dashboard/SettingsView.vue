@@ -1,8 +1,8 @@
 <template>
-  <main class="flex-1 bg_primary_color px-4 py-10 md:px-10">
+  <main class="flex-1 bg_primary_color px-4 py-12 md:px-10 lg:py-7">
     <div class="max-w-full md:max-w-none">
       <!-- Navigation Tabs -->
-      <div class="relative mb-8 border-b primary_border_color bg_white rounded-2xl p-3 md:p-3">
+      <div class="relative border-b primary_border_color bg_white rounded-2xl p-3 md:p-3">
         <!-- Left Arrow Button (Mobile only) -->
         <button
           v-if="canScrollLeft"
@@ -56,7 +56,7 @@
       </div>
 
       <!-- Tab Content -->
-      <div class="space-y-6">
+      <div class="space-y-6 common_gap">
         <!-- Account Tab Content -->
         <div v-if="activeTab === 'account'">
           <!-- Profile Information Section -->

@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="flex h-screen flex-col border-r bg_white transition-all duration-300"
+    class="flex  flex-col border-r bg_white transition-all duration-300"
     :class="isCollapsed ? 'w-16 px-2' : 'w-64 px-4'"
     @click="handleSidebarContainerClick"
   >
@@ -83,7 +83,7 @@
     </nav>
     
 <div>
-  <div class="absolute bottom-3 "
+  <div class="sidebar_bottom_section"
   :class="isCollapsed ? 'w-[2.875em]' : 'w-56'">
 
      <div class="block h-[2px] w-full bg_primary_color " :class="isCollapsed ? 'hidden' : ''"></div>

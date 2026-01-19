@@ -10,4 +10,71 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
+/* Hide text on md screens for product select, show only icon and arrow */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .product-select .product-text {
+    color: transparent;
+    width: 0;
+    overflow: hidden;
+  }
+}
 
+@media (min-width: 1500px) and (max-width: 5000px) {
+  .sidebar_bottom_section {
+    position: absolute;
+    bottom: 1rem;
+  }
+}
+.sidebar_bottom_section{
+  margin-left: 1em;
+  margin-left: 0px;
+}
+/* Checkbox styling */
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #F1F2F4;
+  border-radius: 4px;
+  background-color: #F7F8F9;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+
+.custom-checkbox:checked {
+  background-color: #F3F0FF;
+  border-color: #6E5DC6;
+}
+
+.custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 8px;
+  border: solid #6E5DC6;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+
+.custom-checkbox:hover {
+  border-color: #6E5DC6;
+}
+
+/* Dropdown panel styling */
+.relative > div[class*="absolute"] {
+  border: 1px solid #F1F2F4;
+}
+/* Hide scrollbar for mobile view */
+.chart-scroll-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.chart-scroll-container::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}

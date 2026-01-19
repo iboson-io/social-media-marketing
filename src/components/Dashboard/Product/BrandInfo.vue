@@ -1,7 +1,7 @@
 <template>
-  <div class="bg_white rounded-2xl p-6">
+  <div class="bg_white rounded-2xl common_inner_gap primary_border_color h-[100%]">
   <div class="mb-4 ">
-    <div class="mb-4 gap-8 lg:w-1/2">
+    <div class="gap-8 lg:w-1/2">
       <!-- Left Side: Illustration -->
       <div class=" flex-shrink-0">
         <img
@@ -35,7 +35,7 @@
         </div>
 
         <!-- Upload Files Link -->
-        <div class="mt-4">
+        <div class="common_gap">
           <span class="label_1_regular">Or </span>
           <button
             @click="showUploadModal = true"
@@ -73,7 +73,7 @@
         </h2>
         
         <!-- Subtitle -->
-        <p class="label_2_regular mb-2">
+        <p class="label_2_regular">
           Add your brand or product documents to help AI understand your identity.
         </p>
 
@@ -86,8 +86,8 @@
           @dragleave="isDragOver = false"
           @dragenter="isDragOver = true"
           :class="[
-            'border-2 border-dashed rounded-lg pt-20 text-center cursor-pointer transition-colors',
-            isDragOver ? 'sub_border_color bg_white' : 'primary_border_color'
+            'rounded-lg pt-20 text-center cursor-pointer transition-colors medium_gap' ,
+            isDragOver ? 'upload_box_border bg_white' : 'upload_box_border'
           ]"
           @click="fileInput?.click()"
         >
@@ -226,7 +226,7 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="flex gap-3 mt-6">
+        <div class="flex gap-3 common_gap justify-between">
           <button
             @click="closeModal"
             class="px-5 py-3 rounded-lg label_2_medium primary_border_color bg_primary_color"

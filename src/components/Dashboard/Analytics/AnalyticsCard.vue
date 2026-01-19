@@ -1,14 +1,14 @@
 <template>
   <div
-    class="flex items-start gap-4 rounded-2xl bg_white px-6 py-5 primary_border_color shadow-sm w-72 flex-shrink-0 md:w-auto"
+    :class="['flex items-start gap-4 rounded-2xl bg_white common_inner_gap primary_border_color shadow-sm flex-shrink-0 md:w-auto', mobileWdth]"
   >
     <!-- Content -->
     <div class="flex flex-col">
-        <div class="mb-2">
+        <div>
              <img :src="icon" alt=""> 
         </div>
       
-      <span class="label_1_medium">
+      <span class="label_1_medium normal_gap sub_text_color">
         {{ title }}
       </span>
 
@@ -30,6 +30,7 @@ defineProps({
   description: String,
   icon: Object,
   iconBg: String,
+  mobileWdth: String,
   iconColor: String,
 });
 </script>

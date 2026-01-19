@@ -1,8 +1,8 @@
 <template>
-  <main class="flex-1 bg_primary_color  px-4 py-5 md:py-10 md:px-10">
+  <main class="flex-1 bg_primary_color  px-4 py-12 md:px-10 lg:py-7">
   <div class="space-y-6">
     <!-- Header -->
-    <div class="rounded-xl bg_white common_inner_gap shadow primary_border_color">
+    <div class="rounded-xl bg_white common_inner_gap primary_border_color">
       <h2 class="primary_text_color heading_h6_bold">Calendar</h2>
       <p class="label_1_regular regular_gap">
         Manage your brands, connect their channels, and keep assets in one place.
@@ -10,7 +10,7 @@
     </div>
 
     <!-- Controls -->
-    <div class="flex items-center justify-between rounded-xl bg_white p-3 shadow flex-col-reverse gap-4 md:gap-0 md:flex-row">
+    <div class="flex items-center justify-between rounded-xl bg_white p-3  flex-col-reverse gap-4 md:gap-0 md:flex-row">
       <!-- View Switch -->
       <div class="flex rounded-full bg_secondary_color primary_border_color p-1">
         <button
@@ -20,7 +20,7 @@
           class="rounded-full primary_border_color px-4 py-1 label_2_semibold primary_text_color"
           :class="
             activeView === view
-              ? 'bg_white shadow'
+              ? 'bg_white '
               : ''
           "
         >
@@ -31,16 +31,18 @@
       <!-- Right Actions -->
       <div class="flex items-center gap-3">
         <img :src="ProductIcon" alt="" class="mr-[-40px] md:mr-[-44px] z-10">
+        <div class="relative">
         <select
           v-model="selectedProduct"
-          class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-3 md:pl-10 md:pr-5 py-2 label_2_medium bg_white"
+          class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-10 md:pl-10 md:pr-14 py-2 label_2_medium bg_white appearance-none"
         >
           <option value="single">Single</option>
           <option value="multi">Multi</option>
           <option value="all">All products</option>
         </select>
-
-        <button class="rounded-md px-4 py-2 primary_add_button flex items-center" @click="showPopup = true">
+        <img :src="DownArrow" alt="" class="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+        </div>
+        <button class="rounded-md px-4 py-2 primary_add_button flex items-center">
           <img :src="WhitePlusIcon"  alt="" class="mr-2"> Create new post
         </button>
       </div>
@@ -70,7 +72,7 @@
         <div
           v-for="date in calendarDays"
           :key="date.key"
-          class="h-14 md:h-20 secondary_button_border p-2 "
+          class="h-14 md:h-[4.8em] secondary_button_border p-2 "
           :class="[
             date.isToday ? 'secondary_bg_color border-[#7048E8]' : '',
             !date.isCurrentMonth ? 'bg_white' : ''
@@ -120,7 +122,7 @@
 </div>
 
 
-      <div class="space-y-2 overflow-auto md:h-[47vh]">
+      <div class="space-y-2 overflow-auto h-[64vh] md:h-[47vh] hide-scrollbar">
         <div
           v-for="hour in 24"
           :key="hour"
@@ -139,13 +141,13 @@
 
   <!-- Day Header -->
 <div class="flex items-center justify-between border-b p-4">
-  <button @click="prevDay">‹</button>
+  <button @click="prevDay"><img :src="CircleLeftArrow" alt=""></button>
 
   <p class="heading_h6_semibold primary_text_color">
     {{ fullDate }}
   </p>
 
-  <button @click="nextDay">›</button>
+  <button @click="nextDay"><img :src="CircleRightArrow" alt=""></button>
 </div>
 
 
@@ -160,11 +162,11 @@
   </div>
 
   <!-- Hours -->
-  <div class="space-y-2">
+  <div class="space-y-2  overflow-auto h-[60vh] md:h-[44vh] hide-scrollbar">
     <div
       v-for="hour in 24"
       :key="hour"
-      class="flex h-20 items-center  border-b label_2_regular ml-1"
+      class="flex h-24 items-center  border-b label_2_regular ml-1"
     >
       {{ formatHour(hour) }}
     </div>
@@ -172,89 +174,6 @@
 </div>
 
   </div>
-
-
- <!-- Popup for Create New Post -->
-<div
-  v-if="showPopup"
-  class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-  @click="closePopup"
->
-  <!-- Popup Card -->
-   <div   class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
->
-
-   
-  <div
-    class="flex w-full max-w-2xl rounded-2xl primary_border_color bg_white shadow-lg"
-    @click.stop
-  >
-    <!-- LEFT : Calendar -->
-    <div class="w-1/2 border-r p-6">
-      <div class="mb-4 flex items-center justify-between">
-        <button @click="prevMonth">‹</button>
-        <p class="body_4_regular">{{ monthYear }}</p>
-        <button @click="nextMonth">›</button>
-      </div>
-
-      <div class="grid grid-cols-7 text-center mb-2 label_2_regular">
-        <div v-for="day in weekDays" :key="day">{{ day }}</div>
-      </div>
-
-      <div class="grid grid-cols-7 gap-1">
-        <div
-          v-for="date in calendarDays"
-          :key="date.key"
-          class="cursor-pointer rounded-lg py-2 text-center label_2_medium"
-          :class="[
-            !date.isCurrentMonth ? 'Body_2_Medium  ' : '',
-            selectedDate &&
-            selectedDate.getTime() === date.fullDate.getTime()
-              ? 'primary_button'
-              : 'hover:secondary_bg_color'
-          ]"
-          @click="selectDate(date)"
-        >
-          {{ date.day }}
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT : Time -->
-    <div class="w-1/2 p-6">
-      <h3 class="mb-4 label_1_semibold">Choose time</h3>
-
-      <div class="h-64 overflow-y-auto space-y-2">
-        <button
-          v-for="time in timeSlots"
-          :key="time"
-          class="w-full rounded-lg px-4 py-2 text-left label_2_regular "
-          :class="selectedTime === time ? 'primary_button' : 'label_2_semibold bg_primary_color hover:secondary_bg_color'"
-          @click="selectedTime = time"
-        >
-          {{ time }}
-        </button>
-      </div>
-
-      <div class="mt-6 flex justify-end gap-3">
-        <button
-          class="px-4 py-2 label_2_regular rounded primary_border_color bg_primary_color label_1_medium"
-          @click="clearPopup"
-        >
-          Clear
-        </button>
-
-        <button
-          class="primary_button px-6"
-          @click="schedulePost"
-        >
-          Schedule
-        </button>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
 
   </main>
 </template>
@@ -265,6 +184,7 @@ import ProductIcon from "../../assets/images/ProductIcon.svg"
 import WhitePlusIcon from "../../assets/images/WhitePlusIcon.svg"
 import CircleLeftArrow from "../../assets/images/CircleLeftArrow.svg"
 import CircleRightArrow from "../../assets/images/CircleRightArrow.svg"
+import DownArrow from "../../assets/images/DownArrow.svg"
 
 const selectedTime = ref(null);
 
@@ -272,9 +192,7 @@ const selectedTime = ref(null);
 const views = ["Day", "Week", "Month"];
 const activeView = ref("Month");
 
-/* Popup */
-const showPopup = ref(false);
-const selectedDate = ref(null);
+
 
 /* Selected Product */
 const selectedProduct = ref("all");
@@ -469,26 +387,13 @@ const timeSlots = [
   "02:30 PM",
 ];
 
-const closePopup = () => {
-  showPopup.value = false;
-};
+
 
 const clearPopup = () => {
   selectedDate.value = null;
   selectedTime.value = null;
 };
 
-const schedulePost = () => {
-  if (!selectedDate.value || !selectedTime.value) {
-    alert("Please select date and time");
-    return;
-  }
 
-  // ✅ Success
-  console.log("Scheduled on:", selectedDate.value, selectedTime.value);
-
-  showPopup.value = false;
-  clearPopup();
-};
 
 </script>

@@ -1,7 +1,7 @@
 <template>
-    <main class="flex-1 bg_primary_color  px-4 py-10 md:px-10">
+    <main class="flex-1 bg_primary_color  px-4 py-12 md:px-10 lg:py-7">
     <Filter v-model:activeTab="activeTab"/>
-    <section class="flex gap-4 overflow-x-auto hide-scrollbar sm:grid sm:grid-cols-1 lg:grid lg:grid-cols-4 common_gap">
+    <section class="flex gap-4 overflow-x-auto hide-scrollbar sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 common_gap">
      <AnalyticsStatCard
       v-for="(stat, index) in stats"
       :key="index"
@@ -36,6 +36,7 @@ const baseStats = [
     icon: TotalReach,
     iconBg: 'bg-green-100',
     iconColor: 'text-green-600',
+    mobileWdth: 'w-70',
     valueDay: '50K',
     valueWeek: '200K',
     valueMonth: '128K',
@@ -47,6 +48,7 @@ const baseStats = [
    icon: MessageIcon,
     iconBg: 'bg-yellow-100',
     iconColor: 'text-yellow-600',
+    mobileWdth: 'w-70',
     valueDay: '4.2%',
     valueWeek: '5.5%',
     valueMonth: '6.8%',
@@ -58,6 +60,7 @@ const baseStats = [
     icon: Flowers,
     iconBg: 'bg-blue-100',
     iconColor: 'text-blue-600',
+    mobileWdth: 'w-70',
     valueDay: '+200',
     valueWeek: '+800',
     valueMonth: '+1,230',
@@ -69,6 +72,7 @@ const baseStats = [
     icon: CopyIcon,
     iconBg: 'bg-pink-100',
     iconColor: 'text-pink-600',
+    mobileWdth: 'w-70',
     valueDay: '5',
     valueWeek: '15',
     valueMonth: '32',

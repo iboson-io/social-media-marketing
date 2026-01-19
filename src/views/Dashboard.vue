@@ -19,7 +19,7 @@
     <div class="flex flex-1 flex-col overflow-y-auto">
       <!-- Mobile Header -->
       <header
-        class="flex items-center gap-3 bg_primary_color px-4 py-3 lg:hidden"
+        class="flex items-center gap-3 bg_primary_color px-4 py-3 absolute lg:hidden"
       >
         <button @click="showMobileSidebar = true" class="text-xl">
           <img :src="MobileMenuIcon" alt="">

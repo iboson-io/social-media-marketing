@@ -162,6 +162,9 @@
   .bg_regular_button{
     @apply bg-[#F3F4F6]
   }
+  .hashtag_text_color{
+    @apply text-[#845EF7]
+  }
   .regular_border_color{
     @apply border border-[#D1D5DB]
   }
@@ -186,8 +189,14 @@
   .brand_border_color{
   @apply border border-[#6E5DC6]
   }
+  .profile_tab_border{
+    @apply border border-[#E5DBFF]
+  }
   .profile_border{
     @apply border border-[#DCDFE4]
+  }
+  .upload_box_border{
+    @apply border-2 border-dashed border-[#758195]
   }
   .or_text{
     @apply text-[#6B7280] text-[14px] font-medium
@@ -202,7 +211,7 @@
     @apply border border-[#E2483D]
   }
   .input_box{
-    @apply w-full rounded-md  border border-[#D1D5DB] h-[3.125em] focus:outline-none px-3 font-normal text-[1em] text-[#1D2125];
+    @apply w-full rounded-md h-[3.125em] focus:outline-none px-3 font-normal text-[1em] text-[#1D2125];
   }
   .paragraph_p7_medium{
   @apply text-[0.75em] text-[#555963] font-medium
@@ -224,7 +233,7 @@
   }
   /* --------------------------------------------------------------------------------------- */
   .brand_section_height{
-    height: 46vh;
+    height: 100%;
   }
   .publish_text_style{
     @apply text-[#1D7AFC] bg-[#E9F2FF]

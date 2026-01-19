@@ -1,14 +1,14 @@
 <template>
-    <div class="space-y-6 bg_white rounded-2xl py-7 px-4 brand_section_height">
-  <div class="flex gap-3 flex-col items-start justify-between lg:flex-row">
+    <div class="space-y-6 bg_white rounded-2xl py-7 px-4 brand_section_height primary_border_color">
+  <div class="flex gap-3 flex-col items-start justify-between md:flex-row">
     <label class="label_2_medium primary_text_color">Brand Voice</label>
 
-    <div class="relative flex items-center rounded-xl  w-[100%] lg:w-[70%]">
+    <div class="relative flex items-center rounded-xl  w-[100%] md:w-[70%]">
     <ul class="grid grid-cols-2 gap-4 w-[100%]">
       <!-- Friendly -->
       <li
         @click="selectedVoice = 'friendly'"
-        class="relative flex flex-col  items-start rounded-xl border p-6 cursor-pointer "
+        class="relative flex flex-col  items-start rounded-xl border p-6 cursor-pointer common_inner_gap"
         :class="
           selectedVoice === 'friendly'
             ? 'brand_border_color'
@@ -56,7 +56,7 @@
       <!-- Professional -->
       <li
         @click="selectedVoice = 'professional'"
-        class="relative flex flex-col items-start justify-center rounded-xl p-6 cursor-pointer transition-all"
+        class="relative flex flex-col items-start justify-center rounded-xl common_inner_gap cursor-pointer transition-all"
         :class="
           selectedVoice === 'professional'
             ? 'brand_border_color'
@@ -104,7 +104,7 @@
       <!-- Playful -->
       <li
         @click="selectedVoice = 'playful'"
-        class="relative flex flex-col  items-start rounded-xl p-6 cursor-pointer transition-all"
+        class="relative flex flex-col  items-start rounded-xl p-6 cursor-pointer transition-all common_inner_gap"
         :class="
           selectedVoice === 'playful'
             ? 'brand_border_color'
@@ -152,7 +152,7 @@
       <!-- Calm -->
       <li
         @click="selectedVoice = 'calm'"
-        class="relative flex flex-col  items-start rounded-xl  p-6 cursor-pointer transition-all"
+        class="relative flex flex-col  items-start rounded-xl  p-6 cursor-pointer transition-all common_inner_gap"
         :class="
           selectedVoice === 'calm'
             ? 'brand_border_color'
