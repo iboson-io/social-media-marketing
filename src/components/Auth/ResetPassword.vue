@@ -18,7 +18,7 @@
             v-model="password"
             :type="showPassword ? 'text' : 'password'"
             placeholder="New Password"
-            class="input_box"
+            class="input_box regular_border_color"
           />
 
           <!-- Eye Icon -->

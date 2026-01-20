@@ -1,6 +1,6 @@
 <template>
   <main class="flex-1 bg_primary_color px-4 py-12 md:px-10 lg:py-7">
-    <div class="max-w-full md:max-w-none">
+    <div class="max-w-full md:max-w-none h-[92%]">
       <!-- Navigation Tabs -->
       <div class="relative border-b primary_border_color bg_white rounded-2xl p-3 md:p-3">
         <!-- Left Arrow Button (Mobile only) -->
@@ -56,30 +56,30 @@
       </div>
 
       <!-- Tab Content -->
-      <div class="space-y-6 common_gap">
+      <div class="space-y-6 common_gap h-[100%]">
         <!-- Account Tab Content -->
-        <div v-if="activeTab === 'account'">
+        <div v-if="activeTab === 'account'" class="h-[100%]">
           <!-- Profile Information Section -->
              <UserProfile/>
         </div>
 
         <!-- Billing & Plan Tab Content -->
-        <div v-else-if="activeTab === 'billing'">
+        <div v-else-if="activeTab === 'billing'" class="h-[100%]">
           <Billing/>
         </div>
 
         <!-- Localization Tab Content -->
-        <div v-else-if="activeTab === 'localization'">
+        <div v-else-if="activeTab === 'localization'" class="h-[100%]">
           <Localization />
         </div>
 
         <!-- Security Tab Content -->
-        <div v-else-if="activeTab === 'security'">
+        <div v-else-if="activeTab === 'security'" class="h-[100%]">
           <Security />
         </div>
 
         <!-- Data & Privacy Settings Tab Content -->
-        <div v-else-if="activeTab === 'data-privacy'">
+        <div v-else-if="activeTab === 'data-privacy'" class="h-[100%]">
           <DataPrivacySettings/>
         </div>
       </div>

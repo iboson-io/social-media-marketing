@@ -5,6 +5,7 @@
       class="hidden lg:flex"
       :activeTab="activeTab"
       @changeTab="activeTab = $event"
+      @collapseChange="isSidebarCollapsed = $event"
     />
 
     <!-- Mobile Sidebar -->
@@ -16,10 +17,13 @@
     />
 
     <!-- Main Area -->
-    <div class="flex flex-1 flex-col overflow-y-auto">
+    <div 
+      class="flex flex-1 flex-col overflow-y-auto transition-all duration-300"
+      :class="isSidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'"
+    >
       <!-- Mobile Header -->
       <header
-        class="flex items-center gap-3 bg_primary_color px-4 py-3 absolute lg:hidden"
+        class="flex items-center gap-3 bg-transparent px-4 py-3 absolute lg:hidden"
       >
         <button @click="showMobileSidebar = true" class="text-xl">
           <img :src="MobileMenuIcon" alt="">
@@ -58,6 +62,7 @@ const route = useRoute();
 const router = useRouter();
 const activeTab = ref("chat");
 const showMobileSidebar = ref(false);
+const isSidebarCollapsed = ref(false);
 
 // Check query parameter on mount and route changes
 const checkTabQuery = () => {

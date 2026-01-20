@@ -1,7 +1,7 @@
 <template>
-  <div class="h-[100%]">
+  <div class="flex flex-col h-[100%] min-h-0">
     <!-- Sub-navigation Tabs -->
-    <div class=" flex gap-2 overflow-x-auto bg_white rounded-2xl common_inner_gap primary_border_color hide-scrollbar px-4 py-3">
+    <div class="flex gap-2 overflow-x-auto bg_white rounded-2xl common_inner_gap primary_border_color hide-scrollbar px-4 py-3 flex-shrink-0">
       <button
         @click="$emit('update:activeTab', 'product-info')"
         class="flex items-center gap-2 rounded-lg px-4 py-2 flex-shrink-0 label_2_semibold"
@@ -52,9 +52,9 @@
         <span>Website & Brand Assets</span>
       </button>
     </div>
-    <div class="common_gap h-[83%] md:h-[88%] lg:h-[83%]">
+    <div class="common_gap flex-1 min-h-0 overflow-y-auto">
     <!-- Tab Content: Product Info -->
-    <div v-if="activeTab === 'product-info'" class="h-[100%]">
+    <div v-if="activeTab === 'product-info'" class="h-full">
       <BrandInfoFields
         :product-name="productName"
         :description="description"
@@ -64,15 +64,15 @@
     </div>
 
     <!-- Placeholder for other tabs -->
-     <div v-else-if="activeTab === 'brand-colors'" class="h-[100%]">
+     <div v-else-if="activeTab === 'brand-colors'" class="h-full">
       <BrandColor/>
     </div>
    <!-- tab for typography -->
-    <div v-else-if="activeTab === 'typography'" class="h-[100%]">
+    <div v-else-if="activeTab === 'typography'" class="h-full">
       <BrandTypography/>
     </div>
     <!-- tab for typography -->
-    <div v-else-if="activeTab === 'tone-style'" class="h-[100%]">
+    <div v-else-if="activeTab === 'tone-style'" class="h-full">
       <BrandStyle/>
     </div>
 

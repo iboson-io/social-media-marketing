@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-2xl bg_white common_inner_gap shadow-sm">
+  <div class="rounded-2xl bg_white common_inner_gap shadow-sm h-[100%]">
     <!-- Password Success Modal -->
     <PasswordSuccessModal
       :open="showSuccessModal"

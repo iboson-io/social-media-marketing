@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-2xl bg_white common_inner_gap shadow-sm">
+  <div class="rounded-2xl bg_white common_inner_gap shadow-sm h-[100%]">
     <!-- Header -->
     <h2 class="heading_h6_bold">Billing & Plan</h2>
     <p class="label_1_regular regular_gap medium_mb">
@@ -10,7 +10,7 @@
     <div class="mt-6">
       <h3 class="label_1_semibold">Current Plan</h3>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 primary_border_color rounded-lg common_inner_gap medium_gap">
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4 primary_border_color rounded-lg common_inner_gap medium_gap">
         <!-- Plan Info -->
         <div>
           <p class="label_2_medium">Monthly plan</p>
@@ -26,7 +26,7 @@
             <div class="relative dropdown-container">
               <button
                 @click.stop="toggleDropdown"
-                class="h-9 w-9 rounded-lg primary_border_color dot_text_style flex items-center justify-center"
+                class="h-9 w-9 rounded-lg profile_border dot_text_style flex items-center justify-center"
               >
                 ⋯
               </button>
@@ -47,11 +47,11 @@
           </div>
         </div>
          <!-- Horizontal line (Mobile only) -->
-        <div class="block lg:hidden h-[2px] w-full hr_linr_bg my-4"></div>
+        <div class="block md:hidden h-[2px] w-full bg_secondary_color my-4"></div>
         <!-- Renew -->
         <div class="flex">
             <!-- Vertical line (Desktop only) -->
-           <div class=" hidden lg:block w-[4px] h-28 hr_linr_bg mr-5"></div>
+           <div class=" hidden md:block w-[3px] h-28 bg_secondary_color mr-5"></div>
 
           <div class="w-[100%]">
           <p class="label_2_medium">Renew at</p>
@@ -69,7 +69,8 @@
 
 <!-- plan -->
       
-     <div class="gap-4 common_gap flex overflow-x-auto hide-scrollbar md:overflow-x-visible">
+     <h3 class="label_1_semibold common_gap">Usage</h3>
+     <div class="gap-4 medium_gap flex overflow-x-auto hide-scrollbar md:overflow-x-visible">
       <Plan
         title="AI Credits"
         :used="820"
@@ -102,7 +103,7 @@
       </p>
 
       <button
-        class="rounded-lg bg_primary_color medium_gap body_3_medium font-semibold text_primary_color button_thin w-48"
+        class="rounded-lg bg_primary_color medium_gap body_3_medium font-semibold text_primary_color secondary_button_thin w-48"
       >
         View Invoices
       </button>

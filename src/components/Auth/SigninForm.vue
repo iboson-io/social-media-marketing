@@ -39,7 +39,7 @@
             v-model="form.email"
             type="text"
             placeholder="Email"
-            class="input_box border-gray-300 focus:border-purple-500"
+            class="input_box regular_border_color"
           />
 
           <p v-if="errors.email" class="error_text">

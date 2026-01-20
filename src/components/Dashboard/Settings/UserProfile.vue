@@ -1,5 +1,5 @@
 <template>
-     <div class="bg_white rounded-2xl common_inner_gap primary_border_color">
+     <div class="bg_white rounded-2xl common_inner_gap primary_border_color h-[100%]">
             <h2 class="heading_h6_bold">Profile Information</h2>
             <p class="label_1_regular regular_gap medium_mb">
               Update your profile, secure your account, and manage connected apps.
@@ -29,17 +29,18 @@
 
               <!-- Name Field -->
               <div class="flex flex-col items-start">
-                <label class="label_2_medium primary_text_color w-20 flex-shrink-0">
+                <label class="label_2_medium primary_text_color w-20 flex-shrink-0"
+                :class="[!isEditing ? 'disable_text_color cursor-not-allowed' : '']">
                   Name:
                 </label>
               <div class="flex w-[100%] gap-3 items-center medium_gap"> 
-                <div class="flex items-center gap-3 w-[100%] md:w-1/2">
+                <div class="flex items-center gap-3 w-1/2">
                   <input
                     v-model="profileForm.name"
                     type="text"
                     :disabled="!isEditing"
                     :class="[
-                      ' flex-1 h-12 px-3 rounded-lg inputbox_border_color bg_primary_color ',
+                      ' flex-1 h-12 px-3 rounded-lg inputbox_border_color bg_primary_color w-1/2 ',
                       !isEditing ? ' disable_text_color cursor-not-allowed ' : 'Label_2_Medium'
                     ]"
                   />
@@ -72,18 +73,20 @@
 
               <!-- Email Field -->
               <div class="flex flex-col items-start ">
-                <label class="label_2_medium primary_text_color w-20 flex-shrink-0">
+                <label class="label_2_medium primary_text_color w-20 flex-shrink-0"
+                :class="[!isEditingEmail ? 'disable_text_color cursor-not-allowed' : '']"
+                >
                   Email:
                 </label>
                 <div class="flex w-[100%] gap-3 items-center medium_gap" > 
-                <div class="flex items-center gap-3 w-[100%] md:w-1/2">
+                <div class="flex items-center gap-3  w-1/2">
                   <input
                     v-model="profileForm.email"
                     type="email"
                     :disabled="!isEditingEmail"
                     :class="[
-                      ' flex-1 h-12 px-3 rounded-lg inputbox_border_color bg_primary_color ',
-                      !isEditing ? ' disable_text_color cursor-not-allowed ' : 'Label_2_Medium'
+                      ' flex-1 h-10 md:h-12 px-3 rounded-lg inputbox_border_color bg_primary_color w-1/2',
+                      !isEditingEmail ? ' disable_text_color cursor-not-allowed ' : 'Label_2_Medium'
                     ]"
                   />
                   </div>
@@ -122,7 +125,7 @@
             <div class="space-y-4 common_gap w-[100%] md:w-1/2">
               <!-- Google Account -->
               <div
-                class="flex items-center justify-between p-4"
+                class="flex items-center justify-between md:p-4"
               >
                 <div class="flex items-center gap-5">
                   <div
@@ -137,7 +140,7 @@
                 </div>
                 <button
                   @click="openDisconnectModal"
-                  class="px-12 py-2 rounded-md bg_primary_color label_2_medium primary_border_color"
+                  class="px-5 md:px-12 py-2 rounded-md bg_primary_color label_2_medium primary_border_color"
                 >
                   Disconnect
                 </button>

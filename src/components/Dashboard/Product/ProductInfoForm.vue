@@ -1,7 +1,7 @@
 <template>
   <div class="flex min-h-screen items-center justify-center bg_primary_color px-4 md:px-10 py-12 lg:py-7">
     <!-- Card -->
-    <div class="w-full   h-[100%]  flex flex-col justify-center">
+    <div class="w-full h-[100%] flex flex-col">
       <!-- Header Section -->
       <div class=" bg_white rounded-2xl common_inner_gap primary_border_color">
         <h1 class="heading_h6_bold primary_text_color">
@@ -47,7 +47,7 @@
         </div>
       </div>
       </div>
-    <div class="h-[100%] common_gap">
+    <div class="flex-1 common_gap">
       <!-- Step 1: Brand Info -->
       <BrandInfo
         v-if="currentStep === 1"

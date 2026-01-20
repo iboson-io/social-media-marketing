@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-2xl bg_white common_inner_gap shadow-sm">
+  <div class="rounded-2xl bg_white common_inner_gap shadow-sm h-[100%]"> 
     <!-- Delete Confirmation Modal -->
     <ConfirmDataDeletionModal
       :open="showDeleteModal"
@@ -62,7 +62,7 @@
     </div>
 
     <!-- Analytics Sharing -->
-    <div class="flex flex-row-reverse  md:flex-row items-start md:justify-between gap-4 medium_mb">
+    <div class="flex flex-row-reverse  md:flex-row items-start md:justify-between gap-4">
       <div class="flex-1">
         <h3 class="label_1_semibold">Analytics Sharing</h3>
         <p class="label_1_regular regular_gap">

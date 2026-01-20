@@ -1,11 +1,11 @@
 <template>
   <aside
-    class="flex  flex-col border-r bg_white transition-all duration-300"
+    class="fixed left-0 top-0 lg:top-[-20px] h-screen flex flex-col border-r bg_white transition-all duration-300 z-10 overflow-y-auto hide-scrollbar"
     :class="isCollapsed ? 'w-16 px-2' : 'w-64 px-4'"
     @click="handleSidebarContainerClick"
   >
     <!-- Logo + Toggle -->
-    <div class=" flex items-center  pt-6" 
+    <div class=" flex items-center pt-6 lg:pt-12" 
     :class="isCollapsed ? 'justify-center':'justify-between' "
    >
       <div class="flex items-center gap-2">
@@ -84,7 +84,7 @@
     
 <div>
   <div class="sidebar_bottom_section"
-  :class="isCollapsed ? 'w-[2.875em]' : 'w-56'">
+  :class="isCollapsed ? 'w-[2.875em] absolute bottom-0' : 'w-56'">
 
      <div class="block h-[2px] w-full bg_primary_color " :class="isCollapsed ? 'hidden' : ''"></div>
     <div
@@ -144,7 +144,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 /* ✅ IMPORT POPUP */
 import NotificationPopup from "../../components/Dashboard/NotificationsView.vue";
@@ -162,7 +162,7 @@ defineProps({
   activeTab: String,
 });
 
-const emit = defineEmits(["changeTab"]);
+const emit = defineEmits(["changeTab", "collapseChange"]);
 const changeTab = (tab) => emit("changeTab", tab);
 
 const isCollapsed = ref(false);
@@ -195,6 +195,7 @@ const handleToggleCollapse = () => {
     showUserAccount.value = false;
   }
   isCollapsed.value = !isCollapsed.value;
+  emit("collapseChange", isCollapsed.value);
 };
 
 const handleSidebarContainerClick = (event) => {
@@ -214,4 +215,9 @@ const menuItems = [
 ];
 
 const notification = { icon: NotificationIcon, label: "Notifications", tab: "notifications" }
+
+// Emit initial collapsed state
+onMounted(() => {
+  emit("collapseChange", isCollapsed.value);
+});
 </script>

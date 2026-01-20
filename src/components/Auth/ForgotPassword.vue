@@ -32,7 +32,7 @@
       v-model="form.email"
       type="email"
       placeholder="Email"
-      class="input_box pl-10 border-gray-300 focus:border-purple-500"
+      class="input_box pl-10 regular_border_color"
     />
   </div>
 

@@ -10,7 +10,7 @@
     </div>
 
     <!-- Controls -->
-    <div class="flex items-center justify-between rounded-xl bg_white p-3  flex-col-reverse gap-4 md:gap-0 md:flex-row">
+    <div class="flex items-center justify-between rounded-xl bg_white primary_border_color p-3  flex-col-reverse gap-4 md:gap-0 md:flex-row">
       <!-- View Switch -->
       <div class="flex rounded-full bg_secondary_color primary_border_color p-1">
         <button

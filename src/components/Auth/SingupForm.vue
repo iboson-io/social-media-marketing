@@ -174,7 +174,7 @@ const isFormFilled = computed(() => {
 const inputClass = (error) =>
   error
     ? "border border-red-500 focus:border-red-500"
-    : "border border-gray-300 focus:border-purple-500"
+    : "regular_border_color"
 
 /* Submit → FULL validation happens here */
 const handleSubmit = () => {

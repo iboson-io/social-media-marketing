@@ -8,7 +8,7 @@
 
   <!-- Sidebar -->
   <aside
-    class="fixed left-0 top-0 z-50 h-full w-72 bg_white p-4 shadow-lg lg:hidden transform transition-transform duration-300 ease-in-out"
+    class="fixed left-0 top-0 z-50 h-full w-72 bg_white p-4 shadow-lg lg:hidden transform transition-transform duration-300 ease-in-out overflow-auto hide-scrollbar"
     :class="{ '-translate-x-full': !isOpen, 'pointer-events-none': !isOpen }"
     @click="handleSidebarContainerClick"
   >
@@ -59,9 +59,9 @@
     </nav>
 
     <!-- User -->
-   <div>
-  <div class="absolute bottom-3 "
-  :class="isCollapsed ? 'w-[2.875em]' : 'w-64 md:w-56'">
+  <div>
+  <div class="sidebar_bottom_section absolute bottom-0"
+  :class="isCollapsed ? 'w-[2.875em] ' : 'w-56'">
 
      <div class="block h-[2px] w-full bg_primary_color " :class="isCollapsed ? 'hidden' : ''"></div>
     <div
@@ -73,7 +73,7 @@
       >
         <img :src="notification.icon" class="h-5 w-5" />
 
-        <span v-if="!isCollapsed" class="label_1_medium text-sm">
+        <span v-if="!isCollapsed" class="label_1_medium">
           {{ notification.label }}
         </span>
 
@@ -90,7 +90,7 @@
 
     <!-- User -->
     <div
-      class=" mt-3 p-2 flex items-center gap-3 rounded-md border cursor-pointer"
+      class=" mt-7 p-2 flex items-center gap-3 rounded-md border cursor-pointer"
       :class="isCollapsed ? 'justify-center' : ''"
       @click.stop="showUserAccount = true"
     >

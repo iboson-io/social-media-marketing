@@ -54,7 +54,7 @@
           </div>
           <button
             @click="handleResend"
-            class="label_2_semibold secondary_text_color"
+            class="label_2_semibold underline"
           >
             Resend Code
           </button>
