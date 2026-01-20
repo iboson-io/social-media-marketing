@@ -10,6 +10,9 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
+.settings_height{
+    min-height: 76vh;
+}
 /* Hide text on md screens for product select, show only icon and arrow */
 @media (min-width: 768px) and (max-width: 1023px) {
   .product-select .product-text {
@@ -23,6 +26,9 @@
   .sidebar_bottom_section {
     position: absolute;
     bottom: 1rem;
+  }
+  .settings_height{
+    min-height: 83vh;
   }
 }
 .sidebar_bottom_section{
