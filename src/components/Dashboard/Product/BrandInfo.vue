@@ -30,8 +30,16 @@
             @input="handleUrlInput"
             type="url"
             placeholder="Enter your website URL here..."
-            class="input_box w-full Label_2_Medium bg_primary_color"
+            :class="[
+              'input_box w-full Label_2_Medium bg_primary_color',
+              urlError ? '!error_border_color !border-1' : ''
+            ]"
           />
+          <!-- Error Message -->
+          <p v-if="urlError" class="regular_gap body_4_medium error_text flex items-center justify-end">
+           
+            {{ urlError }}
+          </p>
         </div>
 
         <!-- Upload Files Link -->
@@ -283,6 +291,7 @@ const hasFiles = ref(false);
 const showUploadModal = ref(false);
 const isDragOver = ref(false);
 const fileError = ref(null);
+const urlError = ref(null);
 const selectedFiles = ref([]);
 const fileList = ref([]);
 const uploadIntervals = ref({});
@@ -572,6 +581,19 @@ onMounted(() => {
 // Handle URL input
 const handleUrlInput = (event) => {
   const value = event.target.value;
+  
+  // Validate URL if user has typed something
+  if (value.trim() === "") {
+    urlError.value = null;
+  } else {
+    // Check if it's a valid website URL
+    if (!isValidUrl(value)) {
+      urlError.value = "Please enter a valid website URL";
+    } else {
+      urlError.value = null;
+    }
+  }
+  
   // Emit the update event - Vue will handle kebab-case conversion
   emit("update:websiteUrl", value);
   emit("update:website-url", value);

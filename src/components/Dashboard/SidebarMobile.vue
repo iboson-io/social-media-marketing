@@ -60,13 +60,13 @@
 
     <!-- User -->
   <div>
-  <div class="sidebar_bottom_section absolute bottom-0"
-  :class="isCollapsed ? 'w-[2.875em] ' : 'w-56'">
+  <div class="sidebar_bottom_section absolute bottom-3"
+  :class="isCollapsed ? 'w-[2.875em] ' : 'w-64'">
 
      <div class="block h-[2px] w-full bg_primary_color " :class="isCollapsed ? 'hidden' : ''"></div>
     <div
         @click="handleSidebarClick(notification.tab)"
-        class="relative group flex cursor-pointer items-center gap-3 rounded-md py-2 medium_gap"
+        class="relative group flex cursor-pointer items-center gap-3 rounded-md py-2 regular_gap"
         :class=" showNotifications ? 'bg_primary_color' : '',
           isCollapsed ? 'justify-center' : 'px-2'
         "
@@ -85,7 +85,7 @@
         </div>
       </div>
 
-      <div class="block h-[2px] w-full bg_primary_color medium_gap"></div>
+      <div class="block h-[2px] w-full bg_primary_color regular_gap"></div>
 
 
     <!-- User -->

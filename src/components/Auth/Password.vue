@@ -32,7 +32,7 @@
               :src="EyeOpenIcon"
               alt="Show password"
             />
-            <span v-else>🙈</span>
+            <span v-else><img :src="EyeCloseIcon" alt=""></span>
           </button>
         </div>
 
@@ -69,6 +69,7 @@
 import { ref } from "vue";
 import EyeOpenIcon from "../../assets/images/EyeOpen.svg";
 import LockIcon from "../../assets/images/LockIcon.svg";
+import EyeCloseIcon from "../../assets/images/EyeCloseIcon.svg";
 
 /* State */
 const showPassword = ref(false);

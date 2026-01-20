@@ -32,7 +32,7 @@
               :src="EyeOpenIcon"
               alt="Show password"
             />
-            <span v-else>🙈</span>
+            <span v-else><img :src="EyeCloseIcon" alt=""></span>
           </button>
         </div>
 
@@ -70,6 +70,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import EyeOpenIcon from "../../assets/images/EyeOpen.svg";
 import LockIcon from "../../assets/images/LockIcon.svg";
+import EyeCloseIcon from "../../assets/images/EyeCloseIcon.svg";
 
 const router = useRouter();
 /* State */

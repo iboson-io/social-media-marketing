@@ -70,7 +70,7 @@
               class="absolute right-3 top-1/2 -translate-y-1/2"
             >
               <img v-if="!showPassword" :src="EyeOpenIcon" />
-              <span v-else>🙈</span>
+              <span v-else><img :src="EyeCloseIcon" alt=""></span>
             </button>
           </div>
 
@@ -130,6 +130,7 @@ import { useRouter } from "vue-router"
 import GoogleSignin from "../../components/Auth/GoogleSignin.vue"
 import EyeOpenIcon from "../../assets/images/EyeOpen.svg"
 import Logo from "../../components/common/Logo.vue"
+import EyeCloseIcon from "../../assets/images/EyeCloseIcon.svg"
 
 const router = useRouter()
 
@@ -173,7 +174,7 @@ const isFormFilled = computed(() => {
 /* Input Border */
 const inputClass = (error) =>
   error
-    ? "border border-red-500 focus:border-red-500"
+    ? "error_border_color"
     : "regular_border_color"
 
 /* Submit → FULL validation happens here */

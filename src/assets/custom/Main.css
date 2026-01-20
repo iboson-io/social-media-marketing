@@ -107,7 +107,9 @@
   .body_4_regular{
  @apply text-[#596773] font-normal text-[0.75em] text-[#15172E]
   }
-
+   .body_4_medium{
+    @apply font-medium text-xs
+  }
   .secondary_text_color{
     @apply text-[#7950F2]
   }
@@ -197,6 +199,9 @@
   }
   .upload_box_border{
     @apply border-2 border-dashed border-[#758195]
+  }
+  .error_border_color{
+    @apply border border-[#F15B50]
   }
   .or_text{
     @apply text-[#6B7280] text-[14px] font-medium

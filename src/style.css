@@ -22,13 +22,24 @@
   }
 }
 
-@media (min-width: 1500px) and (max-width: 5000px) {
+@media (min-width: 900px) and (max-width: 1400px) {
+  .popup_position {
+    bottom: 5em !important;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 5000px) {
   .sidebar_bottom_section {
     position: absolute;
     bottom: 1rem;
   }
+  .popup_position {
+    bottom: 6em !important;
+  }
+}
+@media (min-width: 1500px) and (max-width: 5000px) {
   .settings_height{
-    min-height: 83vh;
+    min-height: 84vh;
   }
 }
 .sidebar_bottom_section{
