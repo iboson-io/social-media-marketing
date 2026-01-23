@@ -22,13 +22,13 @@
         </p>
       </div>
 
-      <button @click="$emit('close')" class="text-gray-400 hover:text-gray-600">
+      <button @click="$emit('close')" class="secondary_text_color">
         ✕
       </button>
     </div>
 
     <!-- Tabs -->
-    <div class="flex common_gap gap-7 bg_secondary_color px-2 py-1 rounded-lg overflow-x-auto lg:justify-center lg:overflow-x-visible scrollbar-hide">
+    <div class="flex common_gap gap-2 2xl:gap-9 bg_secondary_color px-2 py-1 rounded-lg overflow-scroll 2xl:justify-center  scrollbar-hide">
       <button
         v-for="tab in tabs"
         :key="tab.key"
