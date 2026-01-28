@@ -15,15 +15,15 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import Filter from "../../components/Dashboard/Analytics/Filter.vue"
-import AnalyticsStatCard from "../../components/Dashboard/Analytics/AnalyticsCard.vue"
-import PerformanceChart from "../../components/Dashboard/Analytics/PerformanceChart.vue"
-import PostList from "../../components/Dashboard/Analytics/PostList.vue"
-import TotalReach from "../../assets/images/TotalReach.svg"
-import MessageIcon from "../../assets/images/MessageIcon.svg"
-import Flowers from "../../assets/images/Flowers.svg"
-import CopyIcon from "../../assets/images/CopyIcon.svg"
-import PostImage from "../../assets/images/PostImage.png"
+import Filter from "../components/Dashboard/Analytics/Filter.vue"
+import AnalyticsStatCard from "../components/Dashboard/Analytics/AnalyticsCard.vue"
+import PerformanceChart from "../components/Dashboard/Analytics/PerformanceChart.vue"
+import PostList from "../components/Dashboard/Analytics/PostList.vue"
+import TotalReach from "../assets/images/TotalReach.svg"
+import MessageIcon from "../assets/images/MessageIcon.svg"
+import Flowers from "../assets/images/Flowers.svg"
+import CopyIcon from "../assets/images/CopyIcon.svg"
+import PostImage from "../assets/images/PostImage.png"
 
 const activeTab = ref('Month')
 
@@ -121,3 +121,4 @@ const tableData = [
   },
 ];
 </script>
+

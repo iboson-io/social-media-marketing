@@ -682,19 +682,19 @@
 
 <script setup>
 import { ref, computed, watch, nextTick, onMounted, onUnmounted } from "vue";
-import ProductIcon from "../../assets/images/ProductIcon.svg"
-import WhitePlusIcon from "../../assets/images/WhitePlusIcon.svg"
-import CircleLeftArrow from "../../assets/images/CircleLeftArrow.svg"
-import CircleRightArrow from "../../assets/images/CircleRightArrow.svg"
-import DownArrow from "../../assets/images/DownArrow.svg"
-import InstagramIcon from "../../assets/images/InstagramIcon.svg"
-import FacebookIcon from "../../assets/images/FacebookIcon.svg"
-import LinkedInIcon from "../../assets/images/LinkedInIcon.svg"
-import TwitterIcon from "../../assets/images/TwitterIcon.svg"
-import closeIcon from "../../assets/images/closeIcon.svg"
-import PendingIcon from "../../assets/images/PendingIcon.svg"
-import ApproveIcon from "../../assets/images/ApproveIcon.svg"
-import TimeIcon from "../../assets/images/TimeIcon.svg"
+import ProductIcon from "../assets/images/ProductIcon.svg"
+import WhitePlusIcon from "../assets/images/WhitePlusIcon.svg"
+import CircleLeftArrow from "../assets/images/CircleLeftArrow.svg"
+import CircleRightArrow from "../assets/images/CircleRightArrow.svg"
+import DownArrow from "../assets/images/DownArrow.svg"
+import InstagramIcon from "../assets/images/InstagramIcon.svg"
+import FacebookIcon from "../assets/images/FacebookIcon.svg"
+import LinkedInIcon from "../assets/images/LinkedInIcon.svg"
+import TwitterIcon from "../assets/images/TwitterIcon.svg"
+import closeIcon from "../assets/images/closeIcon.svg"
+import PendingIcon from "../assets/images/PendingIcon.svg"
+import ApproveIcon from "../assets/images/ApproveIcon.svg"
+import TimeIcon from "../assets/images/TimeIcon.svg"
 
 const selectedTime = ref(null);
 const selectedDate = ref(null);
@@ -1297,3 +1297,4 @@ const closeDateModal = () => {
 
 
 </script>
+

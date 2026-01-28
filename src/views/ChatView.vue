@@ -41,9 +41,9 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import PromptBox from "../../components/Dashboard/PromptBox.vue";
-import Cards from "../../components/Dashboard/Cards.vue";
-import ChatPage from "../../components/Dashboard/Chat/ChatPage.vue";
+import PromptBox from "../components/Dashboard/PromptBox.vue";
+import Cards from "../components/Dashboard/Cards.vue";
+import ChatPage from "../components/Dashboard/Chat/ChatPage.vue";
 
 const props = defineProps({
   resetChat: {
@@ -113,3 +113,4 @@ const handleNewChat = () => {
   messages.value = [];
 };
 </script>
+

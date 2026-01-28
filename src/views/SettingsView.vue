@@ -89,11 +89,11 @@
 
 <script setup>
 import { ref, reactive, h, onMounted, nextTick } from "vue";
-import UserProfile from "../../components/Dashboard/Settings/UserProfile.vue"
-import Billing from "../../components/Dashboard/Settings/Billing.vue"
-import Localization from "../../components/Dashboard/Settings/localization.vue"
-import Security from "../../components/Dashboard/Settings/Security.vue"
-import DataPrivacySettings from "../../components/Dashboard/Settings/DataPrivacySettings.vue"
+import UserProfile from "../components/Dashboard/Settings/UserProfile.vue"
+import Billing from "../components/Dashboard/Settings/Billing.vue"
+import Localization from "../components/Dashboard/Settings/localization.vue"
+import Security from "../components/Dashboard/Settings/Security.vue"
+import DataPrivacySettings from "../components/Dashboard/Settings/DataPrivacySettings.vue"
 
 const PersonIcon = (props) =>
   h("svg", { 
@@ -369,3 +369,4 @@ onMounted(() => {
   }
 }
 </style>
+

@@ -4,7 +4,7 @@
     <Sidebar
       class="hidden lg:flex"
       :activeTab="activeTab"
-      @changeTab="activeTab = $event"
+      @changeTab="handleTabChange"
       @collapseChange="isSidebarCollapsed = $event"
       @newChat="handleNewChat"
     />
@@ -39,7 +39,7 @@
         <AnalyticsView v-else-if="activeTab === 'analytics'" />
         <ProductsView v-else-if="activeTab === 'products'" />
         <SettingsView v-else-if="activeTab === 'settings'" />
-        <NotificationsView v-if="activeTab === 'notifications'" :open="true" :isCollapsed="false" @close="activeTab = 'chat'" class="lg:hidden" />
+        <NotificationsView v-if="activeTab === 'notifications'" :open="true" :isCollapsed="false" @close="handleNotificationsClose" class="lg:hidden" />
     </div>
   </div>
 </template>
@@ -51,11 +51,11 @@ import { useRoute, useRouter } from "vue-router";
 import Sidebar from "../components/Dashboard/Sidebar.vue";
 import SidebarMobile from "../components/Dashboard/SidebarMobile.vue";
 
-import ChatView from "../components/Dashboard/ChatView.vue";
-import CalendarView from "../components/Dashboard/CalendarView.vue";
-import AnalyticsView from "../components/Dashboard/AnalyticsView.vue";
-import ProductsView from "../components/Dashboard/ProductsView.vue";
-import SettingsView from "../components/Dashboard/SettingsView.vue";
+import ChatView from "./ChatView.vue";
+import CalendarView from "./CalendarView.vue";
+import AnalyticsView from "./AnalyticsView.vue";
+import ProductsView from "./ProductsView.vue";
+import SettingsView from "./SettingsView.vue";
 import NotificationsView from "../components/Dashboard/NotificationsView.vue";
 import SidebarIcon from "../assets/images/SidebarIcon.svg"
 import MobileMenuIcon from "../assets/images/MobileMenuIcon.svg"
@@ -67,32 +67,66 @@ const showMobileSidebar = ref(false);
 const isSidebarCollapsed = ref(false);
 const resetChatFlag = ref(false);
 
-// Check query parameter on mount and route changes
-const checkTabQuery = () => {
-  if (route.query.tab && typeof route.query.tab === 'string') {
-    const validTabs = ['chat', 'calendar', 'analytics', 'products', 'settings'];
-    if (validTabs.includes(route.query.tab)) {
-      activeTab.value = route.query.tab;
-    }
-    // Remove query parameter after using it to clean up the URL
-    router.replace({ query: {} });
+// Map route paths to tab names
+const routeToTabMap = {
+  '/chat': 'chat',
+  '/calendar': 'calendar',
+  '/analytics': 'analytics',
+  '/products': 'products',
+  '/settings': 'settings',
+  '/dashboard': 'chat' // default to chat
+};
+
+// Get active tab from route path
+const getTabFromRoute = () => {
+  const path = route.path;
+  return routeToTabMap[path] || 'chat';
+};
+
+// Update active tab when route changes
+const updateActiveTabFromRoute = () => {
+  const tab = getTabFromRoute();
+  if (activeTab.value !== tab) {
+    activeTab.value = tab;
+  }
+};
+
+// Navigate to route when tab changes
+const navigateToTab = (tab) => {
+  const tabToRouteMap = {
+    'chat': '/chat',
+    'calendar': '/calendar',
+    'analytics': '/analytics',
+    'products': '/products',
+    'settings': '/settings'
+  };
+  
+  const routePath = tabToRouteMap[tab];
+  if (routePath && route.path !== routePath) {
+    router.push(routePath);
   }
 };
 
 onMounted(() => {
-  checkTabQuery();
+  updateActiveTabFromRoute();
 });
 
-watch(() => route.query, () => {
-  checkTabQuery();
-}, { deep: true });
+// Watch for route changes
+watch(() => route.path, () => {
+  updateActiveTabFromRoute();
+});
 
 const handleTabChange = (tab) => {
-  activeTab.value = tab;
+  navigateToTab(tab);
   showMobileSidebar.value = false;
 };
 
 const handleNewChat = () => {
   resetChatFlag.value = true;
+};
+
+const handleNotificationsClose = () => {
+  activeTab.value = 'chat';
+  router.push('/chat');
 };
 </script>

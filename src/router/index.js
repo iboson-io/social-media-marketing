@@ -20,7 +20,12 @@ const routes = [
   { path: "/reset-link", name: "ResetLink", component: ResetLink, },
   { path: "/reset-password", name: "ResetPassword", component: ResetPassword, },
   { path: "/password-updation", name: "PasswordUpdation", component: PasswordUpdation, },
-  { path: "/dashboard", name: "Dashboard", component: Dashboard,},
+  { path: "/dashboard", name: "Dashboard", component: Dashboard, redirect: "/chat" },
+  { path: "/chat", name: "Chat", component: Dashboard },
+  { path: "/calendar", name: "Calendar", component: Dashboard },
+  { path: "/analytics", name: "Analytics", component: Dashboard },
+  { path: "/products", name: "Products", component: Dashboard },
+  { path: "/settings", name: "Settings", component: Dashboard },
   { path: "/deleted-message", name: "AccountDeleted", component: AccountDeleted,},
 ];
 

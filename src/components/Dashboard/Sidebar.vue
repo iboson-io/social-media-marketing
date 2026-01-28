@@ -191,6 +191,7 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from "vue";
+import { useRouter } from "vue-router";
 
 /* ✅ IMPORT POPUP */
 import NotificationPopup from "../../components/Dashboard/NotificationsView.vue";
@@ -209,6 +210,7 @@ defineProps({
 });
 
 const emit = defineEmits(["changeTab", "collapseChange", "newChat"]);
+const router = useRouter();
 const changeTab = (tab) => emit("changeTab", tab);
 
 const isCollapsed = ref(false);
@@ -230,8 +232,8 @@ const handleNewChatClick = () => {
     showUserAccount.value = false;
   }
   
-  // Switch to chat tab and emit newChat event
-  changeTab('chat');
+  // Navigate to chat and emit newChat event
+  router.push('/chat');
   emit('newChat');
 };
 

@@ -10,8 +10,8 @@
 
 <script setup>
 import { ref } from "vue";
-import ProductIntroPage from "../../components/Dashboard/Product/ProductIntroPage.vue";
-import ProductInfoForm from "../../components/Dashboard/Product/ProductInfoForm.vue";
+import ProductIntroPage from "../components/Dashboard/Product/ProductIntroPage.vue";
+import ProductInfoForm from "../components/Dashboard/Product/ProductInfoForm.vue";
 
 const showCreateForm = ref(false);
 const currentStep = ref(1);
@@ -42,3 +42,4 @@ const handleContinue = (data) => {
     }
 };
 </script>
+

@@ -115,6 +115,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import PlusIcon from "../../assets/images/PlusIcon.svg";
 import CalenderIcon from "../../assets/images/CalendarIcon.svg";
 import SettingsIcon from "../../assets/images/SettingsIcon.svg";
@@ -131,6 +132,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["changeTab", "close", "newChat"]);
+const router = useRouter();
 
 const select = (tab) => emit("changeTab", tab);
 
@@ -147,8 +149,8 @@ const handleNewChatClick = () => {
   if (showUserAccount.value) {
     showUserAccount.value = false;
   }
-  // Switch to chat tab and emit newChat event
-  select('chat');
+  // Navigate to chat and emit newChat event
+  router.push('/chat');
   emit('newChat');
 };
 
