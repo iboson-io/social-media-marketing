@@ -145,3 +145,31 @@ aside:hover .custom_scrollbar::-webkit-scrollbar-track {
 /* .relative > div[class*="absolute"] {
   border: 1px solid transparent !important;
 } */
+
+/* Custom scrollbar for calendar - visible only on hover, gray-400 color, thinner */
+.custom-scrollbar-calendar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.custom-scrollbar-calendar:hover {
+  scrollbar-color: #9ca3af transparent;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.custom-scrollbar-calendar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar-calendar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar-calendar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 3px;
+}
+
+.custom-scrollbar-calendar:hover::-webkit-scrollbar-thumb {
+  background-color: #9ca3af;
+}

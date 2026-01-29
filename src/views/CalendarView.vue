@@ -78,7 +78,7 @@
           v-for="date in calendarDays"
           :key="date.key"
           @click="openDateModal(date.fullDate)"
-          class="h-14 md:h-[4.8em] secondary_button_border p-2 relative cursor-pointer"
+          class="h-14 md:h-[4.8em]  secondary_button_border p-2 relative cursor-pointer"
           :class="[
             date.isToday ? 'secondary_bg_color selected_calendar_border' : '',
             !date.isCurrentMonth ? 'bg_white' : '',
@@ -128,87 +128,197 @@
       <!-- Right Side Modal Panel -->
       <div
         v-if="selectedDate"
-        class="hidden lg:block w-[30%] lg:w-[35%] rounded-xl bg_white primary_border_color shadow-lg flex-shrink-0 relative z-20 common_inner_gap"
+        class="hidden lg:block w-[30%] h-[35em] lg:w-[35%] rounded-xl bg_white primary_border_color shadow-lg flex-shrink-0 relative z-20 common_inner_gap"
       >
-        <!-- Modal Header -->
-        <div class="flex items-center justify-between">
-          <h2 class="heading_h6_semibold primary_text_color">
-            {{ formatSelectedDate(selectedDate) }}
-          </h2>
-         
-          <button
-            @click="closeDateModal"
-            class="p-2  rounded-full transition-colors"
-            aria-label="Close"
-          >
-            <img :src="closeIcon" alt="">
-          </button>
+        <!-- Post Detail View -->
+        <div v-if="selectedPost" class="h-full flex flex-col">
+          <!-- Modal Header with Back Button -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-6">
+              <button
+                @click="closePostDetail"
+                class="rounded-full transition-colors"
+                aria-label="Back"
+              >
+                <img :src="BackButtonArrow" alt="Back">
+              </button>
+              <h2 class="paragraph_p2_medium primary_text_color">Post details</h2>
+            </div>
+          </div>
+
+          <div class="block h-[1px] w-full bg_primary_color common_gap"></div>
+
+          <!-- Post Detail Content with Auto Scroll -->
+          <div class="flex-1 overflow-y-auto common_gap primary_border_color medium_inner_gap rounded-lg custom-scrollbar-calendar">
+            <!-- Status Badge -->
+            <div
+              :class="[
+                'inline-flex items-center gap-2 secondary_button_thin rounded-md label_3_semibold w-full',
+                selectedPost.status === 'approved' ? 'approve_text_style' : 'pending_text_style'
+              ]"
+            >
+              <img v-if="selectedPost.status === 'approved'" :src="ApproveIcon" alt="Approved" class="w-4 h-4">
+              <img v-else :src="PendingIcon" alt="Pending" class="w-4 h-4">
+              <span>{{ selectedPost.status }}</span>
+            </div>
+
+            <!-- Post Type Dropdown -->
+            <div class="relative medium_gap">
+              <img :src="PostFilter" class="absolute left-2 top-[10px]" alt="">
+              <select
+                v-model="selectedPost.postType"
+                class="w-full rounded-lg primary_border_color secondary_button_thin label_2_regular primary_text_color bg_white appearance-none pl-9"
+              >
+              
+              
+                <option value="Instagram post (4:5)">Instagram post (4:5)</option>
+                <option value="Instagram post (1:1)">Instagram post (1:1)</option>
+                <option value="Instagram post (9:16)">Instagram post (9:16)</option>
+                <option value="Facebook post (4:5)">Facebook post (4:5)</option>
+                <option value="LinkedIn post (4:5)">LinkedIn post (4:5)</option>
+                <option value="Twitter post (16:9)">Twitter post (16:9)</option>
+              </select>
+              <img :src="DownArrow" alt="" class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            </div>
+
+            <!-- Image Preview -->
+            <div class="rounded-lg overflow-hidden bg_primary_color flex justify-center items-center medium_gap h-72">
+              <img
+                :src="selectedPost.postImage"
+                :alt="selectedPost.title"
+                class="w-full max-w-md object-contain"
+              />
+            </div>
+
+            <!-- Caption -->
+              <p class="label_2_medium medium_gap"> Caption</p>
+            <div class="relative medium_gap">
+              <textarea
+                v-model="selectedPost.caption"
+                class="w-full rounded-lg primary_border_color medium_inner_gap label_2_semibold bg_white min-h-[140px] resize-none "
+                placeholder="Write your caption here..."
+              ></textarea>
+              <!-- AI Sparkle Icon -->
+              <button class="absolute bottom-3 right-3 secondary_button_thin">
+                <img :src="AiIcon" alt="">
+              </button>
+            </div>
+
+            <!-- Platforms -->
+             <p class="label_2_medium medium_gap"> Platforms</p>
+            <div class="flex items-center gap-2 medium_gap">
+              <img
+                v-for="platform in selectedPost.platforms"
+                :key="platform"
+                :src="getPlatformIcon(platform)"
+                :alt="platform"
+                class="w-10 h-10"
+              />
+            <span class="primary_border_color rounded-lg secondary_button_thin"> <img :src="ImageEditIcon" alt="" class="w-6 h-6" ></span>
+            </div>
+
+            <!-- Scheduled For -->
+            <div class="common_gap medium_inner_gap primary_border_color rounded-lg">
+              <p class="flex justify-between" v-html="formatScheduledTime(selectedPost)">
+              </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3  common_gap">
+              <button>
+                <img :src="DotsIcon" alt="">
+              </button>
+              <button class="rounded-lg secondary_button_thin primary_add_button label_2_semibold flex justify-center gap-2 w-full">
+                <img :src="SaveIcon" alt="">
+                Save Changes
+              </button>
+            </div>
+          </div>
         </div>
 
-           <div class="block h-[1px] w-full bg_primary_color common_gap"></div>
-
-        <!-- Posts List -->
-        <div class="max-h-[calc(100vh-200px)] overflow-y-auto common_gap">
-          <div v-if="getPostsForDate(selectedDate).length === 0" class="text-center py-8">
-            <p class="label_3_medium ">No posts scheduled for this date</p>
-          </div>
-          
-          <div v-else class="space-y-4">
-            <div
-              v-for="post in getPostsForDate(selectedDate)"
-              :key="post.id"
-              class="flex gap-4 medium_inner_gap rounded-lg primary_border_color"
+        <!-- Posts List View -->
+        <div v-else>
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between">
+            <h2 class="heading_h6_semibold primary_text_color">
+              {{ formatSelectedDate(selectedDate) }}
+            </h2>
+           
+            <button
+              @click="closeDateModal"
+              class="p-2  rounded-full transition-colors"
+              aria-label="Close"
             >
-              <!-- Post Image -->
-              <img
-                :src="post.postImage"
-                :alt="post.title"
-                class="w-20 h-20 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0"
-              />
+              <img :src="closeIcon" alt="">
+            </button>
+          </div>
 
-              <!-- Post Details -->
-              <div class="flex-1 min-w-0">
-                <!-- Title -->
-                <h3 class="label_2_semibold primary_text_color">
-                  {{ post.title || 'Scheduled Post' }}
-                </h3>
+          <div class="block h-[1px] w-full bg_primary_color common_gap"></div>
 
-                <!-- Platforms -->
-                <div class="flex items-center gap-2  flex-wrap normal_gap">
-                  <img
-                    v-for="platform in post.platforms.slice(0, 4)"
-                    :key="platform"
-                    :src="getPlatformIcon(platform)"
-                    :alt="platform"
-                    class="w-5 h-5"
-                  />
-                  <span
-                    v-if="post.platforms.length > 4"
-                    class="text-xs label_2_medium"
-                  >
-                    +{{ post.platforms.length - 4 }}
-                  </span>
-                </div>
+          <!-- Posts List -->
+          <div class="max-h-[calc(100vh-200px)] overflow-y-auto common_gap">
+            <div v-if="getPostsForDate(selectedDate).length === 0" class="text-center py-8">
+              <p class="label_3_medium ">No posts scheduled for this date</p>
+            </div>
+            
+            <div v-else class="space-y-4">
+              <div
+                v-for="post in getPostsForDate(selectedDate)"
+                :key="post.id"
+                @click="openPostDetail(post)"
+                class="flex gap-4 medium_inner_gap rounded-lg primary_border_color cursor-pointer hover:bg-gray-50 transition-colors"
+              >
+                <!-- Post Image -->
+                <img
+                  :src="post.postImage"
+                  :alt="post.title"
+                  class="w-20 h-20 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0"
+                />
 
-                <!-- Status and Time -->
-                <div class="flex items-center gap-4 flex-wrap medium_gap">
-                  <!-- Status -->
-                  <div
-                    :class="[
-                      'flex items-center gap-2 label_3_semibold',
-                      post.status === 'approved' ? 'approve_text_color' : 'pending_text_color'
-                    ]"
-                  >
-                    
-                    <img v-if="post.status === 'approved'" :src="ApproveIcon" alt="Approved">
-                    <img v-else :src="PendingIcon" alt="Pending">
-                    <span>{{ post.status }}</span>
+                <!-- Post Details -->
+                <div class="flex-1 min-w-0">
+                  <!-- Title -->
+                  <h3 class="label_2_semibold primary_text_color">
+                    {{ post.title || 'Scheduled Post' }}
+                  </h3>
+
+                  <!-- Platforms -->
+                  <div class="flex items-center gap-2  flex-wrap normal_gap">
+                    <img
+                      v-for="platform in post.platforms.slice(0, 4)"
+                      :key="platform"
+                      :src="getPlatformIcon(platform)"
+                      :alt="platform"
+                      class="w-5 h-5"
+                    />
+                    <span
+                      v-if="post.platforms.length > 4"
+                      class="text-xs label_2_medium"
+                    >
+                      +{{ post.platforms.length - 4 }}
+                    </span>
                   </div>
 
-                  <!-- Time -->
-                  <div class="flex items-center gap-2 label_3_semibold sub_text_color">
-                    <img :src="TimeIcon" alt="">
-                    <span >{{ formatTime(post.postTime) }}</span>
+                  <!-- Status and Time -->
+                  <div class="flex items-center gap-4 flex-wrap medium_gap">
+                    <!-- Status -->
+                    <div
+                      :class="[
+                        'flex items-center gap-2 label_3_semibold',
+                        post.status === 'approved' ? 'approve_text_color' : 'pending_text_color'
+                      ]"
+                    >
+                      
+                      <img v-if="post.status === 'approved'" :src="ApproveIcon" alt="Approved">
+                      <img v-else :src="PendingIcon" alt="Pending">
+                      <span>{{ post.status }}</span>
+                    </div>
+
+                    <!-- Time -->
+                    <div class="flex items-center gap-2 label_3_semibold sub_text_color">
+                      <img :src="TimeIcon" alt="">
+                      <span >{{ formatTime(post.postTime) }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -225,84 +335,201 @@
       @click="closeDateModal"
     >
       <div
-        class="fixed right-0 top-1/2 bottom-0 w-full bg_white shadow-2xl overflow-hidden transform transition-transform duration-300 ease-in-out overflow-y-auto common_inner_gap"
+        class="fixed right-0 top-[46%] bottom-0 w-full bg_white shadow-2xl overflow-hidden transform transition-transform duration-300 ease-in-out overflow-y-auto common_inner_gap"
         @click.stop
       >
-        <!-- Modal Header -->
-        <div class="flex items-center justify-between">
-          <h2 class="heading_h6_semibold primary_text_color">
-            {{ formatSelectedDate(selectedDate) }}
-          </h2>
-          <button
-            @click="closeDateModal"
-            class=" rounded-full transition-colors"
-            aria-label="Close"
-          >
-            <img :src="closeIcon" alt="">
-          </button>
-        </div>
-        <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
-        <!-- Posts List -->
-        <div class="h-auto overflow-y-auto common_gap">
-          <div v-if="getPostsForDate(selectedDate).length === 0" class="text-center py-8">
-            <p class="label_3_medium">No posts scheduled for this date</p>
+        <!-- Post Detail View -->
+        <div v-if="selectedPost" class="h-full flex flex-col">
+          <!-- Modal Header with Back Button -->
+         <div class="flex items-center justify-between">
+            <div class="flex items-center gap-6">
+              <button
+                @click="closePostDetail"
+                class="rounded-full transition-colors"
+                aria-label="Back"
+              >
+                <img :src="BackButtonArrow" alt="Back">
+              </button>
+              <h2 class="paragraph_p2_medium primary_text_color">Post details</h2>
+            </div>
           </div>
-          
-          <div v-else class="space-y-4">
-            <div
-              v-for="post in getPostsForDate(selectedDate)"
-              :key="post.id"
-              class="flex gap-4 rounded-lg medium_inner_gap primary_border_color"
-            >
-              <!-- Post Image -->
+
+          <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
+
+          <!-- Post Detail Content with Auto Scroll -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar">
+           
+          <div class="flex-1 overflow-y-auto common_gap primary_border_color medium_inner_gap rounded-lg custom-scrollbar-calendar">
+            <div class="md:grid md:grid-cols-2 md:gap-4">
+            <!-- Image Preview -->
+            <div class="rounded-lg overflow-hidden  bg_primary_color flex justify-center items-center h-[16.8em]">
               <img
-                :src="post.postImage"
-                :alt="post.title"
-                class="w-20 h-20 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0"
+                :src="selectedPost.postImage"
+                :alt="selectedPost.title"
+                class="w-full max-w-md object-contain"
               />
+            </div>
+            <div>
+               <!-- Status Badge -->
+            <div
+              :class="[
+                'inline-flex items-center gap-2 secondary_button_thin rounded-md label_3_semibold w-full medium_gap md:mt-0',
+                selectedPost.status === 'approved' ? 'approve_text_style' : 'pending_text_style'
+              ]"
+            >
+              <img v-if="selectedPost.status === 'approved'" :src="ApproveIcon" alt="Approved" class="w-4 h-4">
+              <img v-else :src="PendingIcon" alt="Pending" class="w-4 h-4">
+              <span >{{ selectedPost.status }}</span>
+            </div>
 
-              <!-- Post Details -->
-              <div class="flex-1 min-w-0">
-                <!-- Title -->
-                <h3 class="label_2_semibold primary_text_color">
-                  {{ post.title || 'Scheduled Post' }}
-                </h3>
+            <!-- Post Type Dropdown -->
+            <div class="relative medium_gap">
+              <img :src="PostFilter" class="absolute left-2 top-[10px]" alt="">
+              <select
+                v-model="selectedPost.postType"
+                class="w-full rounded-lg primary_border_color secondary_button_thin label_2_regular primary_text_color bg_white appearance-none pl-9"
+              >
+              
+              
+                <option value="Instagram post (4:5)">Instagram post (4:5)</option>
+                <option value="Instagram post (1:1)">Instagram post (1:1)</option>
+                <option value="Instagram post (9:16)">Instagram post (9:16)</option>
+                <option value="Facebook post (4:5)">Facebook post (4:5)</option>
+                <option value="LinkedIn post (4:5)">LinkedIn post (4:5)</option>
+                <option value="Twitter post (16:9)">Twitter post (16:9)</option>
+              </select>
+              <img :src="DownArrow" alt="" class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            </div>
+           
 
-                <!-- Platforms -->
-                <div class="flex items-center gap-2 flex-wrap normal_gap">
-                  <img
-                    v-for="platform in post.platforms.slice(0, 4)"
-                    :key="platform"
-                    :src="getPlatformIcon(platform)"
-                    :alt="platform"
-                    class="w-5 h-5"
-                  />
-                  <span
-                    v-if="post.platforms.length > 4"
-                    class="text-xs label_2_medium"
-                  >
-                    +{{ post.platforms.length - 4 }}
-                  </span>
-                </div>
+            <!-- Caption -->
+             <p class="label_2_medium medium_gap"> Caption</p>
+            <div class="relative medium_gap">
+              <textarea
+                v-model="selectedPost.caption"
+                class="w-full rounded-lg primary_border_color medium_inner_gap label_2_semibold bg_white min-h-[140px] resize-none "
+                placeholder="Write your caption here..."
+              ></textarea>
+              <!-- AI Sparkle Icon -->
+              <button class="absolute bottom-3 right-3 secondary_button_thin">
+                <img :src="AiIcon" alt="">
+              </button>
+            </div>
+            </div>
+            </div>
+            <!-- Platforms -->
+             <div class="md:flex md:items-end md:justify-center">
+            <p class="label_2_medium medium_gap md:absolute left-8"> Platforms</p>
+            <div class="flex items-center gap-2 medium_gap">
+              <img
+                v-for="platform in selectedPost.platforms"
+                :key="platform"
+                :src="getPlatformIcon(platform)"
+                :alt="platform"
+                class="w-10 h-10"
+              />
+            <span class="primary_border_color rounded-lg secondary_button_thin"> <img :src="ImageEditIcon" alt="" class="w-6 h-6" ></span>
+            </div>
+            </div>
+            <!-- Scheduled For -->
+            <div class="common_gap medium_inner_gap primary_border_color rounded-lg">
+              <p class="flex justify-between" v-html="formatScheduledTime(selectedPost)">
+              </p>
+            </div>
 
-                <!-- Status and Time -->
-                <div class="flex items-center gap-4 flex-wrap medium_gap">
-                  <!-- Status -->
-                  <div
-                    :class="[
-                      'flex items-center gap-2 label_3_semibold',
-                      post.status === 'approved' ? 'approve_text_color' : 'pending_text_color'
-                    ]"
-                  >
-                    <img v-if="post.status === 'approved'" :src="ApproveIcon" alt="Approved">
-                    <img v-else :src="PendingIcon" alt="Pending">
-                    <span>{{ post.status }}</span>
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3  common_gap">
+              <button>
+                <img :src="DotsIcon" alt="">
+              </button>
+              <button class="rounded-lg secondary_button_thin primary_add_button label_2_semibold flex justify-center gap-2 w-full">
+                <img :src="SaveIcon" alt="">
+                Save Changes
+              </button>
+            </div>
+           </div>
+         </div>
+        </div>
+
+        <!-- Posts List View -->
+        <div v-else>
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between">
+            <h2 class="heading_h6_semibold primary_text_color">
+              {{ formatSelectedDate(selectedDate) }}
+            </h2>
+            <button
+              @click="closeDateModal"
+              class=" rounded-full transition-colors"
+              aria-label="Close"
+            >
+              <img :src="closeIcon" alt="">
+            </button>
+          </div>
+          <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
+          <!-- Posts List -->
+          <div class="h-auto overflow-y-auto common_gap">
+            <div v-if="getPostsForDate(selectedDate).length === 0" class="text-center py-8">
+              <p class="label_3_medium">No posts scheduled for this date</p>
+            </div>
+            
+            <div v-else class="space-y-4">
+              <div
+                v-for="post in getPostsForDate(selectedDate)"
+                :key="post.id"
+                @click="openPostDetail(post)"
+                class="flex gap-4 rounded-lg medium_inner_gap primary_border_color cursor-pointer hover:bg-gray-50 transition-colors"
+              >
+                <!-- Post Image -->
+                <img
+                  :src="post.postImage"
+                  :alt="post.title"
+                  class="w-20 h-20 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0"
+                />
+
+                <!-- Post Details -->
+                <div class="flex-1 min-w-0">
+                  <!-- Title -->
+                  <h3 class="label_2_semibold primary_text_color">
+                    {{ post.title || 'Scheduled Post' }}
+                  </h3>
+
+                  <!-- Platforms -->
+                  <div class="flex items-center gap-2 flex-wrap normal_gap">
+                    <img
+                      v-for="platform in post.platforms.slice(0, 4)"
+                      :key="platform"
+                      :src="getPlatformIcon(platform)"
+                      :alt="platform"
+                      class="w-5 h-5"
+                    />
+                    <span
+                      v-if="post.platforms.length > 4"
+                      class="text-xs label_2_medium"
+                    >
+                      +{{ post.platforms.length - 4 }}
+                    </span>
                   </div>
 
-                  <!-- Time -->
-                  <div class="flex items-center gap-2 label_3_semibold sub_text_color">
-                    <img :src="TimeIcon" alt="">
-                    <span>{{ formatTime(post.postTime) }}</span>
+                  <!-- Status and Time -->
+                  <div class="flex items-center gap-4 flex-wrap medium_gap">
+                    <!-- Status -->
+                    <div
+                      :class="[
+                        'flex items-center gap-2 label_3_semibold',
+                        post.status === 'approved' ? 'approve_text_color' : 'pending_text_color'
+                      ]"
+                    >
+                      <img v-if="post.status === 'approved'" :src="ApproveIcon" alt="Approved">
+                      <img v-else :src="PendingIcon" alt="Pending">
+                      <span>{{ post.status }}</span>
+                    </div>
+
+                    <!-- Time -->
+                    <div class="flex items-center gap-2 label_3_semibold sub_text_color">
+                      <img :src="TimeIcon" alt="">
+                      <span>{{ formatTime(post.postTime) }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -683,6 +910,7 @@
 <script setup>
 import { ref, computed, watch, nextTick, onMounted, onUnmounted } from "vue";
 import ProductIcon from "../assets/images/ProductIcon.svg"
+import AiIcon from "../assets/images/AiIcon.svg"
 import WhitePlusIcon from "../assets/images/WhitePlusIcon.svg"
 import CircleLeftArrow from "../assets/images/CircleLeftArrow.svg"
 import CircleRightArrow from "../assets/images/CircleRightArrow.svg"
@@ -695,9 +923,15 @@ import closeIcon from "../assets/images/closeIcon.svg"
 import PendingIcon from "../assets/images/PendingIcon.svg"
 import ApproveIcon from "../assets/images/ApproveIcon.svg"
 import TimeIcon from "../assets/images/TimeIcon.svg"
+import BackButtonArrow from "../assets/images/BackButtonArrow.svg"
+import PostFilter from "../assets/images/PostFilter.svg"
+import ImageEditIcon from "../assets/images/ImageEditIcon.svg"
+import DotsIcon from "../assets/images/DotsIcon.svg"
+import SaveIcon from "../assets/images/SaveIcon.svg"
 
 const selectedTime = ref(null);
 const selectedDate = ref(null);
+const selectedPost = ref(null); // Selected post for detail view
 const selectedWeekDay = ref(null); // For mobile week view
 const mobileWeekScrollContainer = ref(null); // Ref for mobile week scroll container
 const desktopWeekScrollContainer = ref(null); // Ref for desktop week scroll container
@@ -735,7 +969,9 @@ const scheduledPosts = ref([
     platforms: ["instagram", "facebook"],
     postImage: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&h=200&fit=crop",
     status: "approved",
-    title: "New Year Post"
+    title: "New Year Post",
+    caption: "New Year Post! Don't miss your chance to grab your favorites at exclusive prices. #NewYear #LimitedOffer #ShopSmart",
+    postType: "Instagram post (4:5)"
   },
   {
     id: 2,
@@ -744,7 +980,9 @@ const scheduledPosts = ref([
     platforms: ["instagram", "linkedin", "facebook"],
     postImage: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&h=200&fit=crop",
     status: "pending",
-    title: "Product Launch"
+    title: "Product Launch",
+    caption: "Product Launch! Don't miss your chance to grab your favorites at exclusive prices. #ProductLaunch #LimitedOffer #ShopSmart",
+    postType: "Instagram post (4:5)"
   },
   {
     id: 3,
@@ -753,7 +991,9 @@ const scheduledPosts = ref([
     platforms: ["instagram", "facebook", "twitter", "linkedin"],
     postImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop",
     status: "approved",
-    title: "Big sale this weekend"
+    title: "Big sale this weekend",
+    caption: "Big Sale this weekend! Don't miss your chance to grab your favorites at exclusive prices. #WeekendSale #LimitedOffer #ShopSmart",
+    postType: "Instagram post (4:5)"
   },
   {
     id: 4,
@@ -762,7 +1002,9 @@ const scheduledPosts = ref([
     platforms: ["instagram", "twitter"],
     postImage: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=200&h=200&fit=crop",
     status: "approved",
-    title: "Weekend Special"
+    title: "Weekend Special",
+    caption: "Weekend Special! Don't miss your chance to grab your favorites at exclusive prices. #WeekendSale #LimitedOffer #ShopSmart",
+    postType: "Instagram post (4:5)"
   }
 ]);
 
@@ -1286,15 +1528,54 @@ const isDateSelected = (date) => {
 
 // Open date modal
 const openDateModal = (date) => {
+  selectedPost.value = null;
   selectedDate.value = date;
 };
 
 // Close date modal
 const closeDateModal = () => {
   selectedDate.value = null;
+  selectedPost.value = null;
+};
+
+// Open post detail view
+const openPostDetail = (post) => {
+  selectedPost.value = { ...post }; // Create a copy to avoid direct mutation
+};
+
+// Close post detail view
+const closePostDetail = () => {
+  selectedPost.value = null;
+};
+
+// Format scheduled time for detail view
+const formatScheduledTime = (post) => {
+  if (!post) return '';
+  const date = new Date(post.postDate);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  
+  const isToday = date.toDateString() === today.toDateString();
+  const isTomorrow = date.toDateString() === tomorrow.toDateString();
+  
+  let dateLabel = '';
+  if (isToday) {
+    dateLabel = 'Today';
+  } else if (isTomorrow) {
+    dateLabel = 'Tomorrow';
+  } else {
+    dateLabel = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+  }
+
+  return `<span class="label_2_medium sub_text_color">Scheduled for </span><span class="body_3_medium primary_text_color"> ${dateLabel} <span class="inline-block w-[1px] h-4 mx-1 xl:mx-2 bg-gray-400 align-middle"></span>${formatTime(post.postTime)}</span>`;
 };
 
 
 
 </script>
+
 

@@ -244,6 +244,9 @@
   .input_box{
     @apply w-full rounded-md h-[3.125em] focus:outline-none px-3 font-normal text-[1em] text-[#1D2125];
   }
+   .paragraph_p2_medium{
+    @apply font-medium text-[1.25em]
+  }
   .paragraph_p7_medium{
   @apply text-[0.75em] text-[#555963] font-medium
   }
