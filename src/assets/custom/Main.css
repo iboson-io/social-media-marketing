@@ -135,6 +135,9 @@
   .seconary_title_text_color{
     @apply text-[#15172E]
   }
+  .primary_hover_text_color{
+    @apply text-[#6E5DC6] 
+  }
   .secondary_bg_color{
     @apply bg-[#F3F0FF]
   }
@@ -341,6 +344,9 @@
 }
 .hr_linr_bg{
   @apply bg-[#D3D5D9]
+}
+.hr_calendar_bg{
+  @apply bg-[#E9EAEC]
 }
 .bg_toggle_button{
 @apply bg-[#2ABB7F]

@@ -219,7 +219,7 @@
 
             <!-- Scheduled For -->
             <div class="common_gap medium_inner_gap primary_border_color rounded-lg">
-              <p class="flex justify-between" v-html="formatScheduledTime(selectedPost)">
+              <p class="flex justify-between" v-html="formatScheduledTime(selectedPost, true)" @click="handleTimeClick">
               </p>
             </div>
 
@@ -433,7 +433,7 @@
             </div>
             <!-- Scheduled For -->
             <div class="common_gap medium_inner_gap primary_border_color rounded-lg">
-              <p class="flex justify-between" v-html="formatScheduledTime(selectedPost)">
+              <p class="flex justify-between" v-html="formatScheduledTime(selectedPost, true)" @click="handleTimeClick">
               </p>
             </div>
 
@@ -912,6 +912,15 @@
     @update:selected-platforms="updatePlatforms"
   />
 
+  <!-- Scheduler Calendar Modal -->
+  <SchedulerCalendarModal
+    :open="showSchedulerModal"
+    :initial-date="schedulerInitialDate"
+    :initial-time="schedulerInitialTime"
+    @close="closeSchedulerModal"
+    @schedule="handleSchedule"
+  />
+
   </main>
 </template>
 
@@ -937,6 +946,7 @@ import ImageEditIcon from "../assets/images/ImageEditIcon.svg"
 import DotsIcon from "../assets/images/DotsIcon.svg"
 import SaveIcon from "../assets/images/SaveIcon.svg"
 import SocialMediaModal from "../components/Calendar/SocialMediaModal.vue"
+import SchedulerCalendarModal from "../components/Calendar/SchedulerCalendarModal.vue"
 import TikTokIcon from "../assets/images/TikTokIcon.svg"
 import YoutubeIcon from "../assets/images/YoutubeIcon.svg"
 
@@ -949,6 +959,9 @@ const desktopWeekScrollContainer = ref(null); // Ref for desktop week scroll con
 const dayViewScrollContainer = ref(null); // Ref for day view scroll container
 const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024);
 const showPlatformModal = ref(false); // State for platform modal
+const showSchedulerModal = ref(false); // State for scheduler modal
+const schedulerInitialDate = ref(null); // Initial date for scheduler
+const schedulerInitialTime = ref(null); // Initial time for scheduler
 
 // Update window width on resize
 const handleResize = () => {
@@ -1563,7 +1576,7 @@ const closePostDetail = () => {
 };
 
 // Format scheduled time for detail view
-const formatScheduledTime = (post) => {
+const formatScheduledTime = (post, clickable = false) => {
   if (!post) return '';
   const date = new Date(post.postDate);
   const today = new Date();
@@ -1585,7 +1598,9 @@ const formatScheduledTime = (post) => {
     });
   }
 
-  return `<span class="label_2_medium sub_text_color">Scheduled for </span><span class="body_3_medium primary_text_color"> ${dateLabel} <span class="inline-block w-[1px] h-4 mx-1 xl:mx-2 bg-gray-400 align-middle"></span>${formatTime(post.postTime)}</span>`;
+  const timeDisplay = formatTime(post.postTime);
+  
+  return `<span class="label_2_medium sub_text_color">Scheduled for </span><span class="body_3_medium primary_text_color cursor-pointer"  data-time-clickable="true"> ${dateLabel} <span class="inline-block w-[1px] h-4 mx-1 xl:mx-2 bg-gray-400 align-middle"></span>${timeDisplay}</span>`;
 };
 
 // Platform modal handlers
@@ -1609,6 +1624,47 @@ const updatePlatforms = (platforms) => {
     if (postIndex !== -1) {
       scheduledPosts.value[postIndex].platforms = platforms;
     }
+  }
+};
+
+// Scheduler modal handlers
+const openSchedulerModal = (post) => {
+  if (post) { 
+    const date = new Date(post.postDate);
+    schedulerInitialDate.value = date;
+    schedulerInitialTime.value = post.postTime;
+    showSchedulerModal.value = true;
+  }
+};
+
+const closeSchedulerModal = () => {
+  showSchedulerModal.value = false;
+};
+
+const handleSchedule = (scheduleData) => {
+  console.log("scheduleData",scheduleData);
+  
+  if (selectedPost.value) {
+    // Update the selected post
+    const newDate = scheduleData.date;
+    const newTime = scheduleData.time;
+    
+    selectedPost.value.postDate = formatDateToString(newDate);
+    selectedPost.value.postTime = newTime;
+    
+    // Also update the original post in scheduledPosts
+    const postIndex = scheduledPosts.value.findIndex(p => p.id === selectedPost.value.id);
+    if (postIndex !== -1) {
+      scheduledPosts.value[postIndex].postDate = formatDateToString(newDate);
+      scheduledPosts.value[postIndex].postTime = newTime;
+    }
+  }
+};
+
+// Handle click on time in scheduled time display
+const handleTimeClick = (event) => {
+  if (event.target.dataset.timeClickable === 'true' && selectedPost.value) {
+    openSchedulerModal(selectedPost.value);
   }
 };
 
