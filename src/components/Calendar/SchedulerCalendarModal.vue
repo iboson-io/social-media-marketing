@@ -365,6 +365,7 @@ const schedule = () => {
       time: selectedTime.value,
       timeZone: timeZone.value,
     });
+    // Don't close immediately - let parent handle it
     emit('close');
   }
 };

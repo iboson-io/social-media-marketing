@@ -228,7 +228,12 @@
               <button>
                 <img :src="DotsIcon" alt="">
               </button>
-              <button class="rounded-lg secondary_button_thin primary_add_button label_2_semibold flex justify-center gap-2 w-full">
+              <button 
+                @click="savePostChanges"
+                :disabled="!hasUnsavedChanges"
+                class="rounded-lg secondary_button_thin label_2_semibold flex justify-center gap-2 w-full transition-opacity"
+                :class="hasUnsavedChanges ? 'primary_add_button' : 'primary_add_button opacity-50 cursor-not-allowed'"
+              >
                 <img :src="SaveIcon" alt="">
                 Save Changes
               </button>
@@ -442,7 +447,12 @@
               <button>
                 <img :src="DotsIcon" alt="">
               </button>
-              <button class="rounded-lg secondary_button_thin primary_add_button label_2_semibold flex justify-center gap-2 w-full">
+              <button 
+                @click="savePostChanges"
+                :disabled="!hasUnsavedChanges"
+                class="rounded-lg secondary_button_thin label_2_semibold flex justify-center gap-2 w-full transition-opacity"
+                :class="hasUnsavedChanges ? 'primary_add_button' : 'primary_add_button opacity-50 cursor-not-allowed'"
+              >
                 <img :src="SaveIcon" alt="">
                 Save Changes
               </button>
@@ -962,6 +972,8 @@ const showPlatformModal = ref(false); // State for platform modal
 const showSchedulerModal = ref(false); // State for scheduler modal
 const schedulerInitialDate = ref(null); // Initial date for scheduler
 const schedulerInitialTime = ref(null); // Initial time for scheduler
+const originalPost = ref(null); // Store original post data to track changes
+const hasUnsavedChanges = ref(false); // Track if there are unsaved changes
 
 // Update window width on resize
 const handleResize = () => {
@@ -1568,11 +1580,15 @@ const closeDateModal = () => {
 // Open post detail view
 const openPostDetail = (post) => {
   selectedPost.value = { ...post }; // Create a copy to avoid direct mutation
+  originalPost.value = { ...post }; // Store original for comparison
+  hasUnsavedChanges.value = false; // Reset changes flag
 };
 
 // Close post detail view
 const closePostDetail = () => {
   selectedPost.value = null;
+  originalPost.value = null;
+  hasUnsavedChanges.value = false;
 };
 
 // Format scheduled time for detail view
@@ -1616,14 +1632,10 @@ const closePlatformModal = () => {
 
 const updatePlatforms = (platforms) => {
   if (selectedPost.value) {
-    console.log("platforms",platforms);
-    
+    // Only update the local copy, not the main calendar
     selectedPost.value.platforms = platforms;
-    // Also update the original post in scheduledPosts
-    const postIndex = scheduledPosts.value.findIndex(p => p.id === selectedPost.value.id);
-    if (postIndex !== -1) {
-      scheduledPosts.value[postIndex].platforms = platforms;
-    }
+    // Check if platforms have changed
+    checkForChanges();
   }
 };
 
@@ -1642,22 +1654,16 @@ const closeSchedulerModal = () => {
 };
 
 const handleSchedule = (scheduleData) => {
-  console.log("scheduleData",scheduleData);
-  
   if (selectedPost.value) {
-    // Update the selected post
+    // Only update the local copy, not the main calendar
     const newDate = scheduleData.date;
     const newTime = scheduleData.time;
     
     selectedPost.value.postDate = formatDateToString(newDate);
     selectedPost.value.postTime = newTime;
     
-    // Also update the original post in scheduledPosts
-    const postIndex = scheduledPosts.value.findIndex(p => p.id === selectedPost.value.id);
-    if (postIndex !== -1) {
-      scheduledPosts.value[postIndex].postDate = formatDateToString(newDate);
-      scheduledPosts.value[postIndex].postTime = newTime;
-    }
+    // Check if schedule has changed
+    checkForChanges();
   }
 };
 
@@ -1667,6 +1673,67 @@ const handleTimeClick = (event) => {
     openSchedulerModal(selectedPost.value);
   }
 };
+
+// Check if there are unsaved changes
+const checkForChanges = () => {
+  if (!selectedPost.value || !originalPost.value) {
+    hasUnsavedChanges.value = false;
+    return;
+  }
+  
+  // Check if platforms changed
+  const platformsChanged = JSON.stringify(selectedPost.value.platforms.sort()) !== 
+                          JSON.stringify(originalPost.value.platforms.sort());
+  
+  // Check if date changed
+  const dateChanged = selectedPost.value.postDate !== originalPost.value.postDate;
+  
+  // Check if time changed
+  const timeChanged = selectedPost.value.postTime !== originalPost.value.postTime;
+  
+  // Check if other fields changed (caption, postType, etc.)
+  const otherFieldsChanged = 
+    selectedPost.value.caption !== originalPost.value.caption ||
+    selectedPost.value.postType !== originalPost.value.postType;
+  
+  hasUnsavedChanges.value = platformsChanged || dateChanged || timeChanged || otherFieldsChanged;
+};
+
+// Save post changes to main calendar
+const savePostChanges = () => {
+  if (!selectedPost.value || !hasUnsavedChanges.value) return;
+  
+  // Find and update the original post in scheduledPosts
+  const postIndex = scheduledPosts.value.findIndex(p => p.id === selectedPost.value.id);
+  if (postIndex !== -1) {
+    // Update all fields
+    scheduledPosts.value[postIndex] = {
+      ...scheduledPosts.value[postIndex],
+      platforms: [...selectedPost.value.platforms],
+      postDate: selectedPost.value.postDate,
+      postTime: selectedPost.value.postTime,
+      caption: selectedPost.value.caption,
+      postType: selectedPost.value.postType,
+    };
+  }
+  
+  // Update originalPost to match current state
+  originalPost.value = { ...selectedPost.value };
+  hasUnsavedChanges.value = false;
+};
+
+// Watch for changes in selectedPost fields
+watch(() => selectedPost.value?.caption, () => {
+  if (selectedPost.value) {
+    checkForChanges();
+  }
+});
+
+watch(() => selectedPost.value?.postType, () => {
+  if (selectedPost.value) {
+    checkForChanges();
+  }
+});
 
 
 
