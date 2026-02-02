@@ -153,6 +153,9 @@
   .text_subtle_color{
     @apply text-[#44546F]
   }
+  .delete_text_color{
+    @apply text-[#C9372C]
+  }
   .bg_primary_color {
     @apply bg-[#F7F8F9]
   }
@@ -185,6 +188,9 @@
   }
   .bg_tooltip_color{
     @apply bg-[#38414A]
+  }
+  .bg_warning_color{
+    @apply bg-[#FFF3EB]
   }
   .hashtag_text_color{
     @apply text-[#845EF7]
@@ -259,6 +265,9 @@
   .paragraph_p5_regular{
     @apply font-normal text-[0.875em] text-[#555963]
   }
+  .paragraph_p3_regular{
+    @apply font-normal text-[1em] text-[#38414A]
+  }
   .paragraph_sm{
     @apply text-[0.625em]
   }
@@ -304,6 +313,12 @@
   }
   .common_inner_gap{
     @apply p-5
+  }
+  .common_inner_gap_px{
+    @apply px-5
+  }
+  .common_inner_gap_pb{
+    @apply pb-5
   }
   .medium_inner_gap{
     @apply p-3

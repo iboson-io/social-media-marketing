@@ -224,10 +224,27 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center gap-3  common_gap">
-              <button>
-                <img :src="DotsIcon" alt="">
-              </button>
+            <div class="flex items-center gap-3  common_gap relative">
+              <div class="relative">
+                <button
+                  @click.stop="togglePostMenu"
+                  class="relative"
+                  ref="dotsButtonRef"
+                >
+                  <img :src="DotsIcon" alt="">
+                </button>
+                
+                <!-- Post Actions Dropdown Menu -->
+                <TogglePostModal
+                  ref="togglePostModalRef"
+                  :open="showPostMenu"
+                  @close="showPostMenu = false"
+                  @share="handleShareNow"
+                  @regenerate="handleRegeneratePost"
+                  @delete="handleDeletePost"
+                />
+              </div>
+              
               <button 
                 @click="savePostChanges"
                 :disabled="!hasUnsavedChanges"
@@ -443,10 +460,27 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center gap-3  common_gap">
-              <button>
-                <img :src="DotsIcon" alt="">
-              </button>
+            <div class="flex items-center gap-3  common_gap relative">
+              <div class="relative">
+                <button
+                  @click.stop="togglePostMenu"
+                  class="relative"
+                  ref="dotsButtonRefMobile"
+                >
+                  <img :src="DotsIcon" alt="">
+                </button>
+                
+                <!-- Post Actions Dropdown Menu -->
+                <TogglePostModal
+                  ref="togglePostModalRefMobile"
+                  :open="showPostMenu"
+                  @close="showPostMenu = false"
+                  @share="handleShareNow"
+                  @regenerate="handleRegeneratePost"
+                  @delete="handleDeletePost"
+                />
+              </div>
+              
               <button 
                 @click="savePostChanges"
                 :disabled="!hasUnsavedChanges"
@@ -931,6 +965,13 @@
     @schedule="handleSchedule"
   />
 
+  <!-- Delete Post Confirmation Modal -->
+  <DeletePostModal
+    :open="showDeleteModal"
+    @close="closeDeleteModal"
+    @confirm="confirmDeletePost"
+  />
+
   </main>
 </template>
 
@@ -957,6 +998,8 @@ import DotsIcon from "../assets/images/DotsIcon.svg"
 import SaveIcon from "../assets/images/SaveIcon.svg"
 import SocialMediaModal from "../components/Calendar/SocialMediaModal.vue"
 import SchedulerCalendarModal from "../components/Calendar/SchedulerCalendarModal.vue"
+import TogglePostModal from "../components/Calendar/TogglePostModal.vue"
+import DeletePostModal from "../components/Calendar/DeletePostModal.vue"
 import TikTokIcon from "../assets/images/TikTokIcon.svg"
 import YoutubeIcon from "../assets/images/YoutubeIcon.svg"
 
@@ -974,6 +1017,12 @@ const schedulerInitialDate = ref(null); // Initial date for scheduler
 const schedulerInitialTime = ref(null); // Initial time for scheduler
 const originalPost = ref(null); // Store original post data to track changes
 const hasUnsavedChanges = ref(false); // Track if there are unsaved changes
+const showPostMenu = ref(false); // State for post actions dropdown menu
+const dotsButtonRef = ref(null); // Ref for dots button (desktop)
+const dotsButtonRefMobile = ref(null); // Ref for dots button (mobile)
+const togglePostModalRef = ref(null); // Ref for dropdown modal (desktop)
+const togglePostModalRefMobile = ref(null); // Ref for dropdown modal (mobile)
+const showDeleteModal = ref(false); // State for delete confirmation modal
 
 // Update window width on resize
 const handleResize = () => {
@@ -983,6 +1032,9 @@ const handleResize = () => {
 onMounted(() => {
   if (typeof window !== 'undefined') {
     window.addEventListener('resize', handleResize);
+    // Use document for better mobile support
+    document.addEventListener('click', handleClickOutside, true);
+    document.addEventListener('touchend', handleClickOutside, true);
     windowWidth.value = window.innerWidth;
   }
 });
@@ -990,6 +1042,8 @@ onMounted(() => {
 onUnmounted(() => {
   if (typeof window !== 'undefined') {
     window.removeEventListener('resize', handleResize);
+    document.removeEventListener('click', handleClickOutside, true);
+    document.removeEventListener('touchend', handleClickOutside, true);
   }
 });
 
@@ -1672,6 +1726,104 @@ const handleTimeClick = (event) => {
   if (event.target.dataset.timeClickable === 'true' && selectedPost.value) {
     openSchedulerModal(selectedPost.value);
   }
+};
+
+// Toggle post actions menu
+const togglePostMenu = () => {
+  showPostMenu.value = !showPostMenu.value;
+};
+
+// Close post menu when clicking outside
+const handleClickOutside = (event) => {
+  if (!showPostMenu.value) return;
+  
+  const target = event.target;
+  
+  // Check if click is inside the dots button
+  const isClickOnDotsButton = 
+    (dotsButtonRef.value && dotsButtonRef.value.contains(target)) ||
+    (dotsButtonRefMobile.value && dotsButtonRefMobile.value.contains(target));
+  
+  if (isClickOnDotsButton) {
+    return; // Don't close if clicking the button
+  }
+  
+  // Check if click is inside the dropdown menu using refs
+  let isClickInDropdown = false;
+  
+  // Check desktop dropdown
+  if (togglePostModalRef.value && togglePostModalRef.value.dropdownRef) {
+    try {
+      isClickInDropdown = togglePostModalRef.value.dropdownRef.contains(target);
+    } catch (e) {
+      // Ref might not be ready yet
+    }
+  }
+  
+  // Check mobile dropdown
+  if (!isClickInDropdown && togglePostModalRefMobile.value && togglePostModalRefMobile.value.dropdownRef) {
+    try {
+      isClickInDropdown = togglePostModalRefMobile.value.dropdownRef.contains(target);
+    } catch (e) {
+      // Ref might not be ready yet
+    }
+  }
+  
+  // Fallback: check by class name or data attribute
+  if (!isClickInDropdown) {
+    const dropdownElement = target.closest('.post-dropdown-menu') || 
+                           target.closest('[class*="bottom-full"]') ||
+                           target.closest('.bg_white.rounded-xl.shadow-2xl');
+    isClickInDropdown = dropdownElement !== null;
+  }
+  
+  // Close if click is outside both button and dropdown
+  if (!isClickInDropdown) {
+    showPostMenu.value = false;
+  }
+};
+
+// Handle Share Now action
+const handleShareNow = () => {
+  if (selectedPost.value) {
+    console.log('Share Now:', selectedPost.value);
+    // TODO: Implement share functionality
+    showPostMenu.value = false;
+  }
+};
+
+// Handle Regenerate Post action
+const handleRegeneratePost = () => {
+  if (selectedPost.value) {
+    console.log('Regenerate Post:', selectedPost.value);
+    // TODO: Implement regenerate functionality
+    showPostMenu.value = false;
+  }
+};
+
+// Handle Delete Post action
+const handleDeletePost = () => {
+  if (selectedPost.value) {
+    showDeleteModal.value = true;
+    showPostMenu.value = false;
+  }
+};
+
+// Confirm delete action
+const confirmDeletePost = () => {
+  if (selectedPost.value) {
+    const postIndex = scheduledPosts.value.findIndex(p => p.id === selectedPost.value.id);
+    if (postIndex !== -1) {
+      scheduledPosts.value.splice(postIndex, 1);
+    }
+    selectedPost.value = null;
+    showDeleteModal.value = false;
+  }
+};
+
+// Close delete modal
+const closeDeleteModal = () => {
+  showDeleteModal.value = false;
 };
 
 // Check if there are unsaved changes

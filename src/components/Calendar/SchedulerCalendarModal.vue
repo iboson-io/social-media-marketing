@@ -7,15 +7,15 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_white rounded-lg ring-1 ring-black/5 shadow-2xl"
+      class="relative w-[92%] md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_white rounded-lg ring-1 ring-black/5 shadow-2xl"
       @click.stop
     >
      
 
       <!-- Date and Time Picker Container -->
-      <div class="flex flex-col lg:flex-row ">
+      <div class="flex  flex-col md:flex-row ">
         <!-- Date Picker (Left Side) -->
-        <div class="common_inner_gap px-5 pt-5 pb-2 w-2/3">
+        <div class="common_inner_gap px-5 pt-5 pb-2 md:w-2/3">
            <!-- Header -->
      
         <div class="flex items-center justify-between">
@@ -68,23 +68,24 @@
           </div>
         </div>
 
-        <!-- Time Picker (Right Side) -->
-        <div class=" border-l px-5 pt-5 pb-2 w-1/3">
-          <h3 class="label_1_semibold">Choose Time</h3>
+        <!-- Time Picker (Right Side) for desktop-->
+        <div class=" border-l px-5 pt-5 pb-2 hidden md:block md:w-1/3">
+          <h3 class="label_1_semibold text-center">Choose Time</h3>
           
           <!-- Time Slots List -->
-          <div class="max-h-[280px] overflow-y-auto hide-scrollbar space-y-1 common_gap">
+          <div class=" md:max-h-[330px]  lg:max-h-[280px] md:overflow-y-auto space-y-1 common_gap custom-scrollbar-calendar">
             <div
               v-for="time in timeSlots"
               :key="time.value"
-              @click="selectTime(time.value)"
-              @mouseenter="hoveredTime = time.value"
+              @click="!isTimePast(time.value) ? selectTime(time) : null"
+              @mouseenter="!isTimePast(time.value) ? hoveredTime = time.value : null"
               @mouseleave="hoveredTime = null"
-              class="medium_inner_gap rounded-lg cursor-pointer transition-colors label_2_semibold text-center"
+              class="medium_inner_gap rounded-lg transition-colors label_2_semibold text-center"
               :class="[
-                isTimeSelected(time.value) ? 'bg_brand_color text-white' : '',
-                !isTimeSelected(time.value) && isTimeHovered(time.value) ? 'secondary_bg_color primary_hover_text_color' : '',
-                !isTimeSelected(time.value) && !isTimeHovered(time.value) ? 'primary_text_color bg_primary_color' : ''
+                isTimePast(time.value) ? 'disable_text_color cursor-not-allowed bg_primary_color' : 'cursor-pointer',
+                !isTimePast(time.value) && isTimeSelected(time.value) ? 'bg_brand_color text-white' : '',
+                !isTimePast(time.value) && !isTimeSelected(time.value) && isTimeHovered(time.value) ? 'secondary_bg_color primary_hover_text_color' : '',
+                !isTimePast(time.value) && !isTimeSelected(time.value) && !isTimeHovered(time.value) ? 'primary_text_color bg_primary_color' : ''
               ]"
             >
               {{ time.label }}
@@ -111,17 +112,49 @@
             </div>
           </div>
 
+           <!-- Time Picker (Right Side) for mobile -->
+        <div class=" border-l px-5 pb-5 md:pb-2 block md:hidden">
+          <h3 class="label_1_semibold text-center">Choose Time</h3>
+          
+          <!-- Time Slots List -->
+          <!-- Time Slots List -->
+          <div class="flex gap-3 overflow-x-auto space-y-1 common_gap custom-scrollbar-calendar">
+            <div
+              v-for="time in timeSlots"
+              :key="time.value"
+              @click="!isTimePast(time.value) ? selectTime(time) : null"
+              @mouseenter="!isTimePast(time.value) ? hoveredTime = time.value : null"
+              @mouseleave="hoveredTime = null"
+              class="medium_inner_gap rounded-lg transition-colors label_2_semibold text-center"
+              :class="[
+                isTimePast(time.value) ? 'disable_text_color cursor-not-allowed bg_primary_color' : 'cursor-pointer',
+                !isTimePast(time.value) && isTimeSelected(time.value) ? 'bg_brand_color text-white' : '',
+                !isTimePast(time.value) && !isTimeSelected(time.value) && isTimeHovered(time.value) ? 'secondary_bg_color primary_hover_text_color' : '',
+                !isTimePast(time.value) && !isTimeSelected(time.value) && !isTimeHovered(time.value) ? 'primary_text_color bg_primary_color' : ''
+              ]"
+            >
+             <p class="w-16">{{ time.label }}</p>
+            </div>
+          </div>
+        </div>
+
           <!-- Action Buttons -->
-          <div class="flex items-center gap-3 px-5 pb-5 ">
+          <div class="flex items-center justify-end gap-3 px-5 pb-5 ">
             <button
               @click="clearSelection"
-              class="flex-1 px-4 py-2 rounded-lg bg-white primary_border_color label_2_semibold secondary_text_color hover:bg-gray-50 transition-colors"
+              class="rounded-lg bg_primary_color secondary_button_thin label_2_semibold w-24 hidden md:block"
             >
               Clear
             </button>
             <button
+              @click="handleClose"
+              class="rounded-lg bg_primary_color secondary_button_thin label_2_semibold w-24 block md:hidden"
+            >
+              Close
+            </button>
+            <button
               @click="schedule"
-              class="flex-1 px-4 py-2 rounded-lg bg-[#7950F2] text-white label_2_semibold hover:bg-[#6E5DC6] transition-colors"
+              class="rounded-lg bg_brand_color text-white label_2_semibold secondary_button_thin w-24"
             >
               Schedule
             </button>
@@ -324,14 +357,40 @@ const isTimeHovered = (time) => {
 
 // Select date
 const selectDate = (date) => {
-  if (date.isCurrentMonth) {
+  if (date.isCurrentMonth && !date.isPast) {
     selectedDate.value = new Date(date.fullDate);
+    // If selected date is today, clear time if it's in the past
+    if (isToday(date.fullDate) && selectedTime.value) {
+      if (isTimePast(selectedTime.value)) {
+        selectedTime.value = null;
+      }
+    }
   }
+};
+
+// Check if a time is in the past (for today's date)
+const isTimePast = (timeValue) => {
+  return isTimePastForDate(timeValue, selectedDate.value);
+};
+
+// Check if selected date is today
+const isToday = (date) => {
+  if (!date) return false;
+  const today = new Date();
+  const checkDate = new Date(date);
+  return (
+    checkDate.getDate() === today.getDate() &&
+    checkDate.getMonth() === today.getMonth() &&
+    checkDate.getFullYear() === today.getFullYear()
+  );
 };
 
 // Select time
 const selectTime = (time) => {
-  selectedTime.value = time;
+  // Don't allow selecting past times for today
+  if (!isTimePast(time.value)) {
+    selectedTime.value = time.value;
+  }
 };
 
 // Month navigation
@@ -351,15 +410,37 @@ const nextMonth = () => {
   );
 };
 
+// Handle close button click
+const handleClose = () => {
+  emit('close');
+};
+
 // Clear selection
 const clearSelection = () => {
-  selectedDate.value = null;
+  // Reset to today (not null) so user can still select
+  const today = new Date();
+  selectedDate.value = new Date(today);
   selectedTime.value = null;
 };
 
 // Schedule
 const schedule = () => {
   if (selectedDate.value && selectedTime.value) {
+    // Validate that date is not in the past
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const selectedDateOnly = new Date(selectedDate.value);
+    selectedDateOnly.setHours(0, 0, 0, 0);
+    
+    if (selectedDateOnly < today) {
+      return; // Don't schedule past dates
+    }
+    
+    // Validate that time is not in the past for today
+    if (selectedDateOnly.getTime() === today.getTime() && isTimePast(selectedTime.value)) {
+      return; // Don't schedule past times for today
+    }
+    
     emit('schedule', {
       date: selectedDate.value,
       time: selectedTime.value,
@@ -367,20 +448,70 @@ const schedule = () => {
     });
     // Don't close immediately - let parent handle it
     emit('close');
+  }else {
+    // Incomplete selection - could show error or ignore
+    alert("Please select both date and time before scheduling.");
   }
+};
+
+// Helper to check if time is past for a given date
+const isTimePastForDate = (timeValue, date) => {
+  if (!date) return false;
+  
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const checkDate = new Date(date);
+  checkDate.setHours(0, 0, 0, 0);
+  
+  // Only check if date is today
+  if (checkDate.getTime() !== today.getTime()) {
+    return false;
+  }
+  
+  // Parse time value (HH:mm format)
+  const [hours, minutes] = timeValue.split(':').map(Number);
+  const timeDate = new Date();
+  timeDate.setHours(hours, minutes, 0, 0);
+  
+  const now = new Date();
+  return timeDate < now;
 };
 
 // Watch for modal open to reset state
 watch(() => props.open, (isOpen) => {
   if (isOpen) {
     if (props.initialDate) {
-      currentDate.value = new Date(props.initialDate);
-      selectedDate.value = new Date(props.initialDate);
+      const initialDate = new Date(props.initialDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const checkDate = new Date(initialDate);
+      checkDate.setHours(0, 0, 0, 0);
+      
+      // Only set date if it's not in the past
+      if (checkDate >= today) {
+        currentDate.value = initialDate;
+        selectedDate.value = new Date(initialDate);
+      } else {
+        // If initial date is past, set to today
+        currentDate.value = new Date();
+        selectedDate.value = new Date();
+      }
     } else {
       currentDate.value = new Date();
-      selectedDate.value = null;
+      selectedDate.value = new Date(); // Default to today
     }
-    selectedTime.value = props.initialTime || null;
+    
+    // Set initial time, but clear it if it's in the past for today
+    if (props.initialTime && selectedDate.value) {
+      // Check if time is past for the selected date
+      if (!isTimePastForDate(props.initialTime, selectedDate.value)) {
+        selectedTime.value = props.initialTime;
+      } else {
+        selectedTime.value = null;
+      }
+    } else {
+      selectedTime.value = null;
+    }
   }
 });
 
