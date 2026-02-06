@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center px-6 min-h-screen">
+  <div class="flex items-center justify-center px-6xl min-h-screen">
     <div class="w-full max-w-md">
 
       <!-- Logo -->
@@ -8,11 +8,11 @@
       </div>
 
       <!-- Heading -->
-      <h2 class="heading_h5_semibold">
+      <h2 class="heading_h5_semibold primary_text_color">
         Create your account
       </h2>
 
-      <p class="label_1_regular regular_gap">
+      <p class="body_2_regular secondary_text_color mt-md">
         Start creating AI-powered social posts for your brand.
       </p>
 
@@ -20,14 +20,14 @@
       <GoogleSignin />
 
       <!-- Divider -->
-      <div class="my-6 flex items-center gap-3">
-        <div class="h-px flex-1 bg-[#E5E7EB]"></div>
+      <div class="my-4xl flex items-center gap-3">
+        <div class="h-px flex-1 bg-gray-25"></div>
         <span class="or_text">OR</span>
-        <div class="h-px flex-1 bg-[#E5E7EB]"></div>
+        <div class="h-px flex-1 bg-gray-25"></div>
       </div>
 
       <!-- Form -->
-      <form class="space-y-4" novalidate @submit.prevent="handleSubmit">
+      <form novalidate @submit.prevent="handleSubmit">
 
         <!-- Full Name -->
         <div>
@@ -47,7 +47,7 @@
             v-model="form.email"
             type="text"
             placeholder="Email"
-            class="input_box"
+            class="input_box mt-4xl"
             :class="inputClass(errors.email)"
           />
           <p v-if="errors.email" class="error_text">{{ errors.email }}</p>
@@ -60,14 +60,14 @@
               v-model="form.password"
               :type="showPassword ? 'text' : 'password'"
               placeholder="Password"
-              class="input_box pr-10"
+              class="input_box mt-4xl pr-10xl"
               :class="inputClass(errors.password)"
             />
 
             <button
               type="button"
               @click="togglePassword"
-              class="absolute right-3 top-1/2 -translate-y-1/2"
+              class="absolute right-xl top-[62%] -translate-y-1/2"
             >
               <img v-if="!showPassword" :src="EyeOpenIcon" />
               <span v-else><img :src="EyeCloseIcon" alt=""></span>
@@ -79,17 +79,17 @@
 
         <!-- Terms -->
         <div>
-          <label class="label_2_regular flex items-start gap-2">
+          <label class="label_3_regular flex items-start gap-md mt-6xl">
             <input
               type="checkbox"
               v-model="form.terms"
-              class="accent-[#7950F2] regular_gap"
+              class="accent-gray-25 mt-xxs border-gray-25 scale-125 checked:bg-gray-25 checked:border-gray-25"
             />
-            <span>
+            <span class="secondary_text_color">
               I agree to the
-              <a class="underline">Terms of Service</a>
+              <a class="underline primary_text_color">Terms of Service</a>
               and
-              <a class="underline">Privacy Policy</a>
+              <a class="underline primary_text_color">Privacy Policy</a>
             </span>
           </label>
 
@@ -100,7 +100,7 @@
         <button
           type="submit"
           :disabled="!isFormFilled"
-          class="w-full rounded-md py-2 font-medium transition"
+          class="w-full rounded-md py-md font-medium transition mt-6xl"
           :class="isFormFilled
             ? 'primary_button'
             : 'disabled_primary_button'"
@@ -110,11 +110,11 @@
       </form>
 
       <!-- Footer -->
-      <p class="label_1_regular flex justify-center mt-5">
+      <p class="body_2_regular secondary_text_color flex justify-center mt-6xl">
         Already have an account?
         <RouterLink
           to="/signin"
-          class="ml-1 underline font-medium primary_text_color"
+          class="ml-xs underline Body_2_Medium primary_text_color"
         >
           Log in
         </RouterLink>

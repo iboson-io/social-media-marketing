@@ -7,17 +7,17 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-lg mx-4 bg_white rounded-2xl shadow-2xl overflow-hidden p-4"
+      class="relative w-full max-w-lg mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-4"
       @click.stop
     >
        <img :src="SucessImage" alt="">
 
       <!-- Text Content Section -->
       <div class="px-6 py-6">
-        <h2 class="label_1_bold ">
+        <h2 class="label_1_bold primary_text_color">
           Your brand has been created successfully!
         </h2>
-        <p class="label_2_regular">
+        <p class="label_2_regular secondary_text_color">
           You can now start planning posts or generating content.
         </p>
       </div>
@@ -26,7 +26,7 @@
       <div class="px-6  flex justify-between gap-3">
         <button
           @click="handleViewProduct"
-          class=" px-4 py-3 rounded-lg bg_primary_color primary_border_color label_2_semibold"
+          class=" px-4 py-3 rounded-lg bg_primary_color primary_border_color label_2_semibold primary_text_color"
         >
           View Product
         </button>

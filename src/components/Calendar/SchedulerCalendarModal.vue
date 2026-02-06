@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-[92%] md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_white rounded-lg ring-1 ring-black/5 shadow-2xl"
+      class="relative w-[92%] md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_secondary_color rounded-lg ring-1 ring-black/5 shadow-2xl"
       @click.stop
     >
      
@@ -15,7 +15,7 @@
       <!-- Date and Time Picker Container -->
       <div class="flex  flex-col md:flex-row ">
         <!-- Date Picker (Left Side) -->
-        <div class="common_inner_gap px-5 pt-5 pb-2 md:w-2/3">
+        <div class="p-6xl px-5 pt-5 pb-2 md:w-2/3">
            <!-- Header -->
      
         <div class="flex items-center justify-between">
@@ -25,7 +25,7 @@
           >
             <img :src="ArrowLeftIcon" alt="Previous" >
           </button>
-          <h2 class="label_1_semibold">{{ monthYearLabel }}</h2>
+          <h2 class="label_1_semibold primary_text_color">{{ monthYearLabel }}</h2>
           <button
             @click="nextMonth"
             aria-label="Next month"
@@ -35,7 +35,7 @@
         </div>
          
           <!-- Week Days Header -->
-          <div class="grid grid-cols-7 gap-1 common_gap">
+          <div class="grid grid-cols-7 gap-1 mt-5xl">
             <div
               v-for="day in weekDays"
               :key="day"
@@ -44,9 +44,9 @@
               {{ day }}
             </div>
           </div>
-         <div class="block h-[1px] w-full hr_calendar_bg medium_gap"></div>
+         <div class="block h-[1px] w-full hr_calendar_bg mt-xl"></div>
           <!-- Calendar Grid -->
-          <div class="grid grid-cols-7 gap-1 regular_gap">
+          <div class="grid grid-cols-7 gap-1 mt-xs">
             <div
               v-for="date in calendarDays"
               :key="date.key"
@@ -70,17 +70,17 @@
 
         <!-- Time Picker (Right Side) for desktop-->
         <div class=" border-l px-5 pt-5 pb-2 hidden md:block md:w-1/3">
-          <h3 class="label_1_semibold text-center">Choose Time</h3>
+          <h3 class="label_1_semibold primary_text_color text-center">Choose Time</h3>
           
           <!-- Time Slots List -->
-          <div class=" md:max-h-[330px]  lg:max-h-[280px] md:overflow-y-auto space-y-1 common_gap custom-scrollbar-calendar">
+          <div class=" md:max-h-[330px]  lg:max-h-[280px] md:overflow-y-auto space-y-1 mt-5xl custom-scrollbar-calendar">
             <div
               v-for="time in timeSlots"
               :key="time.value"
               @click="!isTimePast(time.value) ? selectTime(time) : null"
               @mouseenter="!isTimePast(time.value) ? hoveredTime = time.value : null"
               @mouseleave="hoveredTime = null"
-              class="medium_inner_gap rounded-lg transition-colors label_2_semibold text-center"
+              class="p-xlp rounded-lg transition-colors label_2_semibold text-center"
               :class="[
                 isTimePast(time.value) ? 'disable_text_color cursor-not-allowed bg_primary_color' : 'cursor-pointer',
                 !isTimePast(time.value) && isTimeSelected(time.value) ? 'bg_brand_color text-white' : '',
@@ -96,16 +96,16 @@
 
        <div class="block h-[1px] w-full hr_calendar_bg"></div>
       <!-- Time Zone Section -->
-          <div class="common_inner_gap ">
+          <div class="p-6xl ">
             <label class="label_2_medium primary_text_color">Time zone</label>
-            <div class="relative medium_gap">
+            <div class="relative mt-xl">
               <div class="absolute left-3 top-1/2 -translate-y-1/2">
                 <img :src="TimeZoneIcon" alt="">
               </div>
               <input
                 :value="timeZone"
                 type="text"
-                class="w-full rounded-lg primary_border_color medium_inner_gap pl-10 label_2_medium primary_text_color bg_white"
+                class="w-full rounded-lg primary_border_color p-xlp pl-10 label_2_medium primary_text_color bg_secondary_color"
                 placeholder="Select time zone"
                 readonly
               />
@@ -114,18 +114,18 @@
 
            <!-- Time Picker (Right Side) for mobile -->
         <div class=" border-l px-5 pb-5 md:pb-2 block md:hidden">
-          <h3 class="label_1_semibold text-center">Choose Time</h3>
+          <h3 class="label_1_semibold primary_text_color text-center">Choose Time</h3>
           
           <!-- Time Slots List -->
           <!-- Time Slots List -->
-          <div class="flex gap-3 overflow-x-auto space-y-1 common_gap custom-scrollbar-calendar">
+          <div class="flex gap-3 overflow-x-auto space-y-1 mt-5xl custom-scrollbar-calendar">
             <div
               v-for="time in timeSlots"
               :key="time.value"
               @click="!isTimePast(time.value) ? selectTime(time) : null"
               @mouseenter="!isTimePast(time.value) ? hoveredTime = time.value : null"
               @mouseleave="hoveredTime = null"
-              class="medium_inner_gap rounded-lg transition-colors label_2_semibold text-center"
+              class="p-xlp rounded-lg transition-colors label_2_semibold text-center"
               :class="[
                 isTimePast(time.value) ? 'disable_text_color cursor-not-allowed bg_primary_color' : 'cursor-pointer',
                 !isTimePast(time.value) && isTimeSelected(time.value) ? 'bg_brand_color text-white' : '',
@@ -142,19 +142,19 @@
           <div class="flex items-center justify-end gap-3 px-5 pb-5 ">
             <button
               @click="clearSelection"
-              class="rounded-lg bg_primary_color secondary_button_thin label_2_semibold w-24 hidden md:block"
+              class="rounded-lg bg_primary_color p-md label_2_semibold primary_text_colorw-24 hidden md:block"
             >
               Clear
             </button>
             <button
               @click="handleClose"
-              class="rounded-lg bg_primary_color secondary_button_thin label_2_semibold w-24 block md:hidden"
+              class="rounded-lg bg_primary_color p-md label_2_semibold primary_text_color w-24 block md:hidden"
             >
               Close
             </button>
             <button
               @click="schedule"
-              class="rounded-lg bg_brand_color text-white label_2_semibold secondary_button_thin w-24"
+              class="rounded-lg bg_brand_color text-white label_2_semibold p-md w-24"
             >
               Schedule
             </button>

@@ -10,25 +10,23 @@
       ></div>
 
       <h1
-        class="primary_text_color heading_h3_semibold_mobile md:heading_h3_semibold"
+        class="primary_text_color heading_h4_semibold_mobile md:heading_h4_semibold"
       >
         Good Afternoon, Cliff
       </h1>
+      <span class=" heading_h3_semibold gradient_text_color">How can I help your brand today?</span>
 
-      <h2
-        class="heading_h3_semibold_mobile md:heading_h3_semibold gradient_text_color"
-      >
-        How can I help your brand today?
-      </h2>
+
+
       <div class="block md:hidden">
-     <p class="caption_2_medium text-start mt-20">
+     <p class="caption_2_medium text-start primary_text_color mt-20">
       Start with the example below
     </p>
    </div>
    <div class="block md:hidden flex text-center justify-center gap-5 mb-[-2.5em] py-3">
-    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_white rounded-lg">Set Up Your Brand</p>
-    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_white rounded-lg">Plan Weekly Posts</p>
-    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_white rounded-lg">Create Social Posts</p>
+    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_secondary_color rounded-lg">Set Up Your Brand</p>
+    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_secondary_color rounded-lg">Plan Weekly Posts</p>
+    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_secondary_color rounded-lg">Create Social Posts</p>
    </div>
       <PromptBox @send-message="handleFirstMessage" />
       <Cards />

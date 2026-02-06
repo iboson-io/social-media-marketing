@@ -1,5 +1,5 @@
 <template>
-    <div class="space-y-6 bg_white rounded-2xl py-7 px-4 brand_section_height primary_border_color">
+    <div class="space-y-6 bg_secondary_color rounded-2xl py-7 px-4 brand_section_height primary_border_color">
   <div class="flex gap-3 flex-col items-start justify-between md:flex-row">
     <label class="label_2_medium primary_text_color">Brand Voice</label>
 
@@ -8,7 +8,7 @@
       <!-- Friendly -->
       <li
         @click="selectedVoice = 'friendly'"
-        class="relative flex flex-col  items-start rounded-xl border p-6 cursor-pointer common_inner_gap"
+        class="relative flex flex-col  items-start rounded-xl border p-6 cursor-pointer p-6xl"
         :class="
           selectedVoice === 'friendly'
             ? 'brand_border_color'
@@ -45,7 +45,7 @@
           class="mt-3 label_2_medium"
           :class="
             selectedVoice === 'friendly'
-              ? 'secondary_text_color'
+              ? 'secondary_text_brand_color'
               : 'primary_text_color'
           "
         >
@@ -56,7 +56,7 @@
       <!-- Professional -->
       <li
         @click="selectedVoice = 'professional'"
-        class="relative flex flex-col items-start justify-center rounded-xl common_inner_gap cursor-pointer transition-all"
+        class="relative flex flex-col items-start justify-center rounded-xl p-6xl cursor-pointer transition-all"
         :class="
           selectedVoice === 'professional'
             ? 'brand_border_color'
@@ -93,7 +93,7 @@
           class="mt-3 label_2_medium"
           :class="
             selectedVoice === 'professional'
-              ? 'secondary_text_color'
+              ? 'secondary_text_brand_color'
               : 'primary_text_color'
           "
         >
@@ -104,7 +104,7 @@
       <!-- Playful -->
       <li
         @click="selectedVoice = 'playful'"
-        class="relative flex flex-col  items-start rounded-xl p-6 cursor-pointer transition-all common_inner_gap"
+        class="relative flex flex-col  items-start rounded-xl p-6 cursor-pointer transition-all p-6xl"
         :class="
           selectedVoice === 'playful'
             ? 'brand_border_color'
@@ -141,7 +141,7 @@
           class="mt-3 label_2_medium"
           :class="
             selectedVoice === 'playful'
-              ? 'secondary_text_color'
+              ? 'secondary_text_brand_color'
               : 'primary_text_color'
           "
         >
@@ -152,7 +152,7 @@
       <!-- Calm -->
       <li
         @click="selectedVoice = 'calm'"
-        class="relative flex flex-col  items-start rounded-xl  p-6 cursor-pointer transition-all common_inner_gap"
+        class="relative flex flex-col  items-start rounded-xl  p-6 cursor-pointer transition-all p-6xl"
         :class="
           selectedVoice === 'calm'
             ? 'brand_border_color'
@@ -189,7 +189,7 @@
           class="mt-3 label_2_medium"
           :class="
             selectedVoice === 'calm'
-              ? 'secondary_text_color'
+              ? 'secondary_text_brand_color'
               : 'primary_text_color'
           "
         >

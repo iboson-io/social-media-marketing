@@ -1,9 +1,9 @@
 <template>
-  <div class="rounded-2xl bg_white common_inner_gap primary_border_color shadow-sm common_gap">
+  <div class="rounded-2xl bg_secondary_color p-6xl primary_border_color shadow-sm mt-5xl">
     <!-- Header -->
     <div class="flex items-start justify-between mb-2">
       <div>
-        <h3 class="label_1_semibold">
+        <h3 class="label_1_semibold primary_text_color">
           Performance by platform
         </h3>
       </div>
@@ -12,7 +12,7 @@
       <div class="relative metric-dropdown-container hidden md:block">
         <button
           @click.stop="toggleMetricDropdown"
-          class="flex items-center gap-2 rounded-lg border px-3 py-2 label_2_medium bg_white primary_border_color"
+          class="flex items-center gap-2 rounded-lg border px-3 py-2 label_2_medium bg_secondary_color primary_border_color"
         >
           <img :src="getMetricIcon(selectedMetric)" alt="" class="h-4 w-4" />
           <span class="label_2_medium min-w-[7em] text-start primary_text_color">{{ getMetricLabel(selectedMetric) }}</span>
@@ -22,7 +22,7 @@
         <!-- Dropdown Menu -->
         <div
           v-if="showMetricDropdown"
-          class="absolute right-0 top-10 z-50 min-w-[160px] rounded-lg bg_white shadow-lg primary_border_color py-2"
+          class="absolute right-0 top-10 z-50 min-w-[160px] rounded-lg bg_secondary_color shadow-lg primary_border_color py-2"
         >
           <div
             v-for="metric in metrics"
@@ -31,7 +31,7 @@
             class="flex items-center justify-between px-4 py-2 cursor-pointer hover:bg-gray-50"
             :class="selectedMetric === metric.value ? 'bg-gray-50' : ''"
           >
-            <span class="label_2_medium">{{ metric.label }}</span>
+            <span class="label_2_medium primary_text_color">{{ metric.label }}</span>
             <img 
               :src="metric.icon" 
               alt="" 
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <p class="label_2_regular mb-6 lg:mt-[-18px]">
+    <p class="label_2_regular secondary_text_color mb-6 lg:mt-[-18px]">
           Compare reach, engagement, likes, comments, and shares across all platforms.
         </p>
     <!-- Chart -->
@@ -50,7 +50,7 @@
     <div class="relative metric-dropdown-container block mb-5 md:hidden">
         <button
           @click.stop="toggleMetricDropdown"
-          class="flex items-center gap-2 rounded-lg border px-3 py-2 label_2_medium bg_white primary_border_color"
+          class="flex items-center gap-2 rounded-lg border px-3 py-2 label_2_medium bg_secondary_color primary_border_color"
         >
           <img :src="getMetricIcon(selectedMetric)" alt="" class="h-4 w-4" />
           <span class="label_2_medium min-w-[7em] text-start primary_text_color">{{ getMetricLabel(selectedMetric) }}</span>
@@ -60,7 +60,7 @@
         <!-- Dropdown Menu -->
         <div
           v-if="showMetricDropdown"
-          class="absolute  top-10 z-50 min-w-[160px] rounded-lg bg_white shadow-lg primary_border_color py-2"
+          class="absolute  top-10 z-50 min-w-[160px] rounded-lg bg_secondary_color shadow-lg primary_border_color py-2"
         >
           <div
             v-for="metric in metrics"
@@ -69,7 +69,7 @@
             class="flex items-center justify-between px-4 py-2 cursor-pointer hover:bg-gray-50"
             :class="selectedMetric === metric.value ? 'bg-gray-50' : ''"
           >
-            <span class="label_2_medium">{{ metric.label }}</span>
+            <span class="label_2_medium primary_text_color">{{ metric.label }}</span>
             <img 
               :src="metric.icon" 
               alt="" 
@@ -86,8 +86,8 @@
         <canvas ref="chartRef" height="80"></canvas>
 
         <!-- X Axis Labels (Icons + Text) -->
-        <ul class="mt-4 grid grid-cols-6 text-center label_2_medium pl-8 lg:pl-6">
-          <li v-for="p in platforms" :key="p.name" class="flex justify-center items-center gap-1 label_2_medium">
+        <ul class="mt-4 grid grid-cols-6 text-center label_2_medium primary_text_color pl-8 lg:pl-6">
+          <li v-for="p in platforms" :key="p.name" class="flex justify-center items-center gap-1 label_2_medium primary_text_color">
             <img :src="p.icon" class="h-5 w-5" />
             <span class="hidden lg:inline">{{ p.name }}</span>
           </li>

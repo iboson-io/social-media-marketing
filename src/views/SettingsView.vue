@@ -2,12 +2,12 @@
   <main class="flex-1 bg_primary_color px-4 py-12 md:px-10 lg:py-7">
     <div class="max-w-full md:max-w-none">
       <!-- Navigation Tabs -->
-      <div class="relative border-b primary_border_color bg_white rounded-2xl p-3 md:p-3">
+      <div class="relative border-b primary_border_color bg_secondary_color rounded-2xl p-3 md:p-3">
         <!-- Left Arrow Button (Mobile only) -->
         <button
           v-if="canScrollLeft"
           @click.stop="scrollTabs('left')"
-          class="absolute left-2 top-1/2 -translate-y-1/2 z-10 md:hidden w-4 h-12 flex items-center justify-center bg_white"
+          class="absolute left-2 top-1/2 -translate-y-1/2 z-10 md:hidden w-4 h-12 flex items-center justify-center bg_secondary_color"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.5 5L7.5 10L12.5 15" stroke="#15172E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -18,7 +18,7 @@
         <button
           v-if="canScrollRight"
           @click.stop="scrollTabs('right')"
-          class="absolute right-2 top-1/2 -translate-y-1/2 z-10 md:hidden w-4 h-12 flex items-center justify-center bg_white"
+          class="absolute right-2 top-1/2 -translate-y-1/2 z-10 md:hidden w-4 h-12 flex items-center justify-center bg_secondary_color"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.5 5L12.5 10L7.5 15" stroke="#15172E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -56,7 +56,7 @@
       </div>
 
       <!-- Tab Content -->
-      <div class="space-y-6 common_gap ">
+      <div class="space-y-6 mt-5xl ">
         <!-- Account Tab Content -->
         <div v-if="activeTab === 'account'">
           <!-- Profile Information Section -->

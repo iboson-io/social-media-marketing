@@ -1,9 +1,9 @@
 <template>
-  <div class="overflow-auto rounded-2xl bg_white primary_border_color common_gap lg:overflow-hidden">
+  <div class="overflow-auto rounded-2xl bg_secondary_color primary_border_color mt-5xl lg:overflow-hidden">
     <!-- Table -->
     <table class="w-full border-collapse">
       <!-- Header -->
-      <thead class="bg_white">
+      <thead class="bg_secondary_color">
         <tr class="text-left paragraph_p5_medium primary_text_color">
           <th class="px-6 py-3">Preview</th>
           <th class="px-6 py-3">Caption / Title</th>
@@ -33,7 +33,7 @@
 
           <!-- Caption -->
           <td class="px-6 py-4">
-            <p class="label_2_regular">
+            <p class="label_2_regular secondary_text_color">
               {{ row.title }}
             </p>
           </td>
@@ -44,7 +44,7 @@
               <span
                 v-for="p in row.platforms"
                 :key="p"
-                class="rounded-md bg_primary_color px-2 py-1 label_3_medium"
+                class="rounded-md bg_primary_color px-2 py-1 label_3_medium secondary_text_color"
               >
                 {{ p }}
               </span>
@@ -58,7 +58,7 @@
           </td>
 
           <!-- Reach -->
-          <td class="px-6 py-4 label_2_regular">
+          <td class="px-6 py-4 label_2_regular secondary_text_color">
             {{ row.reach }}
           </td>
 
@@ -90,20 +90,20 @@
               <!-- Dropdown Menu -->
               <div
                 v-if="openDropdownIndex === index"
-                class="absolute right-0 top-10 z-50 min-w-[140px] rounded-lg bg_white shadow-lg primary_border_color"
+                class="absolute right-0 top-10 z-50 min-w-[140px] rounded-lg bg_secondary_color shadow-lg primary_border_color"
               >
                 <div
                   @click.stop="handleViewPost(row)"
                   class="flex items-center justify-between px-4 py-2.5 cursor-pointer hover:bg-gray-50 first:rounded-t-lg"
                 >
-                  <span class="label_2_regular">View post</span>
+                  <span class="label_2_regular secondary_text_color">View post</span>
                   <img :src="ViewPostIcon" alt="">
                 </div>
                 <div
                   @click.stop="handleRepost(row)"
                   class="flex items-center justify-between px-4 py-2.5 cursor-pointer hover:bg-gray-50 last:rounded-b-lg"
                 >
-                  <span class="label_2_regular">Repost</span>
+                  <span class="label_2_regular secondary_text_color">Repost</span>
                   <img :src="RepostIcon" alt="">
                 </div>
               </div>

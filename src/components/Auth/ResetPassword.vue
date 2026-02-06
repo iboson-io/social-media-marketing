@@ -3,11 +3,11 @@
     <div class="w-full max-w-md">
        <img :src="LockIcon" alt="Lock Icon">
       <!-- Heading -->
-      <h2 class="heading_h5_semibold">
+      <h2 class="heading_h5_semibold primary_text_color">
         Reset Password
       </h2>
 
-      <p class="label_2_regular mt-3 mb-6">
+      <p class="label_2_regular secondary_text_color mt-3 mb-6">
        Enter your new password below to secure your account.
       </p>
 

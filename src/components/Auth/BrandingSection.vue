@@ -17,7 +17,7 @@
       Let AI Run Your Marketing
     </h2>
 
-    <p class="label_1_regular text-center">
+    <p class="label_1_regular secondary_text_color text-center">
       Create, schedule, and optimize social media posts automatically with
       AI-powered intelligence.
     </p>

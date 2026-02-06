@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_white rounded-2xl py-7 px-4 brand_section_height primary_border_color">
+  <div class="bg_secondary_color rounded-2xl py-7 px-4 brand_section_height primary_border_color">
     <ul class="space-y-9">
       <!-- Primary -->
       <div class="gap-3 flex flex-col items-start justify-between md:flex-row">

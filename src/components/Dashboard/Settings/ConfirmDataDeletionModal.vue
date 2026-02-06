@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-xl mx-4 bg_white rounded-2xl shadow-2xl overflow-hidden common_inner_gap"
+      class="relative w-full max-w-xl mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
       @click.stop
     >
       <!-- Header -->
@@ -15,19 +15,19 @@
         <div class="flex items-start justify-between">
           <h2 class="heading_h6_bold">{{ title }}</h2>
         </div>
-        <p class="label_1_regular common_gap">
+        <p class="label_1_regular secondary_text_color mt-5xl">
           {{ description }}
         </p>
       </div>
 
       <!-- Content -->
-      <div class="common_gap">
+      <div class="mt-5xl">
         <!-- Verification Code Input -->
         <div>
-          <label class="label_2_medium block">
+          <label class="label_2_medium primary_text_color block">
             Verification Code:
           </label>
-          <div class="flex gap-2 justify-center medium_gap" ref="inputsContainer">
+          <div class="flex gap-2 justify-center mt-xl" ref="inputsContainer">
             <input
               v-for="(digit, index) in codeDigits"
               :key="index"
@@ -37,13 +37,13 @@
               @paste="handlePaste"
               type="text"
               maxlength="1"
-              class="w-12 h-14 text-center label_2_semibold inputbox_border_color rounded-lg"
+              class="w-12 h-14 text-center label_2_semibold primary_text_color inputbox_border_color rounded-lg"
             />
           </div>
         </div>
 
         <!-- Timer and Resend -->
-        <div class="flex items-center  common_gap gap-3">
+        <div class="flex items-center  mt-5xl gap-3">
           <div class="label_1_regular primary_text_color">
             Code expires in: <span class="label_1_bold primary_text_color">{{ formattedTime }}</span>
           </div>
@@ -55,9 +55,9 @@
           </button>
         </div>
         
-        <div class="block h-[2px] w-full hr_linr_bg common_gap"></div>
+        <div class="block h-[2px] w-full hr_linr_bg mt-5xl"></div>
         <!-- Warning Message -->
-        <div class="pending_text_style rounded-lg flex items-center gap-3 common_gap common_inner_gap">
+        <div class="pending_text_style rounded-lg flex items-center gap-3 mt-5xl p-6xl">
           <img :src="WarningIconOrange" alt="">
           <p class="paragraph_p5_medium primary_text_color">
             Note: All your account data will be deleted permanently. This action cannot be undone.
@@ -66,11 +66,11 @@
       </div>
 
       <!-- Footer -->
-      <div class="flex gap-5 common_gap">
+      <div class="flex gap-5 mt-5xl">
         <button
           @click="$emit('close')"
           :disabled="isDeleting"
-          class="lg:flex-1 rounded-lg button_thin bg_button_secondary sub_button_semibold disabled:opacity-50 disabled:cursor-not-allowed"
+          class="lg:flex-1 rounded-lg p-3xl bg_button_secondary sub_button_semibold disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Cancel
         </button>

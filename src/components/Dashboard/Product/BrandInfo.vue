@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_white rounded-2xl common_inner_gap primary_border_color h-[100%]">
+  <div class="bg_secondary_color rounded-2xl p-6xl primary_border_color h-[100%]">
   <div class="mb-4 ">
     <div class="gap-8 lg:w-1/2">
       <!-- Left Side: Illustration -->
@@ -16,7 +16,7 @@
         <h2 class="heading_h6_bold primary_text_color mb-\">
           Tell us about your brand
         </h2>
-        <p class="label_1_regular mb-6">
+        <p class="label_1_regular secondary_text_color mb-6">
           Paste your website URL or upload documents so AI can learn your brand's style, tone, and personality.
         </p>
 
@@ -31,27 +31,27 @@
             type="url"
             placeholder="Enter your website URL here..."
             :class="[
-              'input_box w-full Label_2_Medium bg_primary_color',
+              'input_box w-full Label_2_Medium bg_primary_color primary_text_color',
               urlError ? '!error_border_color !border-1' : ''
             ]"
           />
           <!-- Error Message -->
-          <p v-if="urlError" class="regular_gap body_4_medium error_text flex items-center justify-end">
+          <p v-if="urlError" class="mt-xs body_4_medium error_text flex items-center justify-end">
            
             {{ urlError }}
           </p>
         </div>
 
         <!-- Upload Files Link -->
-        <div class="common_gap">
-          <span class="label_1_regular">Or </span>
+        <div class="mt-5xl">
+          <span class="label_1_regular secondary_text_color">Or </span>
           <button
             @click="showUploadModal = true"
             class="label_1_semibold primary_text_color underline"
           >
             click here to upload files
           </button>
-          <span class="label_1_regular"> to help AI learn your brand.</span>
+          <span class="label_1_regular secondary_text_color"> to help AI learn your brand.</span>
           <input
             ref="fileInput"
             type="file"
@@ -72,16 +72,16 @@
     >
       <!-- Modal -->
       <div
-        class="relative w-full max-w-md mx-4 bg_white rounded-2xl shadow-2xl overflow-hidden p-6"
+        class="relative w-full max-w-md mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6"
         @click.stop
       >
         <!-- Title -->
-        <h2 class="heading_h5_semibold  mb-2">
+        <h2 class="heading_h5_semibold primary_text_color mb-2">
           Upload brand files
         </h2>
         
         <!-- Subtitle -->
-        <p class="label_2_regular">
+        <p class="label_2_regular secondary_text_color">
           Add your brand or product documents to help AI understand your identity.
         </p>
 
@@ -94,8 +94,8 @@
           @dragleave="isDragOver = false"
           @dragenter="isDragOver = true"
           :class="[
-            'rounded-lg pt-20 text-center cursor-pointer transition-colors medium_gap' ,
-            isDragOver ? 'upload_box_border bg_white' : 'upload_box_border'
+            'rounded-lg pt-20 text-center cursor-pointer transition-colors mt-xl' ,
+            isDragOver ? 'upload_box_border bg_secondary_color' : 'upload_box_border'
           ]"
           @click="fileInput?.click()"
         >
@@ -129,11 +129,11 @@
                   {{ fileItem.name }}
                 </p>
                 <!-- File Size and Status -->
-                <div class="flex items-center gap-2 regular_gap">
+                <div class="flex items-center gap-2 mt-xs">
                   <p v-if="fileItem.status === 'uploading'" class="label_3_regular">
                     {{ formatFileSize(fileItem.uploaded) }} of {{ formatFileSize(fileItem.size) }}
                   </p>
-                  <p v-else class="label_3_regular">
+                  <p v-else class="label_3_regular secondary_text_color">
                     {{ formatFileSize(fileItem.size) }}
                   </p>
                 </div>
@@ -216,7 +216,7 @@
         <!-- Error Message -->
         <div
           v-if="fileError"
-          class="mt-4 flex items-center justify-between bg_white border bg-[#FFECEB] rounded-lg px-4 py-3"
+          class="mt-4 flex items-center justify-between bg_secondary_color border bg-[#FFECEB] rounded-lg px-4 py-3"
         >
           <div class="flex items-center gap-3">
             <!-- Error Icon -->
@@ -234,10 +234,10 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="flex gap-3 common_gap justify-between">
+        <div class="flex gap-3 mt-5xl justify-between">
           <button
             @click="closeModal"
-            class="px-5 py-3 rounded-lg label_2_medium primary_border_color bg_primary_color"
+            class="px-5 py-3 rounded-lg label_2_medium primary_border_color bg_primary_color primary_text_color"
           >
             Cancel
           </button>

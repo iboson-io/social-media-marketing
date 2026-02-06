@@ -1,10 +1,9 @@
 <template>
-     <div class="bg_white rounded-2xl common_inner_gap primary_border_color h-[100%] data-privacy-full-height">
+     <div class="bg_secondary_color rounded-2xl p-6xl primary_border_color h-[100%] data-privacy-full-height">
             <h2 class="heading_h6_bold">Profile Information</h2>
-            <p class="label_1_regular regular_gap medium_mb">
+            <p class="label_1_regular secondary_text_color mt-xs pb-10xl">
               Update your profile, secure your account, and manage connected apps.
             </p>
-
             <div class="space-y-6">
               <!-- Profile Picture -->
               <div class="flex items-start gap-6">
@@ -33,7 +32,7 @@
                 :class="[!isEditing ? 'disable_text_color cursor-not-allowed' : '']">
                   Name:
                 </label>
-              <div class="flex w-[100%] gap-3 items-center medium_gap"> 
+              <div class="flex w-[100%] gap-3 items-center mt-xl"> 
                 <div class="flex items-center gap-3 w-1/2">
                   <input
                     v-model="profileForm.name"
@@ -49,7 +48,7 @@
                 <div v-if="!isEditing" class="flex gap-2">
                     <button
                       @click="startEditing"
-                      class="flex items-center Label_2_Medium justify-center rounded-lg"
+                      class="flex items-center Label_2_Medium primary_text_color justify-center rounded-lg"
                     >
                       <img :src="InputboxEditIcon" alt="">
                     </button>
@@ -57,7 +56,7 @@
                   <div v-else class="flex gap-2">
                     <button
                       @click="cancelEditing"
-                      class="px-4 py-2 rounded-lg primary_border_color bg_white label_2_medium h-12"
+                      class="px-4 py-2 rounded-lg primary_border_color bg_secondary_color label_2_medium h-12"
                     >
                       Cancel
                     </button>
@@ -78,7 +77,7 @@
                 >
                   Email:
                 </label>
-                <div class="flex w-[100%] gap-3 items-center medium_gap" > 
+                <div class="flex w-[100%] gap-3 items-center mt-xl" > 
                 <div class="flex items-center gap-3  w-1/2">
                   <input
                     v-model="profileForm.email"
@@ -93,14 +92,14 @@
                   <button
                     v-if="!isEditingEmail"
                     @click="startEditingEmail"
-                    class="flex items-center Label_2_Medium justify-center rounded-lg"
+                    class="flex items-center justify-center rounded-lg"
                   >
                     <img :src="InputboxEditIcon" alt="">
                   </button>
                   <div v-else class="flex gap-2">
                     <button
                       @click="cancelEditingEmail"
-                      class="px-4 py-2 rounded-lg primary_border_color bg_white label_2_medium h-12"
+                      class="px-4 py-2 rounded-lg primary_border_color bg_secondary_color label_2_medium h-12"
                     >
                       Cancel
                     </button>
@@ -118,11 +117,11 @@
             
           <!-- Connected Social Accounts Section -->
             <h2 class="heading_h6_bold mt-6">Connected social accounts</h2>
-            <p class="label_1_regular mini-gap">
+            <p class="label_1_regular secondary_text_color mini-gap">
               Services that you use to log in to Genius AI
             </p>
 
-            <div class="space-y-4 common_gap w-[100%] md:w-1/2">
+            <div class="space-y-4 mt-5xl w-[100%] md:w-1/2">
               <!-- Google Account -->
               <div
                 class="flex items-center justify-between md:p-4"
@@ -134,13 +133,13 @@
                     <img :src="GoogleIcon" alt="">
                   </div>
                   <div>
-                    <p class="label_1_regular ">Google</p>
-                    <p class="label_1_semibold ">Charlene Reed</p>
+                    <p class="label_1_regular secondary_text_color">Google</p>
+                    <p class="label_1_semibold primary_text_color">Charlene Reed</p>
                   </div>
                 </div>
                 <button
                   @click="openDisconnectModal"
-                  class="px-5 md:px-12 py-2 rounded-md bg_primary_color label_2_medium primary_border_color"
+                  class="px-5 md:px-12 py-2 rounded-md bg_primary_color label_2_medium primary_border_color primary_text_color"
                 >
                   Disconnect
                 </button>
@@ -157,13 +156,13 @@
     @click.self="closeProfilePictureModal"
   >
     <div
-      class="relative w-full max-w-2xl mx-4 bg_white rounded-2xl shadow-2xl overflow-hidden"
+      class="relative w-full max-w-2xl mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden"
       @click.stop
     >
       <!-- Modal Header -->
       <div class="p-6 border-b border-[#F1F2F4]">
-        <h2 class="heading_h5_bold mb-2">Edit Profile Picture</h2>
-        <p class="label_1_regular text-[#8590A2]">
+        <h2 class="heading_h5_bold heading_h5_bold mb-2">Edit Profile Picture</h2>
+        <p class="label_1_regular secondary_text_color">
           {{ uploadedImage ? 'Crop and adjust your image' : 'Upload a new image and crop it to your preference' }}
         </p>
       </div>
@@ -222,7 +221,7 @@
                 <p class="label_1_semibold primary_text_color mb-1">
                   Drag & drop your image here
                 </p>
-                <p class="label_2_regular text-[#8590A2]">
+                <p class="label_2_regular secondary_text_color">
                   or <span class="text-[#7950F2] font-semibold">browse</span> to
                   upload
                 </p>

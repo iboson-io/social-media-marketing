@@ -2,7 +2,7 @@
   <div
     v-if="open"
     ref="dropdownRef"
-    class="absolute left-0 bottom-full  py-2 bg_white rounded-xl shadow-2xl ring-1 ring-black/5 z-50 min-w-[200px]  post-dropdown-menu"
+    class="absolute left-0 bottom-full  py-2 bg_secondary_color rounded-xl shadow-2xl ring-1 ring-black/5 z-50 min-w-[200px]  post-dropdown-menu"
     @click.stop
     @touchstart.stop
   >
@@ -14,20 +14,20 @@
       <span class="body_3_regular primary_text_color">Share Now</span>
       <img :src="ShareIcon" alt="Share" class="w-4 h-4">
     </button>
-    <div class="block h-[1px] w-full primary_border_color regular_gap"></div>
+    <div class="block h-[1px] w-full primary_border_color mt-xs"></div>
     <!-- Regenerate Post -->
     <button
       @click="handleRegenerate"
-      class="w-full px-4 py-2.5 flex items-center justify-between regular_gap"
+      class="w-full px-4 py-2.5 flex items-center justify-between mt-xs"
     >
       <span class="body_3_regular primary_text_color">Regenerate Post</span>
       <img :src="ImageEditIcon" alt="Edit" class="w-4 h-4">
     </button>
-    <div class="block h-[1px] w-full primary_border_color regular_gap"></div>
+    <div class="block h-[1px] w-full primary_border_color mt-xs"></div>
     <!-- Delete -->
     <button
       @click="handleDelete"
-      class="w-full px-4 py-2.5 flex items-center justify-between regular_gap"
+      class="w-full px-4 py-2.5 flex items-center justify-between mt-xs"
     >
       <span class="body_3_regular delete_text_color">Delete</span>
       <img :src="TrashIcon" alt="Delete" class="w-4 h-4">

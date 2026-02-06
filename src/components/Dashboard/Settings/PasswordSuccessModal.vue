@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-md mx-4 bg_white rounded-2xl shadow-2xl overflow-hidden common_inner_gap"
+      class="relative w-full max-w-md mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
       @click.stop
     >
       <!-- Text Content Section -->
@@ -15,13 +15,13 @@
         <h2 class="heading_h6_bold">
           {{ title }}
         </h2>
-        <p class="label_1_regular common_gap">
+        <p class="label_1_regular secondary_text_color mt-5xl">
           {{ message }}
         </p>
       </div>
-       <div class="block h-[2px] w-full hr_linr_bg common_gap"></div>
+       <div class="block h-[2px] w-full hr_linr_bg mt-5xl"></div>
       <!-- Action Button -->
-      <div class="flex justify-center common_gap">
+      <div class="flex justify-center mt-5xl">
         <button
           @click="handleAction"
           class="primary_button_semibold rounded-lg w-full"

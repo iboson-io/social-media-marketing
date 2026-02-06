@@ -22,12 +22,12 @@
         </h1>
         
         <!-- Secondary Text -->
-        <p class="label_1_regular medium_gap">
+        <p class="label_1_regular secondary_text_color mt-xl">
           Thank you for using Genius.
         </p>
         
         <!-- Tertiary Text -->
-        <p class="label_1_regular">
+        <p class="label_1_regular secondary_text_color">
           You can always create a new account anytime.
         </p>
       </div>

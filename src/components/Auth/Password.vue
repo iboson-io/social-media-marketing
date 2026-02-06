@@ -3,11 +3,11 @@
     <div class="w-full max-w-md">
        <img :src="LockIcon" alt="Lock Icon">
       <!-- Heading -->
-      <h2 class="heading_h5_semibold">
+      <h2 class="heading_h5_semibold primary_text_color">
         Enter Password
       </h2>
 
-      <p class="label_2_regular mt-3 mb-6">
+      <p class="label_2_regular secondary_text_color mt-3 mb-6">
         Please enter your password to access your account securely.
       </p>
 
@@ -53,10 +53,10 @@
 
       <!-- Links -->
       <div class="flex justify-between mt-5">
-        <span class="underline label_2_medium cursor-pointer">
+        <span class="underline label_2_medium cursor-pointer primary_text_color">
           <RouterLink to="/forgot-password">Forgot Password?</RouterLink>
         </span>
-        <span class="underline label_2_medium">
+        <span class="underline label_2_medium primary_text_color">
           <RouterLink to="/signin">Back to Sign In</RouterLink>
         </span>
       </div>

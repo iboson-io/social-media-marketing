@@ -9,13 +9,13 @@
 
    
 
-    <div class="rounded-xl bg_white p-4">
+    <div class="rounded-xl bg_secondary_color p-4">
       <!-- Prompt Input -->
       <input
         v-model="prompt"
         type="text"
         placeholder="What's on your mind?"
-        class="w-full border-none outline-none Body_2_Medium"
+        class="w-full border-none outline-none Body_2_Medium secondary_text_color"
         :class="prompt ? 'primary_text_color' : ''"
         @keyup.enter="handleSend"
         @focus="isInputFocused = true"
@@ -46,7 +46,7 @@
               v-if="showProducts"
               ref="productsDropdownMenuRef"
               :class="[
-                'absolute left-0 z-10 w-40 rounded-md profile_border bg_white shadow max-h-48 overflow-y-auto',
+                'absolute left-0 z-10 w-40 rounded-md profile_border bg_secondary_color shadow max-h-48 overflow-y-auto',
                 productsDropdownPosition === 'above' ? 'bottom-full mb-1' : 'top-9'
               ]"
             >
@@ -84,7 +84,7 @@
           <div class="relative" ref="modelsDropdownRef">
             <button
               @click="toggleModels"
-              class="flex items-center gap-2 rounded-md profile_border bg_white px-3 py-1 label_2_medium text-[#596773]"
+              class="flex items-center gap-2 rounded-md profile_border bg_secondary_color px-3 py-1 label_2_medium text-[#596773]"
             >
               <img :src="GeminiIcon" alt="" />
 
@@ -101,7 +101,7 @@
               v-if="showModels"
               ref="modelsDropdownMenuRef"
               :class="[
-                'absolute left-0 z-10 w-40 rounded-md border profile_border bg_white shadow max-h-48 overflow-y-auto',
+                'absolute left-0 z-10 w-40 rounded-md border profile_border bg_secondary_color shadow max-h-48 overflow-y-auto',
                 modelsDropdownPosition === 'above' ? 'bottom-full mb-1' : 'top-9'
               ]"
             >

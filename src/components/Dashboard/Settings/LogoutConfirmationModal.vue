@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-xl mx-4 bg_white rounded-2xl shadow-2xl overflow-hidden common_inner_gap"
+      class="relative w-full max-w-xl mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
       @click.stop
     >
       <!-- Header -->
@@ -21,19 +21,19 @@
             <img :src="CloseIcon" alt="Close">
           </button>
         </div>
-        <div class="common_gap">
-          <p class="label_1_regular">{{ description }}</p>
-          <p v-if="additionalInfo" class="common_gap label_1_medium">
+        <div class="mt-5xl">
+          <p class="label_1_regular secondary_text_color">{{ description }}</p>
+          <p v-if="additionalInfo" class="mt-5xl label_1_medium primary_text_color">
             {{ additionalInfo }}
           </p>
         </div>
       </div>
-    <div class="block h-[2px] w-full hr_linr_bg common_gap"></div>
+    <div class="block h-[2px] w-full hr_linr_bg mt-5xl"></div>
       <!-- Footer -->
-      <div class="flex gap-5 common_gap">
+      <div class="flex gap-5 mt-5xl">
         <button
           @click="$emit('close')"
-          class="lg:flex-1 rounded-lg button_thin bg_button_secondary sub_button_semibold"
+          class="lg:flex-1 rounded-lg p-3xl bg_button_secondary sub_button_semibold"
         >
           Cancel
         </button>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen bg_white overflow-hidden">
+  <div class="flex min-h-screen bg_secondary_color overflow-hidden">
     <!-- Desktop Sidebar -->
     <Sidebar
       class="hidden lg:flex"

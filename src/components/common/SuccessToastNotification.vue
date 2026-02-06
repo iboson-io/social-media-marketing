@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="open"
-    class="fixed z-[70] bg_white rounded-lg shadow-lg min-w-[320px] max-w-[400px] common_inner_gap absolute top-0 right-0 md:top-6 md:right-6"
+    class="fixed z-[70] bg_secondary_color rounded-lg shadow-lg min-w-[320px] max-w-[400px] p-6xl absolute top-0 right-0 md:top-6 md:right-6"
   >
     <!-- Close Button -->
     <button
@@ -17,10 +17,10 @@
       
       <!-- Content -->
       <div class="flex-1">
-        <p class="label_1_semibold">
+        <p class="label_1_semibold primary_text_color">
           {{ mainMessage }}
         </p>
-        <p v-if="secondaryMessage" class="label_2_regular medium_gap">
+        <p v-if="secondaryMessage" class="label_2_regular secondary_text_color mt-xl">
           {{ secondaryMessage }}
         </p>
       </div>

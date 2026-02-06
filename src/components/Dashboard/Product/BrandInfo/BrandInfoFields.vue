@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 bg_white rounded-2xl py-7 px-4 brand_section_height primary_border_color">
+  <div class="space-y-6 bg_secondary_color rounded-2xl py-7 px-4 brand_section_height primary_border_color">
     <!-- Product name field -->
     <div class="flex gap-3 flex-col justify-between md:flex-row">
       <label class="label_2_medium primary_text_color w-32 flex-shrink-0 ">

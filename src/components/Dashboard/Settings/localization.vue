@@ -1,8 +1,8 @@
 <template>
-  <div class="rounded-2xl bg_white common_inner_gap shadow-sm h-[100%] data-privacy-full-height">
+  <div class="rounded-2xl bg_secondary_color p-6xl shadow-sm h-[100%] data-privacy-full-height">
     <!-- Header -->
     <h2 class="heading_h6_bold">Localization</h2>
-    <p class="label_1_regular regular_gap medium_mb">
+    <p class="label_1_regular secondary_text_color mt-xs pb-10xl">
       Set your preferred language, region, and time format.
     </p>
 
@@ -10,13 +10,13 @@
     <div class="space-y-9">
       <!-- Interface Language -->
       <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-        <label class="label_2_medium flex-shrink-0">
+        <label class="label_2_medium primary_text_color flex-shrink-0">
           Interface Language
         </label>
         <div class="relative flex items-center rounded-lg w-full md:w-[70%]">
           <select
             v-model="localizationSettings.interfaceLanguage"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium bg_white"
+            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color bg_secondary_color"
           >
             <option value="English (US)">English (US)</option>
             <option value="English (UK)">English (UK)</option>
@@ -33,13 +33,13 @@
 
       <!-- Region -->
       <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-        <label class="label_2_medium flex-shrink-0">
+        <label class="label_2_medium primary_text_color flex-shrink-0">
           Region
         </label>
         <div class="relative flex items-center rounded-lg w-full md:w-[70%]">
           <select
             v-model="localizationSettings.region"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium bg_white"
+            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color bg_secondary_color"
           >
             <option value="India">India</option>
             <option value="United States">United States</option>
@@ -58,13 +58,13 @@
 
       <!-- Time Format -->
       <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-        <label class="label_2_medium flex-shrink-0">
+        <label class="label_2_medium primary_text_color flex-shrink-0">
           Time Format:
         </label>
         <div class="relative flex items-center rounded-lg w-full md:w-[70%]">
           <select
             v-model="localizationSettings.timeFormat"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium bg_white"
+            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color bg_secondary_color"
           >
             <option value="24-hour">24-hour</option>
             <option value="12-hour">12-hour</option>
@@ -76,13 +76,13 @@
 
       <!-- Timezone -->
       <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-        <label class="label_2_medium flex-shrink-0">
+        <label class="label_2_medium primary_text_color flex-shrink-0">
           Timezone:
         </label>
         <div class="relative flex items-center rounded-lg w-full md:w-[70%]">
           <select
             v-model="localizationSettings.timezone"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium bg_white"
+            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium bg_secondary_color primary_text_color"
           >
             <option value="(GMT+5:30) Asia/Kolkata">(GMT+5:30) Asia/Kolkata</option>
             <option value="(GMT-5:00) America/New_York">(GMT-5:00) America/New_York</option>
@@ -103,13 +103,13 @@
     <div class="flex justify-center md:justify-end gap-4 md:gap-8 mt-10">
       <button
         @click="resetToDefault"
-        class="secondary_button_thin rounded-lg primary_border_color label_2_semibold md:px-6 bg_primary_color text_primary_color"
+        class="p-md rounded-lg primary_border_color label_2_semibold md:px-6 bg_primary_color text_primary_color"
       >
         Reset to Default
       </button>
       <button
         @click="saveChanges"
-        class="secondary_button_thin rounded-lg primary_button md:px-6 "
+        class="p-md rounded-lg primary_button md:px-6 "
       >
         Save Changes
       </button>

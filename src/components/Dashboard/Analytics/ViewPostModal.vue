@@ -7,11 +7,11 @@
   >
     <!-- Modal - Positioned on the right -->
     <div
-      class="fixed right-0 bottom-0 w-full top-0 hide-scrollbar md:max-w-lg  max-h-screen overflow-y-auto bg_white shadow-2xl"
+      class="fixed right-0 bottom-0 w-full top-0 hide-scrollbar md:max-w-lg  max-h-screen overflow-y-auto bg_secondary_color shadow-2xl"
       @click.stop
     >
       <!-- Header -->
-      <div class="sticky top-0 bg_white border-b  px-6 py-4 flex  z-10">
+      <div class="sticky top-0 bg_secondary_color border-b  px-6 py-4 flex  z-10">
         <h2 class="heading_h6_semibold primary_text_color">View post</h2>
         <button
           @click="$emit('close')"
@@ -24,13 +24,13 @@
       <!-- Content -->
       <div class="p-6 bg_primary_color">
         <!-- Performance Banner -->
-        <div class="bg_white rounded-2xl secondary_border_color px-4 py-3 flex items-center justify-center">
+        <div class="bg_secondary_color rounded-2xl secondary_border_color px-4 py-3 flex items-center justify-center">
           <img :src="LogoImage" alt="" class="h-7 ">
-          <span class="label_1_regular_withount_color gradient_text_color">
+          <span class="label_1_regular gradient_text_color">
             This post performed 38% better than your average image post.
           </span>
         </div>
-      <div class="bg_white common_inner_gap rounded-2xl common_gap">
+      <div class="bg_secondary_color p-6xl rounded-2xl mt-5xl">
         <!-- Status and Post Type -->
         <div class="flex justify-between gap-3 justify-center">
           <span
@@ -53,7 +53,7 @@
             <!-- Platform Dropdown -->
             <div
               v-if="showPlatformDropdown"
-              class="absolute right-0 md:left-0 top-8 z-50 min-w-[180px] rounded-lg bg_white shadow-lg primary_border_color py-2"
+              class="absolute right-0 md:left-0 top-8 z-50 min-w-[180px] rounded-lg bg_secondary_color shadow-lg primary_border_color py-2"
             >
               <div
                 v-for="platform in availablePlatforms"
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Post Image -->
-        <div class="rounded-lg overflow-hidden bg_white flex justify-center medium_gap">
+        <div class="rounded-lg overflow-hidden bg_secondary_color flex justify-center mt-xl">
           <img
             :src="postData?.image"
             :alt="postData?.title"
@@ -78,19 +78,19 @@
         </div>
 
         <!-- Caption -->
-        <div class="regular_gap">
-          <p class="body_1_regular primary_text_color medium_gap" v-html="getFullCaption()">
+        <div class="mt-xs">
+          <p class="body_1_regular primary_text_color mt-xl" v-html="getFullCaption()">
           </p>
         </div>
-         <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
+         <div class="block h-[2px] w-full bg_primary_color mt-5xl"></div>
         <!-- Date/Time -->
-         <p class="label_2_semibold common_gap">Date/Time</p>
-        <div class="body_1_regular primary_text_color regular_gap">
+         <p class="label_2_semibold primary_text_color mt-5xl">Date/Time</p>
+        <div class="body_1_regular primary_text_color mt-xs">
           {{ formatDateTime() }}
         </div>
       </div>
         <!-- Metrics Grid -->
-        <div class=" flex flex-col justify-center items-center md:grid md:grid-cols-2 lg:grid grid-cols-1 gap-4 lg:grid-cols-2 common_gap">
+        <div class=" flex flex-col justify-center items-center md:grid md:grid-cols-2 lg:grid grid-cols-1 gap-4 lg:grid-cols-2 mt-5xl">
 
         <AnalyticsStatCard
           v-for="(stat, index) in stats"
@@ -102,7 +102,7 @@
         <!-- Repost Button -->
         <button
           @click="handleRepost"
-          class="w-full primary_button flex items-center justify-center gap-2  rounded-lg common_gap"
+          class="w-full primary_button flex items-center justify-center gap-2  rounded-lg mt-5xl"
         >
           <img :src="RepostBottonIcon" alt="">
           Repost

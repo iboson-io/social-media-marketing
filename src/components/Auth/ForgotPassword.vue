@@ -4,11 +4,11 @@
      <img :src="LockIcon" alt="Lock Icon">
 
       <!-- Heading -->
-      <h2 class="heading_h5_semibold">
+      <h2 class="heading_h5_semibold primary_text_color">
         Forgot Password
       </h2>
 
-      <p class="label_1_regular mt-3 mb-6">
+      <p class="label_1_regular secondary_text_color mt-3 mb-6">
         Enter your email address and we'll send you instructions to reset your password.
       </p>
 

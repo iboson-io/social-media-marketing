@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-md mx-4 bg_white rounded-2xl shadow-2xl overflow-hidden"
+      class="relative w-full max-w-md mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden"
       @click.stop
     >
       <!-- Header -->
@@ -24,7 +24,7 @@
 
       <!-- Content -->
       <div class="px-6 pb-6 pt-3">
-        <p class="label_1_regular">
+        <p class="label_1_regular secondary_text_color">
           {{ description }}
         </p>
       </div>
@@ -33,7 +33,7 @@
       <div class="p-6 border-t primary_border_color flex justify-center gap-3 ">
         <button
           @click="$emit('close')"
-          class="px-4 py-2 rounded-lg label_2_semibold bg_primary_color primary_border_color w-[100%]"
+          class="px-4 py-2 rounded-lg label_2_semibold primary_text_color bg_primary_color primary_border_color w-[100%]"
         >
           Cancel
         </button>

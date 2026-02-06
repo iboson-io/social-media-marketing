@@ -1,15 +1,15 @@
 <template>
   <section>
     <!-- Header -->
-    <div class="bg_white common_inner_gap rounded-xl primary_border_color">
+    <div class="bg_secondary_color p-6xl rounded-xl primary_border_color">
       <h2 class="heading_h6_bold">Analytics</h2>
-      <p class="label_1_regular regular_gap">
+      <p class="label_1_regular secondary_text_color mt-xs">
         Track engagement, reach, and performance across all your connected platforms.
       </p>
     </div>
 
     <!-- Tabs and Dropdowns -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg_white px-3 py-3 md:px-8 rounded-2xl primary_border_color common_gap">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg_secondary_color px-3 py-3 md:px-8 rounded-2xl primary_border_color mt-5xl">
       
       <!-- Tabs -->
       <div class="flex gap-2 ">
@@ -17,7 +17,7 @@
           v-for="tab in tabs"
           :key="tab"
           @click="emit('update:activeTab', tab)"
-          :class="props.activeTab === tab ? 'bg_white' : 'bg_primary_color'"
+          :class="props.activeTab === tab ? 'bg_secondary_color' : 'bg_primary_color'"
           class="px-4 py-1 rounded-full primary_border_color label_2_semibold"
         >
           {{ tab }}
@@ -32,7 +32,7 @@
           <div class="relative product-dropdown-container">
             <button
               @click="toggleProductDropdown"
-              class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-8 md:h-10 md:pl-10 md:pr-10 py-2 label_2_medium bg_white product-select relative"
+              class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-8 md:h-10 md:pl-10 md:pr-10 py-2 label_2_medium bg_secondary_color product-select relative"
             >
               <span class="product-text">{{ getProductDisplayText() }}</span>
               <img :src="DownArrow" alt="" class="absolute right-3 md:right-2 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -41,7 +41,7 @@
             <!-- Products Dropdown Panel -->
             <div
               v-if="isProductDropdownOpen"
-              class="absolute top-full left-0 mt-2 bg_white rounded-md primary_border_color shadow-lg z-50 min-w-[155px] lg:min-w-[190px]"
+              class="absolute top-full left-0 mt-2 bg_secondary_color rounded-md primary_border_color shadow-lg z-50 min-w-[155px] lg:min-w-[190px]"
               @click.stop
             >
               <div class="py-2">
@@ -54,7 +54,7 @@
                     @change="toggleAllProducts"
                     class="w-4 h-4 rounded cursor-pointer custom-checkbox"
                   />
-                  <span class="label_2_medium">All products</span>
+                  <span class="label_2_medium primary_text_color">All products</span>
                 </label>
                 <label
                   v-for="product in products"
@@ -68,7 +68,7 @@
                     @change="handleProductChange"
                     class="w-4 h-4 rounded cursor-pointer custom-checkbox"
                   />
-                  <span class="label_2_medium">{{ product }}</span>
+                  <span class="label_2_medium primary_text_color">{{ product }}</span>
                 </label>
               </div>
               <div class="px-3 pb-2">
@@ -89,7 +89,7 @@
           <div class="relative platform-dropdown-container">
             <button
               @click="togglePlatformDropdown"
-              class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-8 md:pl-10 md:pr-10 md:h-10 lg:pr-10 py-2 label_2_medium bg_white product-select relative"
+              class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-8 md:pl-10 md:pr-10 md:h-10 lg:pr-10 py-2 label_2_medium bg_secondary_color product-select relative"
             >
               <span class="product-text">{{ getPlatformDisplayText() }}</span>
               <img :src="DownArrow" alt="" class="absolute right-3 md:right-2 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -98,7 +98,7 @@
             <!-- Platforms Dropdown Panel -->
             <div
               v-if="isPlatformDropdownOpen"
-              class="absolute top-full left-0 mt-2 bg_white rounded-md primary_border_color shadow-lg z-50 min-w-[155px] lg:min-w-[190px]"
+              class="absolute top-full left-0 mt-2 bg_secondary_color rounded-md primary_border_color shadow-lg z-50 min-w-[155px] lg:min-w-[190px]"
               @click.stop
             >
               <div class="py-2">
@@ -111,7 +111,7 @@
                     @change="toggleAllPlatforms"
                     class="w-4 h-4 rounded cursor-pointer custom-checkbox"
                   />
-                  <span class="label_2_medium">All platforms</span>
+                  <span class="label_2_medium primary_text_color">All platforms</span>
                 </label>
                 <label
                   v-for="platform in platforms"
@@ -125,7 +125,7 @@
                     @change="handlePlatformChange"
                     class="w-4 h-4 rounded cursor-pointer custom-checkbox"
                   />
-                  <span class="label_2_medium">{{ platform }}</span>
+                  <span class="label_2_medium primary_text_color">{{ platform }}</span>
                 </label>
               </div>
               <div class="px-3 pb-2">

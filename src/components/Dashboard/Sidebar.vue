@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="fixed left-0 top-0 lg:top-[-20px] h-screen flex flex-col border-r bg_white transition-all duration-300 z-10"
+    class="fixed left-0 top-0 lg:top-[-20px] h-screen flex flex-col border-r bg_secondary_color transition-all duration-300 z-10"
     :class="isCollapsed ? 'w-16 px-2' : 'w-64 pl-4 pr-1'"
     @click="handleSidebarContainerClick"
   >
@@ -28,7 +28,7 @@
 
         <span
           v-if="!isCollapsed"
-          class="heading_h5_semibold_logo gradient_text_color"
+          class="heading_h5_semibold gradient_text_color"
         >
           Genius AI
         </span>
@@ -38,17 +38,17 @@
         <img :src="SidebarIcon" alt="" />
       </button>
     </div>
- <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
+ <div class="block h-[2px] w-full bg_primary_color mt-5xl"></div>
     <!-- New Chat -->
     <div 
-      class="relative group common_gap"
+      class="relative group mt-5xl"
       @mouseenter="hoveredItem = 'chat'"
       @mouseleave="hoveredItem = null"
       :ref="el => { if (el) menuItemRefs['chat'] = el }"
     >
       <button
         @click="handleNewChatClick"
-        class="flex w-full items-center gap-2 rounded-md secondary_bg_color secondary_text_color px-3 py-3 label_1_bold"
+        class="flex w-full items-center gap-2 rounded-md secondary_bg_color secondary_text_brand_color px-3 py-3 label_1_bold"
         :class="isCollapsed ? 'justify-center' : ''"
       >
         <img :src="PlusIcon" class="h-4 w-4" />
@@ -59,20 +59,26 @@
         <div
           v-if="isCollapsed && hoveredItem === 'chat'"
           :style="getTooltipStyle('chat')"
-          class="pointer-events-none fixed whitespace-nowrap rounded-md bg-gray-900 px-3 py-1 text-xs text-white z-[9999] transition-opacity duration-200"
+          class="pointer-events-none fixed whitespace-nowrap z-[1000] transition-all duration-200 "
         >
-          New Chat
+          <div class="relative bg_tooltip_color text-white label_2_medium rounded-lg px-2 py-2 outline-none ring-0 border_none">
+            New Chat
+            <!-- Speech Bubble Tail -->
+            <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full border_none ">
+              <div class="w-0 h-0 border-t-[6px] border-b-[6px] border-r-[6px] border-transparent border-r-[#38414A]"></div>
+            </div>
+          </div>
         </div>
       </Teleport>
     </div>
 
     <!-- Chat History -->
     <div v-if="!isCollapsed" class="mb-6 mt-4">
-      <p class="mb-2 label_2_semibold">Chat history</p>
+      <p class="mb-2 label_2_semibold primary_text_color">Chat history</p>
       <div class="space-y-1">
-        <div class="px-2 py-2 body_3_regular flex justify-between"><span>Create new product</span> <span class="dot_text_style text-2xl mt-[-0.45em]">...</span></div>
-        <div class="px-2 py-2 body_3_regular flex justify-between"><span>Generate marketing plan</span> <span class="dot_text_style text-2xl mt-[-0.45em]">...</span></div>
-        <div class="px-2 py-2 body_3_regular flex justify-between"><span>Create Instagram post</span> <span class="dot_text_style text-2xl mt-[-0.45em]">...</span></div>
+        <div class="px-2 py-2 body_3_regular secondary_text_color flex justify-between"><span>Create new product</span> <span class="dot_text_style text-2xl mt-[-0.45em]">...</span></div>
+        <div class="px-2 py-2 body_3_regular secondary_text_color flex justify-between"><span>Generate marketing plan</span> <span class="dot_text_style text-2xl mt-[-0.45em]">...</span></div>
+        <div class="px-2 py-2 body_3_regular secondary_text_color flex justify-between"><span>Create Instagram post</span> <span class="dot_text_style text-2xl mt-[-0.45em]">...</span></div>
       </div>
     </div>
 
@@ -93,7 +99,7 @@
       >
         <img :src="item.icon" class="h-5 w-5" />
 
-        <span v-if="!isCollapsed" class="label_1_medium">
+        <span v-if="!isCollapsed" class="label_1_medium primary_text_color">
           {{ item.label }}
         </span>
 
@@ -101,9 +107,15 @@
           <div
             v-if="isCollapsed && hoveredItem === item.tab"
             :style="getTooltipStyle(item.tab)"
-            class="pointer-events-none fixed whitespace-nowrap rounded-md bg-gray-900 px-3 py-1 text-xs text-white z-[9999] transition-opacity duration-200"
+            class="pointer-events-none fixed whitespace-nowrap z-[1000] transition-all duration-200"
           >
-            {{ item.label }}
+            <div class="relative bg_tooltip_color text-white label_2_medium rounded-lg px-2 py-2 outline-none ring-0 border_none">
+              {{ item.label }}
+              <!-- Speech Bubble Tail -->
+              <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full border_none">
+                <div class="w-0 h-0 border-t-[6px] border-b-[6px] border-r-[6px] border-transparent border-r-[#38414A]"></div>
+              </div>
+            </div>
           </div>
         </Teleport>
       </div>
@@ -118,7 +130,7 @@
         @click="handleSidebarClick(notification.tab)"
         @mouseenter="hoveredItem = 'notifications'"
         @mouseleave="hoveredItem = null"
-        class="relative group flex cursor-pointer items-center gap-3 rounded-md py-2 medium_gap"
+        class="relative group flex cursor-pointer items-center gap-3 rounded-md py-2 mt-xl"
         :class=" showNotifications ? 'bg_primary_color' : '',
           isCollapsed ? 'justify-center' : 'px-2'
         "
@@ -126,7 +138,7 @@
       >
         <img :src="notification.icon" class="h-5 w-5" />
 
-        <span v-if="!isCollapsed" class="label_1_medium">
+        <span v-if="!isCollapsed" class="label_1_medium primary_text_color">
           {{ notification.label }}
         </span>
 
@@ -134,14 +146,20 @@
           <div
             v-if="isCollapsed && hoveredItem === 'notifications'"
             :style="getTooltipStyle('notifications')"
-            class="pointer-events-none fixed whitespace-nowrap rounded-md bg-gray-900 px-3 py-1 text-xs text-white z-[9999] transition-opacity duration-200"
+            class="pointer-events-none fixed whitespace-nowrap z-[1000] transition-all duration-200 "
           >
-            {{ notification.label }}
+            <div class="relative bg_tooltip_color text-white label_2_medium rounded-lg px-2 py-2 outline-none ring-0 border_none">
+              {{ notification.label }}
+              <!-- Speech Bubble Tail -->
+              <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full border_none">
+                <div class="w-0 h-0 border-t-[6px] border-b-[6px] border-r-[6px] border-transparent border-r-[#38414A]"></div>
+              </div>
+            </div>
           </div>
         </Teleport>
       </div>
 
-      <div class="block h-[2px] w-full bg_primary_color medium_gap"></div>
+      <div class="block h-[2px] w-full bg_primary_color mt-xl"></div>
 
 
     <!-- User -->
@@ -155,16 +173,22 @@
     >
       <img src="https://i.pravatar.cc/40" class="h-8 w-8 rounded-full" />
       <div v-if="!isCollapsed">
-        <p class="label_2_semibold">Cliff Booth</p>
-        <p class="label_3_regular">cliffbooth@gmail.com</p>
+        <p class="label_2_semibold primary_text_color">Cliff Booth</p>
+        <p class="label_3_regular secondary_text_color">cliffbooth@gmail.com</p>
       </div>
       <Teleport to="body">
         <div
           v-if="isCollapsed && hoveredItem === 'account'"
           :style="getTooltipStyle('account')"
-          class="pointer-events-none fixed whitespace-nowrap rounded-md bg-gray-900 px-3 py-1 text-xs text-white z-[9999] transition-opacity duration-200"
+          class="pointer-events-none fixed whitespace-nowrap z-[1000] transition-all duration-200"
         >
-          Account
+          <div class="relative bg_tooltip_color text-white label_2_medium rounded-lg px-2 py-2 outline-none ring-0 border_none">
+            Account
+            <!-- Speech Bubble Tail -->
+            <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full border_none">
+              <div class="w-0 h-0 border-t-[6px] border-b-[6px] border-r-[6px] border-transparent border-r-[#38414A]"></div>
+            </div>
+          </div>
         </div>
       </Teleport>
     </div>

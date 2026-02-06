@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-md mx-4 bg_white rounded-2xl shadow-2xl overflow-hidden"
+      class="relative w-full max-w-md mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden"
       @click.stop
     >
       <!-- Header -->
@@ -19,7 +19,7 @@
             <img :src="CloseIcon" alt="">
           </button>
         </div>
-        <p class="label_1_regular">
+        <p class="label_1_regular secondary_text_color">
           {{ description }}
         </p>
       </div>
@@ -28,7 +28,7 @@
       <div class="p-6">
         <!-- Verification Code Input -->
         <div class="mb-6">
-          <label class="label_2_medium block mb-3">
+          <label class="label_2_medium primary_text_color block mb-3">
             Verification Code:
           </label>
           <div class="flex gap-2 justify-center" ref="inputsContainer">
@@ -41,7 +41,7 @@
               @paste="handlePaste"
               type="text"
               maxlength="1"
-              class="w-12 h-14 text-center label_2_semibold border primary_border_color rounded-lg"
+              class="w-12 h-14 text-center label_2_semibold primary_text_color border primary_border_color rounded-lg"
               :class="{ '': codeDigits[index] }"
             />
           </div>
@@ -49,12 +49,12 @@
 
         <!-- Timer and Resend -->
         <div class="flex items-center justify-between">
-          <div class="label_1_regular ">
-            Code expires in: <span class="label_1_bold">{{ formattedTime }}</span>
+          <div class="label_1_regular secondary_text_color">
+            Code expires in: <span class="label_1_bold primary_text_color">{{ formattedTime }}</span>
           </div>
           <button
             @click="handleResend"
-            class="label_2_semibold underline"
+            class="label_2_semibold primary_text_color underline"
           >
             Resend Code
           </button>

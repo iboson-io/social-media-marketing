@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_white rounded-lg ring-1 ring-black/5 shadow-2xl common_inner_gap"
+      class="relative w-full md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_secondary_color rounded-lg ring-1 ring-black/5 shadow-2xl p-6xl"
       @click.stop
     >
       <!-- Header -->
@@ -23,11 +23,11 @@
       </div>
 
       <!-- Platforms Grid -->
-      <div class="grid md:grid-cols-2 gap-3 common_gap h-[23em] hide-scrollbar overflow-auto md:h-auto md:overflow-hidden">
+      <div class="grid md:grid-cols-2 gap-3 mt-5xl h-[23em] hide-scrollbar overflow-auto md:h-auto md:overflow-hidden">
         <!-- Instagram -->
         <div
           @click="togglePlatform('instagram')"
-          class="relative rounded-lg primary_border_color common_inner_gap cursor-pointer"
+          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
           :class="isSelected('instagram') ? 'selected_platform_border' : ''"
         >
           <div class="flex items-center gap-3">
@@ -46,7 +46,7 @@
         <!-- Twitter (X) -->
         <div
           @click="togglePlatform('twitter')"
-          class="relative rounded-lg primary_border_color common_inner_gap cursor-pointer"
+          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
           :class="isSelected('twitter') ? 'selected_platform_border' : ''"
         >
           <div class="flex items-center gap-3">
@@ -64,7 +64,7 @@
         <!-- Facebook -->
         <div
           @click="togglePlatform('facebook')"
-          class="relative rounded-lg primary_border_color common_inner_gap cursor-pointer"
+          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
           :class="isSelected('facebook') ? 'selected_platform_border' : ''"
         >
           <div class="flex items-center gap-3">
@@ -83,7 +83,7 @@
         <!-- TikTok -->
         <div
           @click="togglePlatform('tiktok')"
-          class="relative rounded-lg primary_border_color common_inner_gap cursor-pointer"
+          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
           :class="isSelected('tiktok') ? 'selected_platform_border' : ''"
         >
           <div class="flex items-center gap-3">
@@ -101,7 +101,7 @@
         <!-- LinkedIn -->
         <div
           @click="togglePlatform('linkedin')"
-          class="relative rounded-lg primary_border_color common_inner_gap cursor-pointer"
+          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
           :class="isSelected('linkedin') ? 'selected_platform_border' : ''"
         >
           <div class="flex items-center gap-3">
@@ -120,7 +120,7 @@
         <!-- YouTube -->
         <div
           @click="togglePlatform('youtube')"
-          class="relative rounded-lg primary_border_color common_inner_gap cursor-pointer"
+          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
           :class="isSelected('youtube') ? 'selected_platform_border' : ''"
         >
           <div class="flex items-center gap-3">

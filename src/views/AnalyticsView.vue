@@ -1,7 +1,7 @@
 <template>
     <main class="flex-1 bg_primary_color  px-4 py-12 md:px-10 lg:py-7">
     <Filter v-model:activeTab="activeTab"/>
-    <section class="flex gap-4 overflow-x-auto hide-scrollbar sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 common_gap">
+    <section class="flex gap-4 overflow-x-auto hide-scrollbar sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 mt-5xl">
      <AnalyticsStatCard
       v-for="(stat, index) in stats"
       :key="index"

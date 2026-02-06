@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  color: #28293d;
+}
+
 .hide-scrollbar {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
@@ -173,3 +177,109 @@ aside:hover .custom_scrollbar::-webkit-scrollbar-track {
 .custom-scrollbar-calendar:hover::-webkit-scrollbar-thumb {
   background-color: #9ca3af;
 }
+
+
+/* primary button animation */
+
+.primary_button_animation {
+  position: relative;
+  cursor: pointer;
+  border: none;
+  isolation: isolate; /* 🔥 THIS FIXES IT */
+}
+
+/* Inner pill */
+.primary_button_animation::after {
+  content: "";
+  position: absolute;
+  inset: 0.5em 0.75em;
+  background: #000;
+  border-radius: 8px;
+  z-index: -1;
+}
+
+/* Glow layer */
+.primary_button_animation::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: conic-gradient(
+    from var(--mask) at 50% 50%,
+    oklch(0.88 0.19 195),
+    oklch(0.58 0.24 267),
+    oklch(0.66 0.28 312),
+    oklch(0.74 0.3 334),
+    oklch(0.7 0.24 24),
+    oklch(0.79 0.2 65),
+    oklch(0.96 0.24 110),
+    oklch(0.87 0.32 140),
+    oklch(0.86 0.3 150),
+    oklch(0.88 0.19 195)
+  );
+  filter: blur(0.9em);
+  opacity: 0;
+  transform: scale(0.96, 0.9);
+  z-index: -2;
+  transition: all 0.25s ease;
+   --mask: 30deg;
+}
+
+/* Hover */
+.primary_button_animation:hover::before {
+  /* opacity: 0.6;
+  transform: scale(0.85);
+  filter: blur(1em); */
+  animation: spinOnce 0.5s linear 1 forwards;
+}
+
+/* Focus */
+.primary_button_animation:focus-visible {
+  outline: 2px solid oklch(82.795% 0.22329 150.665);
+  outline-offset: 3px;
+}
+
+/* Animation */
+.primary_button_animation:focus::before,
+.primary_button_animation.active::before {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+/* Custom property */
+@property --mask {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 30deg;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    --mask: 30deg;
+    opacity: 0.6;
+    transform: scale(0.80, 0.8);
+  }
+  70% {
+    --mask: 180deg;
+  }
+  85% {
+    opacity: 0.4;
+    transform: scale(0.80, 0.8);
+  }
+}
+
+@keyframes spinOnce {
+  0% {
+    --mask: 30deg;
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+
+  100% {
+    --mask: 390deg; /* 360 + start = forward spin */
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+}
+
+

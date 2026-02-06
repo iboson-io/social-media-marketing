@@ -2,22 +2,22 @@
   <main class="flex-1 bg_primary_color  px-4 py-12 md:px-10 lg:py-7">
     <div class="space-y-6">
       <!-- Header -->
-      <div class="rounded-xl bg_white common_inner_gap primary_border_color">
-        <h2 class="primary_text_color heading_h6_bold">Calendar</h2>
-        <p class="label_1_regular regular_gap">
+      <div class="rounded-xl bg_secondary_color p-6xl primary_border_color">
+        <h2 class="primary_text_color heading_h6_bold ">Calendar</h2>
+        <p class="label_1_regular secondary_text_color mt-xs">
           Manage your brands, connect their channels, and keep assets in one place.
         </p>
       </div>
 
       <!-- Controls -->
       <div
-        class="flex items-center justify-between rounded-xl bg_white primary_border_color p-3  flex-col-reverse gap-4 md:gap-0 md:flex-row">
+        class="flex items-center justify-between rounded-xl bg_secondary_color primary_border_color p-3  flex-col-reverse gap-4 md:gap-0 md:flex-row">
         <!-- View Switch -->
-        <div class="flex rounded-full bg_secondary_color primary_border_color p-1">
+        <div class="flex rounded-full bg-gray-25 primary_border_color p-1">
           <button v-for="view in views" :key="view" @click="activeView = view"
             class="rounded-full primary_border_color px-4 py-1 label_2_semibold primary_text_color" :class="
             activeView === view
-              ? 'bg_white '
+              ? 'bg_secondary_color '
               : ''
           ">
             {{ view }}
@@ -29,7 +29,7 @@
           <img :src="ProductIcon" alt="" class="mr-[-40px] md:mr-[-44px] z-10">
           <div class="relative">
             <select v-model="selectedProduct"
-              class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-10 md:pl-10 md:pr-14 py-2 label_2_medium bg_white appearance-none">
+              class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-10 md:pl-10 md:pr-14 py-2 label_2_medium primary_text_color bg_secondary_color appearance-none">
               <option value="single">Single</option>
               <option value="multi">Multi</option>
               <option value="all">All products</option>
@@ -46,7 +46,7 @@
       <!-- MONTH VIEW with Modal -->
       <div v-if="activeView === 'Month'" class="flex gap-6 items-start lg:items-stretch">
         <!-- Calendar -->
-        <div class="rounded-xl bg_white primary_border_color flex-1 relative"
+        <div class="rounded-xl bg_secondary_color primary_border_color flex-1 relative"
           :class="selectedDate ? 'md:w-[65%] lg:w-[60%] 2xl:w-[70%]' : 'w-full'">
           <!-- Month Header -->
           <div class="flex items-center justify-between border-b p-4 relative z-0">
@@ -68,7 +68,7 @@
             <div v-for="date in calendarDays" :key="date.key" @click="openDateModal(date.fullDate)"
               class="h-14 md:h-[4.8em]  secondary_button_border p-2 relative cursor-pointer" :class="[
             date.isToday ? 'secondary_bg_color selected_calendar_border' : '',
-            !date.isCurrentMonth ? 'bg_white' : '',
+            !date.isCurrentMonth ? 'bg_secondary_color' : '',
             isDateSelected(date.fullDate) ? 'secondary_bg_color selected_calendar_border' : ''
           ]">
               <p class="text-right paragraph_p5_medium mb-1"
@@ -99,13 +99,13 @@
 
           <!-- Black Overlay when date is selected -->
           <div v-if="selectedDate"
-            class="block lg:hidden absolute inset-0 bg-black/40 backdrop-blur-xm rounded-xl z-10 pointer-events-auto"
+            class="block lg:hidden absolute inset-0 bg-[#00000035] rounded-xl z-20 pointer-events-auto"
             @click="closeDateModal"></div>
         </div>
 
         <!-- Right Side Modal Panel -->
         <div v-if="selectedDate"
-          class="hidden lg:block w-[30%] h-[35em] lg:w-[40%] 2xl:w-[30%] rounded-xl bg_white primary_border_color shadow-lg flex-shrink-0 relative z-20 common_inner_gap">
+          class="hidden lg:block w-[30%] h-[35em] lg:w-[40%] 2xl:w-[30%] rounded-xl bg_secondary_color primary_border_color shadow-lg flex-shrink-0 relative z-20 p-6xl">
           <!-- Post Detail View -->
           <div v-if="selectedPost" class="h-full flex flex-col">
             <!-- Modal Header with Back Button -->
@@ -118,14 +118,14 @@
               </div>
             </div>
 
-            <div class="block h-[1px] w-full bg_primary_color common_gap"></div>
+            <div class="block h-[1px] w-full bg_primary_color mt-5xl"></div>
 
             <!-- Post Detail Content with Auto Scroll -->
             <div
-              class="flex-1 overflow-y-auto common_gap primary_border_color medium_inner_gap rounded-lg custom-scrollbar-calendar">
+              class="flex-1 overflow-y-auto mt-5xl primary_border_color p-xlp rounded-lg custom-scrollbar-calendar">
               <!-- Status Badge -->
               <div :class="[
-                'inline-flex items-center gap-2 secondary_button_thin rounded-md label_3_semibold w-full',
+                'inline-flex items-center gap-2 p-md rounded-md label_3_semibold w-full',
                 selectedPost.status === 'approved' ? 'approve_text_style' : 'pending_text_style'
               ]">
                 <img v-if="selectedPost.status === 'approved'" :src="ApproveIcon" alt="Approved" class="w-4 h-4">
@@ -134,10 +134,10 @@
               </div>
 
               <!-- Post Type Dropdown -->
-              <div class="relative medium_gap">
+              <div class="relative mt-xl">
                 <img :src="PostFilter" class="absolute left-2 top-[10px]" alt="">
                 <select v-model="selectedPost.postType"
-                  class="w-full rounded-lg primary_border_color secondary_button_thin label_2_regular primary_text_color bg_white appearance-none pl-9">
+                  class="w-full rounded-lg primary_border_color p-md label_2_regular primary_text_color bg_secondary_color appearance-none pl-9">
 
 
                   <option value="Instagram post (4:5)">Instagram post (4:5)</option>
@@ -151,40 +151,40 @@
               </div>
 
               <!-- Image Preview -->
-              <div class="rounded-lg overflow-hidden bg_primary_color flex justify-center items-center medium_gap h-72">
+              <div class="rounded-lg overflow-hidden bg_primary_color flex justify-center items-center mt-xl h-72">
                 <img :src="selectedPost.postImage" :alt="selectedPost.title" class="w-full max-w-md object-contain" />
               </div>
 
               <!-- Caption -->
-              <p class="label_2_medium medium_gap"> Caption</p>
-              <div class="relative medium_gap">
+              <p class="label_2_medium primary_text_color mt-xl"> Caption</p>
+              <div class="relative mt-xl">
                 <textarea v-model="selectedPost.caption"
-                  class="w-full rounded-lg primary_border_color medium_inner_gap label_2_semibold bg_white min-h-[140px] resize-none "
+                  class="w-full rounded-lg primary_border_color p-xlp label_2_semibold primary_text_color bg_secondary_color min-h-[140px] resize-none "
                   placeholder="Write your caption here..."></textarea>
                 <!-- AI Sparkle Icon -->
-                <button class="absolute bottom-3 right-3 secondary_button_thin">
+                <button class="absolute bottom-3 right-3 p-md">
                   <img :src="AiIcon" alt="">
                 </button>
               </div>
 
               <!-- Platforms -->
-              <p class="label_2_medium medium_gap"> Platforms</p>
-              <div class="flex items-center gap-2 medium_gap overflow-auto hide-scrollbar">
+              <p class="label_2_medium primary_text_color mt-xl"> Platforms</p>
+              <div class="flex items-center gap-2 mt-xl overflow-auto hide-scrollbar">
                 <img v-for="platform in selectedPost.platforms" :key="platform" :src="getPlatformIcon(platform)"
                   :alt="platform" class="w-10 h-10" />
                 <img @click="openPlatformModal" :src="ImageEditIcon" alt=""
-                  class=" primary_border_color rounded-lg secondary_button_thin cursor-pointer w-10 h-10">
+                  class=" primary_border_color rounded-lg p-md cursor-pointer w-10 h-10">
               </div>
 
               <!-- Scheduled For -->
-              <div class="common_gap medium_inner_gap primary_border_color rounded-lg">
+              <div class="mt-5xl p-xlp primary_border_color rounded-lg">
                 <p class="flex justify-between" v-html="formatScheduledTime(selectedPost, true)"
                   @click="handleTimeClick">
                 </p>
               </div>
 
               <!-- Action Buttons -->
-              <div class="flex items-center gap-3  common_gap relative">
+              <div class="flex items-center gap-3  mt-5xl relative">
                 <div class="relative">
                   <button @click.stop="togglePostMenu" class="relative" ref="dotsButtonRef">
                     <img :src="DotsIcon" alt="">
@@ -196,7 +196,7 @@
                 </div>
 
                 <button @click="savePostChanges" :disabled="!hasUnsavedChanges"
-                  class="rounded-lg secondary_button_thin label_2_semibold flex justify-center gap-2 w-full transition-opacity"
+                  class="rounded-lg p-md label_2_semibold flex justify-center gap-2 w-full transition-opacity text-white"
                   :class="hasUnsavedChanges ? 'primary_add_button' : 'primary_add_button opacity-50 cursor-not-allowed'">
                   <img :src="SaveIcon" alt="">
                   Save Changes
@@ -218,17 +218,17 @@
               </button>
             </div>
 
-            <div class="block h-[1px] w-full bg_primary_color common_gap"></div>
+            <div class="block h-[1px] w-full bg_primary_color mt-5xl"></div>
 
             <!-- Posts List -->
-            <div class="max-h-[calc(100vh-200px)] overflow-y-auto common_gap">
+            <div class="max-h-[calc(100vh-200px)] overflow-y-auto mt-5xl">
               <div v-if="getPostsForDate(selectedDate).length === 0" class="text-center py-8">
-                <p class="label_3_medium ">No posts scheduled for this date</p>
+                <p class="label_3_medium secondary_text_color">No posts scheduled for this date</p>
               </div>
 
               <div v-else class="space-y-4">
                 <div v-for="post in getPostsForDate(selectedDate)" :key="post.id" @click="openPostDetail(post)"
-                  class="flex gap-4 medium_inner_gap rounded-lg primary_border_color cursor-pointer hover:bg-gray-50 transition-colors">
+                  class="flex gap-4 p-xlp rounded-lg primary_border_color cursor-pointer hover:bg-gray-50 transition-colors">
                   <!-- Post Image -->
                   <img :src="post.postImage" :alt="post.title"
                     class="w-20 h-20 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0" />
@@ -241,16 +241,16 @@
                     </h3>
 
                     <!-- Platforms -->
-                    <div class="flex items-center gap-2  flex-wrap normal_gap">
+                    <div class="flex items-center gap-2  flex-wrap mt-md">
                       <img v-for="platform in post.platforms.slice(0, 4)" :key="platform"
                         :src="getPlatformIcon(platform)" :alt="platform" class="w-5 h-5" />
-                      <span v-if="post.platforms.length > 4" class="text-xs label_2_medium">
+                      <span v-if="post.platforms.length > 4" class="text-xs label_2_medium primary_text_color">
                         +{{ post.platforms.length - 4 }}
                       </span>
                     </div>
 
                     <!-- Status and Time -->
-                    <div class="flex items-center gap-4 flex-wrap medium_gap">
+                    <div class="flex items-center gap-4 flex-wrap mt-xl">
                       <!-- Status -->
                       <div :class="[
                         'flex items-center gap-2 label_3_semibold',
@@ -279,7 +279,7 @@
       <!-- Mobile Modal Overlay -->
       <div v-if="selectedDate && activeView === 'Month'" class="lg:hidden fixed inset-0 z-50 " @click="closeDateModal">
         <div
-          class="fixed right-0 top-[46%] bottom-0 w-full bg_white shadow-2xl overflow-hidden transform transition-transform duration-300 ease-in-out overflow-y-auto common_inner_gap rounded-lg"
+          class="fixed right-0 top-[46%] bottom-0 w-full bg_secondary_color shadow-2xl overflow-hidden transform transition-transform duration-300 ease-in-out overflow-y-auto p-6xl rounded-lg"
           @click.stop>
           <!-- Post Detail View -->
           <div v-if="selectedPost" class="h-full flex flex-col">
@@ -294,13 +294,13 @@
               </div>
             </div>
 
-            <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
+            <div class="block h-[2px] w-full bg_primary_color mt-5xl"></div>
 
             <!-- Post Detail Content with Auto Scroll -->
             <div class="flex-1 overflow-y-auto custom-scrollbar">
 
               <div
-                class="flex-1 overflow-y-auto common_gap primary_border_color medium_inner_gap rounded-lg custom-scrollbar-calendar">
+                class="flex-1 overflow-y-auto mt-5xl primary_border_color p-xlp rounded-lg custom-scrollbar-calendar">
                 <div class="md:grid md:grid-cols-2 md:gap-4">
                   <!-- Image Preview -->
                   <div class="rounded-lg overflow-hidden  bg_primary_color flex justify-center items-center h-[16.8em]">
@@ -310,7 +310,7 @@
                   <div>
                     <!-- Status Badge -->
                     <div :class="[
-                'inline-flex items-center gap-2 secondary_button_thin rounded-md label_3_semibold w-full medium_gap md:mt-0',
+                'inline-flex items-center gap-2 p-md rounded-md label_3_semibold w-full mt-xl md:mt-0',
                 selectedPost.status === 'approved' ? 'approve_text_style' : 'pending_text_style'
               ]">
                       <img v-if="selectedPost.status === 'approved'" :src="ApproveIcon" alt="Approved" class="w-4 h-4">
@@ -319,10 +319,10 @@
                     </div>
 
                     <!-- Post Type Dropdown -->
-                    <div class="relative medium_gap">
+                    <div class="relative mt-xl">
                       <img :src="PostFilter" class="absolute left-2 top-[10px]" alt="">
                       <select v-model="selectedPost.postType"
-                        class="w-full rounded-lg primary_border_color secondary_button_thin label_2_regular primary_text_color bg_white appearance-none pl-9">
+                        class="w-full rounded-lg primary_border_color p-md label_2_regular primary_text_color bg_secondary_color appearance-none pl-9">
 
 
                         <option value="Instagram post (4:5)">Instagram post (4:5)</option>
@@ -338,13 +338,13 @@
 
 
                     <!-- Caption -->
-                    <p class="label_2_medium medium_gap"> Caption</p>
-                    <div class="relative medium_gap">
+                    <p class="label_2_medium primary_text_color mt-xl"> Caption</p>
+                    <div class="relative mt-xl">
                       <textarea v-model="selectedPost.caption"
-                        class="w-full rounded-lg primary_border_color medium_inner_gap label_2_semibold bg_white min-h-[140px] resize-none "
+                        class="w-full rounded-lg primary_border_color p-xlp label_2_semibold bg_secondary_color min-h-[140px] resize-none "
                         placeholder="Write your caption here..."></textarea>
                       <!-- AI Sparkle Icon -->
-                      <button class="absolute bottom-3 right-3 secondary_button_thin">
+                      <button class="absolute bottom-3 right-3 p-md">
                         <img :src="AiIcon" alt="">
                       </button>
                     </div>
@@ -352,23 +352,23 @@
                 </div>
                 <!-- Platforms -->
                 <div class="md:flex md:items-end md:justify-center">
-                  <p class="label_2_medium medium_gap md:absolute left-8"> Platforms</p>
-                  <div class="flex items-center gap-2 medium_gap overflow-auto hide-scrollbar">
+                  <p class="label_2_medium primary_text_color mt-xl md:absolute left-8"> Platforms</p>
+                  <div class="flex items-center gap-2 mt-xl overflow-auto hide-scrollbar">
                     <img v-for="platform in selectedPost.platforms" :key="platform" :src="getPlatformIcon(platform)"
                       :alt="platform" class="w-10 h-10" />
                     <img @click="openPlatformModal" :src="ImageEditIcon" alt=""
-                      class=" primary_border_color rounded-lg secondary_button_thin cursor-pointer w-10 h-10">
+                      class=" primary_border_color rounded-lg p-md cursor-pointer w-10 h-10">
                   </div>
                 </div>
                 <!-- Scheduled For -->
-                <div class="common_gap medium_inner_gap primary_border_color rounded-lg">
+                <div class="mt-5xl p-xlp primary_border_color rounded-lg">
                   <p class="flex justify-between" v-html="formatScheduledTime(selectedPost, true)"
                     @click="handleTimeClick">
                   </p>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex items-center gap-3  common_gap relative">
+                <div class="flex items-center gap-3  mt-5xl relative">
                   <div class="relative">
                     <button @click.stop="togglePostMenu" class="relative" ref="dotsButtonRefMobile">
                       <img :src="DotsIcon" alt="">
@@ -380,7 +380,7 @@
                   </div>
 
                   <button @click="savePostChanges" :disabled="!hasUnsavedChanges"
-                    class="rounded-lg secondary_button_thin label_2_semibold flex justify-center gap-2 w-full transition-opacity"
+                    class="rounded-lg p-md label_2_semibold primary_text_color flex justify-center gap-2 w-full transition-opacity"
                     :class="hasUnsavedChanges ? 'primary_add_button' : 'primary_add_button opacity-50 cursor-not-allowed'">
                     <img :src="SaveIcon" alt="">
                     Save Changes
@@ -401,16 +401,16 @@
                 <img :src="closeIcon" alt="">
               </button>
             </div>
-            <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
+            <div class="block h-[2px] w-full bg_primary_color mt-5xl"></div>
             <!-- Posts List -->
-            <div class="h-auto overflow-y-auto common_gap">
+            <div class="h-auto overflow-y-auto mt-5xl">
               <div v-if="getPostsForDate(selectedDate).length === 0" class="text-center py-8">
-                <p class="label_3_medium">No posts scheduled for this date</p>
+                <p class="label_3_medium secondary_text_color">No posts scheduled for this date</p>
               </div>
 
               <div v-else class="space-y-4">
                 <div v-for="post in getPostsForDate(selectedDate)" :key="post.id" @click="openPostDetail(post)"
-                  class="flex gap-4 rounded-lg medium_inner_gap primary_border_color cursor-pointer hover:bg-gray-50 transition-colors">
+                  class="flex gap-4 rounded-lg p-xlp primary_border_color cursor-pointer hover:bg-gray-50 transition-colors">
                   <!-- Post Image -->
                   <img :src="post.postImage" :alt="post.title"
                     class="w-20 h-20 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0" />
@@ -423,16 +423,16 @@
                     </h3>
 
                     <!-- Platforms -->
-                    <div class="flex items-center gap-2 flex-wrap normal_gap">
+                    <div class="flex items-center gap-2 flex-wrap mt-md">
                       <img v-for="platform in post.platforms.slice(0, 4)" :key="platform"
                         :src="getPlatformIcon(platform)" :alt="platform" class="w-5 h-5" />
-                      <span v-if="post.platforms.length > 4" class="text-xs label_2_medium">
+                      <span v-if="post.platforms.length > 4" class="text-xs label_2_medium primary_text_color">
                         +{{ post.platforms.length - 4 }}
                       </span>
                     </div>
 
                     <!-- Status and Time -->
-                    <div class="flex items-center gap-4 flex-wrap medium_gap">
+                    <div class="flex items-center gap-4 flex-wrap mt-xl">
                       <!-- Status -->
                       <div :class="[
                         'flex items-center gap-2 label_3_semibold',
@@ -458,7 +458,7 @@
       </div>
 
       <!-- WEEK VIEW -->
-      <div v-if="activeView === 'Week'" class="rounded-xl bg_white  shadow">
+      <div v-if="activeView === 'Week'" class="rounded-xl bg_secondary_color  shadow">
         <div class="flex items-center justify-between border-b p-4">
           <button @click="prevWeek"><img :src="CircleLeftArrow" alt=""></button>
           <p class="heading_h6_semibold primary_text_color">{{ monthYear }}</p>
@@ -468,7 +468,7 @@
         <!-- Mobile Week View -->
         <div class="md:hidden">
           <!-- Week Header - Mobile -->
-          <div class="flex items-center justify-between border-b bg_primary_color secondary_button_thin gap-3">
+          <div class="flex items-center justify-between border-b bg_primary_color p-md gap-3">
             <div v-for="day in weekDaysOnly" :key="day.day" @click="selectedWeekDay = day.dateString"
               class="flex-1 text-center cursor-pointer" :class="[
               selectedWeekDay === day.dateString || (selectedWeekDay === null && day.isToday) 
@@ -476,7 +476,7 @@
                 : ''
             ]">
               <p class="sub_button_semibold" :class="selectedWeekDay === day.dateString || (selectedWeekDay === null && day.isToday) 
-                ? 'secondary_text_color' 
+                ? 'secondary_text_brand_color' 
                 : 'primary_text_color'">
                 {{ day.dateNumber }} {{ day.dayLabel }}
               </p>
@@ -488,7 +488,7 @@
             <div v-for="hour in 24" :key="hour" class="border-b relative min-h-[60px]">
               <div class="flex">
                 <!-- Time Label -->
-                <div class="w-20 flex-shrink-0 pt-2 px-2 label_2_regular">
+                <div class="w-20 flex-shrink-0 pt-2 px-2 label_2_regular secondary_text_color">
                   {{ formatHour(hour === 24 ? 0 : hour - 1) }}
                 </div>
 
@@ -497,7 +497,7 @@
                   <!-- Posts for selected day and hour -->
                   <div v-for="post in getPostsForWeekDayAndHourMobile(hour)" :key="post.id" :data-post-id="post.id"
                     :data-post-hour="hour"
-                    class="absolute left-1 right-1 rounded-md bg_white shadow-sm primary_border_color secondary_button_thin z-10 max-w-72"
+                    class="absolute left-1 right-1 rounded-md bg_secondary_color shadow-sm primary_border_color p-md z-10 max-w-72"
                     :style="{
                     top: `${getPostTopPosition(post.postTime)}px`,
                     height: 'auto',
@@ -516,17 +516,17 @@
                         </p>
 
                         <!-- Platforms -->
-                        <div class="flex items-center gap-2  flex-wrap normal_gap">
+                        <div class="flex items-center gap-2  flex-wrap mt-md">
                           <img v-for="platform in post.platforms.slice(0, 4)" :key="platform"
                             :src="getPlatformIcon(platform)" :alt="platform" class="w-4 h-4" />
-                          <span v-if="post.platforms.length > 4" class="text-xs label_2_medium">
+                          <span v-if="post.platforms.length > 4" class="text-xs label_2_medium primary_text_color">
                             +{{ post.platforms.length - 4 }}
                           </span>
                         </div>
 
                         <!-- Status and Time -->
                         <!-- Status and Time -->
-                        <div class="flex items-center gap-4 flex-wrap medium_gap">
+                        <div class="flex items-center gap-4 flex-wrap mt-xl">
                           <!-- Status -->
                           <div :class="[
                       'flex items-center gap-2 label_3_semibold',
@@ -559,13 +559,13 @@
             :style="windowWidth >= 768 ? { gridTemplateColumns: weekGridTemplate } : {}">
             <div class="border-r"></div>
             <div v-for="day in weekDaysOnly" :key="day.day"
-              class="p-3 md:common_inner_gap text-center border-r last:border-r-0"
+              class="p-3 md:p-6xl text-center border-r last:border-r-0"
               :class="day.isToday ? 'secondary_bg_color ' : ''">
-              <p class="heading_h5_semibold" :class="day.isToday ? 'secondary_text_color' : ''">
+              <p class="heading_h5_semibold" :class="day.isToday ? 'secondary_text_brand_color' : 'primary_text_color'">
                 {{ day.dateNumber }}
               </p>
 
-              <p class="label_3_medium">
+              <p class="label_3_medium secondary_text_color">
                 {{ day.dayLabel }}
               </p>
             </div>
@@ -577,7 +577,7 @@
             :style="windowWidth >= 768 ? { gridTemplateColumns: weekGridTemplate } : {}">
             <!-- Time Column -->
             <div class="border-r">
-              <div v-for="hour in 24" :key="hour" class="h-24 border-b flex items-center pt-2 px-2 label_2_regular">
+              <div v-for="hour in 24" :key="hour" class="h-24 border-b flex items-center pt-2 px-2 label_2_regular secondary_text_color">
                 {{ formatHour(hour === 24 ? 0 : hour - 1) }}
               </div>
             </div>
@@ -588,7 +588,7 @@
                 <!-- Posts for this day and hour -->
                 <div v-for="post in getPostsForWeekDayAndHour(day.dateString, hour)" :key="post.id"
                   :data-post-id="post.id"
-                  class="absolute left-1 right-1 rounded-md bg_white shadow-sm primary_border_color secondary_button_thin z-10"
+                  class="absolute left-1 right-1 rounded-md bg_secondary_color shadow-sm primary_border_color p-md z-10 w-56"
                   :style="{
                   top: `${getPostTopPosition(post.postTime)}px`,
                   height: 'auto',
@@ -607,16 +607,16 @@
                       </p>
 
                       <!-- Platforms -->
-                      <div class="flex items-center gap-2  flex-wrap normal_gap">
+                      <div class="flex items-center gap-2  flex-wrap mt-md">
                         <img v-for="platform in post.platforms.slice(0, 4)" :key="platform"
                           :src="getPlatformIcon(platform)" :alt="platform" class="w-4 h-4" />
-                        <span v-if="post.platforms.length > 4" class="text-xs label_2_medium">
+                        <span v-if="post.platforms.length > 4" class="text-xs label_2_medium primary_text_color">
                           +{{ post.platforms.length - 4 }}
                         </span>
                       </div>
 
                       <!-- Status and Time -->
-                      <div class="flex items-center gap-2 label_3_semibold normal_gap">
+                      <div class="flex items-center gap-2 label_3_semibold mt-md">
                         <span :class="[
                           'flex items-center gap-1 ',
                           post.status === 'approved' ? 'approve_text_color' : 'pending_text_color'
@@ -641,10 +641,10 @@
       </div>
 
       <!-- DAY VIEW -->
-      <div v-if="activeView === 'Day'" class="rounded-xl bg_white primary_border_color shadow">
+      <div v-if="activeView === 'Day'" class="rounded-xl bg_secondary_color primary_border_color shadow">
 
         <!-- Day Header -->
-        <div class="flex items-center justify-between border-b common_inner_gap">
+        <div class="flex items-center justify-between border-b p-6xl">
           <button @click="prevDay"><img :src="CircleLeftArrow" alt=""></button>
 
           <p class="heading_h6_semibold primary_text_color">
@@ -656,11 +656,11 @@
 
 
 
-        <div class="mb-6 flex flex-col items-start justify-center border-b secondary_button_thin bg_primary_color">
-          <p class="heading_h5_semibold ml-1">
+        <div class="mb-6 flex flex-col items-start justify-center border-b p-md bg_primary_color">
+          <p class="heading_h5_semibold primary_text_color ml-1">
             {{ dayNumber }}
           </p>
-          <p class="label_3_medium ml-1">
+          <p class="label_3_medium secondary_text_colorml-1">
             {{ dayShort }}
           </p>
         </div>
@@ -670,7 +670,7 @@
           class="grid grid-cols-[30%_70%] md:grid-cols-[20%_80%] overflow-auto h-[60vh] md:h-[44vh] hide-scrollbar">
           <!-- Time Column -->
           <div>
-            <div v-for="hour in 24" :key="hour" class="h-24 border-b flex items-end pt-2 px-2 label_2_regular">
+            <div v-for="hour in 24" :key="hour" class="h-24 border-b flex items-end pt-2 px-2 label_2_regular secondary_text_color">
               {{ formatHour(hour === 24 ? 0 : hour - 1) }}
             </div>
           </div>
@@ -680,7 +680,7 @@
             <div v-for="hour in 24" :key="hour" class="h-24 border-b relative">
               <!-- Posts for this day and hour -->
               <div v-for="post in getPostsForDayAndHour(hour)" :key="post.id" :data-post-id="post.id"
-                class="absolute left-1 right-1 rounded-md bg_white shadow-sm primary_border_color secondary_button_thin z-10"
+                class="absolute left-1 right-1 rounded-md bg_secondary_color shadow-sm primary_border_color p-md z-10"
                 :style="{
             top: `${getPostTopPosition(post.postTime)}px`,
             height: 'auto',
@@ -699,16 +699,16 @@
                     </p>
 
                     <!-- Platforms -->
-                    <div class="flex items-center gap-1 flex-wrap normal_gap">
+                    <div class="flex items-center gap-1 flex-wrap mt-md">
                       <img v-for="platform in post.platforms.slice(0, 4)" :key="platform"
                         :src="getPlatformIcon(platform)" :alt="platform" class="w-4 h-4" />
-                      <span v-if="post.platforms.length > 4" class="text-xs label_2_medium">
+                      <span v-if="post.platforms.length > 4" class="text-xs label_2_medium primary_text_color">
                         +{{ post.platforms.length - 4 }}
                       </span>
                     </div>
 
                     <!-- Status and Time -->
-                    <div class="flex items-center gap-2 label_3_semibold normal_gap">
+                    <div class="flex items-center gap-2 label_3_semibold mt-md">
                       <span :class="[
                     'flex items-center gap-1',
                     post.status === 'approved' ? 'approve_text_color' : 'pending_text_color'
@@ -1544,7 +1544,7 @@
     if (!isClickInDropdown) {
       const dropdownElement = target.closest('.post-dropdown-menu') ||
         target.closest('[class*="bottom-full"]') ||
-        target.closest('.bg_white.rounded-xl.shadow-2xl');
+        target.closest('.bg_secondary_color.rounded-xl.shadow-2xl');
       isClickInDropdown = dropdownElement !== null;
     }
 

@@ -7,12 +7,12 @@
   >
     <!-- Modal -->
     <div
-      class="relative  max-w-xl w-[90%] md:w-full  bg_white rounded-lg shadow-2xl overflow-hidden "
+      class="relative  max-w-xl w-[90%] md:w-full  bg_secondary_color rounded-lg shadow-2xl overflow-hidden "
       @click.stop
     >
       <!-- Header -->
-      <div class="flex justify-between items-center common_inner_gap">
-        <h2 class="heading_h5_semibold">Delete post?</h2>
+      <div class="flex justify-between items-center p-6xl">
+        <h2 class="heading_h5_semibold primary_text_color">Delete post?</h2>
         <button
           @click="$emit('close')"
           aria-label="Close"
@@ -24,17 +24,17 @@
       </div>
  
       <div class="block h-[1px] w-full hr_calendar_bg"></div>
-     <div class="common_inner_gap_px"> 
+     <div class="px-6xl"> 
       <!-- Question -->
-      <div class="common_gap">
+      <div class="mt-5xl">
         <p class="paragraph_p3_regular">
           Are you sure you want to delete this post?
         </p>
       </div >
 
       <!-- Warning Box -->
-      <div class="common_gap ">
-        <div class="flex items-center gap-3 bg_warning_color rounded-lg common_inner_gap">
+      <div class="mt-5xl ">
+        <div class="flex items-center gap-3 bg_warning_color rounded-lg p-6xl">
           <img :src="WarningIconOrange" alt="Warning" class="w-5 h-5 flex-shrink-0 mt-0.5">
           <p class="paragraph_p5_medium primary_text_color">
             Note: This action cannot be undone, and the post will be permanently removed from your calendar.
@@ -43,18 +43,18 @@
       </div>
     </div>
 
-    <div class="block h-[1px] w-full hr_calendar_bg common_gap"></div>
+    <div class="block h-[1px] w-full hr_calendar_bg mt-5xl"></div>
       <!-- Footer Buttons -->
-      <div class="flex items-center justify-end gap-3 common_gap common_inner_gap_px common_inner_gap_pb">
+      <div class="flex items-center justify-end gap-3 mt-5xl px-6xl pb-6xl">
         <button
           @click="$emit('close')"
-          class="medium_inner_gap rounded-lg bg_primary_color label_2_semibold primary_text_color "
+          class="p-xlp rounded-lg bg_primary_color label_2_semibold primary_text_color "
         >
           Cancel
         </button>
         <button
           @click="handleDelete"
-          class="medium_inner_gap rounded-lg modal_primary_button"
+          class="p-xlp rounded-lg modal_primary_button"
         >
           Delete
         </button>

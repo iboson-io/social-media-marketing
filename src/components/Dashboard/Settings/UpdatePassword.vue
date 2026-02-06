@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-2xl bg_white common_inner_gap shadow-sm h-[100%] data-privacy-full-height">
+  <div class="rounded-2xl bg_secondary_color p-6xl shadow-sm h-[100%] data-privacy-full-height">
     <!-- Password Success Modal -->
     <PasswordSuccessModal
       :open="showSuccessModal"
@@ -13,7 +13,7 @@
     <!-- Back to Security Header -->
     <button
       @click="$emit('back')"
-      class="flex items-center gap-2 heading_h6_bold medium_mb"
+      class="flex items-center gap-2 heading_h6_bold pb-10xl"
     >
       <img :src="BackButtonArrow" alt="">
       <span>Back to Security</span>
@@ -23,8 +23,8 @@
     <div class="space-y-9 lg:w-1/2">
       <!-- Current Password Field -->
       <div>
-        <label class="label_2_medium block">Current password:</label>
-        <div class="relative common_gap">
+        <label class="label_2_medium primary_text_color block">Current password:</label>
+        <div class="relative mt-5xl">
           <input
             v-model="currentPassword"
             :type="showCurrentPassword ? 'text' : 'password'"
@@ -54,8 +54,8 @@
 
       <!-- New Password Field -->
       <div>
-        <label class="label_2_medium block">New Password:</label>
-        <div class="relative common_gap">
+        <label class="label_2_medium primary_text_color block">New Password:</label>
+        <div class="relative mt-5xl">
           <input
             v-model="newPassword"
             :type="showNewPassword ? 'text' : 'password'"
@@ -85,8 +85,8 @@
 
       <!-- Confirm New Password Field -->
       <div>
-        <label class="label_2_medium block">Confirm New Password:</label>
-        <div class="relative common_gap">
+        <label class="label_2_medium primary_text_color block">Confirm New Password:</label>
+        <div class="relative mt-5xl">
           <input
             v-model="confirmPassword"
             :type="showConfirmPassword ? 'text' : 'password'"

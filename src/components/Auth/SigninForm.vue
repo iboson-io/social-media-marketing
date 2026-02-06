@@ -8,11 +8,11 @@
       </div>
 
       <!-- Heading -->
-      <h2 class="heading_h5_semibold">
+      <h2 class="heading_h5_semibold primary_text_color">
         Sign In
       </h2>
 
-      <p class="label_1_regular regular_gap">
+      <p class="label_1_regular secondary_text_color mt-xs">
         Manage your posts, analytics, and campaigns with AI.
       </p>
 
@@ -57,7 +57,7 @@
       </form>
 
       <!-- Footer -->
-      <p class="label_1_regular mt-5 flex justify-center">
+      <p class="label_1_regular secondary_text_color mt-5 flex justify-center">
         Don't have an account?
         <RouterLink
           to="/signup"

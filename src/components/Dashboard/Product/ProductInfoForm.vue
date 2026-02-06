@@ -3,23 +3,23 @@
     <!-- Card -->
     <div class="w-full h-[100%] flex flex-col">
       <!-- Header Section -->
-      <div class=" bg_white rounded-2xl common_inner_gap primary_border_color">
+      <div class=" bg_secondary_color rounded-2xl p-6xl primary_border_color">
         <h1 class="heading_h6_bold primary_text_color">
           Create a new product
         </h1>
-        <p class="label_1_regular regular_gap">
+        <p class="label_1_regular secondary_text_color mt-xs">
           Add your brand details and link social platforms for automated posting.
         </p>
       <!-- Step Navigation -->
-      <div ref="scrollContainer" class="overflow-x-auto common_gap scrollbar-hide">
+      <div ref="scrollContainer" class="overflow-x-auto mt-5xl scrollbar-hide">
         <div class="flex items-center  min-w-max">
           <!-- Step 1: Brand Info -->
           <div ref="step1Ref" class="flex items-center flex-shrink-0">
             <div
               class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
-              :class="currentStep === 1 ? 'secondary_bg_color' : currentStep > 1 ? 'secondary_bg_color' : 'bg_white'"
+              :class="currentStep === 1 ? 'secondary_bg_color' : currentStep > 1 ? 'secondary_bg_color' : 'bg_secondary_color'"
             >
-              <span class="label_1_semibold secondary_text_color">1. Brand Info</span>
+              <span class="label_1_semibold secondary_text_brand_color">1. Brand Info</span>
             </div>
           </div>
           <!-- Connector Line -->
@@ -28,9 +28,9 @@
           <div ref="step2Ref" class="flex items-center flex-shrink-0">
             <div
               class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
-              :class="currentStep === 2 ? 'secondary_bg_color' : currentStep > 2 ? 'secondary_bg_color' : 'bg_white'"
+              :class="currentStep === 2 ? 'secondary_bg_color' : currentStep > 2 ? 'secondary_bg_color' : 'bg_secondary_color'"
             >
-              <span class="label_1_semibold secondary_text_color">2. Brand Identity</span>
+              <span class="label_1_semibold secondary_text_brand_color">2. Brand Identity</span>
             </div>
           </div>
           <!-- Connector Line -->
@@ -39,15 +39,15 @@
           <div ref="step3Ref" class="flex items-center flex-shrink-0">
             <div
               class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
-              :class="currentStep === 3 ? 'secondary_bg_color' : 'bg_white'"
+              :class="currentStep === 3 ? 'secondary_bg_color' : 'bg_secondary_color'"
             >
-              <span class="label_1_semibold secondary_text_color">3. Social Connections</span>
+              <span class="label_1_semibold secondary_text_brand_color">3. Social Connections</span>
             </div>
           </div>
         </div>
       </div>
       </div>
-    <div class="flex-1 common_gap">
+    <div class="flex-1 mt-5xl">
       <!-- Step 1: Brand Info -->
       <BrandInfo
         v-if="currentStep === 1"
@@ -78,10 +78,10 @@
         @view-product="handleViewProduct"
         @go-to-chat="handleGoToChat"
       />
-      <div class="flex items-center justify-between bg_white common_gap p-3 primary_border_color rounded-2xl">
+      <div class="flex items-center justify-between bg_secondary_color mt-5xl p-3 primary_border_color rounded-2xl">
         <button
           @click="handleBack"
-          class="label_2_semibold bg_primary_color primary_border_color px-4 py-3 rounded-lg"
+          class="label_2_semibold primary_text_color bg_primary_color primary_border_color px-4 py-3 rounded-lg"
         >
           Back
         </button>

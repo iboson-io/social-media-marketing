@@ -1,11 +1,11 @@
 <template>
-  <div class=" bg_white rounded-2xl py-7 px-4 brand_section_height">
+  <div class=" bg_secondary_color rounded-2xl py-7 px-4 brand_section_height">
     <!-- Section Header -->
     <div class="mb-6">
       <h2 class="heading_h5_bold primary_text_color mb-2">
         Connect your social media accounts
       </h2>
-      <p class="label_1_regular">
+      <p class="label_1_regular secondary_text_color">
         Link your brand's social profiles to create and publish posts directly from one place.
       </p>
     </div>
@@ -21,7 +21,7 @@
           <img :src="InstagramIcon" alt="Instagram" class="h-10 w-10 flex-shrink-0" />
           <div class="flex flex-col">
             <p class="label_1_semibold primary_text_color">@lumovibe</p>
-            <p class="label_2_regular">Instagram</p>
+            <p class="label_2_regular secondary_text_color">Instagram</p>
           </div>
         </div>
         <!-- Chain Link Icon (Connected) or Plus Icon -->
@@ -40,7 +40,7 @@
       <!-- Facebook Card -->
       <div 
         @click="handleConnectClick('facebook')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_white p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
       >
         <div class="flex items-center gap-3">
           <img :src="FacebookIcon" alt="Facebook" class="h-10 w-10" />
@@ -64,7 +64,7 @@
       <!-- LinkedIn Card -->
       <div 
         @click="handleConnectClick('linkedin')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_white p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
       >
         <div class="flex items-center gap-3">
           <img :src="LinkedInIcon" alt="LinkedIn" class="h-10 w-10" />
@@ -88,7 +88,7 @@
       <!-- Twitter (X) Card -->
       <div 
         @click="handleConnectClick('twitter')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_white p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
       >
         <div class="flex items-center gap-3">
           <img :src="TwitterIcon" alt="Twitter" class="h-10 w-10" />
@@ -112,7 +112,7 @@
       <!-- TikTok Card -->
       <div 
         @click="handleConnectClick('tiktok')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_white p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
       >
         <div class="flex items-center gap-3">
           <img :src="TikTokIcon" alt="TikTok" class="h-10 w-10" />
@@ -136,7 +136,7 @@
       <!-- YouTube Card -->
       <div 
         @click="handleConnectClick('youtube')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_white p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
       >
         <div class="flex items-center gap-3">
           <img :src="YoutubeIcon" alt="YouTube" class="h-10 w-10" />

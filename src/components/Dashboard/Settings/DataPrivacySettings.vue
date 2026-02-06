@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-2xl bg_white common_inner_gap shadow-sm h-[100%] data-privacy-full-height"> 
+  <div class="rounded-2xl bg_secondary_color p-6xl shadow-sm h-[100%] data-privacy-full-height"> 
     <!-- Delete Confirmation Modal -->
     <ConfirmDataDeletionModal
       :open="showDeleteModal"
@@ -20,21 +20,21 @@
 
     <!-- Header -->
     <h2 class="heading_h6_bold">Data & Privacy Settings</h2>
-    <p class="label_1_regular regular_gap medium_mb">
+    <p class="label_1_regular secondary_text_color mt-xs pb-10xl">
       Manage how your personal and brand data is stored and used.
     </p>
 
     <!-- Delete your data -->
     <div class="flex flex-col md:flex-row items-start md:justify-between gap-4 mb-8">
       <div class="flex-1">
-        <h3 class="label_1_semibold">Delete your data</h3>
-        <p class="label_1_regular regular_gap">
+        <h3 class="label_1_semibold primary_text_color">Delete your data</h3>
+        <p class="label_1_regular secondary_text_color mt-xs">
           Permanently remove all account data.
         </p>
       </div>
       <button
         @click="showDeleteModal = true"
-        class="button_thin px-6 rounded-lg inputbox_border_color bg_white sub_button_semibold"
+        class="p-3xl px-6 rounded-lg inputbox_border_color bg_secondary_color sub_button_semibold"
       >
         Delete My Data
       </button>
@@ -43,8 +43,8 @@
     <!-- AI Content Learning -->
     <div class="flex flex-row-reverse  md:flex-row items-start md:justify-between gap-4 mb-8">
       <div class="flex-1">
-        <h3 class="label_1_semibold">AI Content Learning</h3>
-        <p class="label_1_regular regular_gap">
+        <h3 class="label_1_semibold primary_text_color">AI Content Learning</h3>
+        <p class="label_1_regular secondary_text_color mt-xs">
           Allow AI learning from content:
         </p>
       </div>
@@ -55,7 +55,7 @@
         :class="aiContentLearning ? 'bg-[#000] lg:bg_toggle_button' : 'bg-[#DCDFE4]'"
       >
         <span
-          class="inline-block h-5 w-5 transform rounded-full bg_white transition-transform"
+          class="inline-block h-5 w-5 transform rounded-full bg_secondary_color transition-transform"
           :class="aiContentLearning ? 'translate-x-5' : 'translate-x-1'"
         ></span>
       </button>
@@ -64,8 +64,8 @@
     <!-- Analytics Sharing -->
     <div class="flex flex-row-reverse  md:flex-row items-start md:justify-between gap-4">
       <div class="flex-1">
-        <h3 class="label_1_semibold">Analytics Sharing</h3>
-        <p class="label_1_regular regular_gap">
+        <h3 class="label_1_semibold primary_text_color">Analytics Sharing</h3>
+        <p class="label_1_regular secondary_text_color mt-xs">
           Share analytics for improvements:
         </p>
       </div>
@@ -76,7 +76,7 @@
         :class="analyticsSharing ? 'bg-[#000] lg:bg_toggle_button' : 'bg-[#DCDFE4]'"
       >
         <span
-          class="inline-block h-5 w-5 transform rounded-full bg_white transition-transform"
+          class="inline-block h-5 w-5 transform rounded-full bg_secondary_color transition-transform"
           :class="analyticsSharing ? 'translate-x-5' : 'translate-x-1'"
         ></span>
       </button>

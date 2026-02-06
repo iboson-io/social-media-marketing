@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-[100%] min-h-0">
     <!-- Sub-navigation Tabs -->
-    <div class="flex gap-2 overflow-x-auto bg_white rounded-2xl common_inner_gap primary_border_color hide-scrollbar px-4 py-3 flex-shrink-0">
+    <div class="flex gap-2 overflow-x-auto bg_secondary_color rounded-2xl p-6xl primary_border_color hide-scrollbar px-4 py-3 flex-shrink-0">
       <button
         @click="$emit('update:activeTab', 'product-info')"
         class="flex items-center gap-2 rounded-lg px-4 py-2 flex-shrink-0 label_2_semibold"
@@ -52,7 +52,7 @@
         <span>Website & Brand Assets</span>
       </button>
     </div>
-    <div class="common_gap flex-1 min-h-0 overflow-y-auto">
+    <div class="mt-5xl flex-1 min-h-0 overflow-y-auto">
     <!-- Tab Content: Product Info -->
     <div v-if="activeTab === 'product-info'" class="h-full">
       <BrandInfoFields
@@ -77,7 +77,7 @@
     </div>
 
     <div v-else>
-      <p class="label_1_regular text-[#8590A2]">{{ activeTab }} content coming soon...</p>
+      <p class="label_1_regular secondary_text_color">{{ activeTab }} content coming soon...</p>
     </div>
 </div>
   </div>

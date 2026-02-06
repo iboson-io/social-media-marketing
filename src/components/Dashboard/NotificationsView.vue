@@ -10,25 +10,25 @@
   <!-- Popup -->
   <div
     v-if="open"
-    class="fixed inset-0 z-50 bg_white shadow-2xl h-[100%] lg:h-[98%] lg:inset-auto lg:top-2 lg:rounded-xl lg:w-[40%] common_inner_gap"
+    class="fixed inset-0 z-50 bg_secondary_color shadow-2xl h-[100%] lg:h-[98%] lg:inset-auto lg:top-2 lg:rounded-xl lg:w-[40%] p-6xl"
     :class="isCollapsed ? 'lg:left-20' : 'lg:left-[16.5em]'"
   >
     <!-- Header -->
     <div class="flex items-start justify-between ">
       <div>
         <h2 class="heading_h6_semibold">Notifications</h2>
-        <p class="body_3_regular">
+        <p class="body_3_regular secondary_text_color">
           Stay updated with your latest activities
         </p>
       </div>
 
-      <button @click="$emit('close')" class="secondary_text_color">
+      <button @click="$emit('close')" class="secondary_text_brand_color">
         ✕
       </button>
     </div>
 
     <!-- Tabs -->
-    <div class="flex common_gap gap-2 2xl:gap-9 bg_secondary_color px-2 py-1 rounded-lg overflow-scroll 2xl:justify-center  scrollbar-hide">
+    <div class="flex mt-5xl gap-2 2xl:gap-9 bg-gray-25 px-2 py-1 rounded-lg overflow-scroll 2xl:justify-center  scrollbar-hide">
       <button
         v-for="tab in tabs"
         :key="tab.key"
@@ -40,14 +40,14 @@
             : 'hover:bg-gray-100'
         "
       >
-        <span class="label_2_semibold whitespace-nowrap">{{ tab.label }}</span>
-        <span class="label_3_regular whitespace-nowrap">({{ tab.count }})</span>
+        <span class="label_2_semibold primary_text_color whitespace-nowrap">{{ tab.label }}</span>
+        <span class="label_3_regular secondary_text_color whitespace-nowrap">({{ tab.count }})</span>
       </button>
     </div>
 
-    <div class="block h-[2px] w-full bg_primary_color common_gap"></div>
+    <div class="block h-[2px] w-full bg_primary_color mt-5xl"></div>
     <!-- CONTENT -->
-    <div class="common_gap">
+    <div class="mt-5xl">
       <!-- EMPTY STATE -->
       <div
         v-if="filteredNotifications.length === 0"
@@ -59,8 +59,8 @@
          <img :src="BellIcon" alt="" class="h-32 w-32">
         </div>
 
-        <p class="label_1_medium">Notification</p>
-        <p class="body_3_regular">
+        <p class="label_1_medium primary_text_color">Notification</p>
+        <p class="body_3_regular secondary_text_color">
           You have no notifications right now. <br />
           Come back later.
         </p>
@@ -74,7 +74,7 @@
         <div
           v-for="item in filteredNotifications"
           :key="item.id"
-          class="relative rounded-lg primary_border_color common_inner_gap bg_primary_color"
+          class="relative rounded-lg primary_border_color p-6xl bg_primary_color"
         >
           <!-- Status Dot -->
           <span
@@ -94,12 +94,12 @@
           </div>
 
           <!-- Description -->
-          <p class="label_2_regular normal_gap">
+          <p class="label_2_regular secondary_text_color mt-md">
             {{ item.description }}
           </p>
 
           <!-- Time -->
-          <p class="body_4_regular normal_gap">
+          <p class="body_4_regular tertiary_text_color mt-md">
             {{ item.time }}
           </p>
         </div>
@@ -109,11 +109,11 @@
     <!-- Footer -->
     <div
       v-if="notifications.length"
-      class="absolute w-[93%] bottom-5 common_gap flex cursor-pointer items-center justify-center gap-2 rounded-md regular_border_color bg_regular_button p-2 text-[#374151]"
+      class="absolute w-[93%] bottom-5 mt-5xl flex cursor-pointer items-center justify-center gap-2 rounded-md regular_border_color bg_regular_button p-2 text-[#374151]"
       @click="clearAll"
     >
       <img :src="ClearIcon" />
-      <span class="label_2_medium">Clear All</span>
+      <span class="label_2_medium primary_text_color">Clear All</span>
     </div>
   </div>
 </template>

@@ -17,7 +17,7 @@
               <div class="relative group/button">
                 <button
                   @click="handleCopy(message.text)"
-                  class="flex items-center gap-1.5 rounded-lg bg_white p-2 "
+                  class="flex items-center gap-1.5 rounded-lg bg_secondary_color p-2 "
                 >
                   <img :src="TextCopyIcon" alt="Copy" />
                 </button>
@@ -37,7 +37,7 @@
               <div class="relative group/button">
                 <button
                   @click="handleEdit(index)"
-                  class="flex items-center gap-1.5 rounded-lg bg_white p-2 "
+                  class="flex items-center gap-1.5 rounded-lg bg_secondary_color p-2 "
                 >
                   <img :src="ImageEditIcon" alt="Edit"  />
                 </button>
@@ -56,7 +56,7 @@
             
             <!-- Message Bubble -->
             <div
-              class="relative max-w-[80%]  bg_white p-3.5 rounded-[18px] profile_border"
+              class="relative max-w-[80%]  bg_secondary_color p-3.5 rounded-[18px] profile_border"
               :class="editingIndex === index ? 'w-full' : ''"
             >
               <!-- Edit Mode -->
@@ -169,8 +169,8 @@
         <PromptBox @send-message="handleNewMessage" />
         
         <!-- Disclaimer -->
-        <div class="text-center common_inner_gap">
-          <p class="body_4_regular">
+        <div class="text-center p-6xl">
+          <p class="body_4_regular tertiary_text_color">
             Genius AI can make mistakes. Please check for accuracy.
           </p>
         </div>

@@ -1,5 +1,5 @@
  <template>
-  <div class="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white ">
+  <div class="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg_secondary_color ">
     <BrandingSection />
     <SignupForm />
   </div>
