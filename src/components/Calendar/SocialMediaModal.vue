@@ -7,131 +7,107 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_secondary_color rounded-lg ring-1 ring-black/5 shadow-2xl p-6xl"
+      class="relative w-full md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_secondary_color rounded-lg primary_border_color shadow-2xl p-6xl"
       @click.stop
     >
       <!-- Header -->
       <div class="flex items-center justify-between">
-        <h2 class="paragraph_p2_medium primary_text_color">Platforms</h2>
+        <h2 class="label_2_semibold primary_text_color">Platforms</h2>
         <button
           @click="$emit('close')"
-          class="p-2 rounded-full"
+          class="p-md rounded-lg bg-gray-25 hover:bg-gray-50-hover"
           aria-label="Close"
         >
           <img :src="CloseIcon" alt="Close" class="w-5 h-5">
         </button>
       </div>
-
+       <div class="block h-[1px] w-full bg-gray-25 mt-6xl"></div>
       <!-- Platforms Grid -->
-      <div class="grid md:grid-cols-2 gap-3 mt-5xl h-[23em] hide-scrollbar overflow-auto md:h-auto md:overflow-hidden">
+      <div class="grid md:grid-cols-2 gap-6xl mt-6xl h-[23em] hide-scrollbar overflow-auto md:h-auto md:overflow-hidden">
         <!-- Instagram -->
         <div
           @click="togglePlatform('instagram')"
-          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
-          :class="isSelected('instagram') ? 'selected_platform_border' : ''"
+          class="relative rounded-lg primary_border_color p-5xl cursor-pointer hover:bg-gray-25"
+          :class="isSelected('instagram') ? 'selected_platform_border bg-gray-25' : ''"
         >
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-md ">
             <img :src="InstagramIcon" alt="Instagram" class="w-10 h-10">
             <div class="flex-1">
-              <p class="label_1_medium primary_text_color">Instagram</p>
-              <p class="label_3_regular sub_text_color">@lumovibe</p>
+              <p class="label_1_semibold primary_text_color">Instagram</p>
+              <p class="label_3_regular secondary_text_color mt-xxs">@lumovibe</p>
             </div>
-          </div>
-          <!-- Checkmark for selected -->
-          <div v-if="isSelected('instagram')" class=" absolute top-2 right-2 border_none">
-            <img :src="SelectedTick" alt="Selected" >
           </div>
         </div>
 
         <!-- Twitter (X) -->
         <div
           @click="togglePlatform('twitter')"
-          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
-          :class="isSelected('twitter') ? 'selected_platform_border' : ''"
+          class="relative rounded-lg primary_border_color p-5xl cursor-pointer hover:bg-gray-25"
+          :class="isSelected('twitter') ? 'selected_platform_border bg-gray-25' : ''"
         >
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-md">
             <img :src="TwitterIcon" alt="Twitter" class="w-10 h-10">
             <div class="flex-1">
-              <p class="label_1_medium primary_text_color">Twitter (X)</p>
+              <p class="label_1_semibold primary_text_color">Twitter (X)</p>
             </div>
-          </div>
-          <!-- Checkmark for selected -->
-          <div v-if="isSelected('twitter')" class="absolute top-2 right-2 border_none">
-            <img :src="SelectedTick" alt="Selected">
           </div>
         </div>
 
         <!-- Facebook -->
         <div
           @click="togglePlatform('facebook')"
-          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
-          :class="isSelected('facebook') ? 'selected_platform_border' : ''"
+          class="relative rounded-lg primary_border_color p-5xl cursor-pointer hover:bg-gray-25"
+          :class="isSelected('facebook') ? 'selected_platform_border bg-gray-25' : ''"
         >
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-md">
             <img :src="FacebookIcon" alt="Facebook" class="w-10 h-10">
             <div class="flex-1">
-              <p class="label_1_medium primary_text_color">Facebook</p>
-              <p class="label_3_regular sub_text_color">@lumovibe</p>
+              <p class="label_1_semibold primary_text_color">Facebook</p>
+              <p class="label_3_regular secondary_text_color mt-xxs">@lumovibe</p>
             </div>
-          </div>
-          <!-- Checkmark for selected -->
-          <div v-if="isSelected('facebook')" class="absolute top-2 right-2 border_none">
-            <img :src="SelectedTick" alt="Selected">
           </div>
         </div>
 
         <!-- TikTok -->
         <div
           @click="togglePlatform('tiktok')"
-          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
-          :class="isSelected('tiktok') ? 'selected_platform_border' : ''"
+          class="relative rounded-lg primary_border_color p-5xl cursor-pointer hover:bg-gray-25"
+          :class="isSelected('tiktok') ? 'selected_platform_border bg-gray-25' : ''"
         >
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-md">
             <img :src="TikTokIcon" alt="TikTok" class="w-10 h-10">
             <div class="flex-1">
-              <p class="label_1_medium primary_text_color">TikTok</p>
+              <p class="label_1_semibold primary_text_color">TikTok</p>
             </div>
-          </div>
-          <!-- Checkmark for selected -->
-          <div v-if="isSelected('tiktok')" class="absolute top-2 right-2 border_none">
-            <img :src="SelectedTick" alt="Selected">
           </div>
         </div>
 
         <!-- LinkedIn -->
         <div
           @click="togglePlatform('linkedin')"
-          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
-          :class="isSelected('linkedin') ? 'selected_platform_border' : ''"
+          class="relative rounded-lg primary_border_color p-5xl cursor-pointer hover:bg-gray-25"
+          :class="isSelected('linkedin') ? 'selected_platform_border bg-gray-25' : ''"
         >
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-md">
             <img :src="LinkedInIcon" alt="LinkedIn" class="w-10 h-10">
             <div class="flex-1">
-              <p class="label_1_medium primary_text_color">LinkedIn</p>
-              <p class="label_3_regular sub_text_color">@lumovibe</p>
+              <p class="label_1_semibold primary_text_color">LinkedIn</p>
+              <p class="label_3_regular secondary_text_color mt-xxs">@lumovibe</p>
             </div>
-          </div>
-          <!-- Checkmark for selected -->
-          <div v-if="isSelected('linkedin')" class="absolute top-2 right-2 border_none">
-            <img :src="SelectedTick" alt="Selected">
           </div>
         </div>
 
         <!-- YouTube -->
         <div
           @click="togglePlatform('youtube')"
-          class="relative rounded-lg primary_border_color p-6xl cursor-pointer"
-          :class="isSelected('youtube') ? 'selected_platform_border' : ''"
+          class="relative rounded-lg primary_border_color p-5xl cursor-pointer hover:bg-gray-25"
+          :class="isSelected('youtube') ? 'selected_platform_border bg-gray-25' : ''"
         >
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-md">
             <img :src="YoutubeIcon" alt="YouTube" class="w-10 h-10">
             <div class="flex-1">
-              <p class="label_1_medium primary_text_color">YouTube</p>
+              <p class="label_1_semibold primary_text_color">YouTube</p>
             </div>
-          </div>
-          <!-- Checkmark for selected -->
-          <div v-if="isSelected('youtube')" class="absolute top-2 right-2 border_none">
-            <img :src="SelectedTick" alt="Selected">
           </div>
         </div>
       </div>
@@ -148,8 +124,6 @@ import TwitterIcon from "../../assets/images/TwitterIcon.svg";
 import TikTokIcon from "../../assets/images/TikTokIcon.svg";
 import YoutubeIcon from "../../assets/images/YoutubeIcon.svg";
 import CloseIcon from "../../assets/images/CloseIcon.svg";
-import ApproveIcon from "../../assets/images/ApproveIcon.svg";
-import SelectedTick from "../../assets/images/SelectedTick.svg";
 
 const props = defineProps({
   open: {

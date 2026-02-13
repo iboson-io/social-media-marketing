@@ -40,7 +40,7 @@
               'flex items-center justify-center gap-1.5 md:gap-2 px-2 py-2.5 md:px-2 md:py-2 rounded-xl transition-colors relative flex-shrink-0 tab-button',
               activeTab === tab.id
                 ? 'label_2_semibold primary_text_color bg_primary_color'
-                : 'label_2_semibold sub_text_color hover:primary_text_color'
+                : 'label_2_semibold secondary_text_color hover:primary_text_color'
             ]"
           >
             <!-- Icon -->

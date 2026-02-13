@@ -2,35 +2,35 @@
   <div
     v-if="open"
     ref="dropdownRef"
-    class="absolute left-0 bottom-full  py-2 bg_secondary_color rounded-xl shadow-2xl ring-1 ring-black/5 z-50 min-w-[200px]  post-dropdown-menu"
+    class="absolute left-0 bottom-full  py-md bg_secondary_color rounded-lg shadow-2xl primary_border_color z-50 min-w-[200px]  post-dropdown-menu"
     @click.stop
     @touchstart.stop
   >
     <!-- Share Now -->
     <button
       @click="handleShare"
-      class="w-full px-4 py-2.5 flex items-center justify-between "
+      class="w-full px-4 py-2.5 flex items-center gap-md"
     >
-      <span class="body_3_regular primary_text_color">Share Now</span>
-      <img :src="ShareIcon" alt="Share" class="w-4 h-4">
+    <img :src="ShareIcon" alt="Share" class="w-4 h-4">
+      <span class="label_2_medium primary_text_color">Share Now</span>  
     </button>
-    <div class="block h-[1px] w-full primary_border_color mt-xs"></div>
+    <div class="block h-[1px] w-full bg-gray-25 mt-xs"></div>
     <!-- Regenerate Post -->
     <button
       @click="handleRegenerate"
-      class="w-full px-4 py-2.5 flex items-center justify-between mt-xs"
+      class="w-full px-4 py-2.5 flex items-center mt-xs gap-md"
     >
-      <span class="body_3_regular primary_text_color">Regenerate Post</span>
       <img :src="ImageEditIcon" alt="Edit" class="w-4 h-4">
+      <span class="label_2_medium primary_text_color">Regenerate Post</span>
     </button>
-    <div class="block h-[1px] w-full primary_border_color mt-xs"></div>
+    <div class="block h-[1px] w-full bg-gray-25 mt-xs gap-md"></div>
     <!-- Delete -->
     <button
       @click="handleDelete"
-      class="w-full px-4 py-2.5 flex items-center justify-between mt-xs"
+      class="w-full px-4 py-2.5 flex items-center mt-xs gap-md"
     >
-      <span class="body_3_regular delete_text_color">Delete</span>
       <img :src="TrashIcon" alt="Delete" class="w-4 h-4">
+      <span class="label_2_medium delete_text_color">Delete</span>
     </button>
   </div>
 </template>

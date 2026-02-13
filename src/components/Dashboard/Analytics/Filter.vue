@@ -1,80 +1,81 @@
 <template>
   <section>
     <!-- Header -->
-    <div class="bg_secondary_color p-6xl rounded-xl primary_border_color">
-      <h2 class="heading_h6_bold">Analytics</h2>
-      <p class="label_1_regular secondary_text_color mt-xs">
+    <div class="bg_secondary_color p-6xl rounded-lg primary_border_color">
+      <h2 class="heading_h6_bold primary_text_color">Analytics</h2>
+      <p class="label_1_regular secondary_text_color mt-md">
         Track engagement, reach, and performance across all your connected platforms.
       </p>
     </div>
 
     <!-- Tabs and Dropdowns -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg_secondary_color px-3 py-3 md:px-8 rounded-2xl primary_border_color mt-5xl">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3xl bg_secondary_color px-xl py-xl md:px-6xl rounded-2xl primary_border_color mt-4xl">
       
       <!-- Tabs -->
-      <div class="flex gap-2 ">
+      <div class="flex bg-gray-25 rounded-full p-xs">
         <button
           v-for="tab in tabs"
           :key="tab"
           @click="emit('update:activeTab', tab)"
-          :class="props.activeTab === tab ? 'bg_secondary_color' : 'bg_primary_color'"
-          class="px-4 py-1 rounded-full primary_border_color label_2_semibold"
+          :class="props.activeTab === tab ? 'bg_secondary_color primary_text_color' : 'bg-gray-25 secondary_text_color'"
+          class="px-3xl py-sm rounded-full primary_border_color label_2_semibold"
         >
           {{ tab }}
         </button>
       </div>
 
       <!-- Dropdowns -->
-      <div class="flex gap-4 md:gap-8 justify-center">
+      <div class="flex gap-3xl md:gap-6xl justify-center">
         <!-- Products Dropdown -->
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-md">
           <img :src="ProductIcon" alt="" class="mr-[-40px] md:mr-[-42px] z-10">
           <div class="relative product-dropdown-container">
             <button
               @click="toggleProductDropdown"
-              class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-8 md:h-10 md:pl-10 md:pr-10 py-2 label_2_medium bg_secondary_color product-select relative"
-            >
+              class="flex items-center gap-md rounded-md primary_border_color pl-8xl pr-8xl md:h-10xl md:pl-10xl md:pr-10xl py-md label_2_medium primary_text_color bg_secondary_color product-select relative"
+              :class="isProductDropdownOpen ? 'border-[3px] border-[#D9E2FC]':''"
+                >
               <span class="product-text">{{ getProductDisplayText() }}</span>
-              <img :src="DownArrow" alt="" class="absolute right-3 md:right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+              <img :src="DownArrow" alt="" class="absolute right-xl md:right-md top-1/2 -translate-y-1/2 pointer-events-none">
             </button>
             
             <!-- Products Dropdown Panel -->
             <div
               v-if="isProductDropdownOpen"
-              class="absolute top-full left-0 mt-2 bg_secondary_color rounded-md primary_border_color shadow-lg z-50 min-w-[155px] lg:min-w-[190px]"
+              class="absolute top-full left-0 mt-sm bg_secondary_color rounded-md primary_border_color shadow-lg z-50 min-w-[155px] lg:min-w-[190px]"
               @click.stop
             >
-              <div class="py-2">
+              <div>
                 <label
-                  class="flex items-center gap-3 px-4 py-2 "
+                  :class="['flex items-center gap-md px-xl py-3xl hover:bg-info-50', { 'bg-info-50': selectedProducts.length === 0 }]"
                 >
                   <input
                     type="checkbox"
                     :checked="selectedProducts.length === 0"
                     @change="toggleAllProducts"
-                    class="w-4 h-4 rounded cursor-pointer custom-checkbox"
+                    class="w-5xl h-5xl rounded cursor-pointer custom-checkbox"
                   />
                   <span class="label_2_medium primary_text_color">All products</span>
                 </label>
                 <label
                   v-for="product in products"
                   :key="product"
-                  class="flex items-center gap-3 px-4 py-2 "
+                  :class="['flex items-center gap-md px-xl py-3xl border-b primary_border_color hover:bg-info-50', { 'bg-info-50': selectedProducts.includes(product) }]"
                 >
                   <input
                     type="checkbox"
                     :value="product"
                     v-model="selectedProducts"
                     @change="handleProductChange"
-                    class="w-4 h-4 rounded cursor-pointer custom-checkbox"
+                    class="w-5xl h-5xl rounded cursor-pointer custom-checkbox"
                   />
                   <span class="label_2_medium primary_text_color">{{ product }}</span>
                 </label>
               </div>
-              <div class="px-3 pb-2">
+              <div class="px-xl pb-xl">
               <button
                 @click="applyProductFilter"
-                class="w-full primary_add_button py-2 px-4 rounded-b-md"
+                class="w-full primary_add_button label_3_medium py-md px-md rounded-b-md"
               >
                 Apply
               </button>
@@ -84,54 +85,55 @@
         </div>
 
         <!-- Platforms Dropdown -->
-        <div class="flex items-center gap-3">
-          <img :src="ProductIcon" alt="" class="mr-[-40px] md:mr-[-42px] z-10">
+        <div class="flex items-center gap-xl">
+          <img :src="PlatformIcon" alt="" class="mr-[-40px] md:mr-[-42px] z-10">
           <div class="relative platform-dropdown-container">
             <button
               @click="togglePlatformDropdown"
-              class="flex items-center gap-2 rounded-md primary_border_color pl-8 pr-8 md:pl-10 md:pr-10 md:h-10 lg:pr-10 py-2 label_2_medium bg_secondary_color product-select relative"
-            >
+              class="flex items-center gap-md rounded-md primary_border_color pl-8xl pr-8xl md:pl-10xl md:pr-10xl md:h-10xl lg:pr-10xl py-md label_2_medium bg_secondary_color product-select relative"
+               :class="isPlatformDropdownOpen ? 'border-[3px] border-[#D9E2FC]':''"
+              >
               <span class="product-text">{{ getPlatformDisplayText() }}</span>
-              <img :src="DownArrow" alt="" class="absolute right-3 md:right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+              <img :src="DownArrow" alt="" class="absolute right-xl md:right-md top-1/2 -translate-y-1/2 pointer-events-none">
             </button>
             
             <!-- Platforms Dropdown Panel -->
             <div
               v-if="isPlatformDropdownOpen"
-              class="absolute top-full left-0 mt-2 bg_secondary_color rounded-md primary_border_color shadow-lg z-50 min-w-[155px] lg:min-w-[190px]"
+              class="absolute top-full left-0 mt-sm bg_secondary_color rounded-md primary_border_color shadow-lg z-50 min-w-[155px] lg:min-w-[190px]"
               @click.stop
             >
-              <div class="py-2">
+              <div>
                 <label
-                  class="flex items-center gap-3 px-4 py-2"
+                  :class="['flex items-center gap-md px-xl py-3xl hover:bg-info-50', { 'bg-info-50': selectedPlatforms.length === 0 }]"
                 >
                   <input
                     type="checkbox"
                     :checked="selectedPlatforms.length === 0"
                     @change="toggleAllPlatforms"
-                    class="w-4 h-4 rounded cursor-pointer custom-checkbox"
+                    class="w-5xl h-5xl rounded cursor-pointer custom-checkbox"
                   />
                   <span class="label_2_medium primary_text_color">All platforms</span>
                 </label>
                 <label
                   v-for="platform in platforms"
                   :key="platform"
-                  class="flex items-center gap-3 px-4 py-2"
+                   :class="['flex items-center gap-md px-xl py-3xl border-b primary_border_color hover:bg-info-50', { 'bg-info-50': selectedPlatforms.includes(platform) }]"
                 >
                   <input
                     type="checkbox"
                     :value="platform"
                     v-model="selectedPlatforms"
                     @change="handlePlatformChange"
-                    class="w-4 h-4 rounded cursor-pointer custom-checkbox"
+                    class="w-5xl h-5xl rounded cursor-pointer custom-checkbox"
                   />
                   <span class="label_2_medium primary_text_color">{{ platform }}</span>
                 </label>
               </div>
-              <div class="px-3 pb-2">
+              <div class="px-xl pb-xl">
               <button
                 @click="applyPlatformFilter"
-                class="w-full primary_add_button py-2 px-4 rounded-b-md"
+                class="w-full primary_add_button label_3_medium py-md px-md rounded-b-md"
               >
                 Apply
               </button>
@@ -147,6 +149,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import ProductIcon from "../../../assets/images/ProductIcon.svg"
+import PlatformIcon from "../../../assets/images/PlatformIcon.svg"
 import DownArrow from "../../../assets/images/DownArrow.svg"
 
 const props = defineProps({

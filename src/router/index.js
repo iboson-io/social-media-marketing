@@ -22,7 +22,12 @@ const routes = [
   { path: "/password-updation", name: "PasswordUpdation", component: PasswordUpdation, },
   { path: "/dashboard", name: "Dashboard", component: Dashboard, redirect: "/chat" },
   { path: "/chat", name: "Chat", component: Dashboard },
-  { path: "/calendar", name: "Calendar", component: Dashboard },
+  { path: "/calendar", name: "Calendar", component: Dashboard,
+    meta: {
+      title: "calender | My App",
+      description: "View insights and analytics."
+    }
+   },
   { path: "/analytics", name: "Analytics", component: Dashboard },
   { path: "/products", name: "Products", component: Dashboard },
   { path: "/settings", name: "Settings", component: Dashboard },
@@ -32,6 +37,23 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.afterEach((to) => {
+  document.title = to.meta.title || "My App";
+
+  let description = document.querySelector('meta[name="description"]');
+
+  if (!description) {
+    description = document.createElement("meta");
+    description.setAttribute("name", "description");
+    document.head.appendChild(description);
+  }
+
+  description.setAttribute(
+    "content",
+    to.meta.description || "Default app description"
+  );
 });
 
 

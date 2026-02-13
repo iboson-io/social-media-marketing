@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen items-center justify-center bg_primary_color px-4 md:px-10 py-12 lg:py-7">
+  <div class="flex-1 bg_primary_color px-3xl py-12xl md:px-10xl lg:py-10xl">
     <!-- Card -->
     <div class="w-full h-[100%] flex flex-col">
       <!-- Header Section -->
@@ -7,17 +7,17 @@
         <h1 class="heading_h6_bold primary_text_color">
           Create a new product
         </h1>
-        <p class="label_1_regular secondary_text_color mt-xs">
+        <p class="label_1_regular secondary_text_color mt-md">
           Add your brand details and link social platforms for automated posting.
         </p>
       <!-- Step Navigation -->
-      <div ref="scrollContainer" class="overflow-x-auto mt-5xl scrollbar-hide">
+      <div ref="scrollContainer" class="overflow-x-auto mt-6xl scrollbar-hide">
         <div class="flex items-center  min-w-max">
           <!-- Step 1: Brand Info -->
           <div ref="step1Ref" class="flex items-center flex-shrink-0">
             <div
-              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
-              :class="currentStep === 1 ? 'secondary_bg_color' : currentStep > 1 ? 'secondary_bg_color' : 'bg_secondary_color'"
+              class="flex items-center justify-center rounded-lg px-3xl md:px-3xl py-xl border border-blue-50 whitespace-nowrap profile_tab_border"
+              :class="currentStep === 1 ? 'bg-blue-25' : currentStep > 1 ? 'bg-blue-25' : 'bg_secondary_color'"
             >
               <span class="label_1_semibold secondary_text_brand_color">1. Brand Info</span>
             </div>
@@ -27,8 +27,8 @@
           <!-- Step 2: Brand Identity -->
           <div ref="step2Ref" class="flex items-center flex-shrink-0">
             <div
-              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
-              :class="currentStep === 2 ? 'secondary_bg_color' : currentStep > 2 ? 'secondary_bg_color' : 'bg_secondary_color'"
+              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 border border-blue-50 whitespace-nowrap profile_tab_border"
+              :class="currentStep === 2 ? 'bg-blue-25' : currentStep > 2 ? 'bg-blue-25' : 'bg_secondary_color'"
             >
               <span class="label_1_semibold secondary_text_brand_color">2. Brand Identity</span>
             </div>
@@ -38,8 +38,8 @@
           <!-- Step 3: Social Connections -->
           <div ref="step3Ref" class="flex items-center flex-shrink-0">
             <div
-              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 sub_border_color whitespace-nowrap profile_tab_border"
-              :class="currentStep === 3 ? 'secondary_bg_color' : 'bg_secondary_color'"
+              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 border border-blue-50 whitespace-nowrap profile_tab_border"
+              :class="currentStep === 3 ? 'bg-blue-25' : 'bg_secondary_color'"
             >
               <span class="label_1_semibold secondary_text_brand_color">3. Social Connections</span>
             </div>

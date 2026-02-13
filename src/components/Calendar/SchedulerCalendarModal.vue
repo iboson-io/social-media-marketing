@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-[92%] md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_secondary_color rounded-lg ring-1 ring-black/5 shadow-2xl"
+      class="relative w-[92%] md:max-w-2xl lg:max-w-lg mx-4 lg:mx-0 bg_secondary_color rounded-lg primary_border_color shadow-2xl"
       @click.stop
     >
      
@@ -15,7 +15,7 @@
       <!-- Date and Time Picker Container -->
       <div class="flex  flex-col md:flex-row ">
         <!-- Date Picker (Left Side) -->
-        <div class="p-6xl px-5 pt-5 pb-2 md:w-2/3">
+        <div class="px-5xl pt-6xl pb-md md:w-2/3">
            <!-- Header -->
      
         <div class="flex items-center justify-between">
@@ -25,7 +25,7 @@
           >
             <img :src="ArrowLeftIcon" alt="Previous" >
           </button>
-          <h2 class="label_1_semibold primary_text_color">{{ monthYearLabel }}</h2>
+          <h2 class="label_1_medium primary_text_color">{{ monthYearLabel }}</h2>
           <button
             @click="nextMonth"
             aria-label="Next month"
@@ -39,27 +39,27 @@
             <div
               v-for="day in weekDays"
               :key="day"
-              class="body_3_medium seconary_title_text_color text-center"
+              class="body_3_medium text-center"
             >
               {{ day }}
             </div>
           </div>
-         <div class="block h-[1px] w-full hr_calendar_bg mt-xl"></div>
+         <div class="block h-[1px] w-full bg-black-25 mt-6xl"></div>
           <!-- Calendar Grid -->
-          <div class="grid grid-cols-7 gap-1 mt-xs">
+          <div class="grid grid-cols-7 gap-1 mt-6xl">
             <div
               v-for="date in calendarDays"
               :key="date.key"
               @click="!date.isEmpty && date.isCurrentMonth && !date.isPast ? selectDate(date) : null"
               @mouseenter="!date.isEmpty && date.isCurrentMonth && !date.isPast ? hoveredDate = date.fullDate : null"
               @mouseleave="hoveredDate = null"
-              class="aspect-square flex items-center justify-center rounded-md transition-colors label_2_medium"
+              class="aspect-square flex items-center justify-center rounded-md transition-colors label_2_medium "
               :class="[
                 date.isEmpty ? '' : 
-                date.isPast ? 'disable_text_color cursor-not-allowed' :
-                date.isCurrentMonth ? 'primary_text_color cursor-pointer' : 'disable_text_color cursor-not-allowed',
-                !date.isEmpty && date.isCurrentMonth && !date.isPast && isDateSelected(date.fullDate) ? 'bg_brand_color text-white' : '',
-                !date.isEmpty && date.isCurrentMonth && !date.isPast && !isDateSelected(date.fullDate) && isDateHovered(date.fullDate) ? 'secondary_bg_color' : '',
+                date.isPast ? 'text-black-50 cursor-not-allowed' :
+                date.isCurrentMonth ? 'primary_text_color cursor-pointer hover:bg-gray-25' : 'text-black-50 cursor-not-allowed',
+                !date.isEmpty && date.isCurrentMonth && !date.isPast && isDateSelected(date.fullDate) ? 'bg-black-600 text-white hover:bg-black-600' : '',
+                !date.isEmpty && date.isCurrentMonth && !date.isPast && !isDateSelected(date.fullDate) && isDateHovered(date.fullDate) ? 'bg-gray-25' : '',
                // !date.isEmpty && date.isCurrentMonth && !date.isPast && !isDateSelected(date.fullDate) && !isDateHovered(date.fullDate) ? 'hover:bg-gray-100' : ''
               ]"
             >
@@ -69,23 +69,23 @@
         </div>
 
         <!-- Time Picker (Right Side) for desktop-->
-        <div class=" border-l px-5 pt-5 pb-2 hidden md:block md:w-1/3">
-          <h3 class="label_1_semibold primary_text_color text-center">Choose Time</h3>
+        <div class=" border-l primary_border_color px-5xl pt-6xl pb-md hidden md:block md:w-1/3">
+          <h3 class="label_2_medium primary_text_color text-center">Choose Time</h3>
           
           <!-- Time Slots List -->
-          <div class=" md:max-h-[330px]  lg:max-h-[280px] md:overflow-y-auto space-y-1 mt-5xl custom-scrollbar-calendar">
+          <div class=" md:max-h-[330px]  lg:max-h-[280px] md:overflow-y-auto mt-5xl custom-scrollbar-calendar">
             <div
               v-for="time in timeSlots"
               :key="time.value"
               @click="!isTimePast(time.value) ? selectTime(time) : null"
               @mouseenter="!isTimePast(time.value) ? hoveredTime = time.value : null"
               @mouseleave="hoveredTime = null"
-              class="p-xlp rounded-lg transition-colors label_2_semibold text-center"
+              class="py-xl px-6xl mt-xs rounded-lg transition-colors body_3_medium text-center"
               :class="[
-                isTimePast(time.value) ? 'disable_text_color cursor-not-allowed bg_primary_color' : 'cursor-pointer',
-                !isTimePast(time.value) && isTimeSelected(time.value) ? 'bg_brand_color text-white' : '',
-                !isTimePast(time.value) && !isTimeSelected(time.value) && isTimeHovered(time.value) ? 'secondary_bg_color primary_hover_text_color' : '',
-                !isTimePast(time.value) && !isTimeSelected(time.value) && !isTimeHovered(time.value) ? 'primary_text_color bg_primary_color' : ''
+                isTimePast(time.value) ? 'disable_text_color cursor-not-allowed' : 'cursor-pointer',
+                !isTimePast(time.value) && isTimeSelected(time.value) ? 'bg-black-600 primary_2_text_color' : '',
+                !isTimePast(time.value) && !isTimeSelected(time.value) && isTimeHovered(time.value) ? 'bg-gray-25' : '',
+                !isTimePast(time.value) && !isTimeSelected(time.value) && !isTimeHovered(time.value) ? 'primary_text_color ' : ''
               ]"
             >
               {{ time.label }}
@@ -94,18 +94,18 @@
         </div>
       </div>
 
-       <div class="block h-[1px] w-full hr_calendar_bg"></div>
+       <div class="block h-[1px] w-full bg-gray-25"></div>
       <!-- Time Zone Section -->
-          <div class="p-6xl ">
+          <div class="p-5xl ">
             <label class="label_2_medium primary_text_color">Time zone</label>
-            <div class="relative mt-xl">
+            <div class="relative mt-md">
               <div class="absolute left-3 top-1/2 -translate-y-1/2">
                 <img :src="TimeZoneIcon" alt="">
               </div>
               <input
                 :value="timeZone"
                 type="text"
-                class="w-full rounded-lg primary_border_color p-xlp pl-10 label_2_medium primary_text_color bg_secondary_color"
+                class="w-full rounded-lg regular_border_color p-3xl pl-10 label_2_medium primary_text_color bg_secondary_color"
                 placeholder="Select time zone"
                 readonly
               />
@@ -113,8 +113,8 @@
           </div>
 
            <!-- Time Picker (Right Side) for mobile -->
-        <div class=" border-l px-5 pb-5 md:pb-2 block md:hidden">
-          <h3 class="label_1_semibold primary_text_color text-center">Choose Time</h3>
+        <div class=" border-l px-5xl pb-5xl md:pb-md block md:hidden">
+          <h3 class="label_3_semibold primary_text_color text-center">Choose Time</h3>
           
           <!-- Time Slots List -->
           <!-- Time Slots List -->
@@ -125,11 +125,11 @@
               @click="!isTimePast(time.value) ? selectTime(time) : null"
               @mouseenter="!isTimePast(time.value) ? hoveredTime = time.value : null"
               @mouseleave="hoveredTime = null"
-              class="p-xlp rounded-lg transition-colors label_2_semibold text-center"
+              class="p-xl rounded-lg transition-colors label_2_semibold text-center"
               :class="[
                 isTimePast(time.value) ? 'disable_text_color cursor-not-allowed bg_primary_color' : 'cursor-pointer',
-                !isTimePast(time.value) && isTimeSelected(time.value) ? 'bg_brand_color text-white' : '',
-                !isTimePast(time.value) && !isTimeSelected(time.value) && isTimeHovered(time.value) ? 'secondary_bg_color primary_hover_text_color' : '',
+                !isTimePast(time.value) && isTimeSelected(time.value) ? 'bg-black-600 primary_2_text_color' : '',
+                !isTimePast(time.value) && !isTimeSelected(time.value) && isTimeHovered(time.value) ? 'bg-gray-25' : '',
                 !isTimePast(time.value) && !isTimeSelected(time.value) && !isTimeHovered(time.value) ? 'primary_text_color bg_primary_color' : ''
               ]"
             >
@@ -139,22 +139,22 @@
         </div>
 
           <!-- Action Buttons -->
-          <div class="flex items-center justify-end gap-3 px-5 pb-5 ">
+          <div class="flex items-center justify-end gap-xl px-5xl pb-5xl">
             <button
               @click="clearSelection"
-              class="rounded-lg bg_primary_color p-md label_2_semibold primary_text_colorw-24 hidden md:block"
+              class="rounded-lg bg-gray-25 p-xl label_1_semibold primary_text_colorw-24 hidden md:block"
             >
               Clear
             </button>
             <button
               @click="handleClose"
-              class="rounded-lg bg_primary_color p-md label_2_semibold primary_text_color w-24 block md:hidden"
+              class="rounded-lg bg-gray-25 p-xl label_1_semibold primary_text_color w-24 block md:hidden"
             >
               Close
             </button>
             <button
               @click="schedule"
-              class="rounded-lg bg_brand_color text-white label_2_semibold p-md w-24"
+              class="rounded-lg bg-black-600 primary_2_text_color label_1_semibold p-xl w-24"
             >
               Schedule
             </button>

@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['flex items-start gap-4 rounded-2xl bg_secondary_color p-6xl primary_border_color shadow-sm flex-shrink-0 md:w-auto', mobileWdth]"
+    :class="['flex items-start gap-5xl rounded-2xl bg_secondary_color p-5xl primary_border_color shadow-sm flex-shrink-0 md:w-auto', mobileWdth]"
   >
     <!-- Content -->
     <div class="flex flex-col">
@@ -8,15 +8,15 @@
              <img :src="icon" alt=""> 
         </div>
       
-      <span class="label_1_medium mt-md sub_text_color">
+      <span class="bady_2_medium mt-md secondary_text_color">
         {{ title }}
       </span>
 
-      <span class=" heading_h5_bold primary_text_color">
+      <span class=" heading_h5_bold primary_text_color mt-xs">
         {{ animatedValue }}
       </span>
 
-      <span class="mt-xs label_3_regular secondary_text_color">
+      <span class="mt-md bady_4_regular secondary_text_color">
         {{ description }}
       </span>
     </div>

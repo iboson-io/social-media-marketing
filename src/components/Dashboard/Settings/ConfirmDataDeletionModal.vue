@@ -57,7 +57,7 @@
         
         <div class="block h-[2px] w-full hr_linr_bg mt-5xl"></div>
         <!-- Warning Message -->
-        <div class="pending_text_style rounded-lg flex items-center gap-3 mt-5xl p-6xl">
+        <div class="border border-warning-200 bg-warning-50 text-warning-500 rounded-lg flex items-center gap-3 mt-5xl p-6xl">
           <img :src="WarningIconOrange" alt="">
           <p class="paragraph_p5_medium primary_text_color">
             Note: All your account data will be deleted permanently. This action cannot be undone.

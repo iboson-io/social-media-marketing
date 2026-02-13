@@ -1,33 +1,32 @@
 <template>
-  <div class="flex flex-col h-full bg-gradient-to-br from-[#F6F3FF] to-white">
+  <div class="flex flex-col h-full bg_primary_color">
     <!-- Chat Messages Container -->
-    <div class="flex-1 overflow-y-auto px-4 md:px-6 py-6  custom_scrollbar">
-      <div class="mx-auto max-w-3xl space-y-6">
+    <div class="flex-1 overflow-y-auto px-3xl md:px-6xl pt-12xl pb-6xl  custom_scrollbar">
+      <div class="mx-auto max-w-3xl space-y-7">
         <!-- Message Pair -->
         <div
           v-for="(message, index) in messages"
           :key="index"
-          class="space-y-4"
         >
           <!-- User Message Bubble (Right Aligned) - Only show if there's user text -->
-          <div v-if="message.text" class="flex flex-row justify-end gap-3 items-center group">
+          <div v-if="message.text" class="flex flex-row justify-end gap-xl items-center group">
             <!-- Copy and Edit Buttons (Show on Hover, Hide when editing) -->
-            <div v-if="editingIndex !== index" class="flex gap-3  opacity-0 group-hover:opacity-100 transition-opacity border_transparent">
+            <div v-if="editingIndex !== index" class="flex gap-xl  opacity-0 group-hover:opacity-100 transition-opacity border_transparent">
               <!-- Copy Button with Tooltip -->
               <div class="relative group/button">
                 <button
                   @click="handleCopy(message.text)"
-                  class="flex items-center gap-1.5 rounded-lg bg_secondary_color p-2 "
+                  class="flex items-center gap-sm rounded-lg bg_secondary_color p-md "
                 >
                   <img :src="TextCopyIcon" alt="Copy" />
                 </button>
                 <!-- Speech Bubble Tooltip -->
-                <div class=" absolute bottom-full left-1/2 -translate-x-1/2 mb-2 invisible group-hover/button:visible transition-all duration-200 pointer-events-none whitespace-nowrap z-[1000] ">
-                  <div class="relative bg-black-400 text-white label_2_medium rounded-lg px-2 py-2  outline-none ring-0">
+                <div class=" absolute bottom-full left-1/2 -translate-x-1/2 mb-md invisible group-hover/button:visible transition-all duration-200 pointer-events-none whitespace-nowrap z-[1000] ">
+                  <div class="relative bg-black-400 primary_2_text_color label_3_semibold rounded-lg px-md py-xl  outline-none ring-0">
                     Copy
                     <!-- Speech Bubble Tail -->
                     <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
-                      <div class="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[#38414A]"></div>
+                      <div class="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-black-400"></div>
                     </div>
                   </div>
                 </div>
@@ -37,17 +36,17 @@
               <div class="relative group/button">
                 <button
                   @click="handleEdit(index)"
-                  class="flex items-center gap-1.5 rounded-lg bg_secondary_color p-2 "
+                  class="flex items-center gap-sm rounded-lg bg_secondary_color p-md "
                 >
                   <img :src="ImageEditIcon" alt="Edit"  />
                 </button>
                 <!-- Speech Bubble Tooltip -->
-                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 invisible group-hover/button:visible transition-all duration-200 pointer-events-none whitespace-nowrap z-[1000]">
-                  <div class="relative bg-black-400 text-white label_2_medium rounded-lg px-2 py-2 outline-none ring-0">
+                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-md invisible group-hover/button:visible transition-all duration-200 pointer-events-none whitespace-nowrap z-[1000]">
+                  <div class="relative bg-black-400 primary_2_text_color label_3_semibold rounded-lg px-md py-xl outline-none ring-0">
                     Edit
                     <!-- Speech Bubble Tail -->
                     <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
-                      <div class="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[#38414A]"></div>
+                      <div class="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-black-400"></div>
                     </div>
                   </div>
                 </div>
@@ -56,30 +55,30 @@
             
             <!-- Message Bubble -->
             <div
-              class="relative max-w-[80%]  bg_secondary_color p-3.5 rounded-[18px] profile_border"
+              class="relative max-w-[80%]  bg_secondary_color p-3xl rounded-2xl border primary_border_color"
               :class="editingIndex === index ? 'w-full' : ''"
             >
               <!-- Edit Mode -->
-              <div v-if="editingIndex === index" class="flex flex-col gap-2">
+              <div v-if="editingIndex === index" class="flex flex-col gap-md">
                 <textarea
                   v-model="editingText"
                   @keydown.enter.exact.prevent="saveEdit(index)"
                   @keydown.escape="cancelEdit"
                   @keydown.enter.shift.exact="editingText += '\n'"
-                  class="w-full border-none outline-none Body_2_Medium primary_text_color resize-none"
+                  class="w-full border-none outline-none Body_2_regular primary_text_color resize-none"
                   rows="3"
                   :ref="el => { if (el && editingIndex === index) editTextareaRef = el }"
                 ></textarea>
-                <div class="flex gap-2 justify-end">
+                <div class="flex gap-md justify-end">
                   <button
                     @click="cancelEdit"
-                    class="px-3 py-1.5 rounded-md label_2_medium bg_primary_color primary_border"
+                    class="px-md py-sm rounded-md label_2_medium bg_primary_color"
                   >
                     Cancel
                   </button>
                   <button
                     @click="saveEdit(index)"
-                    class="px-3 py-1.5 rounded-md label_2_medium primary_add_button"
+                    class="px-md py-sm rounded-md label_2_medium primary_add_button"
                   >
                     Sent
                   </button>
@@ -102,18 +101,18 @@
             <!-- AI Message -->
             <div class="flex-1">
               <!-- Loading State with Animated Dots -->
-              <div v-if="message.isLoading" class="rounded-2xl lg:px-4 py-1">
-               <p class="gradient_text_color body_2_medium"> Got it, give me a moment<span class="loading-dots"></span></p>
+              <div v-if="message.isLoading" class="rounded-2xl lg:px-3xl py-xs">
+               <p class="primary_text_color body_3_regular"> Got it, give me a moment<span class="loading-dots"></span></p>
               </div>
               <!-- AI Response Content -->
               <div v-else-if="message.aiResponse">
-                <div class="Body_2_regular primary_text_color lg:px-4 py-1" v-html="message.aiResponse"></div>
+                <div class="Body_2_regular primary_text_color lg:px-3xl pb-md pt-3xl" v-html="message.aiResponse"></div>
                 <!-- Action Icons Row -->
-                <div class="flex items-center gap-3 px-4 py-2">
+                <div class="flex items-center gap-sm px-3xl mt-4xl">
                   <!-- Copy Icon -->
                   <button
                     @click="handleCopyAIResponse(message.aiResponse, index)"
-                    class="flex items-center justify-center w-4 h-5  cursor-pointer"
+                    class="flex items-center justify-center w-4xl h-4xl  cursor-pointer"
                     title="Copy"
                   >
                     <img :src="TextCopyIcon" alt="Copy" />
@@ -122,7 +121,7 @@
                   <!-- Like (Thumbs Up) Icon -->
                   <button
                     @click="handleLike(index)"
-                    class="flex items-center justify-center w-5 h-5 cursor-pointer"
+                    class="flex items-center justify-center w-4xl h-4xl  cursor-pointer"
                     title="Like"
                   >
                     <svg width="60" height="60" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +132,7 @@
                   <!-- Dislike (Thumbs Down) Icon -->
                   <button
                     @click="handleDislike(index)"
-                    class="flex items-center justify-center w-5 h-5 transition-colors cursor-pointer"
+                    class="flex items-center justify-center w-4xl h-4xl  transition-colors cursor-pointer"
                     title="Dislike"
                   >
                     <svg width="60" height="60" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +144,7 @@
                   <!-- Refresh/Redo Icon -->
                   <button
                     @click="handleRefresh(index)"
-                    class="flex items-center justify-center w-4 h-5 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+                    class="flex items-center justify-center w-4xl h-4xl  text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
                     title="Refresh"
                   >
                     <img :src="RestartIcon" alt="">
@@ -162,14 +161,14 @@
 
     <!-- Prompt Box at Bottom (Fixed) -->
     <div 
-      class="fixed bottom-0 left-0 right-0 transition-all duration-300 ease-in-out bg-gradient-to-r from-[#f9f7ff] to-[#fefdff] px-4 md:px-6"
+      class="fixed bottom-0 left-0 right-0 transition-all duration-300 ease-in-out bg_primary_color px-4 md:px-6"
       :class="isSidebarCollapsed ? 'lg:left-16' : 'lg:left-64'"
     >
       <div class="mx-auto max-w-3xl">
         <PromptBox @send-message="handleNewMessage" />
         
         <!-- Disclaimer -->
-        <div class="text-center p-6xl">
+        <div class="text-center p-xl">
           <p class="body_4_regular tertiary_text_color">
             Genius AI can make mistakes. Please check for accuracy.
           </p>

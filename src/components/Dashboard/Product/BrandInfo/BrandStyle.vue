@@ -18,7 +18,7 @@
         <!-- Checkmark (top-right) -->
         <div
           v-if="selectedVoice === 'friendly'"
-          class="absolute top-3 right-3 h-5 w-5 rounded-full bg_brand_color flex items-center justify-center"
+          class="absolute top-3 right-3 h-5 w-5 rounded-full bg-black-600 flex items-center justify-center"
         >
           <svg
             width="12"
@@ -66,7 +66,7 @@
         <!-- Checkmark (top-right) -->
         <div
           v-if="selectedVoice === 'professional'"
-          class="absolute top-3 right-3 h-5 w-5 rounded-full bg_brand_color flex items-center justify-center"
+          class="absolute top-3 right-3 h-5 w-5 rounded-full bg-black-600 flex items-center justify-center"
         >
           <svg
             width="12"
@@ -114,7 +114,7 @@
         <!-- Checkmark (top-right) -->
         <div
           v-if="selectedVoice === 'playful'"
-          class="absolute top-3 right-3 h-5 w-5 rounded-full bg_brand_color flex items-center justify-center"
+          class="absolute top-3 right-3 h-5 w-5 rounded-full bg-black-600 flex items-center justify-center"
         >
           <svg
             width="12"
@@ -162,7 +162,7 @@
         <!-- Checkmark (top-right) -->
         <div
           v-if="selectedVoice === 'calm'"
-          class="absolute top-3 right-3 h-5 w-5 rounded-full bg_brand_color flex items-center justify-center"
+          class="absolute top-3 right-3 h-5 w-5 rounded-full bg-black-600 flex items-center justify-center"
         >
           <svg
             width="12"

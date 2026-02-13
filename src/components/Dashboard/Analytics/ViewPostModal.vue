@@ -11,30 +11,38 @@
       @click.stop
     >
       <!-- Header -->
-      <div class="sticky top-0 bg_secondary_color border-b  px-6 py-4 flex  z-10">
+      <div class="sticky top-0 bg_primary_color  px-6xl py-6xl flex  z-10">
         <h2 class="heading_h6_semibold primary_text_color">View post</h2>
         <button
           @click="$emit('close')"
-          class="absolute right-6 primary_text_color leading-none"
+          class="absolute right-6 primary_text_color leading-none p-xl bg-gray-25 rounded-lg"
         >
-          ✕
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 1L1 9M1 1L9 9" stroke="#28293D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
         </button>
       </div>
 
       <!-- Content -->
-      <div class="p-6 bg_primary_color">
+      <div class="pb-6xl px-6xl bg_primary_color">
         <!-- Performance Banner -->
-        <div class="bg_secondary_color rounded-2xl secondary_border_color px-4 py-3 flex items-center justify-center">
-          <img :src="LogoImage" alt="" class="h-7 ">
-          <span class="label_1_regular gradient_text_color">
-            This post performed 38% better than your average image post.
-          </span>
+        <div 
+          class="rounded-2xl p-[1px]"
+          style="background: linear-gradient(124.88deg, #9966FF 18.51%, #0073E6 38.28%, #FAB000 57.61%, #15BE53 76.05%);"
+        >
+          <div class="bg_secondary_color rounded-2xl px-xl py-3xl flex items-center justify-center">
+            <img :src="LogoImage" alt="" class="h-7 ">
+            <span class="label_2_semibold primary_text_color">
+              This post performed 38% better than your average image post.
+            </span>
+          </div>
         </div>
-      <div class="bg_secondary_color p-6xl rounded-2xl mt-5xl">
+      <div class="bg_secondary_color p-5xl rounded-2xl mt-6xl">
         <!-- Status and Post Type -->
-        <div class="flex justify-between gap-3 justify-center">
+        <div class="flex justify-between gap-3xl justify-center">
           <span
-            class="rounded-lg px-3 py-1.5 paragraph_p5_regular flex items-center gap-2 w-36 md:min-w-56"
+            class="rounded-lg px-md py-xxl label_2_semibold flex items-center gap-xs w-36 md:min-w-56"
             :class="statusClass(postData?.status)"
           >
             <img :src="PublishIcon" alt="">
@@ -43,7 +51,7 @@
           <div class="relative platform-dropdown-container">
             <button
               @click.stop="togglePlatformDropdown"
-              class="flex items-center gap-6 md:gap-2 paragraph_p5_regular primary_text_color primary_border_color p-1"
+              class="flex items-center gap-6xl md:gap-md px-md py-xxl label_2_semibold primary_text_color primary_border_color rounded-lg"
             >
               <img :src="PostFilter" alt="">
               <span class="hidden md:block">{{ getPostType() }}</span>
@@ -53,14 +61,14 @@
             <!-- Platform Dropdown -->
             <div
               v-if="showPlatformDropdown"
-              class="absolute right-0 md:left-0 top-8 z-50 min-w-[180px] rounded-lg bg_secondary_color shadow-lg primary_border_color py-2"
+              class="absolute right-0 md:left-0 top-8 z-50 min-w-[180px] rounded-lg bg_secondary_color shadow-lg primary_border_color py-md"
             >
               <div
                 v-for="platform in availablePlatforms"
                 :key="platform"
                 @click.stop="selectPlatform(platform)"
-                class="px-4 py-2 cursor-pointer paragraph_p5_regular"
-                :class="selectedPlatform === platform ? 'paragraph_p5_regular' : ''"
+                class="px-3xl py-xl hover:bg-gray-25 cursor-pointer body_3_medium"
+                :class="selectedPlatform === platform ? 'body_3_medium' : ''"
               >
                 {{ platform }} post (4:5)
               </div>
@@ -69,7 +77,7 @@
         </div>
 
         <!-- Post Image -->
-        <div class="rounded-lg overflow-hidden bg_secondary_color flex justify-center mt-xl">
+        <div class="rounded-lg overflow-hidden bg_secondary_color flex justify-center mt-lg">
           <img
             :src="postData?.image"
             :alt="postData?.title"
@@ -78,19 +86,19 @@
         </div>
 
         <!-- Caption -->
-        <div class="mt-xs">
+        <div class="mt-xl">
           <p class="body_1_regular primary_text_color mt-xl" v-html="getFullCaption()">
           </p>
         </div>
-         <div class="block h-[2px] w-full bg_primary_color mt-5xl"></div>
+         <div class="block h-[1px] w-full bg-gray-25 mt-5xl"></div>
         <!-- Date/Time -->
-         <p class="label_2_semibold primary_text_color mt-5xl">Date/Time</p>
-        <div class="body_1_regular primary_text_color mt-xs">
+         <p class="label_2_semibold secondary_text_color mt-5xl">Date/Time</p>
+        <div class="body_1_regular primary_text_color mt-xxs">
           {{ formatDateTime() }}
         </div>
       </div>
         <!-- Metrics Grid -->
-        <div class=" flex flex-col justify-center items-center md:grid md:grid-cols-2 lg:grid grid-cols-1 gap-4 lg:grid-cols-2 mt-5xl">
+        <div class=" flex flex-col justify-center items-center md:grid md:grid-cols-2 lg:grid grid-cols-1 gap-5xl lg:grid-cols-2 mt-6xl">
 
         <AnalyticsStatCard
           v-for="(stat, index) in stats"
@@ -102,7 +110,7 @@
         <!-- Repost Button -->
         <button
           @click="handleRepost"
-          class="w-full primary_button flex items-center justify-center gap-2  rounded-lg mt-5xl"
+          class="w-full primary_button label_1_semibold flex items-center justify-center gap-md  rounded-lg mt-5xl"
         >
           <img :src="RepostBottonIcon" alt="">
           Repost
@@ -147,10 +155,10 @@ const showPlatformDropdown = ref(false);
 const selectedPlatform = ref(null);
 
 const statusClass = (status) => {
-  if (status === 'Published') return 'publish_text_style';
-  if (status === 'Pending') return 'pending_text_style';
-  if (status === 'Approved') return 'approve_text_style';
-  return 'publish_text_style';
+  if (status === 'Published') return ' bg-blue-25 text-blue-200';
+  if (status === 'Pending') return 'bg-warning-50 text-warning-500';
+  if (status === 'Approved') return 'bg-success-50 text-success-800';
+  return 'bg-blue-25 text-blue-200';
 };
 
 const availablePlatforms = computed(() => {

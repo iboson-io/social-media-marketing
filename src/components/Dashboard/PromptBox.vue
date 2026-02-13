@@ -1,22 +1,19 @@
 <template>
 
   <div
-    :class="[
-      'mx-auto mt-10 max-w-3xl rounded-xl p-[1px] shadow-md shadow-[#c0aef7]',
-      isInputFocused ? 'gradient-border-static' : 'gradient-border-animated'
-    ]"
+    class="mx-auto mt-10 max-w-3xl block button-gradient"
   >
 
    
 
-    <div class="rounded-xl bg_secondary_color p-4">
+    <div class="rounded-xl bg_secondary_color p-5xl">
       <!-- Prompt Input -->
       <input
         v-model="prompt"
         type="text"
         placeholder="What's on your mind?"
-        class="w-full border-none outline-none Body_2_Medium secondary_text_color"
-        :class="prompt ? 'primary_text_color' : ''"
+        class="w-full border-none outline-none label_1_regular"
+        :class="prompt ? 'primary_text_color' : 'secondary_text_color'"
         @keyup.enter="handleSend"
         @focus="isInputFocused = true"
         @blur="isInputFocused = false"
@@ -29,7 +26,7 @@
           <div class="relative" ref="productsDropdownRef">
             <button
               @click="toggleProducts"
-              class="flex items-center gap-2 rounded-md border profile_border px-3 py-1 label_2_medium text-[#596773]"
+              class="flex items-center gap-md rounded-lg border primary_border_color px-xl py-xs label_2_medium primary_text_color"
             >
               <img :src="ProductIcon" alt="" />
 
@@ -46,15 +43,15 @@
               v-if="showProducts"
               ref="productsDropdownMenuRef"
               :class="[
-                'absolute left-0 z-10 w-40 rounded-md profile_border bg_secondary_color shadow max-h-48 overflow-y-auto',
-                productsDropdownPosition === 'above' ? 'bottom-full mb-1' : 'top-9'
+                'absolute left-0 z-10 w-40 rounded-md border primary_border_color bg_secondary_color max-h-48 overflow-y-auto',
+                productsDropdownPosition === 'above' ? 'bottom-full mb-xs' : 'top-9'
               ]"
             >
               <div
                 v-for="item in products"
                 :key="item"
                 @click="selectProduct(item)"
-                class="cursor-pointer px-3 py-2 label_2_medium text-[#596773] hover:bg-gray-50"
+                class="cursor-pointer px-xl py-md label_2_medium secondary_text_color hover:bg-gray-50"
               >
                 {{ item }}
               </div>
@@ -63,7 +60,7 @@
 
           <!-- Add Files -->
           <label
-            class="flex cursor-pointer items-center gap-2 rounded-md profile_border px-3 py-1 label_2_medium text-[#596773]"
+            class="flex cursor-pointer items-center gap-md rounded-md border primary_border_color  px-xl py-xs label_2_medium primary_text_color"
           >
             <img :src="AttachmentIcon" alt="" />
 
@@ -84,7 +81,7 @@
           <div class="relative" ref="modelsDropdownRef">
             <button
               @click="toggleModels"
-              class="flex items-center gap-2 rounded-md profile_border bg_secondary_color px-3 py-1 label_2_medium text-[#596773]"
+              class="flex items-center gap-md rounded-md border primary_border_color bg_secondary_color  px-xl py-xs label_2_medium primary_text_color"
             >
               <img :src="GeminiIcon" alt="" />
 
@@ -101,15 +98,15 @@
               v-if="showModels"
               ref="modelsDropdownMenuRef"
               :class="[
-                'absolute left-0 z-10 w-40 rounded-md border profile_border bg_secondary_color shadow max-h-48 overflow-y-auto',
-                modelsDropdownPosition === 'above' ? 'bottom-full mb-1' : 'top-9'
+                'absolute left-0 z-10 w-40 rounded-md  border primary_border_color bg_secondary_color shadow max-h-48 overflow-y-auto',
+                modelsDropdownPosition === 'above' ? 'bottom-full mb-xs' : 'top-9'
               ]"
             >
               <div
                 v-for="model in models"
                 :key="model"
                 @click="selectModel(model)"
-                class="cursor-pointer px-3 py-2 label_2_medium text-[#596773] hover:bg-gray-50"
+                class="cursor-pointer  px-xl py-xs label_2_medium secondary_text_color hover:bg-gray-50"
               >
                 {{ model }}
               </div>
@@ -129,7 +126,7 @@
         <span
           v-for="file in files"
           :key="file.name"
-          class="rounded bg-gray-100 px-2 py-1 label_2_medium text-[#596773]"
+          class="rounded bg_primary_color px-md py-xs label_2_medium secondary_text_color"
         >
           {{ file.name }}
         </span>
@@ -328,32 +325,4 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-  /* border animation styles */
-.gradient-border-animated {
-  background: linear-gradient(
-    90deg,
-    #CD519D 0%,
-    #7950F2 20%,
-    #CD519D 40%,
-    #7950F2 60%,
-    #CD519D 80%,
-    #7950F2 100%
-  );
-  background-size: 200% 100%;
-  animation: gradient-run 1s linear infinite;
-}
-
-.gradient-border-static {
-  background: linear-gradient(to right, #CD519D, #7950F2);
-  animation: none;
-}
-
-@keyframes gradient-run {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 200% 0%;
-  }
-}
 </style>

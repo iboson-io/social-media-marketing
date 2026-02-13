@@ -131,7 +131,7 @@
             <input
               type="checkbox"
               v-model="form.terms"
-              class="accent-gray-25 mt-xxs border-gray-25 scale-125 checked:bg-gray-25 checked:border-gray-25"
+              class="accent-gray-25 mt-xxs primary_border_color scale-125 checked:bg-gray-25 checked:primary_border_color"
             />
             <span class="secondary_text_color">
               I agree to the

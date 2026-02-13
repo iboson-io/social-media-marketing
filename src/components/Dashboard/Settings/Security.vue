@@ -94,11 +94,11 @@
       <h3 class="label_1_semibold primary_text_color">Active Sessions</h3>
       <div class="space-y-3">
         <!-- Session 1 -->
-        <div class="rounded-lg bg_secondary_color p-3 mt-5xl p-6xl secondary_button_border md:w-1/2">
+        <div class="rounded-lg bg_secondary_color p-3 mt-5xl p-6xl primary_border_color md:w-1/2">
           <p class="label_2_medium primary_text_color">Chrome on Windows – Last active 12 mins ago</p>
         </div>
         <!-- Session 2 -->
-        <div class="rounded-lg bg_secondary_color p-3 mt-5xl p-6xl secondary_button_border md:w-1/2">
+        <div class="rounded-lg bg_secondary_color p-3 mt-5xl p-6xl primary_border_color md:w-1/2">
           <p class="label_2_medium primary_text_color">Safari on iPhone – Active now</p>
         </div>
       </div>

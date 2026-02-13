@@ -14,7 +14,7 @@
         <!-- Plan Info -->
         <div>
           <p class="label_2_medium primary_text_color">Monthly plan</p>
-          <p class="heading_h6_semibold mt-xl seconary_title_text_color">$20 Monthly</p>
+          <p class="heading_h6_semibold mt-xl body_3_medium">$20 Monthly</p>
 
           <div class="mt-xl flex items-center gap-3">
             <button
@@ -26,7 +26,7 @@
             <div class="relative dropdown-container">
               <button
                 @click.stop="toggleDropdown"
-                class="h-9 w-9 rounded-lg profile_border text-black-50 flex items-center justify-center"
+                class="h-9 w-9 rounded-lg border primary_border_color text-black-50 flex items-center justify-center"
               >
                 ⋯
               </button>
@@ -55,10 +55,10 @@
 
           <div class="w-[100%]">
           <p class="label_2_medium primary_text_color">Renew at</p>
-          <p class="heading_h6_semibold mt-xl seconary_title_text_color">Oct 26, 2025</p>
+          <p class="heading_h6_semibold mt-xl body_3_medium">Oct 26, 2025</p>
 
           <button
-            class="mt-xl rounded-lg p-md secondary_bg_color w-4/5 lg:button_width"
+            class="mt-xl rounded-lg p-md bg-blue-25 w-4/5 lg:button_width"
           >
             Refill Credits
           </button>

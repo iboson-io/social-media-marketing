@@ -76,13 +76,13 @@
       >
         <img :src="notification.icon" class="h-5 w-5" />
 
-        <span v-if="!isCollapsed" class="label_1_medium primary_text_color">
+        <span v-if="!isCollapsed" class="label_2_semibold primary_text_color">
           {{ notification.label }}
         </span>
 
         <div
           v-if="isCollapsed"
-          class="pointer-events-none absolute left-14 whitespace-nowrap rounded-md bg-gray-900 px-3 py-1 text-xs text-white opacity-0 transition group-hover:opacity-100"
+          class="pointer-events-none absolute left-14 whitespace-nowrap rounded-md bg-gray-900 px-md py-1 text-xs primary_2_text_color opacity-0 transition group-hover:opacity-100"
         >
           {{ notification.label }}
         </div>

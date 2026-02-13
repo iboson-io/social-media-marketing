@@ -1,8 +1,8 @@
 <template>
   <aside
-    class="fixed left-0 top-0 lg:top-[-20px] h-screen flex flex-col  bg_secondary_color transition-all duration-300 z-10"
-    :class="isCollapsed ? 'w-20 px-3xl' : 'w-60 pl-4xl pr-xs'" @click="handleSidebarContainerClick">
-    <div class="flex-1 overflow-y-auto custom_scrollbar ">
+    class="fixed left-0 top-0 lg:top-[-20px] h-screen flex flex-col  bg_secondary_color transition-all duration-300 z-10 border primary_border_color"
+    :class="isCollapsed ? 'w-20 px-3xl' : 'w-64 pl-4xl pr-xs'" @click="handleSidebarContainerClick">
+    <div class="flex-1 overflow-y-auto custom_scrollbar pr-3xl">
       <!-- Logo + Toggle -->
       <div class="relative group flex items-center pt-6xl lg:pt-11xl" 
         :class="isCollapsed ? 'justify-center':'justify-between' "

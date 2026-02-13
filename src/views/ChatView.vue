@@ -2,34 +2,36 @@
   <!-- Initial View (No Messages) -->
   <main
     v-if="!hasMessages"
-    class="flex items-center flex-1 bg-gradient-to-br from-[#F6F3FF] to-white px-6 py-10"
+    class="flex items-center flex-1 bg_primary_color px-6xl py-10xl"
   >
     <div class="mx-auto max-w-5xl text-center">
       <div
         class="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-tr from-pink-400 via-purple-400 to-indigo-400"
       ></div>
 
-      <h1
-        class="primary_text_color heading_h4_semibold_mobile md:heading_h4_semibold"
+      <h4
+        class="primary_text_color heading_h5_semibold md:heading_h4_semibold"
       >
         Good Afternoon, Cliff
-      </h1>
-      <span class=" heading_h3_semibold gradient_text_color">How can I help your brand today?</span>
+      </h4>
+      <span class=" heading_h4_semibold gradient_text_color">How can I help your brand today?</span>
 
 
 
       <div class="block md:hidden">
-     <p class="caption_2_medium text-start primary_text_color mt-20">
+     <p class="lebel_2_semibold text-start primary_text_color mt-14xl">
       Start with the example below
     </p>
+    <div class="flex gap-md mb-[-2.5em] py-xxl overflow-auto hide-scrollbar">
+    <div class="cursor-pointer px-xl py-xxl gap-xl items-center bg_secondary_color rounded-lg flex shrink-0"> <img :src="HomeIcon" alt="" class="w-6 h-6"><span class="label_2_semibold primary_text_color">Set Up Your Brand</span></div>
+    <div class="cursor-pointer px-xl py-xxl gap-xl items-center bg_secondary_color rounded-lg flex shrink-0"> <img :src="DateIcon" alt="" class="w-6 h-6"><span class="label_2_semibold primary_text_color">Set Up Your Brand</span></div>
+    <div class="cursor-pointer px-xl py-xxl gap-xl items-center bg_secondary_color rounded-lg flex shrink-0"> <img :src="GalleryIcon" alt="" class="w-6 h-6"><span class="label_2_semibold primary_text_color">Set Up Your Brand</span></div>
    </div>
-   <div class="block md:hidden flex text-center justify-center gap-5 mb-[-2.5em] py-3">
-    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_secondary_color rounded-lg">Set Up Your Brand</p>
-    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_secondary_color rounded-lg">Plan Weekly Posts</p>
-    <p class="caption_2_semibold primary_text_color cursor-pointer px-2 py-3 bg_secondary_color rounded-lg">Create Social Posts</p>
    </div>
+ 
       <PromptBox @send-message="handleFirstMessage" />
       <Cards />
+          <p class="body_4_regular secondary_text_color  block lg:hidden absolute left-0 right-0 bottom-7xl">Genius AI can make mistakes. Please check for accuracy.</p>
     </div>
   </main>
 
@@ -42,6 +44,9 @@ import { ref, watch } from "vue";
 import PromptBox from "../components/Dashboard/PromptBox.vue";
 import Cards from "../components/Dashboard/Cards.vue";
 import ChatPage from "../components/Dashboard/Chat/ChatPage.vue";
+import HomeIcon from "../assets/images/HomeIcon.svg"
+import DateIcon from "../assets/images/DateIcon.svg"
+import GalleryIcon from "../assets/images/GalleryIcon.svg"
 
 const props = defineProps({
   resetChat: {

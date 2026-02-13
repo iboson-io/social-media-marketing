@@ -245,10 +245,6 @@
     @apply font-medium text-[1.25em]
   }
 
-  .paragraph_p7_medium {
-    @apply text-[0.75em] text-[#555963] font-medium
-  }
-
   .paragraph_p5_medium {
     @apply text-[0.875em] text-[#22272B] font-medium
   }
@@ -261,46 +257,12 @@
     @apply font-normal text-[1em] text-[#38414A]
   }
 
-  .paragraph_sm {
-    @apply text-[0.625em]
-  }
-
-
-
-  .publish_text_style {
-    @apply text-[#1D7AFC] bg-[#E9F2FF]
-  }
-
-  .pending_text_style {
-    @apply text-[#E56910] bg-[#FFF3EB]
-  }
-
-  .approve_text_style {
-    @apply text-[#22A06B] bg-[#DCFFF1]
-  }
-
   .pending_text_color {
     @apply text-[#E56910]
   }
 
-  .approve_text_color {
-    @apply text-[#22A06B]
-  }
-
   .secondary_text_brand_color {
     @apply text-[#7950F2]
-  }
-
-  .sub_text_color {
-    @apply text-[#596773]
-  }
-
-  .seconary_title_text_color {
-    @apply text-[#15172E]
-  }
-
-  .primary_hover_text_color {
-    @apply text-[#6E5DC6]
   }
 
   .text_color {
@@ -358,13 +320,6 @@
     background: #16172280;
   }
 /* new design system end*/
-  .secondary_bg_color {
-    @apply bg-[#F3F0FF]
-  }
-
-  .bg_brand_color {
-    @apply bg-[#7950F2]
-  }
 
   .bg_bar_color {
     @apply bg-[#845EF7]
@@ -380,18 +335,6 @@
 
   .bg_delete_button {
     @apply bg-[#C9372C]
-  }
-
-  .bg_notification {
-    @apply bg-[#155DFC]
-  }
-
-  .bg_regular_button {
-    @apply bg-[#F3F4F6]
-  }
-
-  .bg_warning_color {
-    @apply bg-[#FFF3EB]
   }
 
   .hr_linr_bg {
@@ -417,7 +360,7 @@
   }
 /* new design system end*/
   .primary_border_color {
-    @apply border border-[#F1F2F4]
+    @apply border border-[#F3F4F5]
   }
 
   .secondary_border_color {
@@ -431,11 +374,6 @@
   .calendar_border_color_only {
     @apply border-[#E9EAEC]
   }
-
-  .secondary_button_border {
-    @apply border border-[#E9EAEC]
-  }
-
   .inputbox_border_color {
     @apply border border-[#B3B9C4]
   }
@@ -448,16 +386,8 @@
     @apply border-t-[#38414A]
   }
 
-  .selected_calendar_border {
-    @apply border border-[#7048E8]
-  }
-
   .profile_tab_border {
     @apply border border-[#E5DBFF]
-  }
-
-  .profile_border {
-    @apply border border-[#DCDFE4]
   }
 
   .upload_box_border {
@@ -479,7 +409,32 @@
   }
 
   .selected_platform_border {
-    @apply border border-[#6E5DC6];
+    position: relative;
+    border: 2px solid transparent;
+  }
+
+  .selected_platform_border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.5rem;
+    padding: 2px;
+    background: linear-gradient(131.96deg, #FAB000 -3.18%, #9966FF 12.33%, #0073E6 85.54%, #15BE53 103.49%);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .selected_platform_border > * {
+    position: relative;
+    z-index: 1;
   }
 
   /* width */
@@ -490,10 +445,6 @@
 
 
   /* --------------------------------------------------------------------------------------- */
-
-  .card {
-    @apply rounded-xl border border-[#F1F2F4] p-5 shadow-sm transition cursor-pointer;
-  }
 
   .icon {
     @apply h-9 w-9;

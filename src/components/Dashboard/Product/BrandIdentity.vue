@@ -5,7 +5,7 @@
       <button
         @click="$emit('update:activeTab', 'product-info')"
         class="flex items-center gap-2 rounded-lg px-4 py-2 flex-shrink-0 label_2_semibold"
-        :class="activeTab === 'product-info' ? 'bg_primary_color primary_text_color' : 'sub_text_color'"
+        :class="activeTab === 'product-info' ? 'bg_primary_color primary_text_color' : 'secondary_text_color'"
       >
         <!-- Document Icon -->
         <img :src="ProductInfoIcon" alt="">
@@ -15,7 +15,7 @@
       <button
         @click="$emit('update:activeTab', 'brand-colors')"
           class="flex items-center gap-2 rounded-lg px-4 py-2 flex-shrink-0 label_2_semibold"
-          :class="activeTab === 'brand-colors' ? 'bg_primary_color primary_text_color' : 'sub_text_color'"
+          :class="activeTab === 'brand-colors' ? 'bg_primary_color primary_text_color' : 'secondary_text_color'"
       >
         <!-- Paint Palette Icon -->
         <img :src="BrandColorIcon" alt="">
@@ -25,7 +25,7 @@
       <button
         @click="$emit('update:activeTab', 'typography')"
         class="flex items-center gap-2 rounded-lg px-4 py-2 flex-shrink-0 label_2_semibold"
-        :class="activeTab === 'typography' ? 'bg_primary_color primary_text_color' : 'sub_text_color'"
+        :class="activeTab === 'typography' ? 'bg_primary_color primary_text_color' : 'secondary_text_color'"
       >
         <!-- Typography Icon (A) -->
         <img :src="TypographyIcon" alt="">
@@ -35,7 +35,7 @@
       <button
         @click="$emit('update:activeTab', 'tone-style')"
         class="flex items-center gap-2 rounded-lg px-4 py-2 flex-shrink-0 label_2_semibold"
-        :class="activeTab === 'tone-style' ? 'bg_primary_color primary_text_color' : 'sub_text_color'"
+        :class="activeTab === 'tone-style' ? 'bg_primary_color primary_text_color' : 'secondary_text_color'"
       >
         <!-- Sparkle/Star Icon -->
         <img :src="StyleIcon" alt="">
@@ -45,7 +45,7 @@
       <button
         @click="$emit('update:activeTab', 'website-assets')"
         class="flex items-center gap-2 rounded-lg px-4 py-2 flex-shrink-0 label_2_semibold"
-        :class="activeTab === 'website-assets' ? 'bg_primary_color primary_text_color' : 'sub_text_color'"
+        :class="activeTab === 'website-assets' ? 'bg_primary_color primary_text_color' : 'secondary_text_color'"
       >
         <!-- Folder Icon -->
         <img :src="FolderIcon" alt="">
