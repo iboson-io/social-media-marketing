@@ -13,26 +13,26 @@
        <img :src="SucessImage" alt="">
 
       <!-- Text Content Section -->
-      <div class="px-6 py-6">
-        <h2 class="label_1_bold primary_text_color">
+      <div class="mt-6xl">
+        <h2 class="heading_h6_semibold primary_text_color">
           Your brand has been created successfully!
         </h2>
-        <p class="label_2_regular secondary_text_color">
+        <p class="label_2_regular primary_text_color">
           You can now start planning posts or generating content.
         </p>
       </div>
 
       <!-- Action Buttons -->
-      <div class="px-6  flex justify-between gap-3">
+      <div class="flex justify-between mt-6xl">
         <button
           @click="handleViewProduct"
-          class=" px-4 py-3 rounded-lg bg_primary_color primary_border_color label_2_semibold primary_text_color"
+          class=" px-3xl py-xl rounded-lg bg-gray-25  label_1_semibold primary_text_color"
         >
           View Product
         </button>
         <button
           @click="handleGoToChat"
-          class=" flex items-center justify-center gap-2 px-4 py-3 rounded-lg primary_button "
+          class=" flex items-center justify-center px-3xl py-xl rounded-lg primary_button label_1_semibold"
         >
           <span>Go to Chat</span>
           <img :src="DoneArrowRight" alt="" class="w-4 h-4">

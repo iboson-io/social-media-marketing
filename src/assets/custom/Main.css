@@ -47,14 +47,6 @@
  /* new design system end*/
 
 
-  .sub_button_semibold {
-    @apply text-[0.875em] font-semibold tracking-[0.16px] text-[#1D2125];
-  }
-
-  .close_button_style {
-    @apply bg-[#DEE4EA] w-5 h-5 rounded-[50%] p-[2px]
-  }
-
   
 
 
@@ -261,10 +253,6 @@
     @apply text-[#E56910]
   }
 
-  .secondary_text_brand_color {
-    @apply text-[#7950F2]
-  }
-
   .text_color {
     @apply text-[#38414A];
   }
@@ -325,16 +313,8 @@
     @apply bg-[#845EF7]
   }
 
-  .bg_toggle_button {
-    @apply bg-[#DCDFE4]
-  }
-
   .bg_button_secondary {
     @apply bg-[#F1F2F9]
-  }
-
-  .bg_delete_button {
-    @apply bg-[#C9372C]
   }
 
   .hr_linr_bg {
@@ -343,10 +323,6 @@
 
   .hr_calendar_bg {
     @apply bg-[#E9EAEC]
-  }
-
-  .bg_toggle_button {
-    @apply bg-[#2ABB7F]
   }
 
 
@@ -374,9 +350,7 @@
   .calendar_border_color_only {
     @apply border-[#E9EAEC]
   }
-  .inputbox_border_color {
-    @apply border border-[#B3B9C4]
-  }
+
 
   .brand_border_color {
     @apply border border-[#6E5DC6]
@@ -390,9 +364,6 @@
     @apply border border-[#E5DBFF]
   }
 
-  .upload_box_border {
-    @apply border-2 border-dashed border-[#758195]
-  }
 
   
 
@@ -405,7 +376,7 @@
   }
 
   .input_box {
-    @apply w-full rounded-md h-[3.125em] focus:outline-none px-xl label_1_medium primary_text_color placeholder:tertiary_text_color;
+    @apply w-full rounded-md focus:outline-none label_1_regular primary_text_color placeholder:tertiary_text_color;
   }
 
   .selected_platform_border {

@@ -1,7 +1,7 @@
 <template>
-  <div class="space-y-6 bg_secondary_color rounded-2xl py-7 px-4 brand_section_height primary_border_color">
+  <div class=" bg_secondary_color rounded-2xl p-6xl brand_section_height primary_border_color">
     <!-- Product name field -->
-    <div class="flex gap-3 flex-col justify-between md:flex-row">
+    <div class="flex flex-col justify-between md:flex-row">
       <label class="label_2_medium primary_text_color w-32 flex-shrink-0 ">
         Product name
       </label>
@@ -11,13 +11,13 @@
           @input="$emit('update:productName', $event.target.value)"
           type="text"
           placeholder="Enter product name"
-          class="input_box w-full inputbox_border_color"
+          class="input_box w-full border border-gray-400 py-xl px-3xl mt-sm md:mt-0"
         />
       </div>
     </div>
 
     <!-- Description field -->
-    <div class="flex gap-3 flex-col justify-between md:flex-row">
+    <div class="flex flex-col justify-between md:flex-row mt-11xl">
       <label class="label_2_medium primary_text_color w-32 flex-shrink-0">
         Description
       </label>
@@ -26,7 +26,7 @@
           :model-value="description"
           @input="$emit('update:description', $event.target.value)"
           placeholder="description...."
-          class="input_box w-full min-h-[120px] resize-y inputbox_border_color"
+          class="input_box w-full min-h-[100px] resize-y border border-gray-400 py-xl px-3xl mt-sm md:mt-0"
           rows="4"
         ></textarea>
       </div>

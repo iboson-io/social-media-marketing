@@ -63,7 +63,7 @@ aside:hover .custom_scrollbar::-webkit-scrollbar-track {
 /* Large screen adjustments */
 @media (min-width: 1024px) {
   .data-privacy-full-height {
-    min-height: calc(100vh - 140px);
+    min-height: calc(100vh - 170px);
   }
 }
 /* Hide text on md screens for product select, show only icon and arrow */

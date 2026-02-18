@@ -7,78 +7,88 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-xl mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
+      class="relative w-full max-w-xl mx-xs bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
       @click.stop
     >
       <!-- Header -->
       <div >
         <div class="flex items-start justify-between">
-          <h2 class="heading_h6_bold">{{ title }}</h2>
+          <h2 class="heading_h6_semibold primary_text_color">{{ title }}</h2>
         </div>
-        <p class="label_1_regular secondary_text_color mt-5xl">
+        <p class="body_3_regular secondary_text_color mt-6xl">
           {{ description }}
         </p>
       </div>
 
       <!-- Content -->
-      <div class="mt-5xl">
+      <div class="mt-6xl">
         <!-- Verification Code Input -->
         <div>
           <label class="label_2_medium primary_text_color block">
             Verification Code:
           </label>
-          <div class="flex gap-2 justify-center mt-xl" ref="inputsContainer">
-            <input
+          <div class="flex gap-xxl justify-center mt-xl" ref="inputsContainer">
+            <div
               v-for="(digit, index) in codeDigits"
               :key="index"
-              v-model="codeDigits[index]"
-              @input="handleCodeInput(index, $event)"
-              @keydown="handleKeyDown(index, $event)"
-              @paste="handlePaste"
-              type="text"
-              maxlength="1"
-              class="w-12 h-14 text-center label_2_semibold primary_text_color inputbox_border_color rounded-lg"
-            />
+              class="relative"
+            >
+              <input
+                v-model="codeDigits[index]"
+                @input="handleCodeInput(index, $event)"
+                @keydown="handleKeyDown(index, $event)"
+                @paste="handlePaste"
+                @focus="focusedInputIndex = index"
+                @blur="focusedInputIndex = -1"
+                type="text"
+                maxlength="1"
+                class="verification-input w-[2.1em] h-[2.1em] text-center text-xl md:text-4xl heading_2_medium primary_text_color border border-black-25 rounded-lg bg_secondary_color focus:outline-none focus:border-gray-50"
+                :class="{ 'has-value': codeDigits[index] !== '' }"
+              />
+              <span
+                v-if="!codeDigits[index] && focusedInputIndex !== index"
+                class="dash-placeholder"
+              >—</span>
+            </div>
           </div>
         </div>
 
         <!-- Timer and Resend -->
-        <div class="flex items-center  mt-5xl gap-3">
+        <div class="flex items-center  mt-6xl gap-xl">
           <div class="label_1_regular primary_text_color">
             Code expires in: <span class="label_1_bold primary_text_color">{{ formattedTime }}</span>
           </div>
           <button
             @click="handleResend"
-            class="label_2_semibold primary_text_color underline"
+            class="body_3_regular primary_text_color underline"
           >
             Resend Code
           </button>
         </div>
         
-        <div class="block h-[2px] w-full hr_linr_bg mt-5xl"></div>
+        <div class="block h-[1px] w-full bg-gray-25 mt-6xl"></div>
         <!-- Warning Message -->
-        <div class="border border-warning-200 bg-warning-50 text-warning-500 rounded-lg flex items-center gap-3 mt-5xl p-6xl">
-          <img :src="WarningIconOrange" alt="">
-          <p class="paragraph_p5_medium primary_text_color">
+        <div class=" bg-warning-50 text-warning-700 rounded-md flex items-start gap-md mt-6xl p-xl">
+          <img :src="WarningIconOrange" alt="" class="mt-xs">
+          <p class="body_3_medium text-warning-700">
             Note: All your account data will be deleted permanently. This action cannot be undone.
           </p>
         </div>
       </div>
 
       <!-- Footer -->
-      <div class="flex gap-5 mt-5xl">
+      <div class="flex gap-10xl mt-6xl">
         <button
           @click="$emit('close')"
           :disabled="isDeleting"
-          class="lg:flex-1 rounded-lg p-3xl bg_button_secondary sub_button_semibold disabled:opacity-50 disabled:cursor-not-allowed"
+          class="lg:flex-1 rounded-lg p-3xl bg-gray-25 label_1_semibold  primary_text_color disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Cancel
         </button>
         <button
           @click="handleDelete"
           :disabled="!isCodeComplete || isDeleting"
-          class="flex-1 rounded-lg text-white sub_button_semibold disabled:opacity-50 disabled:cursor-not-allowed"
-          :class="isCodeComplete ? 'bg_delete_button' : 'bg_delete_button'"
+          class="flex-1 rounded-lg primary_2_text_color label_1_semibold  disabled:opacity-50 disabled:cursor-not-allowed bg-error-600"
         >
           {{ isDeleting ? 'Deleting...' : 'Delete Permanently' }}
         </button>
@@ -116,6 +126,7 @@ const codeDigits = ref(["", "", "", "", "", ""]);
 const timeRemaining = ref(props.initialTime);
 const inputsContainer = ref(null);
 const isDeleting = ref(false);
+const focusedInputIndex = ref(-1);
 let timerInterval = null;
 
 const formattedTime = computed(() => {
@@ -132,9 +143,9 @@ const handleCodeInput = (index, event) => {
   const value = event.target.value.replace(/[^0-9]/g, "");
   codeDigits.value[index] = value;
 
-  // Auto-focus next input
+  // Auto-focus next input when a digit is entered
   if (value && index < 5) {
-    const nextInput = event.target.parentElement.children[index + 1];
+    const nextInput = inputsContainer.value?.querySelectorAll('input')[index + 1];
     if (nextInput) {
       nextInput.focus();
     }
@@ -143,18 +154,30 @@ const handleCodeInput = (index, event) => {
 
 const handleKeyDown = (index, event) => {
   // Handle backspace
-  if (event.key === "Backspace" && !codeDigits.value[index] && index > 0) {
-    const prevInput = event.target.parentElement.children[index - 1];
-    if (prevInput) {
-      prevInput.focus();
-      codeDigits.value[index - 1] = "";
+  if (event.key === "Backspace") {
+    if (codeDigits.value[index]) {
+      // If current input has value, clear it
+      codeDigits.value[index] = "";
+    } else if (index > 0) {
+      // If current input is empty, move to previous and clear it
+      const prevInput = inputsContainer.value?.querySelectorAll('input')[index - 1];
+      if (prevInput) {
+        prevInput.focus();
+        codeDigits.value[index - 1] = "";
+      }
     }
   }
   // Handle arrow keys
   else if (event.key === "ArrowLeft" && index > 0) {
-    event.target.parentElement.children[index - 1].focus();
+    const prevInput = inputsContainer.value?.querySelectorAll('input')[index - 1];
+    if (prevInput) {
+      prevInput.focus();
+    }
   } else if (event.key === "ArrowRight" && index < 5) {
-    event.target.parentElement.children[index + 1].focus();
+    const nextInput = inputsContainer.value?.querySelectorAll('input')[index + 1];
+    if (nextInput) {
+      nextInput.focus();
+    }
   }
 };
 
@@ -172,8 +195,8 @@ const handlePaste = (event) => {
   // Focus the next empty input or the last one
   const nextEmptyIndex = codeDigits.value.findIndex((digit) => digit === "");
   const focusIndex = nextEmptyIndex === -1 ? 5 : Math.min(nextEmptyIndex, 5);
-  const inputs = event.target.parentElement.children;
-  if (inputs[focusIndex]) {
+  const inputs = inputsContainer.value?.querySelectorAll('input');
+  if (inputs && inputs[focusIndex]) {
     inputs[focusIndex].focus();
   }
 };
@@ -266,6 +289,28 @@ input[type="text"]::-webkit-inner-spin-button,
 input[type="text"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.verification-input {
+  position: relative;
+}
+
+.dash-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  color: #9C9DA6;
+  font-size: 1.5rem;
+  line-height: 1;
+  user-select: none;
+  font-weight: 800;
+}
+
+.verification-input.has-value + .dash-placeholder,
+.verification-input:focus + .dash-placeholder {
+  display: none;
 }
 </style>
 

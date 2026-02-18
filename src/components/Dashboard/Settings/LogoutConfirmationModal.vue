@@ -7,39 +7,39 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-xl mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
+      class="relative w-full max-w-xl mx-3xl bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
       @click.stop
     >
       <!-- Header -->
       <div>
         <div class="flex items-start justify-between">
-          <h2 class="heading_h6_bold">{{ title }}</h2>
+          <h2 class="heading_h5_semibold primary_text_color">{{ title }}</h2>
           <button
             @click="$emit('close')"
-            class="bg_primary_color"
+            class="bg-gray-25 p-xl rounded-md hover:bg-black-25"
           >
-            <img :src="CloseIcon" alt="Close">
+            <img :src="BlackCloseIcon" alt="Close">
           </button>
         </div>
-        <div class="mt-5xl">
+        <div class="mt-6xl">
           <p class="label_1_regular secondary_text_color">{{ description }}</p>
-          <p v-if="additionalInfo" class="mt-5xl label_1_medium primary_text_color">
+          <p v-if="additionalInfo" class="mt-6xl label_1_regular secondary_text_color">
             {{ additionalInfo }}
           </p>
         </div>
       </div>
-    <div class="block h-[2px] w-full hr_linr_bg mt-5xl"></div>
+    <div class="block h-[1px] w-full bg-gray-25 mt-6xl"></div>
       <!-- Footer -->
-      <div class="flex gap-5 mt-5xl">
+      <div class="flex gap-md mt-6xl">
         <button
           @click="$emit('close')"
-          class="lg:flex-1 rounded-lg p-3xl bg_button_secondary sub_button_semibold"
+          class="md:flex-1 rounded-md p-xl bg-gray-25 label_1_semibold  primary_text_color"
         >
           Cancel
         </button>
         <button
           @click="handleConfirm"
-          class="flex-1 rounded-lg text-white sub_button_semibold bg_delete_button"
+          class="flex-1 p-xl rounded-md primary_2_text_color label_1_semibold  primary_text_color primary_button"
         >
           {{ confirmButtonText }}
         </button>
@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import CloseIcon from "../../../assets/images/CloseIcon.svg";
+import BlackCloseIcon from "../../../assets/images/BlackCloseIcon.svg";
 
 const props = defineProps({
   open: {

@@ -13,29 +13,31 @@
     <!-- Back to Security Header -->
     <button
       @click="$emit('back')"
-      class="flex items-center gap-2 heading_h6_bold pb-10xl"
+      class="flex items-center gap-xl heading_h6_bold primary_text_color"
     >
       <img :src="BackButtonArrow" alt="">
       <span>Back to Security</span>
     </button>
 
     <!-- Form -->
-    <div class="space-y-9 lg:w-1/2">
+    <div class="mt-10xl lg:w-1/2">
       <!-- Current Password Field -->
       <div>
-        <label class="label_2_medium primary_text_color block">Current password:</label>
-        <div class="relative mt-5xl">
+        <label class="label_2_semibold block primary_text_color">Current password:</label>
+        <div class="relative mt-sm">
           <input
-            v-model="currentPassword"
-            :type="showCurrentPassword ? 'text' : 'password'"
-            placeholder="Enter Current Password"
-            class="input_box w-full pr-10"
-            :class="errors.currentPassword ? '!border-[#E2483D]' : 'inputbox_border_color'"
-            @input="validateCurrentPassword"
+            :value="showCurrentPassword ? currentPassword : '*'.repeat(currentPassword.length)"
+            @input="handleCurrentPasswordInput"
+            @keydown="handleCurrentPasswordKeydown"
+            @paste="handleCurrentPasswordPaste"
+            type="text"
+            placeholder="Enter current password"
+            class="regular_border_color rounded-lg py-xl px-3xl w-full pr-10xl label_1_medium focus-visible:outline-none focus-visible:ring-0"
+            :class="errors.currentPassword ? '!border-[#E2483D]' : ''"
           />
           <button
             type="button"
-            @click="showCurrentPassword = !showCurrentPassword"
+            @click="toggleCurrentPassword"
             class="absolute right-3 top-1/2 -translate-y-1/2"
           >
             <img
@@ -47,26 +49,29 @@
             <img v-else :src="EyeCloseIcon" alt="">
           </button>
         </div>
-        <p v-if="errors.currentPassword" class="label_2_semibold text-error-600 mt-1">
-          {{ errors.currentPassword }}
+        <p v-if="errors.currentPassword" class="label_2_semibold text-error-600 mt-1 flex items-center gap-sm">
+          <img :src="WarningIcon" alt="">
+          <span>{{ errors.currentPassword }}</span>
         </p>
       </div>
 
       <!-- New Password Field -->
-      <div>
-        <label class="label_2_medium primary_text_color block">New Password:</label>
-        <div class="relative mt-5xl">
+      <div class="mt-10xl">
+        <label class="label_2_semibold block primary_text_color">New Password:</label>
+        <div class="relative mt-sm">
           <input
-            v-model="newPassword"
-            :type="showNewPassword ? 'text' : 'password'"
-            placeholder="Enter New Password"
-            class="input_box w-full pr-10"
-            :class="errors.newPassword ? '!border-[#E2483D]' : 'inputbox_border_color'"
-            @input="validateNewPassword"
+            :value="showNewPassword ? newPassword : '*'.repeat(newPassword.length)"
+            @input="handleNewPasswordInput"
+            @keydown="handleNewPasswordKeydown"
+            @paste="handleNewPasswordPaste"
+            type="text"
+            placeholder="Enter new password"
+            class="regular_border_color rounded-lg py-xl px-3xl w-full pr-10xl label_1_medium focus-visible:outline-none focus-visible:ring-0"
+            :class="errors.newPassword ? '!border-[#E2483D]' : ''"
           />
           <button
             type="button"
-            @click="showNewPassword = !showNewPassword"
+            @click="toggleNewPassword"
             class="absolute right-3 top-1/2 -translate-y-1/2"
           >
             <img
@@ -78,26 +83,29 @@
             <img v-else :src="EyeCloseIcon" alt="">
           </button>
         </div>
-        <p v-if="errors.newPassword" class="label_2_semibold text-error-600 mt-1">
-          {{ errors.newPassword }}
+        <p v-if="errors.newPassword" class="label_2_semibold text-error-600 mt-1 flex items-center gap-sm">
+          <img :src="WarningIcon" alt="">
+          <span>{{ errors.newPassword }}</span>
         </p>
       </div>
 
       <!-- Confirm New Password Field -->
-      <div>
-        <label class="label_2_medium primary_text_color block">Confirm New Password:</label>
-        <div class="relative mt-5xl">
+      <div class="mt-10xl">
+        <label class="label_2_semibold block primary_text_color">Confirm New Password:</label>
+        <div class="relative mt-sm">
           <input
-            v-model="confirmPassword"
-            :type="showConfirmPassword ? 'text' : 'password'"
-            placeholder="Enter Confirm Password"
-            class="input_box w-full pr-10"
-            :class="errors.confirmPassword ? '!border-[#E2483D]' : 'inputbox_border_color'"
-            @input="validateConfirmPassword"
+            :value="showConfirmPassword ? confirmPassword : '*'.repeat(confirmPassword.length)"
+            @input="handleConfirmPasswordInput"
+            @keydown="handleConfirmPasswordKeydown"
+            @paste="handleConfirmPasswordPaste"
+            type="text"
+            placeholder="Confirm new password"
+            class="regular_border_color rounded-lg py-xl px-3xl w-full pr-10xl label_1_medium focus-visible:outline-none focus-visible:ring-0"
+            :class="errors.confirmPassword ? '!border-[#E2483D]' : ''"
           />
           <button
             type="button"
-            @click="showConfirmPassword = !showConfirmPassword"
+            @click="toggleConfirmPassword"
             class="absolute right-3 top-1/2 -translate-y-1/2"
           >
             <img
@@ -109,8 +117,9 @@
             <img v-else :src="EyeCloseIcon" alt="">
           </button>
         </div>
-        <p v-if="errors.confirmPassword" class="label_2_semibold text-error-600 mt-1">
-          {{ errors.confirmPassword }}
+        <p v-if="errors.confirmPassword" class="label_2_semibold text-error-600 mt-1 flex items-center gap-sm">
+          <img :src="WarningIcon" alt="">
+          <span>{{ errors.confirmPassword }}</span>
         </p>
       </div>
 
@@ -118,7 +127,7 @@
       <button
         type="button"
         @click="handleResetPassword"
-        class="primary_button lg:button_width px-5"
+        class="primary_button label_1_semibold lg:button_width px-xxl py-xl mt-10xl"
       >
         Reset Password
       </button>
@@ -132,6 +141,7 @@ import EyeOpenIcon from "../../../assets/images/EyeOpen.svg";
 import BackButtonArrow from "../../../assets/images/BackButtonArrow.svg";
 import EyeCloseIcon from "../../../assets/images/EyeCloseIcon.svg";
 import PasswordSuccessModal from "./PasswordSuccessModal.vue";
+import WarningIcon from "../../../assets/images/WarningIcon.svg";
 
 const emit = defineEmits(["back", "passwordUpdated"]);
 
@@ -148,6 +158,265 @@ const errors = reactive({
   newPassword: "",
   confirmPassword: "",
 });
+
+// Toggle password visibility
+const toggleCurrentPassword = () => {
+  showCurrentPassword.value = !showCurrentPassword.value;
+};
+
+const toggleNewPassword = () => {
+  showNewPassword.value = !showNewPassword.value;
+};
+
+const toggleConfirmPassword = () => {
+  showConfirmPassword.value = !showConfirmPassword.value;
+};
+
+// Handle current password input
+const handleCurrentPasswordInput = (event) => {
+  const inputValue = event.target.value;
+  const cursorPosition = event.target.selectionStart;
+  
+  if (showCurrentPassword.value) {
+    // When password is visible, update directly
+    currentPassword.value = inputValue;
+  } else {
+    // When password is hidden, update display to show asterisks
+    setTimeout(() => {
+      if (event.target && !showCurrentPassword.value) {
+        event.target.value = '*'.repeat(currentPassword.value.length);
+        const newCursorPos = Math.min(cursorPosition, currentPassword.value.length);
+        event.target.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
+  }
+  validateCurrentPassword();
+};
+
+const handleCurrentPasswordKeydown = (event) => {
+  if (!showCurrentPassword.value) {
+    const cursorPos = event.target.selectionStart || 0;
+    
+    if (event.key === 'Backspace') {
+      if (cursorPos > 0) {
+        currentPassword.value = currentPassword.value.substring(0, cursorPos - 1) + currentPassword.value.substring(cursorPos);
+      }
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(currentPassword.value.length);
+          event.target.setSelectionRange(Math.max(0, cursorPos - 1), Math.max(0, cursorPos - 1));
+        }
+      }, 0);
+      validateCurrentPassword();
+    } else if (event.key === 'Delete') {
+      if (cursorPos < currentPassword.value.length) {
+        currentPassword.value = currentPassword.value.substring(0, cursorPos) + currentPassword.value.substring(cursorPos + 1);
+      }
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(currentPassword.value.length);
+          event.target.setSelectionRange(cursorPos, cursorPos);
+        }
+      }, 0);
+      validateCurrentPassword();
+    } else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      currentPassword.value = currentPassword.value.substring(0, cursorPos) + event.key + currentPassword.value.substring(cursorPos);
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(currentPassword.value.length);
+          event.target.setSelectionRange(cursorPos + 1, cursorPos + 1);
+        }
+      }, 0);
+      validateCurrentPassword();
+    }
+  }
+};
+
+const handleCurrentPasswordPaste = (event) => {
+  if (!showCurrentPassword.value) {
+    event.preventDefault();
+    const pastedText = (event.clipboardData || window.clipboardData).getData('text');
+    const cursorPos = event.target.selectionStart || 0;
+    
+    currentPassword.value = currentPassword.value.substring(0, cursorPos) + pastedText + currentPassword.value.substring(cursorPos);
+    
+    setTimeout(() => {
+      if (event.target) {
+        event.target.value = '*'.repeat(currentPassword.value.length);
+        const newCursorPos = cursorPos + pastedText.length;
+        event.target.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
+    validateCurrentPassword();
+  }
+};
+
+// Handle new password input
+const handleNewPasswordInput = (event) => {
+  const inputValue = event.target.value;
+  const cursorPosition = event.target.selectionStart;
+  
+  if (showNewPassword.value) {
+    // When password is visible, update directly
+    newPassword.value = inputValue;
+  } else {
+    // When password is hidden, update display to show asterisks
+    setTimeout(() => {
+      if (event.target && !showNewPassword.value) {
+        event.target.value = '*'.repeat(newPassword.value.length);
+        const newCursorPos = Math.min(cursorPosition, newPassword.value.length);
+        event.target.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
+  }
+  validateNewPassword();
+};
+
+const handleNewPasswordKeydown = (event) => {
+  if (!showNewPassword.value) {
+    const cursorPos = event.target.selectionStart || 0;
+    
+    if (event.key === 'Backspace') {
+      if (cursorPos > 0) {
+        newPassword.value = newPassword.value.substring(0, cursorPos - 1) + newPassword.value.substring(cursorPos);
+      }
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(newPassword.value.length);
+          event.target.setSelectionRange(Math.max(0, cursorPos - 1), Math.max(0, cursorPos - 1));
+        }
+      }, 0);
+      validateNewPassword();
+    } else if (event.key === 'Delete') {
+      if (cursorPos < newPassword.value.length) {
+        newPassword.value = newPassword.value.substring(0, cursorPos) + newPassword.value.substring(cursorPos + 1);
+      }
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(newPassword.value.length);
+          event.target.setSelectionRange(cursorPos, cursorPos);
+        }
+      }, 0);
+      validateNewPassword();
+    } else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      newPassword.value = newPassword.value.substring(0, cursorPos) + event.key + newPassword.value.substring(cursorPos);
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(newPassword.value.length);
+          event.target.setSelectionRange(cursorPos + 1, cursorPos + 1);
+        }
+      }, 0);
+      validateNewPassword();
+    }
+  }
+};
+
+const handleNewPasswordPaste = (event) => {
+  if (!showNewPassword.value) {
+    event.preventDefault();
+    const pastedText = (event.clipboardData || window.clipboardData).getData('text');
+    const cursorPos = event.target.selectionStart || 0;
+    
+    newPassword.value = newPassword.value.substring(0, cursorPos) + pastedText + newPassword.value.substring(cursorPos);
+    
+    setTimeout(() => {
+      if (event.target) {
+        event.target.value = '*'.repeat(newPassword.value.length);
+        const newCursorPos = cursorPos + pastedText.length;
+        event.target.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
+    validateNewPassword();
+  }
+};
+
+// Handle confirm password input
+const handleConfirmPasswordInput = (event) => {
+  const inputValue = event.target.value;
+  const cursorPosition = event.target.selectionStart;
+  
+  if (showConfirmPassword.value) {
+    // When password is visible, update directly
+    confirmPassword.value = inputValue;
+  } else {
+    // When password is hidden, update display to show asterisks
+    setTimeout(() => {
+      if (event.target && !showConfirmPassword.value) {
+        event.target.value = '*'.repeat(confirmPassword.value.length);
+        const newCursorPos = Math.min(cursorPosition, confirmPassword.value.length);
+        event.target.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
+  }
+  validateConfirmPassword();
+};
+
+const handleConfirmPasswordKeydown = (event) => {
+  if (!showConfirmPassword.value) {
+    const cursorPos = event.target.selectionStart || 0;
+    
+    if (event.key === 'Backspace') {
+      if (cursorPos > 0) {
+        confirmPassword.value = confirmPassword.value.substring(0, cursorPos - 1) + confirmPassword.value.substring(cursorPos);
+      }
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(confirmPassword.value.length);
+          event.target.setSelectionRange(Math.max(0, cursorPos - 1), Math.max(0, cursorPos - 1));
+        }
+      }, 0);
+      validateConfirmPassword();
+    } else if (event.key === 'Delete') {
+      if (cursorPos < confirmPassword.value.length) {
+        confirmPassword.value = confirmPassword.value.substring(0, cursorPos) + confirmPassword.value.substring(cursorPos + 1);
+      }
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(confirmPassword.value.length);
+          event.target.setSelectionRange(cursorPos, cursorPos);
+        }
+      }, 0);
+      validateConfirmPassword();
+    } else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      confirmPassword.value = confirmPassword.value.substring(0, cursorPos) + event.key + confirmPassword.value.substring(cursorPos);
+      event.preventDefault();
+      setTimeout(() => {
+        if (event.target) {
+          event.target.value = '*'.repeat(confirmPassword.value.length);
+          event.target.setSelectionRange(cursorPos + 1, cursorPos + 1);
+        }
+      }, 0);
+      validateConfirmPassword();
+    }
+  }
+};
+
+const handleConfirmPasswordPaste = (event) => {
+  if (!showConfirmPassword.value) {
+    event.preventDefault();
+    const pastedText = (event.clipboardData || window.clipboardData).getData('text');
+    const cursorPos = event.target.selectionStart || 0;
+    
+    confirmPassword.value = confirmPassword.value.substring(0, cursorPos) + pastedText + confirmPassword.value.substring(cursorPos);
+    
+    setTimeout(() => {
+      if (event.target) {
+        event.target.value = '*'.repeat(confirmPassword.value.length);
+        const newCursorPos = cursorPos + pastedText.length;
+        event.target.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
+    validateConfirmPassword();
+  }
+};
 
 // Validation
 const validateCurrentPassword = () => {

@@ -1,12 +1,12 @@
 <template>
      <div class="bg_secondary_color rounded-2xl p-6xl primary_border_color h-[100%] data-privacy-full-height">
-            <h2 class="heading_h6_bold">Profile Information</h2>
-            <p class="label_1_regular secondary_text_color mt-xs pb-10xl">
+            <h2 class="heading_h6_semibold">Profile Information</h2>
+            <p class="label_1_regular secondary_text_color mt-md">
               Update your profile, secure your account, and manage connected apps.
             </p>
-            <div class="space-y-6">
+            <div class="mt-10xl">
               <!-- Profile Picture -->
-              <div class="flex items-start gap-6">
+              <div class="flex items-start gap-6xl">
                 <div class="relative">
                   <div
                     class="w-24 h-24 rounded-full overflow-hidden flex items-center justify-center"
@@ -27,25 +27,29 @@
               </div>
 
               <!-- Name Field -->
-              <div class="flex flex-col items-start">
-                <label class="label_2_medium primary_text_color w-20 flex-shrink-0"
+              <div class="flex flex-col items-start mt-10xl">
+                <label class="label_2_semibold primary_text_color w-20 flex-shrink-0 flex items-center gap-lg"
                 :class="[!isEditing ? 'disable_text_color cursor-not-allowed' : '']">
-                  Name:
+                  Name: <span><img :src="WarningGrayIcon" alt=""></span>
                 </label>
-              <div class="flex w-[100%] gap-3 items-center mt-xl"> 
-                <div class="flex items-center gap-3 w-1/2">
+              <div class="flex w-[100%] gap-xl items-center mt-sm"> 
+                <div class="flex items-center gap-xl w-1/2">
                   <input
                     v-model="profileForm.name"
                     type="text"
                     :disabled="!isEditing"
                     :class="[
-                      ' flex-1 h-12 px-3 rounded-lg inputbox_border_color bg_primary_color w-1/2 ',
-                      !isEditing ? ' disable_text_color cursor-not-allowed ' : 'Label_2_Medium'
+                      ' flex-1 h-12 px-3xl py-xl rounded-lg border border-black-50  w-1/2 ',
+                      !isEditing ? ' disable_text_color cursor-not-allowed bg-info-50' : 'Label_2_Medium'
                     ]"
+                    :style="isEditing ? {
+                      border: '1px solid #0068CF',
+                      boxShadow: '0px 0px 0px 3px #D9E2FC'
+                    } : {}"
                   />
                   
                 </div>
-                <div v-if="!isEditing" class="flex gap-2">
+                <div v-if="!isEditing" class="flex gap-xl">
                     <button
                       @click="startEditing"
                       class="flex items-center Label_2_Medium primary_text_color justify-center rounded-lg"
@@ -53,16 +57,16 @@
                       <img :src="InputboxEditIcon" alt="">
                     </button>
                   </div>
-                  <div v-else class="flex gap-2">
+                  <div v-else class="flex gap-xl">
                     <button
                       @click="cancelEditing"
-                      class="px-4 py-2 rounded-lg primary_border_color bg_secondary_color label_2_medium h-12"
+                      class="px-xxl py-xl rounded-lg primary_border_color bg-gray-25 label_1_semibold h-12"
                     >
                       Cancel
                     </button>
                     <button
                       @click="saveChanges"
-                      class="px-4 py-2 rounded-lg primary_button h-12"
+                      class="px-xxl py-xl rounded-lg primary_button h-12"
                     >
                       Save
                     </button>
@@ -71,41 +75,46 @@
               </div> 
 
               <!-- Email Field -->
-              <div class="flex flex-col items-start ">
-                <label class="label_2_medium primary_text_color w-20 flex-shrink-0"
+              <div class="flex flex-col items-start mt-10xl">
+                <label class="label_2_semibold primary_text_color w-20 flex-shrink-0"
                 :class="[!isEditingEmail ? 'disable_text_color cursor-not-allowed' : '']"
                 >
                   Email:
                 </label>
-                <div class="flex w-[100%] gap-3 items-center mt-xl" > 
-                <div class="flex items-center gap-3  w-1/2">
-                  <input
-                    v-model="profileForm.email"
-                    type="email"
-                    :disabled="!isEditingEmail"
-                    :class="[
-                      ' flex-1 h-10 md:h-12 px-3 rounded-lg inputbox_border_color bg_primary_color w-1/2',
-                      !isEditingEmail ? ' disable_text_color cursor-not-allowed ' : 'Label_2_Medium'
-                    ]"
-                  />
+                <div class="flex w-[100%] gap-xl items-center mt-sm"> 
+                  <div class="flex items-center gap-xl w-1/2">
+                    <input
+                      v-model="profileForm.email"
+                      type="email"
+                      :disabled="!isEditingEmail"
+                      :class="[
+                        ' flex-1 h-12 px-3xl py-xl rounded-lg border border-black-50  w-1/2 ',
+                        !isEditingEmail ? ' disable_text_color cursor-not-allowed bg-info-50' : 'Label_2_Medium'
+                      ]"
+                      :style="isEditingEmail ? {
+                        border: '1px solid #0068CF',
+                        boxShadow: '0px 0px 0px 3px #D9E2FC'
+                      } : {}"
+                    />
                   </div>
-                  <button
-                    v-if="!isEditingEmail"
-                    @click="startEditingEmail"
-                    class="flex items-center justify-center rounded-lg"
-                  >
-                    <img :src="InputboxEditIcon" alt="">
-                  </button>
-                  <div v-else class="flex gap-2">
+                  <div v-if="!isEditingEmail" class="flex gap-xl">
+                    <button
+                      @click="startEditingEmail"
+                      class="flex items-center Label_2_Medium primary_text_color justify-center rounded-lg"
+                    >
+                      <img :src="InputboxEditIcon" alt="">
+                    </button>
+                  </div>
+                  <div v-else class="flex gap-xl">
                     <button
                       @click="cancelEditingEmail"
-                      class="px-4 py-2 rounded-lg primary_border_color bg_secondary_color label_2_medium h-12"
+                      class="px-xxl py-xl rounded-lg primary_border_color bg-gray-25 label_1_semibold h-12"
                     >
                       Cancel
                     </button>
                     <button
                       @click="saveEmailChanges"
-                      class="px-4 py-2 rounded-lg primary_button h-12"
+                      class="px-xxl py-xl rounded-lg primary_button h-12"
                     >
                       Save
                     </button>
@@ -116,30 +125,30 @@
 
             
           <!-- Connected Social Accounts Section -->
-            <h2 class="heading_h6_bold mt-6">Connected social accounts</h2>
-            <p class="label_1_regular secondary_text_color mini-gap">
+            <h2 class="heading_h6_semibold mt-10xl primary_text_color">Connected social accounts</h2>
+            <p class="label_1_regular secondary_text_color mt-md">
               Services that you use to log in to Genius AI
             </p>
 
-            <div class="space-y-4 mt-5xl w-[100%] md:w-1/2">
+            <div class="mt-10xl w-[100%] md:w-1/2">
               <!-- Google Account -->
               <div
-                class="flex items-center justify-between md:p-4"
+                class="flex items-center justify-between"
               >
-                <div class="flex items-center gap-5">
+                <div class="flex items-center gap-6xl">
                   <div
                     class="w-10 h-10 flex items-center justify-center"
                   >
                     <img :src="GoogleIcon" alt="">
                   </div>
                   <div>
-                    <p class="label_1_regular secondary_text_color">Google</p>
-                    <p class="label_1_semibold primary_text_color">Charlene Reed</p>
+                    <p class="label_1_medium primary_text_color">Google</p>
+                    <p class="label_1_bold primary_text_color">Charlene Reed</p>
                   </div>
                 </div>
                 <button
                   @click="openDisconnectModal"
-                  class="px-5 md:px-12 py-2 rounded-md bg_primary_color label_2_medium primary_border_color primary_text_color"
+                  class="px-5xl md:px-12xl py-md rounded-md bg-gray-25 label_1_semibold primary_text_color hover:bg-black-25 active:bg-black-25"
                 >
                   Disconnect
                 </button>
@@ -160,9 +169,9 @@
       @click.stop
     >
       <!-- Modal Header -->
-      <div class="p-6 border-b border-[#F1F2F4]">
-        <h2 class="heading_h5_bold heading_h5_bold mb-2">Edit Profile Picture</h2>
-        <p class="label_1_regular secondary_text_color">
+      <div class="p-6xl border-b border-gray-25">
+        <h2 class="heading_h5_bold heading_h5_bold">Edit Profile Picture</h2>
+        <p class="label_1_regular secondary_text_color mt-xl">
           {{ uploadedImage ? 'Crop and adjust your image' : 'Upload a new image and crop it to your preference' }}
         </p>
       </div>
@@ -179,7 +188,7 @@
             @dragenter="isDragOver = true"
             :class="[
               'border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors',
-              isDragOver ? 'border-[#7950F2] bg-[#F9FAFB]' : 'border-[#E5E7EB]'
+              isDragOver ? 'border-[#7950F2] bg-gray-25' : 'border-gray-25'
             ]"
             @click="fileInputRef?.click()"
           >
@@ -218,14 +227,14 @@
                 />
               </svg>
               <div>
-                <p class="label_1_semibold primary_text_color mb-1">
+                <p class="label_1_semibold primary_text_color">
                   Drag & drop your image here
                 </p>
-                <p class="label_2_regular secondary_text_color">
+                <p class="label_2_regular secondary_text_color mt-sm">
                   or <span class="text-[#7950F2] font-semibold">browse</span> to
                   upload
                 </p>
-                <p class="label_3_regular text-[#A7ABB3] mt-2">
+                <p class="label_3_regular secondary_text_color mt-md">
                   Accepted formats: JPG, PNG | Max size: 5MB
                 </p>
               </div>
@@ -242,7 +251,7 @@
 
         <!-- Image Cropper Section -->
         <div v-else class="space-y-4">
-          <div class="relative w-full h-[400px] bg-[#F9FAFB] rounded-lg overflow-hidden">
+          <div class="relative w-full h-[400px] bg-info-50rounded-lg overflow-hidden">
             <Cropper
               ref="cropperRef"
               class="cropper"
@@ -262,13 +271,13 @@
             <button
               v-if="isExistingImage"
               @click="removeExistingImage"
-              class="px-4 py-2 rounded-md border border-[#E5E7EB] bg-white text-[#DC2626] label_2_semibold hover:bg-[#FEF2F2] transition-colors"
+              class="px-4 py-2 rounded-md border border-gray-25 bg_secondary_color text-[#DC2626] label_2_semibold hover:bg-info-50 transition-colors"
             >
               Remove Image
             </button>
             <button
               @click="resetImage"
-              class="px-4 py-2 rounded-md border border-[#E5E7EB] bg-white text-[#1D2125] label_2_semibold hover:bg-[#F9FAFB] transition-colors"
+              class="px-4 py-2 rounded-md border border-gray-25 bg_secondary_color text_primary_color label_2_semibold hover:bg-info-50transition-colors"
             >
               {{ isExistingImage ? 'Upload New Image' : 'Choose Different Image' }}
             </button>
@@ -277,17 +286,17 @@
       </div>
 
       <!-- Modal Footer -->
-      <div class="p-6 border-t border-[#F1F2F4] flex justify-end gap-3">
+      <div class="p-6 border-t border-gray-25 flex justify-end gap-3">
         <button
           @click="closeProfilePictureModal"
-          class="px-4 py-2 rounded-md border border-[#E5E7EB] bg-white text-[#1D2125] label_2_semibold hover:bg-[#F9FAFB] transition-colors"
+          class="px-3xl py-md rounded-md border border-gray-25 bg_secondary_color text_primary_color label_2_semibold hover:bg-info-50transition-colors"
         >
           Cancel
         </button>
         <button
           v-if="uploadedImage"
           @click="saveProfilePicture"
-          class="px-4 py-2 rounded-md bg-[#7950F2] text-white label_2_semibold hover:bg-[#6E5DC6] transition-colors"
+          class="px-4 py-2 rounded-md bg-black-400 text-white label_2_semibold hover:bg-black-700 transition-colors"
         >
           Save Changes
         </button>
@@ -326,6 +335,7 @@ import DisconnectAccountModal from "./DisconnectAccountModal.vue";
 import ImageEditIcon from "../../../assets/images/ImageEditIcon.svg";
 import InputboxEditIcon from "../../../assets/images/InputboxEditIcon.svg";
 import GoogleIcon from "../../../assets/images/GoogleIcon.svg";
+import WarningGrayIcon from "../../../assets/images/WarningGrayIcon.svg";
 
 // Profile form state
 const profileForm = reactive({
@@ -401,14 +411,14 @@ const saveEmailChanges = () => {
   verificationAction.value = "save";
   verificationEmail.value = profileForm.email;
   verificationTitle.value = "Confirm your new email";
-  verificationDescription.value = `We’ve sent a 6-digit verification code to ${profileForm.email}. Enter the code below to verify your new email address.`;
+  verificationDescription.value = `We've sent a 4-digit verification code to ${profileForm.email}. Enter the code below to verify your new email address.`;
   showEmailVerificationModal.value = true;
 };
 
 const handleVerifyCode = (code) => {
   // Here you would typically verify the code with your backend
-  // For now, we'll just accept any 6-digit code
-  if (code.length === 6 && /^[0-9]{6}$/.test(code)) {
+  // For now, we'll just accept any 4-digit code
+  if (code.length === 4 && /^[0-9]{4}$/.test(code)) {
     if (verificationAction.value === "edit") {
       // Enable email editing
       closeEmailVerificationModal();
@@ -591,6 +601,10 @@ const closeProfilePictureModal = () => {
 .cropper {
   width: 100%;
   height: 100%;
+}
+
+input:focus-visible {
+  outline: none;
 }
 
 :deep(.vue-simple-handler) {

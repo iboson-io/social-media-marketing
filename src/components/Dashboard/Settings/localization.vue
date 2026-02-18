@@ -1,22 +1,22 @@
 <template>
   <div class="rounded-2xl bg_secondary_color p-6xl shadow-sm h-[100%] data-privacy-full-height">
     <!-- Header -->
-    <h2 class="heading_h6_bold">Localization</h2>
-    <p class="label_1_regular secondary_text_color mt-xs pb-10xl">
+    <h2 class="heading_h6_semibold primary_text_color">Localization</h2>
+    <p class="label_1_regular secondary_text_color mt-md">
       Set your preferred language, region, and time format.
     </p>
 
     <!-- Settings Fields -->
-    <div class="space-y-9">
+    <div class="mt-10xl">
       <!-- Interface Language -->
-      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-        <label class="label_2_medium primary_text_color flex-shrink-0">
-          Interface Language
+      <div class="">
+        <label class="label_1_bold primary_text_color flex-shrink-0">
+          Interface Language:
         </label>
-        <div class="relative flex items-center rounded-lg w-full md:w-[70%]">
+        <div class="relative flex items-center rounded-lg w-full mt-md md:w-[70%] overflow-visible">
           <select
             v-model="localizationSettings.interfaceLanguage"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color bg_secondary_color"
+            class="w-full appearance-none rounded-md regular_border_color px-xl py-xxl label_2_medium primary_text_color bg_secondary_color focus-visible:outline-none focus-visible:ring-0"
           >
             <option value="English (US)">English (US)</option>
             <option value="English (UK)">English (UK)</option>
@@ -32,14 +32,14 @@
       </div>
 
       <!-- Region -->
-      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-        <label class="label_2_medium primary_text_color flex-shrink-0">
-          Region
+      <div class="mt-10xl">
+        <label class="label_1_bold primary_text_color flex-shrink-0">
+          Region:
         </label>
-        <div class="relative flex items-center rounded-lg w-full md:w-[70%]">
+        <div class="relative flex items-center rounded-lg w-full mt-md md:w-[70%] overflow-visible">
           <select
             v-model="localizationSettings.region"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color bg_secondary_color"
+            class="w-full appearance-none rounded-md regular_border_color px-xl py-xxl label_2_medium primary_text_color bg_secondary_color focus-visible:outline-none focus-visible:ring-0"
           >
             <option value="India">India</option>
             <option value="United States">United States</option>
@@ -57,14 +57,14 @@
       </div>
 
       <!-- Time Format -->
-      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-        <label class="label_2_medium primary_text_color flex-shrink-0">
+      <div class="mt-10xl">
+        <label class="label_1_bold primary_text_color flex-shrink-0">
           Time Format:
         </label>
-        <div class="relative flex items-center rounded-lg w-full md:w-[70%]">
+        <div class="relative flex items-center rounded-lg w-full mt-md md:w-[70%] overflow-visible">
           <select
             v-model="localizationSettings.timeFormat"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color bg_secondary_color"
+            class="w-full appearance-none rounded-md regular_border_color px-xl py-xxl label_2_medium primary_text_color bg_secondary_color focus-visible:outline-none focus-visible:ring-0"
           >
             <option value="24-hour">24-hour</option>
             <option value="12-hour">12-hour</option>
@@ -75,14 +75,14 @@
       </div>
 
       <!-- Timezone -->
-      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-        <label class="label_2_medium primary_text_color flex-shrink-0">
+      <div class="mt-10xl">
+        <label class="label_1_bold primary_text_color flex-shrink-0">
           Timezone:
         </label>
-        <div class="relative flex items-center rounded-lg w-full md:w-[70%]">
+        <div class="relative flex items-center rounded-lg w-full mt-md md:w-[70%] overflow-visible">
           <select
             v-model="localizationSettings.timezone"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium bg_secondary_color primary_text_color"
+            class="w-full appearance-none rounded-md regular_border_color px-xl py-xxl label_2_medium primary_text_color bg_secondary_color focus-visible:outline-none focus-visible:ring-0"
           >
             <option value="(GMT+5:30) Asia/Kolkata">(GMT+5:30) Asia/Kolkata</option>
             <option value="(GMT-5:00) America/New_York">(GMT-5:00) America/New_York</option>
@@ -103,13 +103,14 @@
     <div class="flex justify-center md:justify-end gap-4 md:gap-8 mt-10">
       <button
         @click="resetToDefault"
-        class="p-md rounded-lg primary_border_color label_2_semibold md:px-6 bg_primary_color text_primary_color"
+        class="p-md rounded-lg primary_border_color label_2_semibold md:px-xl md:py-md bg-gray-25 text_primary_color"
       >
         Reset to Default
       </button>
       <button
         @click="saveChanges"
-        class="p-md rounded-lg primary_button md:px-6 "
+        :disabled="!hasChanges"
+        class="p-md rounded-lg primary_button md:px-xl md:py-md disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Save Changes
       </button>
@@ -117,16 +118,41 @@
   </div>
 </template>
 
+<style scoped>
+/* Ensure select dropdowns open at the bottom */
+select {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure parent containers don't clip dropdowns */
+.relative {
+  z-index: 0;
+}
+
+select:focus {
+  z-index: 10;
+}
+</style>
+
 <script setup>
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import DownArrow from "../../../assets/images/DownArrow.svg";
 
-// Localization settings state
-const localizationSettings = reactive({
+// Initial values (snapshot of original state)
+const initialValues = {
   interfaceLanguage: 'English (US)',
   region: 'India',
   timeFormat: '24-hour',
   timezone: '(GMT+5:30) Asia/Kolkata',
+};
+
+// Localization settings state
+const localizationSettings = reactive({
+  interfaceLanguage: initialValues.interfaceLanguage,
+  region: initialValues.region,
+  timeFormat: initialValues.timeFormat,
+  timezone: initialValues.timezone,
 });
 
 // Default values for reset functionality
@@ -137,14 +163,28 @@ const defaultValues = {
   timezone: '(GMT+5:30) Asia/Kolkata',
 };
 
+// Check if any changes have been made
+const hasChanges = computed(() => {
+  return (
+    localizationSettings.interfaceLanguage !== initialValues.interfaceLanguage ||
+    localizationSettings.region !== initialValues.region ||
+    localizationSettings.timeFormat !== initialValues.timeFormat ||
+    localizationSettings.timezone !== initialValues.timezone
+  );
+});
+
 const resetToDefault = () => {
   Object.assign(localizationSettings, defaultValues);
+  // Update initial values to match default after reset
+  Object.assign(initialValues, defaultValues);
   // Here you would typically make an API call to reset settings
 };
 
 const saveChanges = () => {
   // Here you would typically make an API call to save the changes
   console.log('Saving localization settings:', localizationSettings);
+  // Update initial values to match current values after save
+  Object.assign(initialValues, { ...localizationSettings });
 };
 </script>
 

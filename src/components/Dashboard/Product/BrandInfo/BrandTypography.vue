@@ -1,19 +1,23 @@
 <template>
-  <div class="bg_secondary_color rounded-2xl py-7 px-4 brand_section_height primary_border_color">
+  <div class="bg_secondary_color rounded-2xl p-6xl brand_section_height primary_border_color">
     <ul class="space-y-9">
 
       <!-- Secondary -->
-      <div class="gap-3 flex flex-col items-start justify-between md:flex-row">
+      <div class="gap-xl flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Heading
         </span>
 
         <div
-          class="relative flex items-center rounded-xl w-[100%] md:w-[70%]"
+          class="relative flex items-center rounded-lg w-[100%] md:w-[70%] mt-sm md:mt-0"
         >
           <select
             v-model="fonts.body"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color"
+            class="w-full appearance-none rounded-lg border border-gray-400 px-3xl py-xl label_1_regular primary_text_color
+            focus-visible:outline-none
+         focus-visible:ring-1
+         focus-visible:ring-black-50
+         focus-visible:border-black-200"
           >
             <option value="Open Sans">Open Sans</option>
             <option value="Inter">Inter</option>
@@ -36,17 +40,21 @@
     </div>
 
       <!-- Font -->
-      <li class="gap-3 flex flex-col items-start justify-between md:flex-row">
+      <li class="gap-xl flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Font
         </span>
 
         <div
-          class="relative flex items-center rounded-xl w-[100%] md:w-[70%]"
+          class="relative flex items-center rounded-xl w-[100%] md:w-[70%] mt-sm md:mt-0"
         >
           <select
             v-model="fonts.body"
-            class="w-full appearance-none rounded-lg inputbox_border_color px-4 py-3 label_2_medium primary_text_color "
+            class="w-full appearance-none rounded-lg border border-gray-400 px-3xl py-xl label_2_medium primary_text_color 
+            focus-visible:outline-none
+         focus-visible:ring-1
+         focus-visible:ring-black-50
+         focus-visible:border-black-200"
           >
             <option value="Open Sans">Open Sans</option>
             <option value="Inter">Inter</option>

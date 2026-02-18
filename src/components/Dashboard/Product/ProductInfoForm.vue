@@ -12,42 +12,38 @@
         </p>
       <!-- Step Navigation -->
       <div ref="scrollContainer" class="overflow-x-auto mt-6xl scrollbar-hide">
-        <div class="flex items-center  min-w-max">
+        <div class="flex items-center  min-w-max gap-3xl">
           <!-- Step 1: Brand Info -->
           <div ref="step1Ref" class="flex items-center flex-shrink-0">
             <div
               class="flex items-center justify-center rounded-lg px-3xl md:px-3xl py-xl border border-blue-50 whitespace-nowrap profile_tab_border"
               :class="currentStep === 1 ? 'bg-blue-25' : currentStep > 1 ? 'bg-blue-25' : 'bg_secondary_color'"
-            >
-              <span class="label_1_semibold secondary_text_brand_color">1. Brand Info</span>
+            > 
+              <span class="body_3_medium text-blue-300">1. Brand Info</span>
             </div>
           </div>
-          <!-- Connector Line -->
-          <div class="h-px w-[15px] md:w-[30px] bg-[#DCDFE4] flex-shrink-0"></div>
           <!-- Step 2: Brand Identity -->
           <div ref="step2Ref" class="flex items-center flex-shrink-0">
             <div
-              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 border border-blue-50 whitespace-nowrap profile_tab_border"
+              class="flex items-center justify-center rounded-lg px-3xl md:px-3xl py-xl border border-blue-50 whitespace-nowrap profile_tab_border"
               :class="currentStep === 2 ? 'bg-blue-25' : currentStep > 2 ? 'bg-blue-25' : 'bg_secondary_color'"
             >
-              <span class="label_1_semibold secondary_text_brand_color">2. Brand Identity</span>
+              <span class="body_3_medium text-blue-300">2. Brand Identity</span>
             </div>
           </div>
-          <!-- Connector Line -->
-          <div class="h-px w-[15px] md:w-[30px] bg-[#DCDFE4] flex-shrink-0"></div>
           <!-- Step 3: Social Connections -->
           <div ref="step3Ref" class="flex items-center flex-shrink-0">
             <div
-              class="flex items-center justify-center rounded-lg px-4 md:px-6 py-2 border border-blue-50 whitespace-nowrap profile_tab_border"
+              class="flex items-center justify-center rounded-lg px-3xl md:px-3xl py-xl border border-blue-50 whitespace-nowrap profile_tab_border"
               :class="currentStep === 3 ? 'bg-blue-25' : 'bg_secondary_color'"
             >
-              <span class="label_1_semibold secondary_text_brand_color">3. Social Connections</span>
+              <span class="body_3_medium text-blue-300">3. Social Connections</span>
             </div>
           </div>
         </div>
       </div>
       </div>
-    <div class="flex-1 mt-5xl">
+    <div class="flex-1 mt-6xl">
       <!-- Step 1: Brand Info -->
       <BrandInfo
         v-if="currentStep === 1"
@@ -78,10 +74,10 @@
         @view-product="handleViewProduct"
         @go-to-chat="handleGoToChat"
       />
-      <div class="flex items-center justify-between bg_secondary_color mt-5xl p-3 primary_border_color rounded-2xl">
+      <div class="flex items-center justify-between bg_secondary_color mt-5xl px-6xl py-xl primary_border_color rounded-lg">
         <button
           @click="handleBack"
-          class="label_2_semibold primary_text_color bg_primary_color primary_border_color px-4 py-3 rounded-lg"
+          class="label_1_semibold primary_text_color bg_primary_color primary_border_color px-5xl py-xl rounded-lg"
         >
           Back
         </button>
@@ -89,9 +85,9 @@
           @click="handleContinue"
           :disabled="currentStep === 1 && !isStep1Valid"
           :class="[
-            'flex items-center gap-2 rounded-lg px-4 py-3',
+            'flex items-center gap-md rounded-lg px-5xl py-xl',
             currentStep === 1 && !isStep1Valid 
-              ? 'modal_disabled_primary_button cursor-not-allowed' 
+              ? 'modal_disabled_primary_button cursor-not-allowed label_1_semibold' 
               : 'modal_primary_button cursor-pointer'
           ]"
         >

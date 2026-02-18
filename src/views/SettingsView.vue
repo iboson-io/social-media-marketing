@@ -1,8 +1,8 @@
 <template>
-  <main class="flex-1 bg_primary_color px-4 py-12 md:px-10 lg:py-7">
+  <main class="flex-1 bg_primary_color px-3xl py-12xl md:px-10xl lg:py-10xl">
     <div class="max-w-full md:max-w-none">
       <!-- Navigation Tabs -->
-      <div class="relative border-b primary_border_color bg_secondary_color rounded-2xl p-3 md:p-3">
+      <div class="relative border-b primary_border_color bg_secondary_color rounded-2xl p-xl">
         <!-- Left Arrow Button (Mobile only) -->
         <button
           v-if="canScrollLeft"
@@ -28,7 +28,7 @@
         <!-- Tabs Container -->
         <div 
           ref="tabsContainer"
-          class="flex gap-1 md:gap-5 overflow-x-auto scrollbar-hide lg:overflow-visible scroll-smooth mx-auto"
+          class="flex gap-xs md:gap-6xl overflow-x-auto scrollbar-hide lg:overflow-visible scroll-smooth mx-auto"
           @scroll="checkScrollPosition"
         >
           <button
@@ -37,10 +37,10 @@
             :ref="el => { if (el) tabRefs[tab.id] = el }"
             @click="handleTabClick(tab.id, index)"
             :class="[
-              'flex items-center justify-center gap-1.5 md:gap-2 px-2 py-2.5 md:px-2 md:py-2 rounded-xl transition-colors relative flex-shrink-0 tab-button',
+              'flex items-center justify-center gap-sm md:gap-xl p-xl rounded-xl transition-colors relative flex-shrink-0 tab-button',
               activeTab === tab.id
-                ? 'label_2_semibold primary_text_color bg_primary_color'
-                : 'label_2_semibold secondary_text_color hover:primary_text_color'
+                ? 'label_2_semibold primary_text_color bg-info-50'
+                : 'label_2_semibold secondary_text_color hover:bg-info-50'
             ]"
           >
             <!-- Icon -->
@@ -56,7 +56,7 @@
       </div>
 
       <!-- Tab Content -->
-      <div class="space-y-6 mt-5xl ">
+      <div class="mt-5xl ">
         <!-- Account Tab Content -->
         <div v-if="activeTab === 'account'">
           <!-- Profile Information Section -->

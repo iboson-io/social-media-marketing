@@ -11,45 +11,49 @@
       @click.stop
     >
       <!-- Header -->
-      <div class="p-6">
-        <div class="flex items-start justify-between mb-2">
-          <h2 class="heading_h6_bold">{{ title }}</h2>
+      <div class="p-6xl">
+        <div class="flex items-start justify-between">
+          <h2 class="heading_h6_semibold">{{ title }}</h2>
           <button
-            @click="$emit('close')" class="bg_primary_color">
-            <img :src="CloseIcon" alt="">
+            @click="$emit('close')" class=" p-md bg-gray-25 rounded-lg">
+            <img :src="BlackCloseIcon" alt="">
           </button>
         </div>
-        <p class="label_1_regular secondary_text_color">
+        <p class="label_2_regular secondary_text_color mt-6xl">
           {{ description }}
         </p>
       </div>
 
       <!-- Content -->
-      <div class="p-6">
+      <div class="px-6xl pb-6xl">
         <!-- Verification Code Input -->
-        <div class="mb-6">
-          <label class="label_2_medium primary_text_color block mb-3">
-            Verification Code:
-          </label>
-          <div class="flex gap-2 justify-center" ref="inputsContainer">
-            <input
-              v-for="(digit, index) in codeDigits"
-              :key="index"
-              v-model="codeDigits[index]"
-              @input="handleCodeInput(index, $event)"
-              @keydown="handleKeyDown(index, $event)"
-              @paste="handlePaste"
-              type="text"
-              maxlength="1"
-              class="w-12 h-14 text-center label_2_semibold primary_text_color border primary_border_color rounded-lg"
-              :class="{ '': codeDigits[index] }"
-            />
+        <div>
+          <div>
+            <label class="label_2_medium primary_text_color whitespace-nowrap">
+              Verification Code:
+            </label>
+            <div class="flex items-center justify-center gap-xl mt-4xl" ref="inputsContainer">
+              <input
+                v-for="(digit, index) in codeDigits"
+                :key="index"
+                v-model="codeDigits[index]"
+                @input="handleCodeInput(index, $event)"
+                @keydown="handleKeyDown(index, $event)"
+                @paste="handlePaste"
+                @focus="handleFocus(index, $event)"
+                @blur="handleBlur(index, $event)"
+                type="text"
+                maxlength="1"
+                :placeholder="codeDigits[index] ? '' : '—'"
+                class="w-14 h-14 text-center label_2_semibold primary_text_color border border-gray-25 rounded-lg focus:outline-none"
+              />
+            </div>
           </div>
         </div>
 
         <!-- Timer and Resend -->
-        <div class="flex items-center justify-between">
-          <div class="label_1_regular secondary_text_color">
+        <div class="flex items-center justify-between mt-6xl">
+          <div class="body_3_regular secondary_text_color">
             Code expires in: <span class="label_1_bold primary_text_color">{{ formattedTime }}</span>
           </div>
           <button
@@ -62,11 +66,11 @@
       </div>
 
       <!-- Footer -->
-      <div class="p-4 border-t border-[#F1F2F4]">
+      <div class="p-3xl border-t border-gray-25">
         <button
           @click="handleContinue"
           :disabled="!isCodeComplete"
-          class="w-full px-4 py-3 rounded-lg primary_button disabled:disabled_primary_button"
+          class="w-full px-3xl py-xl rounded-lg primary_button disabled:disabled_primary_button"
         >
           Continue
         </button>
@@ -77,7 +81,7 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
-import CloseIcon from "../../../assets/images/CloseIcon.svg";
+import BlackCloseIcon from "../../../assets/images/BlackCloseIcon.svg";
 
 const props = defineProps({
   open: {
@@ -104,7 +108,7 @@ const props = defineProps({
 
 const emit = defineEmits(["close", "verify", "resend"]);
 
-const codeDigits = ref(["", "", "", "", "", ""]);
+const codeDigits = ref(["", "", "", ""]);
 const timeRemaining = ref(props.initialTime);
 const inputsContainer = ref(null);
 let timerInterval = null;
@@ -124,7 +128,7 @@ const handleCodeInput = (index, event) => {
   codeDigits.value[index] = value;
 
   // Auto-focus next input
-  if (value && index < 5) {
+  if (value && index < 3) {
     const nextInput = event.target.parentElement.children[index + 1];
     if (nextInput) {
       nextInput.focus();
@@ -144,7 +148,7 @@ const handleKeyDown = (index, event) => {
   // Handle arrow keys
   else if (event.key === "ArrowLeft" && index > 0) {
     event.target.parentElement.children[index - 1].focus();
-  } else if (event.key === "ArrowRight" && index < 5) {
+  } else if (event.key === "ArrowRight" && index < 3) {
     event.target.parentElement.children[index + 1].focus();
   }
 };
@@ -154,19 +158,29 @@ const handlePaste = (event) => {
   const pastedData = event.clipboardData
     .getData("text")
     .replace(/[^0-9]/g, "")
-    .slice(0, 6);
+    .slice(0, 4);
 
-  for (let i = 0; i < pastedData.length && i < 6; i++) {
+  for (let i = 0; i < pastedData.length && i < 4; i++) {
     codeDigits.value[i] = pastedData[i];
   }
 
   // Focus the next empty input or the last one
   const nextEmptyIndex = codeDigits.value.findIndex((digit) => digit === "");
-  const focusIndex = nextEmptyIndex === -1 ? 5 : Math.min(nextEmptyIndex, 5);
+  const focusIndex = nextEmptyIndex === -1 ? 3 : Math.min(nextEmptyIndex, 3);
   const inputs = event.target.parentElement.children;
   if (inputs[focusIndex]) {
     inputs[focusIndex].focus();
   }
+};
+
+const focusedInputs = ref(new Set());
+
+const handleFocus = (index, event) => {
+  focusedInputs.value.add(index);
+};
+
+const handleBlur = (index, event) => {
+  focusedInputs.value.delete(index);
 };
 
 const handleContinue = () => {
@@ -181,7 +195,7 @@ const handleResend = () => {
   // Reset timer
   timeRemaining.value = props.initialTime;
   // Reset code
-  codeDigits.value = ["", "", "", "", "", ""];
+  codeDigits.value = ["", "", "", ""];
 };
 
 const startTimer = () => {
@@ -210,7 +224,7 @@ watch(
   (isOpen) => {
     if (isOpen) {
       // Reset code and timer when modal opens
-      codeDigits.value = ["", "", "", "", "", ""];
+      codeDigits.value = ["", "", "", ""];
       timeRemaining.value = props.initialTime;
       startTimer();
       // Focus first input after modal opens
@@ -246,6 +260,18 @@ input[type="text"]::-webkit-inner-spin-button,
 input[type="text"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+input[type="text"]::placeholder {
+  color: #000000;
+  opacity: 1;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+input[type="text"]:focus::placeholder,
+input[type="text"]:hover::placeholder {
+  opacity: 0;
 }
 </style>
 

@@ -1,14 +1,14 @@
-<template>
-  <div class="bg_secondary_color rounded-2xl py-7 px-4 brand_section_height primary_border_color">
-    <ul class="space-y-9">
+<template> 
+  <div class="bg_secondary_color rounded-2xl p-6xl brand_section_height primary_border_color">
+    <ul>
       <!-- Primary -->
-      <div class="gap-3 flex flex-col items-start justify-between md:flex-row">
+      <div class=" flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Primary
         </span>
 
         <div
-          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] md:w-[70%]"
+          class="relative flex items-center rounded-lg px-3xl py-xl w-[100%] md:w-[70%] mt-sm md:mt-0"
           :style="{ backgroundColor: colors.primary }"
         >
           <input
@@ -16,20 +16,20 @@
             v-model="colors.primary"
             class="absolute inset-0 h-full w-full cursor-pointer opacity-0"
           />
-          <span class="label_2_medium text-white">
+          <span class="body_2_medium primary_2_text_color">
             {{ colors.primary.toUpperCase() }}
           </span>
         </div>
     </div>
 
       <!-- Secondary -->
-      <div class="gap-3 flex flex-col items-start justify-between md:flex-row">
+      <div class=" flex flex-col items-start justify-between mt-10xl md:flex-row">
         <span class="label_2_medium primary_text_color">
           Secondary
         </span>
 
         <div
-          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] md:w-[70%]"
+          class="relative flex items-center rounded-lg px-3xl py-xl w-[100%] md:w-[70%] mt-sm md:mt-0"
           :style="{ backgroundColor: colors.secondary }"
         >
           <input
@@ -37,20 +37,20 @@
             v-model="colors.secondary"
             class="absolute inset-0 h-full w-full cursor-pointer opacity-0"
           />
-          <span class="label_2_medium text-white">
+          <span class="label_2_medium primary_2_text_color">
             {{ colors.secondary.toUpperCase() }}
           </span>
         </div>
     </div>
 
       <!-- Font -->
-      <li class="gap-3 flex flex-col items-start justify-between md:flex-row">
+      <li class="mt-10xl flex flex-col items-start justify-between md:flex-row">
         <span class="label_2_medium primary_text_color">
           Font
         </span>
 
         <div
-          class="relative flex items-center rounded-xl px-4 py-4 w-[100%] md:w-[70%]"
+          class="relative flex items-center rounded-lg px-3xl py-xl w-[100%] md:w-[70%] mt-sm md:mt-0"
           :style="{ backgroundColor: colors.font }"
         >
           <input
@@ -58,7 +58,7 @@
             v-model="colors.font"
             class="absolute inset-0 h-full w-full cursor-pointer opacity-0"
           />
-          <span class="label_2_medium text-white">
+          <span class="label_2_medium primary_2_text_color">
             {{ colors.font.toUpperCase() }}
           </span>
         </div>

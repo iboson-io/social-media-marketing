@@ -602,7 +602,7 @@
             <div v-for="day in weekDaysOnly" :key="day.day"
               class=" md:p-3xl text-center border-r primary_border_color last:border-r-0"
               :class="day.isToday ? 'bg-blue-25 ' : ''">
-              <p class="heading_h5_semibold" :class="day.isToday ? 'secondary_text_brand_color' : 'primary_text_color'">
+              <p class="heading_h5_semibold" :class="day.isToday ? 'text-blue-300' : 'primary_text_color'">
                 {{ day.dateNumber }}
               </p>
 

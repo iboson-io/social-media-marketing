@@ -7,49 +7,50 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-md mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden"
+      class="relative w-full   max-w-[23em] md:max-w-xl  bg_secondary_color rounded-2xl shadow-2xl overflow-hidden"
       @click.stop
     >
       <!-- Header -->
-      <div class="px-6 pt-6">
-        <div class="flex items-start justify-between mb-2">
-          <h2 class="heading_h6_bold">{{ title }}</h2>
+      <div class="p-6xl">
+        <div class="flex items-start justify-between">
+          <h2 class="heading_h5_semibold">{{ title }}</h2>
           <button
-            @click="$emit('close')" class="bg_primary_color"
+            @click="$emit('close')" class="p-md bg-gray-25 hover:bg-black-25 rounded-md"
           >
-            <img :src="CloseIcon" alt="">
+            <img :src="BlackCloseIcon" alt="">
           </button>
         </div>
-      </div>
+      
 
       <!-- Content -->
-      <div class="px-6 pb-6 pt-3">
+      <div class="mt-6xl mb-6xl">
         <p class="label_1_regular secondary_text_color">
           {{ description }}
         </p>
       </div>
 
       <!-- Footer -->
-      <div class="p-6 border-t primary_border_color flex justify-center gap-3 ">
+      <div class="pt-6xl border-t border-gray-25 flex justify-center gap-xl ">
         <button
           @click="$emit('close')"
-          class="px-4 py-2 rounded-lg label_2_semibold primary_text_color bg_primary_color primary_border_color w-[100%]"
+          class="px-4xl py-xl rounded-lg label_1_semibold primary_text_color bg-gray-25 w-[100%]"
         >
           Cancel
         </button>
         <button
           @click="handleDisconnect"
-          class="px-4 py-2 rounded-lg  primary_button w-[100%]"
+          class="px-4xl py-xl rounded-lg  primary_button w-[100%]"
         >
           Disconnect
         </button>
+      </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-  import CloseIcon from "../../../assets/images/CloseIcon.svg";
+  import BlackCloseIcon from "../../../assets/images/BlackCloseIcon.svg";
 const props = defineProps({
   open: {
     type: Boolean,

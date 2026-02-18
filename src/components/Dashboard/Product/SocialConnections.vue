@@ -1,27 +1,26 @@
 <template>
-  <div class=" bg_secondary_color rounded-2xl py-7 px-4 brand_section_height">
+  <div class=" bg_secondary_color rounded-2xl p-6xl brand_section_height">
     <!-- Section Header -->
-    <div class="mb-6">
-      <h2 class="heading_h5_bold primary_text_color mb-2">
+    <div>
+      <h2 class="label_1_semibold primary_text_color">
         Connect your social media accounts
       </h2>
-      <p class="label_1_regular secondary_text_color">
+      <p class="label_2_regular secondary_text_color mt-md">
         Link your brand's social profiles to create and publish posts directly from one place.
       </p>
     </div>
-
     <!-- Social Media Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6xl mt-10xl">
       <!-- Instagram Card -->
       <div 
         @click="handleConnectClick('instagram')"
-        class="flex items-center justify-between rounded-lg border border-[#F1F2F4] bg-white p-4 hover:shadow-md transition-shadow cursor-pointer"
+        class="flex items-center justify-between rounded-lg p-5xl hover:bg-gray-25 transition-shadow cursor-pointer"
+        :class="clickedSocials.has('instagram') ? 'selected_platform_border bg-gray-25' : 'default-border'"
       >
-        <div class="flex items-center gap-3">
-          <img :src="InstagramIcon" alt="Instagram" class="h-10 w-10 flex-shrink-0" />
+        <div class="flex items-center gap-xl">
+          <img :src="InstagramIcon" alt="Instagram" class="h-9 w-9 flex-shrink-0" />
           <div class="flex flex-col">
-            <p class="label_1_semibold primary_text_color">@lumovibe</p>
-            <p class="label_2_regular secondary_text_color">Instagram</p>
+            <p class="label_1_medium primary_text_color">Instagram</p>
           </div>
         </div>
         <!-- Chain Link Icon (Connected) or Plus Icon -->
@@ -40,12 +39,13 @@
       <!-- Facebook Card -->
       <div 
         @click="handleConnectClick('facebook')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
+        class="flex items-center justify-between  rounded-lg p-5xl hover:bg-gray-25 cursor-pointer"
+        :class="clickedSocials.has('facebook') ? 'selected_platform_border bg-gray-25' : 'default-border'"
       >
         <div class="flex items-center gap-3">
-          <img :src="FacebookIcon" alt="Facebook" class="h-10 w-10" />
+          <img :src="FacebookIcon" alt="Facebook" class="h-9 w-9 flex-shrink-0" />
           <div>
-            <p class="label_1_semibold primary_text_color">Facebook</p>
+            <p class="label_1_medium primary_text_color">Facebook</p>
           </div>
         </div>
         <!-- Chain Link Icon (Connected) or Plus Icon -->
@@ -64,12 +64,13 @@
       <!-- LinkedIn Card -->
       <div 
         @click="handleConnectClick('linkedin')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg p-5xl hover:bg-gray-25 cursor-pointer"
+        :class="clickedSocials.has('linkedin') ? 'selected_platform_border bg-gray-25' : 'default-border'"
       >
         <div class="flex items-center gap-3">
-          <img :src="LinkedInIcon" alt="LinkedIn" class="h-10 w-10" />
+          <img :src="LinkedInIcon" alt="LinkedIn" class="h-9 w-9 flex-shrink-0" />
           <div>
-            <p class="label_1_semibold primary_text_color">LinkedIn</p>
+            <p class="label_1_medium primary_text_color">LinkedIn</p>
           </div>
         </div>
         <!-- Chain Link Icon (Connected) or Plus Icon -->
@@ -88,12 +89,13 @@
       <!-- Twitter (X) Card -->
       <div 
         @click="handleConnectClick('twitter')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg p-5xl hover:bg-gray-25 cursor-pointer"
+        :class="clickedSocials.has('twitter') ? 'selected_platform_border bg-gray-25' : 'default-border'"
       >
         <div class="flex items-center gap-3">
-          <img :src="TwitterIcon" alt="Twitter" class="h-10 w-10" />
+          <img :src="TwitterIcon" alt="Twitter" class="h-9 w-9 flex-shrink-0" />
           <div>
-            <p class="label_1_semibold primary_text_color">Twitter (X)</p>
+            <p class="label_1_medium primary_text_color">Twitter (X)</p>
           </div>
         </div>
         <!-- Chain Link Icon (Connected) or Plus Icon -->
@@ -112,12 +114,13 @@
       <!-- TikTok Card -->
       <div 
         @click="handleConnectClick('tiktok')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg p-5xl hover:bg-gray-25 cursor-pointer"
+        :class="clickedSocials.has('tiktok') ? 'selected_platform_border bg-gray-25' : 'default-border'"
       >
         <div class="flex items-center gap-3">
-          <img :src="TikTokIcon" alt="TikTok" class="h-10 w-10" />
+          <img :src="TikTokIcon" alt="TikTok" class="h-9 w-9 flex-shrink-0" />
           <div>
-            <p class="label_1_semibold primary_text_color">TikTok</p>
+            <p class="label_1_medium primary_text_color">TikTok</p>
           </div>
         </div>
         <!-- Chain Link Icon (Connected) or Plus Icon -->
@@ -136,12 +139,13 @@
       <!-- YouTube Card -->
       <div 
         @click="handleConnectClick('youtube')"
-        class="flex items-center justify-between rounded-lg primary_border_color bg_secondary_color p-4  cursor-pointer"
+        class="flex items-center justify-between rounded-lg p-5xl hover:bg-gray-25 cursor-pointer"
+        :class="clickedSocials.has('youtube') ? 'selected_platform_border bg-gray-25' : 'default-border'"
       >
         <div class="flex items-center gap-3">
-          <img :src="YoutubeIcon" alt="YouTube" class="h-10 w-10" />
+          <img :src="YoutubeIcon" alt="YouTube" class="h-9 w-9 flex-shrink-0" />
           <div>
-            <p class="label_1_semibold primary_text_color">YouTube</p>
+            <p class="label_1_medium primary_text_color">YouTube</p>
           </div>
         </div>
         <!-- Chain Link Icon (Connected) or Plus Icon -->
@@ -224,8 +228,12 @@ const handleConnectClick = (platform) => {
 }
 
 .group:hover .disconnect-icon path {
-  stroke: #C9372C;
+  stroke: #E3665D;
   transition: stroke 0.2s ease-in-out;
+}
+
+.default-border {
+  border: 2px solid #F3F4F5;
 }
 </style>
 

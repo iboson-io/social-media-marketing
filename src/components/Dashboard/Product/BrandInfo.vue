@@ -1,7 +1,7 @@
 <template>
   <div class="bg_secondary_color rounded-2xl p-6xl primary_border_color h-[100%]">
   <div class="mb-4 ">
-    <div class="gap-8 lg:w-1/2">
+    <div class=" lg:w-1/2">
       <!-- Left Side: Illustration -->
       <div class=" flex-shrink-0">
         <img
@@ -12,17 +12,17 @@
       </div>
 
       <!-- Right Side: Form Content -->
-      <div class="flex-1">
-        <h2 class="heading_h6_bold primary_text_color mb-\">
+      <div class="flex-1 mt-6xl">
+        <h2 class="heading_h6_bold primary_text_color">
           Tell us about your brand
         </h2>
-        <p class="label_1_regular secondary_text_color mb-6">
+        <p class="label_1_regular secondary_text_color mt-md">
           Paste your website URL or upload documents so AI can learn your brand's style, tone, and personality.
         </p>
 
         <!-- Website URL Input -->
-        <div class="mb-4">
-          <label class="label_2_medium mb-2 block primary_text_color">
+        <div class="mt-6xl">
+          <label class="label_2_semiboldblock primary_text_color">
             Website URL
           </label>
           <input
@@ -31,27 +31,27 @@
             type="url"
             placeholder="Enter your website URL here..."
             :class="[
-              'input_box w-full Label_2_Medium bg_primary_color primary_text_color',
-              urlError ? '!error_border_color !border-1' : ''
+              'input_box w-full Label_2_Medium bg_secondary_color tertiary_text_color regular_border_color mt-sm py-xl px-3xl',
+              urlError ? '!border-error-600 !border-1' : ''
             ]"
           />
           <!-- Error Message -->
-          <p v-if="urlError" class="mt-xs body_4_medium label_2_semibold text-error-600 flex items-center justify-end">
-           
+          <p v-if="urlError" class="mt-md label_2_semibold text-error-600 flex items-center gap-sm">
+            <img :src="WarningIcon" alt="WarningIcon">
             {{ urlError }}
           </p>
         </div>
 
         <!-- Upload Files Link -->
-        <div class="mt-5xl">
-          <span class="label_1_regular secondary_text_color">Or </span>
+        <div class="mt-6xl">
+          <span class="label_2_medium secondary_text_color">Or </span>
           <button
             @click="showUploadModal = true"
-            class="label_1_semibold primary_text_color underline"
+            class="label_2_medium primary_text_color underline"
           >
             click here to upload files
           </button>
-          <span class="label_1_regular secondary_text_color"> to help AI learn your brand.</span>
+          <span class="label_2_medium secondary_text_color"> to help AI learn your brand.</span>
           <input
             ref="fileInput"
             type="file"
@@ -72,16 +72,16 @@
     >
       <!-- Modal -->
       <div
-        class="relative w-full max-w-md mx-4 bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6"
+        class="relative w-full max-w-md bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6"
         @click.stop
       >
         <!-- Title -->
-        <h2 class="heading_h5_semibold primary_text_color mb-2">
+        <h2 class="heading_h6_bold primary_text_color">
           Upload brand files
         </h2>
         
         <!-- Subtitle -->
-        <p class="label_2_regular secondary_text_color">
+        <p class="label_2_medium primary_text_color p-xs">
           Add your brand or product documents to help AI understand your identity.
         </p>
 
@@ -94,21 +94,21 @@
           @dragleave="isDragOver = false"
           @dragenter="isDragOver = true"
           :class="[
-            'rounded-lg pt-20 text-center cursor-pointer transition-colors mt-xl' ,
-            isDragOver ? 'upload_box_border bg_secondary_color' : 'upload_box_border'
+            'rounded-lg pt-20 text-center cursor-pointer transition-colors mt-4xl' ,
+            isDragOver ? 'border-2 border-dashed border-gray-500 bg_secondary_color' : 'border-2 border-dashed border-gray-500'
           ]"
           @click="fileInput?.click()"
         >
           <!-- Cloud Upload Icon -->
-          <div class="flex justify-center mb-4">
+          <div class="flex justify-center">
             <img :src="UploadImageIcon" alt="">
           </div>
           
-          <p class="body_3_medium text_color mb-20">
+          <p class="body_3_medium text_color mt-7xl ">
             Drag & drop your files here or <span class="font-semibold primary_text_color">browse</span> to upload.
           </p>
           
-          <p class="label_3_regular text-[#A7ABB3] mb-2">
+          <p class="label_3_regular text-[#A7ABB3] mb-md mt-14xl">
             Accepted formats - .pdf, .png, .jpg, .jpeg | Max file size - 5MB
           </p>
         </div>
@@ -118,18 +118,18 @@
           <div
             v-for="(fileItem, index) in fileList"
             :key="fileItem.id"
-            class="bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg p-3"
+            class=" border primary_border_color rounded-lg p-xl"
           >
             <!-- File Name -->
-            <div class="flex items-start justify-between mb-2">
+            <div class="flex items-start justify-between mb-md">
               <div class="flex-1 min-w-0 flex gap-1">
                 <img :src="UploadaImageIcon" alt="">
               <div>
-                <p class="label_2_semibold primary_text_color truncate">
+                <p class="label_3_bold primary_text_color truncate">
                   {{ fileItem.name }}
                 </p>
                 <!-- File Size and Status -->
-                <div class="flex items-center gap-2 mt-xs">
+                <div class="flex items-center gap-md mt-xs">
                   <p v-if="fileItem.status === 'uploading'" class="label_3_regular">
                     {{ formatFileSize(fileItem.uploaded) }} of {{ formatFileSize(fileItem.size) }}
                   </p>
@@ -144,35 +144,20 @@
              <div class="flex justify-between">
                   <span
                     v-if="fileItem.status === 'completed'"
-                    class="flex items-center gap-1 label_3_regular text-[#2ABB7F]"
+                    class="flex items-center gap-1 label_3_regular text-success-600"
                   >
                     <!-- Checkmark Icon -->
                     <img :src="GreenTickIcon" alt="">
                     Completed
                   </span>
-                   <!-- Cancel/Delete Button -->
+                   <!-- Cancel/Delete Button (only for completed files) -->
               <button
+                v-if="fileItem.status === 'completed'"
                 @click="removeFile(index)"
-                class="ml-2 text-[#6B7280]"
+                class="ml-md text-[#6B7280]"
               >
-              <span v-if="fileItem.status === 'uploading'">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 4L4 12M4 4L12 12"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                </svg>
-                </span>
                 <!-- Trash Icon -->
-                <span v-else><img :src="TrashIcon" alt=""></span>
+                <img :src="ClearIcon" alt="">
               </button>
                   </div>
             <!-- Progress Bar (only for uploading files) -->
@@ -203,12 +188,32 @@
                 />
               </svg>
               <!-- Progress Bar -->
-              <div class="flex-1 h-2 bg-[#DCFFF1] rounded-full overflow-hidden">
+              <div class="flex-1 h-2 bg-success-100 rounded-full overflow-hidden">
                 <div
-                  class="h-full bg-[#2ABB7F] rounded-full transition-all duration-300 ease-out"
+                  class="h-full bg-success-600 rounded-full transition-all duration-300 ease-out"
                   :style="{ width: `${fileItem.progress}%` }"
                 ></div>
               </div>
+              <!-- Cancel Button at the end of progress bar -->
+              <button
+                @click="removeFile(index)"
+                class="text-[#6B7280] hover:text-[#4B5563] transition-colors"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 4L4 12M4 4L12 12"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -216,9 +221,9 @@
         <!-- Error Message -->
         <div
           v-if="fileError"
-          class="mt-4 flex items-center justify-between bg_secondary_color border bg-[#FFECEB] rounded-lg px-4 py-3"
+          class="mt-4 flex items-center justify-between bg_secondary_color border bg-gray-25 rounded-lg px-3xl py-xl"
         >
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-xl">
             <!-- Error Icon -->
            <img :src="WarningIcon" alt="">
             <span class="label_2_semibold text-error-600">
@@ -234,10 +239,10 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="flex gap-3 mt-5xl justify-between">
+        <div class="flex mt-6xl justify-between">
           <button
             @click="closeModal"
-            class="px-5 py-3 rounded-lg label_2_medium primary_border_color bg_primary_color primary_text_color"
+            class="px-xxl py-xl rounded-lg label_1_semibold primary_border_color bg-gray-25 primary_text_color hover:bg-gray-50"
           >
             Cancel
           </button>
@@ -245,10 +250,10 @@
             @click="handleContinue"
             :disabled="fileError || completedFilesCount === 0"
             :class="[
-              ' px-5 py-3 rounded-lg flex items-center justify-center gap-2 ',
+              ' px-xxl py-xl rounded-lg flex items-center justify-center gap-2 ',
               fileError || completedFilesCount === 0
-                ? 'label_2_medium disabled_primary_button cursor-not-allowed text-white'
-                : 'label_2_medium primary_button cursor-pointer text-white'
+                ? 'label_2_medium disabled_primary_button cursor-not-allowed '
+                : 'label_2_medium primary_button cursor-pointer'
             ]"
           >
             Continue
@@ -267,7 +272,7 @@ import BrandIllustration from "../../../assets/images/ProductIntroImage.png";
 import UploadImageIcon from "../../../assets/images/UploadImageIcon.svg"
 import UploadaImageIcon from "../../../assets/images/UploadaImageIcon.svg"
 import GreenTickIcon from "../../../assets/images/GreenTickIcon.svg"
-import TrashIcon from "../../../assets/images/TrashIcon.svg"
+import ClearIcon from "../../../assets/images/ClearIcon.svg"
 import CloseIcon from "../../../assets/images/CloseIcon.svg"
 import WarningIcon from "../../../assets/images/WarningIcon.svg"
 import DoneArrowRight from "../../../assets/images/DoneArrowRight.svg"

@@ -37,13 +37,13 @@
   <!-- Show Security Settings -->
   <div v-if="!showCreatePassword && !showUpdatePassword" class="rounded-2xl bg_secondary_color p-6xl shadow-sm h-[100%] data-privacy-full-height">
     <!-- Header -->
-    <h2 class="heading_h6_bold">Security</h2>
-    <p class="label_1_regular secondary_text_color mt-xs pb-10xl">
+    <h2 class="heading_h6_bold primary_text_color">Security</h2>
+    <p class="label_1_regular secondary_text_color mt-md">
       Manage your password and login sessions securely.
     </p>
 
     <!-- Create/Update your password -->
-    <div class="flex flex-col items-start md:flex-row  md:justify-between gap-4 mb-8">
+    <div class="flex flex-col items-start mt-10xl md:flex-row  md:justify-between gap-4xl">
       <div class="flex-1">
         <h3 class="label_1_semibold primary_text_color">{{ hasPasswordCreated ? 'Update your password' : 'Create your password' }}</h3>
         <p class="label_1_regular secondary_text_color mt-xs">
@@ -52,14 +52,14 @@
       </div>
       <button
         @click="hasPasswordCreated ? showUpdatePassword = true : showCreatePassword = true"
-        class="p-3xl px-5 rounded-lg inputbox_border_color bg_secondary_color sub_button_semibold "
+        class="p-xl px-xxl rounded-lg border border-black-200 bg_secondary_color label_1_semibold  primary_text_color hover:bg-gray-25"
       >
         {{ hasPasswordCreated ? 'Update password' : 'Create password' }}
       </button>
     </div>
 
     <!-- Delete your account -->
-    <div class="flex flex-col md:flex-row items-start md:justify-between gap-4 mb-8">
+    <div class="flex flex-col items-start mt-10xl md:flex-row  md:justify-between gap-4xl">
       <div class="flex-1">
         <h3 class="label_1_semibold primary_text_color">Delete your account</h3>
         <p class="label_1_regular secondary_text_color mt-xs">
@@ -67,14 +67,14 @@
         </p>
       </div>
       <button @click="showDeleteModal = true"
-        class="p-3xl px-5 rounded-lg inputbox_border_color bg_secondary_color sub_button_semibold"
+        class="p-xl px-xxl rounded-lg border border-black-200 bg_secondary_color label_1_semibold  primary_text_color hover:bg-gray-25"
       >
         Delete account
       </button>
     </div>
 
     <!-- Forgot to sign out on a shared device? -->
-    <div class="flex flex-col md:flex-row items-start md:justify-between gap-4 pb-10xl">
+    <div class="flex flex-col items-start mt-10xl md:flex-row  md:justify-between gap-4xl">
       <div class="flex-1">
         <h3 class="label_1_semibold primary_text_color">Forgot to sign out on a shared device?</h3>
         <p class="label_1_regular secondary_text_color mt-xs">
@@ -83,7 +83,7 @@
       </div>
       <button
         @click="showLogoutModal = true"
-        class="p-3xl px-5 rounded-lg inputbox_border_color bg_secondary_color sub_button_semibold"
+        class="p-xl px-xxl rounded-lg border border-black-200 bg_secondary_color label_1_semibold  primary_text_color hover:bg-gray-25"
       >
         Log Out From All Devices
       </button>
@@ -91,15 +91,17 @@
 
     <!-- Active Sessions -->
     <div>
-      <h3 class="label_1_semibold primary_text_color">Active Sessions</h3>
-      <div class="space-y-3">
+      <h3 class="label_1_semibold primary_text_color mt-10xl">Active Sessions</h3>
+      <div>
         <!-- Session 1 -->
-        <div class="rounded-lg bg_secondary_color p-3 mt-5xl p-6xl primary_border_color md:w-1/2">
+        <div class="flex justify-between rounded-lg bg_secondary_color mt-xxl p-4xl primary_border_color md:w-1/2">
           <p class="label_2_medium primary_text_color">Chrome on Windows – Last active 12 mins ago</p>
+          <img :src="ActiveSessionsIcon" alt="Active Sessions Icon">
         </div>
         <!-- Session 2 -->
-        <div class="rounded-lg bg_secondary_color p-3 mt-5xl p-6xl primary_border_color md:w-1/2">
+        <div class="flex justify-between rounded-lg bg_secondary_color mt-xxl p-4xl primary_border_color md:w-1/2">
           <p class="label_2_medium primary_text_color">Safari on iPhone – Active now</p>
+          <img :src="ActiveSessionsIcon" alt="Active Sessions Icon">
         </div>
       </div>
     </div>
@@ -113,6 +115,7 @@ import CreatePassword from "./CreatePassword.vue";
 import UpdatePassword from "./UpdatePassword.vue";
 import ConfirmDataDeletionModal from "./ConfirmDataDeletionModal.vue";
 import LogoutConfirmationModal from "./LogoutConfirmationModal.vue";
+import ActiveSessionsIcon from "../../../assets/images/ActiveSessionsIcon.svg";
 
 const router = useRouter()
 const showCreatePassword = ref(false);

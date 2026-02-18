@@ -17,12 +17,12 @@
       <!-- Text Content -->
       <div class="text-center ">
         <!-- Main Heading - Larger, Bold -->
-        <h1 class="heading_h6_bold">
+        <h1 class="heading_h6_bold primary_text_color">
           Your account has been deleted.
         </h1>
         
         <!-- Secondary Text -->
-        <p class="label_1_regular secondary_text_color mt-xl">
+        <p class="label_1_regular secondary_text_color mt-sm">
           Thank you for using Genius.
         </p>
         
