@@ -49,8 +49,8 @@
         :ref="el => { if (el) menuItemRefs['chat'] = el }">
 
         <button class="button-gradient w-full" @click="handleNewChatClick">
-          <span class="flex gap-md items-center w-full p-xl bg_primary_color primary_text_color label_2_semibold"
-           :class="isCollapsed ? 'justify-center' : ''"
+          <span class="flex gap-md items-center w-full bg_primary_color primary_text_color label_2_semibold"
+           :class="isCollapsed ? 'justify-center p-md' : 'p-xl'"
           >
             <img :src="PlusIcon" class="h-4 w-4" />
             <span v-if="!isCollapsed">New Chat</span>

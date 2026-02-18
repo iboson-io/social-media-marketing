@@ -290,7 +290,7 @@ background-color: #f3f4f5;
 
 .button-gradient {
   --border-size: 1px;
-  --radius: 14px;
+  --radius: 8px;
   --angle: 0deg;
 
   padding: var(--border-size);
