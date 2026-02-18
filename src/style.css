@@ -337,4 +337,85 @@ background-color: #f3f4f5;
   border-radius: calc(var(--radius) - var(--border-size));
 }
 
+/* Prompt box animated border shadow when AI is generating */
+.prompt-box-animated {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+}
+
+.prompt-box-animated::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  border-radius: 12px 12px 0 0;
+  z-index: -1;
+  animation: center-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 60% 100% at 50% 50%,
+    rgba(153, 102, 255, 0.9) 0%,
+    rgba(124, 58, 237, 0.7) 25%,
+    rgba(99, 102, 241, 0.5) 40%,
+    rgba(59, 130, 246, 0.3) 60%,
+    rgba(99, 102, 241, 0.15) 75%,
+    transparent 100%
+  );
+  filter: blur(12px);
+}
+
+@keyframes center-pulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scaleX(1) scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.1) scaleY(1.2);
+  }
+}
+
+.prompt-box-animated > div {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  background: var(--bg-secondary-color, #fff);
+  border-radius: 12px;
+}
+
+.prompt-box-animated > div::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(129.49deg, #FAB000 3.76%, #9966FF 23.94%, #0073E6 70.44%, #15BE53 101.03%);
+  background-size: 200% 200%;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  z-index: -1;
+  animation: border-gradient-animate 3s linear infinite;
+}
+
+@keyframes border-gradient-animate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 

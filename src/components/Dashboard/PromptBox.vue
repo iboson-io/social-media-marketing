@@ -1,7 +1,8 @@
 <template>
 
   <div
-    class="mx-auto mt-10 max-w-3xl block button-gradient"
+    class="mx-auto mt-10 max-w-3xl block"
+    :class="isAiGenerating ? 'prompt-box-animated' : 'button-gradient'"
   >
 
    
@@ -144,6 +145,14 @@ import GeminiIcon from "../../assets/images/GeminiIcon.svg";
 import DownArrow from "../../assets/images/DownArrow.svg";
 import MikeIcon from "../../assets/images/MikeIcon.svg";
 import SendIcon from "../../assets/images/SendIcon.svg";
+
+/* Props */
+const props = defineProps({
+  isAiGenerating: {
+    type: Boolean,
+    default: false
+  }
+});
 
 /* Emit */
 const emit = defineEmits(['send-message']);

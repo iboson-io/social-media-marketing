@@ -165,7 +165,7 @@
       :class="isSidebarCollapsed ? 'lg:left-16' : 'lg:left-64'"
     >
       <div class="mx-auto max-w-3xl">
-        <PromptBox @send-message="handleNewMessage" />
+        <PromptBox @send-message="handleNewMessage" :is-ai-generating="isAiGenerating" />
         
         <!-- Disclaimer -->
         <div class="text-center p-xl">
@@ -181,7 +181,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onMounted } from "vue";
+import { ref, nextTick, watch, onMounted, computed } from "vue";
 import PromptBox from "../PromptBox.vue";
 import ImageEditIcon from "../../../assets/images/ImageEditIcon.svg";
 import TextCopyIcon from "../../../assets/images/TextCopyIcon.svg";
@@ -204,6 +204,11 @@ const editingIndex = ref(null);
 const editingText = ref("");
 let editTextareaRef = null;
 const scrollAnchor = ref(null);
+
+// Computed property to check if AI is generating
+const isAiGenerating = computed(() => {
+  return messages.value.some(message => message.isLoading === true);
+});
 
 // Auto-scroll function to bottom anchor
 const scrollToBottom = () => {
@@ -302,7 +307,7 @@ const handleRefresh = (index) => {
         // Scroll when AI response updates
         scrollToBottom();
       }
-    }, 1000);
+    }, 5000);
   }
 };
 
@@ -357,7 +362,7 @@ const saveEdit = (index) => {
         // Add second dummy message after a short delay
 
       }
-    }, 3000);
+    }, 5000);
   }
 };
 
@@ -397,7 +402,7 @@ const handleNewMessage = (messageData) => {
       
       // Add second dummy message after a short delay
     }
-  }, 1000);
+  }, 5000);
 };
 
 // Watch for changes in messages array to auto-scroll
