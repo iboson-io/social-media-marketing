@@ -30,7 +30,7 @@
         <tr
           v-for="(row, index) in rows"
           :key="index"
-          class="border-t primary_border_color"
+          class="border-t primary_border_color hover:bg-gray-25"
         >
           <!-- Checkbox -->
           <td class="px-6xl py-xl">
@@ -98,36 +98,72 @@
 
           <!-- Actions -->
           <td class="px-6xl py-xxl text-center">
-            <div class="relative dropdown-container">
+            <div class="relative dropdown-container" :ref="el => setDropdownRef(el, index)">
               <button
                 @click.stop="toggleDropdown(index)"
                 class="flex h-8xl w-8xl items-center justify-center rounded-full hover:primary_border_color hover:bg-gray-25"
+                :ref="el => setButtonRef(el, index)"
               >
                 <img :src="ThreeDotsIcon" alt="ThreeDotsIcon">
               </button>
               
               <!-- Dropdown Menu -->
-              <div
-                v-if="openDropdownIndex === index"
-                class="absolute right-0 top-10 z-50 min-w-[160px] rounded-lg bg_secondary_color shadow-lg primary_border_color"
-              >
+              <Teleport to="body">
+                <div
+                  v-if="openDropdownIndex === index"
+                  :ref="el => setDropdownMenuRef(el, index)"
+                  :style="getDropdownStyle(index)"
+                  class="dropdown-menu fixed z-[9999] min-w-[160px] rounded-lg bg_secondary_color shadow-lg primary_border_color border"
+                >
+                <!-- Approve post (only for pending status) -->
+                <div
+                  v-if="row.status === 'Pending'"
+                  @click.stop="handleApprovePost(row)"
+                  class="flex items-center gap-3xl px-5xl py-3xl cursor-pointer bg_secondary_color hover:bg_primary_color first:rounded-t-lg"
+                >
+                  <img :src="ApprovePostIcon" alt="">
+                  <span class="body_2_medium primary_text_color">Approve post</span>
+                </div>
+                
                 <div
                   @click.stop="handleViewPost(row)"
-                  class="flex items-center gap-3xl px-5xl py-3xl cursor-pointer hover:bg_primary_color first:rounded-t-lg"
+                  class="flex items-center gap-3xl px-5xl py-3xl cursor-pointer hover:bg_primary_color"
+                  :class="row.status !== 'Pending' ? 'first:rounded-t-lg' : ''"
                 >
                   <img :src="ViewPostIcon" alt="">
                   <span class="body_2_medium primary_text_color">View post</span>
-                  
                 </div>
+                
                 <div
                   @click.stop="handleRepost(row)"
-                  class="flex items-center gap-3xl px-5xl py-3xl cursor-pointer hover:bg_primary_color last:rounded-b-lg"
+                  class="flex items-center gap-3xl px-5xl py-3xl cursor-pointer hover:bg_primary_color"
+                  :class="row.status !== 'Pending' ? 'last:rounded-b-lg' : ''"
                 >
                   <img :src="RepostIcon" alt="">
                   <span class="body_2_medium primary_text_color">Repost</span>
-                  
                 </div>
-              </div>
+                
+                <!-- Edit design (only for pending status) -->
+                <div
+                  v-if="row.status === 'Pending'"
+                  @click.stop="handleEditDesign(row)"
+                  class="flex items-center gap-3xl px-5xl py-3xl cursor-pointer hover:bg_primary_color"
+                >
+                  <img :src="ImageEditIconGray" alt="">
+                  <span class="body_2_medium primary_text_color">Edit design</span>
+                </div>
+                
+                <!-- Delete (only for pending status) -->
+                <div
+                  v-if="row.status === 'Pending'"
+                  @click.stop="handleDeletePost(row)"
+                  class="flex items-center gap-3xl px-5xl py-3xl cursor-pointer hover:bg_primary_color last:rounded-b-lg"
+                >
+                  <img :src="TrashIcon" alt="">
+                  <span class="body_2_medium text-red-500">Delete</span>
+                </div>
+                </div>
+              </Teleport>
             </div>
           </td>
         </tr>
@@ -142,14 +178,25 @@
     @close="closeViewPostModal"
     @repost="handleRepostFromModal"
   />
+
+  <!-- Delete Post Modal -->
+  <DeletePostModal
+    :open="showDeleteModal"
+    @close="closeDeleteModal"
+    @confirm="confirmDeletePost"
+  />
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import ViewPostModal from './ViewPostModal.vue';
+import DeletePostModal from '../../Calendar/DeletePostModal.vue';
 import ViewPostIcon from  "../../../assets/images/ViewPostIcon.svg"
 import RepostIcon from "../../../assets/images/RepostIcon.svg"
 import ThreeDotsIcon from "../../../assets/images/ThreeDotsIcon.svg"
+import ApprovePostIcon from "../../../assets/images/ApprovePostIcon.svg"
+import ImageEditIconGray from "../../../assets/images/ImageEditIconGray.svg"
+import TrashIcon from "../../../assets/images/TrashIcon.svg"
 
 const props = defineProps({
   rows: Array,
@@ -159,6 +206,13 @@ const openDropdownIndex = ref(null);
 const showViewPostModal = ref(false);
 const selectedPost = ref(null);
 const selectedRows = ref([]);
+const showDeleteModal = ref(false);
+const postToDelete = ref(null);
+const dropdownPositions = ref({});
+const dropdownStyles = ref({});
+const buttonRefs = ref({});
+const dropdownRefs = ref({});
+const dropdownMenuRefs = ref({});
 
 const isAllSelected = computed(() => {
   return props.rows && props.rows.length > 0 && selectedRows.value.length === props.rows.length;
@@ -194,18 +248,112 @@ const statusClass = (status) => {
     return ' border border-success-200 bg-success-50 text-success-800';
 };
 
+const setButtonRef = (el, index) => {
+  if (el) {
+    buttonRefs.value[index] = el;
+  }
+};
+
+const setDropdownRef = (el, index) => {
+  if (el) {
+    dropdownRefs.value[index] = el;
+  }
+};
+
+const setDropdownMenuRef = (el, index) => {
+  if (el) {
+    dropdownMenuRefs.value[index] = el;
+    nextTick(() => {
+      // Use requestAnimationFrame to ensure DOM is fully rendered
+      requestAnimationFrame(() => {
+        calculateDropdownPosition(index);
+      });
+    });
+  }
+};
+
+const calculateDropdownPosition = (index) => {
+  const button = buttonRefs.value[index];
+  const menu = dropdownMenuRefs.value[index];
+  
+  if (!button || !menu) return;
+  
+  const buttonRect = button.getBoundingClientRect();
+  const menuRect = menu.getBoundingClientRect();
+  const viewportHeight = window.innerHeight;
+  const viewportWidth = window.innerWidth;
+  const padding = 16; // 16px padding from viewport edges
+  
+  // Calculate available space below and above the button
+  const spaceBelow = viewportHeight - buttonRect.bottom;
+  const spaceAbove = buttonRect.top;
+  const menuHeight = menuRect.height || 200; // Estimate if not yet rendered
+  const menuWidth = menuRect.width || 160;
+  
+  // Determine vertical position
+  let top = 0;
+  let position = 'bottom';
+  
+  if (spaceBelow >= menuHeight + padding) {
+    // Show below button
+    top = buttonRect.bottom + 4; // 4px gap
+    position = 'bottom';
+  } else if (spaceAbove >= menuHeight + padding) {
+    // Show above button
+    top = buttonRect.top - menuHeight - 4; // 4px gap
+    position = 'top';
+  } else {
+    // Choose side with more space
+    if (spaceAbove > spaceBelow) {
+      top = Math.max(padding, buttonRect.top - menuHeight - 4);
+      position = 'top';
+    } else {
+      top = Math.min(viewportHeight - menuHeight - padding, buttonRect.bottom + 4);
+      position = 'bottom';
+    }
+  }
+  
+  // Calculate horizontal position (align to right of button)
+  let right = viewportWidth - buttonRect.right;
+  
+  // Ensure dropdown doesn't go off screen
+  if (right + menuWidth > viewportWidth - padding) {
+    right = padding;
+  }
+  
+  dropdownStyles.value[index] = {
+    top: `${top}px`,
+    right: `${right}px`,
+    position: 'fixed'
+  };
+  
+  dropdownPositions.value[index] = position;
+};
+
+const getDropdownStyle = (index) => {
+  return dropdownStyles.value[index] || { top: '0px', right: '0px' };
+};
+
 const toggleDropdown = (index) => {
   if (openDropdownIndex.value === index) {
     openDropdownIndex.value = null;
+    delete dropdownPositions.value[index];
+    delete dropdownStyles.value[index];
   } else {
     openDropdownIndex.value = index;
+    // Position will be calculated in nextTick after menu is rendered
   }
 };
 
 const handleViewPost = (row) => {
   selectedPost.value = row;
   showViewPostModal.value = true;
+  const currentIndex = openDropdownIndex.value;
   openDropdownIndex.value = null;
+  if (currentIndex !== null) {
+    delete dropdownPositions.value[currentIndex];
+    delete dropdownStyles.value[currentIndex];
+  }
 };
 
 const closeViewPostModal = () => {
@@ -215,7 +363,12 @@ const closeViewPostModal = () => {
 
 const handleRepost = (row) => {
   console.log('Repost:', row);
+  const currentIndex = openDropdownIndex.value;
   openDropdownIndex.value = null;
+  if (currentIndex !== null) {
+    delete dropdownPositions.value[currentIndex];
+    delete dropdownStyles.value[currentIndex];
+  }
   // Add your repost logic here
 };
 
@@ -224,17 +377,83 @@ const handleRepostFromModal = (postData) => {
   // Add your repost logic here
 };
 
+const handleApprovePost = (row) => {
+  console.log('Approve post:', row);
+  const currentIndex = openDropdownIndex.value;
+  openDropdownIndex.value = null;
+  if (currentIndex !== null) {
+    delete dropdownPositions.value[currentIndex];
+    delete dropdownStyles.value[currentIndex];
+  }
+  // Add your approve post logic here
+};
+
+const handleEditDesign = (row) => {
+  console.log('Edit design:', row);
+  const currentIndex = openDropdownIndex.value;
+  openDropdownIndex.value = null;
+  if (currentIndex !== null) {
+    delete dropdownPositions.value[currentIndex];
+    delete dropdownStyles.value[currentIndex];
+  }
+  // Add your edit design logic here
+};
+
+const handleDeletePost = (row) => {
+  postToDelete.value = row;
+  showDeleteModal.value = true;
+  const currentIndex = openDropdownIndex.value;
+  openDropdownIndex.value = null;
+  if (currentIndex !== null) {
+    delete dropdownPositions.value[currentIndex];
+    delete dropdownStyles.value[currentIndex];
+  }
+};
+
+const closeDeleteModal = () => {
+  showDeleteModal.value = false;
+  postToDelete.value = null;
+};
+
+const confirmDeletePost = () => {
+  console.log('Delete post confirmed:', postToDelete.value);
+  // Add your delete post logic here
+  // You can emit an event or call an API to delete the post
+  closeDeleteModal();
+};
+
 const handleClickOutside = (event) => {
-  if (!event.target.closest('.dropdown-container')) {
+  if (!event.target.closest('.dropdown-container') && !event.target.closest('.dropdown-menu')) {
+    const currentIndex = openDropdownIndex.value;
     openDropdownIndex.value = null;
+    if (currentIndex !== null) {
+      delete dropdownPositions.value[currentIndex];
+      delete dropdownStyles.value[currentIndex];
+    }
+  }
+};
+
+const handleResize = () => {
+  if (openDropdownIndex.value !== null) {
+    calculateDropdownPosition(openDropdownIndex.value);
+  }
+};
+
+const handleScroll = () => {
+  if (openDropdownIndex.value !== null) {
+    calculateDropdownPosition(openDropdownIndex.value);
   }
 };
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
+  window.addEventListener('resize', handleResize);
+  window.addEventListener('scroll', handleScroll, true);
 });
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
+  window.removeEventListener('resize', handleResize);
+  window.removeEventListener('scroll', handleScroll, true);
 });
 </script>

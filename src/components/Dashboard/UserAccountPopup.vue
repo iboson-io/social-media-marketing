@@ -32,7 +32,7 @@
       </div>
     </div>
       
-    <div class="block h-[2px] w-full hr_linr_bg mt-5xl"></div>
+    <div class="block h-[1px] w-full bg-gray-25mt-5xl"></div>
     <!-- Sign Out Option -->
     <div 
       class="flex items-center gap-2 cursor-pointer mt-5xl"

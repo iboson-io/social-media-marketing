@@ -72,7 +72,7 @@
     >
       <!-- Modal -->
       <div
-        class="relative w-full max-w-md bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6"
+        class="relative w-full max-w-md bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6 mx-3xl"
         @click.stop
       >
         <!-- Title -->

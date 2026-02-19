@@ -103,7 +103,7 @@
     <div class="flex justify-center md:justify-end gap-4 md:gap-8 mt-10">
       <button
         @click="resetToDefault"
-        class="p-md rounded-lg primary_border_color label_2_semibold md:px-xl md:py-md bg-gray-25 text_primary_color"
+        class="p-md rounded-lg primary_border_color label_2_semibold md:px-xl md:py-md bg-gray-25 text_primary_color hover:bg-black-25"
       >
         Reset to Default
       </button>

@@ -35,7 +35,6 @@
           class=" flex items-center justify-center px-3xl py-xl rounded-lg primary_button label_1_semibold"
         >
           <span>Go to Chat</span>
-          <img :src="DoneArrowRight" alt="" class="w-4 h-4">
         </button>
       </div>
     </div>
@@ -43,7 +42,6 @@
 </template>
 
 <script setup>
-import DoneArrowRight from "../../../assets/images/DoneArrowRight.svg";
 import SucessImage from "../../../assets/images/SucessImage.png";
 
 const props = defineProps({

@@ -3,33 +3,10 @@
     <div class="max-w-full md:max-w-none">
       <!-- Navigation Tabs -->
       <div class="relative border-b primary_border_color bg_secondary_color rounded-2xl p-xl">
-        <!-- Left Arrow Button (Mobile only) -->
-        <button
-          v-if="canScrollLeft"
-          @click.stop="scrollTabs('left')"
-          class="absolute left-2 top-1/2 -translate-y-1/2 z-10 md:hidden w-4 h-12 flex items-center justify-center bg_secondary_color"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.5 5L7.5 10L12.5 15" stroke="#15172E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-
-        <!-- Right Arrow Button (Mobile only) -->
-        <button
-          v-if="canScrollRight"
-          @click.stop="scrollTabs('right')"
-          class="absolute right-2 top-1/2 -translate-y-1/2 z-10 md:hidden w-4 h-12 flex items-center justify-center bg_secondary_color"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.5 5L12.5 10L7.5 15" stroke="#15172E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-
         <!-- Tabs Container -->
         <div 
           ref="tabsContainer"
           class="flex gap-xs md:gap-6xl overflow-x-auto scrollbar-hide lg:overflow-visible scroll-smooth mx-auto"
-          @scroll="checkScrollPosition"
         >
           <button
             v-for="(tab, index) in tabs"
@@ -88,7 +65,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, h, onMounted, nextTick } from "vue";
+import { ref, h, nextTick } from "vue";
 import UserProfile from "../components/Dashboard/Settings/UserProfile.vue"
 import Billing from "../components/Dashboard/Settings/Billing.vue"
 import Localization from "../components/Dashboard/Settings/localization.vue"
@@ -186,8 +163,6 @@ const DatabaseIcon = (props) =>
 const activeTab = ref("account");
 const tabsContainer = ref(null);
 const tabRefs = ref({});
-const canScrollLeft = ref(false);
-const canScrollRight = ref(true);
 
 const tabs = [
   {
@@ -217,30 +192,6 @@ const tabs = [
   },
 ];
 
-const checkScrollPosition = () => {
-  if (!tabsContainer.value) return;
-  
-  const container = tabsContainer.value;
-  const scrollLeft = container.scrollLeft;
-  const scrollWidth = container.scrollWidth;
-  const clientWidth = container.clientWidth;
-  
-  // Only show arrows if content overflows
-  const needsScrolling = scrollWidth > clientWidth;
-  
-  if (!needsScrolling) {
-    canScrollLeft.value = false;
-    canScrollRight.value = false;
-    return;
-  }
-  
-  // Check if we can scroll left
-  canScrollLeft.value = scrollLeft > 5; // Small threshold for rounding
-  
-  // Check if we can scroll right (with a small threshold to account for rounding)
-  canScrollRight.value = scrollLeft < (scrollWidth - clientWidth - 5);
-};
-
 const handleTabClick = (tabId, index) => {
   // Set active tab first
   activeTab.value = tabId;
@@ -256,54 +207,9 @@ const handleTabClick = (tabId, index) => {
         block: 'nearest',
         inline: 'center'
       });
-      
-      // Update scroll position after scroll
-      setTimeout(checkScrollPosition, 300);
     }
   });
 };
-
-const scrollTabs = (direction) => {
-  if (!tabsContainer.value) return;
-  
-  const container = tabsContainer.value;
-  const containerWidth = container.clientWidth;
-  
-  // On mobile, we show 2 tabs, so scroll by half the container width (one tab)
-  // On desktop, calculate based on actual tab width
-  const isMobile = window.innerWidth < 768;
-  let scrollAmount;
-  
-  if (isMobile) {
-    // Scroll by half container width (one tab) + gap
-    scrollAmount = (containerWidth / 2) + 4; // gap-1 = 4px
-  } else {
-    // Get the first visible tab button to calculate width
-    const firstButton = container.querySelector('button');
-    if (!firstButton) return;
-    const tabWidth = firstButton.offsetWidth;
-    const gap = 20; // gap-5 = 20px on desktop
-    scrollAmount = tabWidth + gap;
-  }
-  
-  if (direction === 'left') {
-    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-  } else {
-    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  }
-  
-  // Check position after a short delay to allow smooth scroll to complete
-  setTimeout(checkScrollPosition, 100);
-};
-
-onMounted(() => {
-  nextTick(() => {
-    checkScrollPosition();
-    // Also check on window resize
-    window.addEventListener('resize', checkScrollPosition);
-  });
-});
-
 
 </script>
 

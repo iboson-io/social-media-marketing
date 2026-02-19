@@ -12,7 +12,8 @@
       <div class="relative metric-dropdown-container hidden md:block">
         <button
           @click.stop="toggleMetricDropdown"
-          class="flex items-center gap-3xl rounded-lg border px-3 py-2 label_2_medium bg_secondary_color primary_border_color"
+          class="flex items-center gap-3xl rounded-lg border px-xl py-md label_2_medium bg_secondary_color primary_border_color"
+          :class="showMetricDropdown ? 'border-[3px] border-[#D9E2FC]':''"
         >
           <img :src="getMetricIcon(selectedMetric)" alt="" class="h-6xl w-6xl" />
           <span class="label_2_medium min-w-[7em] text-start primary_text_color">{{ getMetricLabel(selectedMetric) }}</span>
@@ -51,6 +52,7 @@
         <button
           @click.stop="toggleMetricDropdown"
           class="flex items-center gap-3xl rounded-lg border px-xl py-xxl bg_secondary_color primary_border_color"
+          :class="showMetricDropdown ? 'border-[3px] border-[#D9E2FC]':''"
         >
           <img :src="getMetricIcon(selectedMetric)" alt="" class="h-6xl w-6xl" />
           <span class="label_2_medium min-w-[7em] text-start primary_text_color">{{ getMetricLabel(selectedMetric) }}</span>

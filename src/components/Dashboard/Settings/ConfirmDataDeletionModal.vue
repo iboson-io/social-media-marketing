@@ -7,7 +7,7 @@
   >
     <!-- Modal -->
     <div
-      class="relative w-full max-w-xl mx-xs bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
+      class="relative w-full max-w-xl mx-3xl bg_secondary_color rounded-2xl shadow-2xl overflow-hidden p-6xl"
       @click.stop
     >
       <!-- Header -->

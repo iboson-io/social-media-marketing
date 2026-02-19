@@ -58,7 +58,7 @@
           <p class="heading_h6_semibold mt-3xl primary_text_color">Oct 26, 2025</p>
 
           <button
-            class="mt-xl rounded-md p-md bg-gray-25 w-4/5 lg:button_width label_1_semibold primary_text_color"
+            class="mt-xl rounded-md p-md bg-gray-25 w-4/5 lg:button_width label_1_semibold primary_text_color hover:bg-black-25"
           >
             Refill Credits
           </button>
@@ -103,7 +103,7 @@
       </p>
 
       <button
-        class="rounded-md bg-gray-25 mt-xxl label_1_semibold primary_text_color p-md w-48"
+        class="rounded-md bg-gray-25 mt-xxl label_1_semibold primary_text_color p-md w-48 hover:bg-black-25"
       >
         View Invoices
       </button>
