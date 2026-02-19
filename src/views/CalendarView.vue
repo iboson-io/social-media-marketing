@@ -76,7 +76,7 @@
           <div class="grid grid-cols-7 relative z-0"
             :class="selectedDate ? 'pointer-events-none lg:pointer-events-auto' : ''">
             <div v-for="date in calendarDays" :key="date.key" @click="openDateModal(date.fullDate)"
-              class="h-14 md:h-[4.8em]  primary_border_color p-lg relative cursor-pointer" :class="[
+              class="h-14 md:h-[4.4em]  primary_border_color p-lg relative cursor-pointer hover:bg-blue-25 hover:border hover:border-blue-200" :class="[
             date.isToday ? 'border border-blue-200' : '',
             !date.isCurrentMonth ? 'bg_secondary_color' : '',
             isDateSelected(date.fullDate) ? 'bg-blue-25 border-blue-200' : ''
@@ -516,10 +516,10 @@
                 ? 'bg-blue-25 rounded-lg py-md' 
                 : ''
             ]">
-              <p class="label_2_semibold flex flex-col hover:bg_primary_color active:bg_primary_color" :class="selectedWeekDay === day.dateString || (selectedWeekDay === null && day.isToday) 
+              <p class="label_2_semibold flex flex-col  active:bg_primary_color" :class="selectedWeekDay === day.dateString || (selectedWeekDay === null && day.isToday) 
                 ? 'primary_text_color' 
                 : 'secondary_text_color'">
-               <span class="hover:bg_primary_color active:bg_primary_color">{{ day.dateNumber }} </span> <span class="hover:bg_primary_color active:bg_primary_color">{{ day.dayLabel }}</span>
+               <span class="active:bg_primary_color">{{ day.dateNumber }} </span> <span class=" active:bg_primary_color">{{ day.dayLabel }}</span>
               </p>
             </div>
           </div>
@@ -613,7 +613,7 @@
           </div>
 
           <!-- Week Grid with Time Slots and Posts -->
-          <div ref="desktopWeekScrollContainer" class="grid overflow-auto h-[47vh] hide-scrollbar"
+          <div ref="desktopWeekScrollContainer" class="grid overflow-auto h-[44vh] hide-scrollbar"
             :class="windowWidth >= 768 ? '' : 'grid-cols-8'"
             :style="windowWidth >= 768 ? { gridTemplateColumns: weekGridTemplate } : {}">
             <!-- Time Column -->
@@ -629,7 +629,7 @@
                 <!-- Posts for this day and hour -->
                 <div v-for="post in getPostsForWeekDayAndHour(day.dateString, hour)" :key="post.id"
                   :data-post-id="post.id"
-                  class="absolute left-1 right-1 rounded-md bg_primary_color shadow-sm primary_border_color p-sm z-10 w-56"
+                  class="absolute left-1 right-1 rounded-md bg_primary_color shadow-sm primary_border_color p-sm z-10 w-60"
                   :style="{
                   top: `${getPostTopPosition(post.postTime)}px`,
                   height: 'auto',
@@ -685,7 +685,7 @@
       <div v-if="activeView === 'Day'" class="rounded-xl bg_secondary_color primary_border_color shadow mt-5xl">
 
         <!-- Day Header -->
-        <div class="flex items-center justify-between border-b border-gray-25 p-5xl">
+        <div class="flex items-center justify-between border-b border-gray-25 p-6xl">
           <button @click="prevDay"><img :src="CircleLeftArrow" alt=""></button>
 
           <p class="heading_h6_semibold primary_text_color">
@@ -867,7 +867,7 @@
   const scheduledPosts = ref([
     {
       id: 1,
-      postDate: "2026-01-01",
+      postDate: "2026-02-01",
       postTime: "09:00",
       platforms: ["instagram", "facebook"],
       postImage: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&h=200&fit=crop",
@@ -878,7 +878,7 @@
     },
     {
       id: 2,
-      postDate: "2026-01-30",
+      postDate: "2026-02-28",
       postTime: "10:30",
       platforms: ["instagram", "linkedin", "facebook"],
       postImage: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&h=200&fit=crop",
@@ -889,7 +889,7 @@
     },
     {
       id: 3,
-      postDate: "2026-01-16",
+      postDate: "2026-02-15",
       postTime: "10:00",
       platforms: ["instagram", "facebook", "twitter", "linkedin"],
       postImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop",
@@ -900,7 +900,7 @@
     },
     {
       id: 4,
-      postDate: "2026-02-16",
+      postDate: "2026-02-26",
       postTime: "14:00",
       platforms: ["instagram", "twitter"],
       postImage: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=200&h=200&fit=crop",

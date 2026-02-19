@@ -155,7 +155,7 @@
           </div>
         </div>
         <!-- Bottom Anchor for Auto-Scroll (height matches prompt box to ensure full scroll) -->
-        <div ref="scrollAnchor" class="h-60 md:h-56"></div>
+        <div ref="scrollAnchor" class="h-64 md:h-56"></div>
       </div>
     </div>
 

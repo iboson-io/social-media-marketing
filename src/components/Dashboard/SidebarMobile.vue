@@ -93,7 +93,7 @@
 
     <!-- User -->
     <div
-      class=" mt-7 p-2 flex items-center gap-3 rounded-md border cursor-pointer"
+      class=" mt-7 p-2 flex items-center gap-3 rounded-md cursor-pointer"
       :class="isCollapsed ? 'justify-center' : ''"
       @click.stop="showUserAccount = true"
     >

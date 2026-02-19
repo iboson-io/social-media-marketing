@@ -290,7 +290,7 @@ background-color: #f3f4f5;
 
 .button-gradient {
   --border-size: 1px;
-  --radius: 8px;
+  --radius: 12px;
   --angle: 0deg;
 
   padding: var(--border-size);
@@ -416,6 +416,31 @@ background-color: #f3f4f5;
   100% {
     background-position: 0% 50%;
   }
+}
+
+/* Remove autofill background color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+/* For dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--bg-secondary-color, #fff) inset !important;
+    box-shadow: 0 0 0 30px var(--bg-secondary-color, #fff) inset !important;
+  }
+}
+select:focus {
+  box-shadow: 0px 0px 0px 3px #D9E2FC;
+  outline: none;
 }
 
 

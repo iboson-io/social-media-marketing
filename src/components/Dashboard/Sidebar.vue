@@ -155,7 +155,7 @@
 
 
           <!-- User -->
-          <div class="relative group mt-7xl p-md flex items-center gap-md cursor-pointer"
+          <div class="relative group mt-7xl p-md flex items-center gap-md cursor-pointer rounded-md hover:bg_primary_color"
             :class="isCollapsed ? 'justify-center' : ''" @click.stop="showUserAccount = true"
             @mouseenter="hoveredItem = 'account'" @mouseleave="hoveredItem = null"
             :ref="el => { if (el) menuItemRefs['account'] = el }">

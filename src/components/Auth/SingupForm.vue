@@ -47,7 +47,7 @@
             @focus="focusedFields.name = true"
             @blur="focusedFields.name = false"
             type="text"
-            class="input_box w-full pt-4xl pb-md"
+            class="input_box w-full pt-4xl pb-md px-xl"
             :class="[
              inputClass(errors.name),
              focusedFields.name ? 'border border-info-50' : ''
@@ -74,7 +74,7 @@
             @focus="focusedFields.email = true"
             @blur="focusedFields.email = false"
             type="text"
-            class="input_box w-full pt-4xl pb-md"
+            class="input_box w-full pt-4xl pb-md px-xl"
             :class="[
              inputClass(errors.email),
              focusedFields.email ? 'border border-info-50' : ''
@@ -105,7 +105,7 @@
               @focus="focusedFields.password = true"
               @blur="focusedFields.password = false"
               type="text"
-              class="input_box w-full pt-4xl pb-md pr-10xl password-input"
+              class="input_box w-full pt-4xl pb-md pr-10xl password-input px-xl"
               :class="[
              inputClass(errors.password),
              focusedFields.password ? 'border border-info-50' : ''

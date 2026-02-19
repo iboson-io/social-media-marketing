@@ -7,7 +7,7 @@
       <section class="mt-xl max-w-3xl">
     <div class="grid grid-cols-1 gap-5xl md:grid-cols-3">
       <!-- Card 1 -->
-      <div class="p-5xl rounded-lg border primary_border_color bg_secondary_color">
+      <div class="p-5xl rounded-lg border primary_border_color bg_secondary_color hover:border-black-25">
         <div>
           <img :src="HomeIcon" class="icon" />
         </div>
@@ -20,7 +20,7 @@
       </div>
 
       <!-- Card 2 -->
-      <div class="p-5xl rounded-lg border primary_border_color bg_secondary_color">
+      <div class="p-5xl rounded-lg border primary_border_color bg_secondary_color hover:border-black-25">
         <div>
           <img :src="DateIcon" class="icon" />
         </div>
@@ -33,7 +33,7 @@
       </div>
 
       <!-- Card 3 -->
-      <div class="p-5xl rounded-lg border primary_border_color bg_secondary_color">
+      <div class="p-5xl rounded-lg border primary_border_color bg_secondary_color hover:border-black-25">
         <div>
           <img :src="GalleryIcon" class="icon " />
         </div>

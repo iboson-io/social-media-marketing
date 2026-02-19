@@ -31,7 +31,7 @@
  
       <PromptBox @send-message="handleFirstMessage" />
       <Cards />
-          <p class="body_4_regular secondary_text_color  block lg:hidden absolute left-0 right-0 bottom-7xl">Genius AI can make mistakes. Please check for accuracy.</p>
+          <p class="body_4_regular secondary_text_color  block lg:hidden absolute left-0 right-0 mt-5 md:mt-0 md:bottom-7xl">Genius AI can make mistakes. Please check for accuracy.</p>
     </div>
   </main>
 

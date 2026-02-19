@@ -27,7 +27,7 @@
           <div class="relative" ref="productsDropdownRef">
             <button
               @click="toggleProducts"
-              class="flex items-center gap-md rounded-lg border primary_border_color px-xl py-xs label_2_medium primary_text_color"
+              class="flex items-center gap-md rounded-lg border primary_border_color px-xl py-xs label_2_medium primary_text_color hover:bg-gray-25"
             >
               <img :src="ProductIcon" alt="" />
 
@@ -61,7 +61,7 @@
 
           <!-- Add Files -->
           <label
-            class="flex cursor-pointer items-center gap-md rounded-md border primary_border_color  px-xl py-xs label_2_medium primary_text_color"
+            class="flex cursor-pointer items-center gap-md rounded-md border primary_border_color  px-xl py-xs label_2_medium primary_text_color hover:bg-gray-25"
           >
             <img :src="AttachmentIcon" alt="" />
 
@@ -82,7 +82,7 @@
           <div class="relative" ref="modelsDropdownRef">
             <button
               @click="toggleModels"
-              class="flex items-center gap-md rounded-md border primary_border_color bg_secondary_color  px-xl py-xs label_2_medium primary_text_color"
+              class="flex items-center gap-md rounded-md border primary_border_color bg_secondary_color  px-xl py-xs label_2_medium primary_text_color hover:bg-gray-25"
             >
               <img :src="GeminiIcon" alt="" />
 

@@ -50,7 +50,7 @@
             @focus="focusedFields.email = true"
             @blur="focusedFields.email = false"
             type="text"
-            class="input_box w-full pt-4xl pb-md"
+            class="input_box w-full pt-4xl px-xl pb-md"
             :class="[
              inputClass(errors.email),
              focusedFields.email ? 'border border-info-50' : ''

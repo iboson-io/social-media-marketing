@@ -57,10 +57,10 @@
               :class="[
                 date.isEmpty ? '' : 
                 date.isPast ? 'text-black-50 cursor-not-allowed' :
-                date.isCurrentMonth ? 'primary_text_color cursor-pointer hover:bg-gray-25' : 'text-black-50 cursor-not-allowed',
-                !date.isEmpty && date.isCurrentMonth && !date.isPast && isDateSelected(date.fullDate) ? 'bg-black-600 text-white hover:bg-black-600' : '',
+                date.isCurrentMonth ? 'primary_text_color cursor-pointer' : 'text-black-50 cursor-not-allowed',
+                !date.isEmpty && date.isCurrentMonth && !date.isPast && isDateSelected(date.fullDate) ? 'bg-black-600 primary_2_text_color hover:bg-black-600' : '',
                 !date.isEmpty && date.isCurrentMonth && !date.isPast && !isDateSelected(date.fullDate) && isDateHovered(date.fullDate) ? 'bg-gray-25' : '',
-               // !date.isEmpty && date.isCurrentMonth && !date.isPast && !isDateSelected(date.fullDate) && !isDateHovered(date.fullDate) ? 'hover:bg-gray-100' : ''
+               // !date.isEmpty && date.isCurrentMonth && !date.isPast && !isDateSelected(date.fullDate) && !isDateHovered(date.fullDate) ? 'hover:bg-gray-800' : ''
               ]"
             >
               {{ date.day }}
@@ -154,7 +154,7 @@
             </button>
             <button
               @click="schedule"
-              class="rounded-lg bg-black-600 primary_2_text_color label_1_semibold p-xl w-24"
+              class="rounded-lg bg-black-400 hover:bg-black-700 primary_2_text_color label_1_semibold p-xl w-24"
             >
               Schedule
             </button>

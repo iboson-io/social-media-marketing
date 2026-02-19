@@ -38,7 +38,7 @@
             @focus="focusedFields.password = true"
             @blur="focusedFields.password = false"
             type="text"
-            class="input_box w-full pt-4xl pb-md pr-10xl password-input"
+            class="input_box w-full pt-4xl pb-md pr-10xl px-xl password-input"
             :class="[
               inputClass(errorMessage),
               focusedFields.password ? 'border border-info-50' : ''
