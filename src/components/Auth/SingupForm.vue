@@ -91,7 +91,7 @@
               (showPassword ? form.password : actualPassword) || focusedFields.password
                 ? 'top-0 label_2_medium secondary_text_color -translate-y-1/2 bg-white px-xs'
                 : 'top-1/2 -translate-y-1/2 secondary_text_color',
-              errors.password && (showPassword ? password : actualPassword) || focusedFields.password ? 'top-0' : errors.password  ? 'top-1/3' : ''
+              errors.password && (showPassword ? form.password : actualPassword) || focusedFields.password ? 'top-0' : errors.password  ? 'top-1/3' : ''
             ]"
           >
             Password
@@ -114,7 +114,7 @@
 
             <button
               type="button"
-              @click="togglePassword"
+              @click="togglePassword" 
               class="absolute right-xl top-1/2 -translate-y-1/2 z-20"
             >
               <img v-if="!showPassword" :src="EyeOpenIcon" />
