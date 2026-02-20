@@ -91,14 +91,18 @@
 </template>
 
 <script setup>
-  import { ref, computed } from "vue";
+  import { ref, computed, watch } from "vue";
   import ClearIcon from "../../assets/images/ClearIcon.svg";
-  import BellIcon from "../../assets/images/BellIcon.svg"
+  import BellIcon from "../../assets/images/BellIcon.svg";
+  import { useNotifications } from "../../composables/useNotifications";
 
   defineProps({
     open: Boolean,
     isCollapsed: Boolean,
   });
+
+  const emit = defineEmits(["close", "notificationCountChange"]);
+  const { setNotificationCount } = useNotifications();
 
   const activeTab = ref("all");
 
@@ -177,6 +181,16 @@
     notifications.value = [];
     activeTab.value = "all";
   };
+
+  /* WATCH NOTIFICATION COUNT AND EMIT CHANGES */
+  watch(
+    () => notifications.value.length,
+    (count) => {
+      emit("notificationCountChange", count);
+      setNotificationCount(count);
+    },
+    { immediate: true }
+  );
 </script>
 
 <style scoped>

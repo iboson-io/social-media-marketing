@@ -130,9 +130,10 @@
         " :ref="el => { if (el) menuItemRefs['notifications'] = el }">
             <img :src="notification.icon" class="h-5 w-5" />
 
-            <span v-if="!isCollapsed" class="label_2_semibold primary_text_color">
+            <span v-if="!isCollapsed" class="label_2_semibold primary_text_color flex-1">
               {{ notification.label }}
             </span>
+            <span v-if="hasNotifications" :class="isCollapsed ? 'absolute top-2 right-2' : ''" class="h-2 w-2 rounded-full bg-red-500"></span>
 
             <Teleport to="body">
               <div v-if="isCollapsed && hoveredItem === 'notifications'" :style="getTooltipStyle('notifications')"
@@ -184,7 +185,7 @@
       </div>
     </div>
     <!-- 🔔 NOTIFICATION POPUP -->
-    <NotificationPopup :open="showNotifications" :isCollapsed="isCollapsed" @close="showNotifications = false" />
+    <NotificationPopup :open="showNotifications" :isCollapsed="isCollapsed" @close="showNotifications = false" @notificationCountChange="handleNotificationCountChange" />
     <!-- 👤 USER ACCOUNT POPUP -->
     <UserAccountPopup :open="showUserAccount" :isCollapsed="isCollapsed" @close="showUserAccount = false"
       @signOut="handleSignOut" />
@@ -194,8 +195,9 @@
 </template>
 
 <script setup>
-  import { ref, onMounted, nextTick } from "vue";
+  import { ref, onMounted, nextTick, computed } from "vue";
   import { useRouter } from "vue-router";
+  import { useNotifications } from "../../composables/useNotifications";
 
   /* ✅ IMPORT POPUP */
   import NotificationPopup from "../../components/Dashboard/NotificationsView.vue";
@@ -223,6 +225,10 @@
   const hoveredItem = ref(null);
   const menuItemRefs = ref({});
   const hoverLogo = ref(false);
+  
+  // Use shared notification state
+  const { notificationCount } = useNotifications();
+  const hasNotifications = computed(() => notificationCount.value > 0);
 
   const handleSignOut = () => {
     // Handle sign out logic here
@@ -281,6 +287,11 @@
   ];
 
   const notification = { icon: NotificationIcon, label: "Notifications", tab: "notifications" }
+
+  const handleNotificationCountChange = (count) => {
+    // Notification count is updated via the composable in NotificationsView
+    // This handler is kept for compatibility but the composable handles the state
+  };
 
   const getTooltipStyle = (itemKey) => {
     const element = menuItemRefs.value[itemKey];

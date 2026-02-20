@@ -76,9 +76,10 @@
       >
         <img :src="notification.icon" class="h-5 w-5" />
 
-        <span v-if="!isCollapsed" class="label_2_semibold primary_text_color">
+        <span v-if="!isCollapsed" class="label_2_semibold primary_text_color flex-1">
           {{ notification.label }}
         </span>
+        <span v-if="hasNotifications" :class="isCollapsed ? 'absolute top-2 right-2' : ''" class="h-2 w-2 rounded-full bg-red-500"></span>
 
         <div
           v-if="isCollapsed"
@@ -117,8 +118,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useNotifications } from "../../composables/useNotifications";
 import PlusIcon from "../../assets/images/PlusIcon.svg";
 import CalenderIcon from "../../assets/images/CalendarIcon.svg";
 import SettingsIcon from "../../assets/images/SettingsIcon.svg";
@@ -140,6 +142,10 @@ const router = useRouter();
 const select = (tab) => emit("changeTab", tab);
 
 const showUserAccount = ref(false);
+
+// Use shared notification state
+const { notificationCount } = useNotifications();
+const hasNotifications = computed(() => notificationCount.value > 0);
 
 const handleSignOut = () => {
   // Handle sign out logic here
