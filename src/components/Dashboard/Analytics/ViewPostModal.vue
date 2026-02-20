@@ -126,12 +126,144 @@
     @close="closeScheduledModal"
     @viewCalendar="handleViewCalendar"
   />
+
+  <!-- Repost Modal - Right Side Panel -->
+  <div
+    v-if="showRepostModal"
+    class="fixed inset-0 z-[60] bg_overlay"
+    @click="closeRepostModal"
+  >
+    <!-- Modal - Positioned on the right -->
+    <div
+      class="fixed right-0 bottom-0 w-full top-0 hide-scrollbar md:max-w-lg max-h-screen overflow-y-auto bg_secondary_color shadow-2xl bg_primary_color"
+      @click.stop
+    >
+      <!-- Header -->
+      <div class="sticky top-0 bg_primary_color px-6xl py-6xl flex items-center justify-between z-10">
+        <h2 class="heading_h6_semibold primary_text_color">View post</h2>
+        <button
+          @click="closeRepostModal"
+          class="p-md border primary_border_color hover:bg-black-25 rounded-lg transition-colors"
+          aria-label="Close"
+        >
+          <img :src="closeIcon" alt="">
+        </button>
+      </div>
+
+      <!-- Content -->
+      <div class="px-6xl pb-6xl bg_primary_color">
+        <!-- Post Detail Content with Auto Scroll -->
+        <div class="flex-1 overflow-y-auto primary_border_color p-5xl rounded-lg custom-scrollbar-calendar bg_secondary_color">
+          <!-- Post Type Dropdown -->
+          <div class="relative">
+            <img :src="PostFilter" class="absolute left-2 top-[10px]" alt="">
+            <select
+              v-model="repostPostType"
+              class="w-full rounded-lg regular_border_color p-md label_2_medium primary_text_color bg_secondary_color appearance-none pl-9xl"
+            >
+              <option value="Instagram post (4:5)">Instagram post (4:5)</option>
+              <option value="Instagram post (1:1)">Instagram post (1:1)</option>
+              <option value="Instagram post (9:16)">Instagram post (9:16)</option>
+              <option value="Facebook post (4:5)">Facebook post (4:5)</option>
+              <option value="LinkedIn post (4:5)">LinkedIn post (4:5)</option>
+              <option value="Twitter post (16:9)">Twitter post (16:9)</option>
+            </select>
+            <img :src="DownArrow" alt="" class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          </div>
+
+          <!-- Image Preview -->
+          <div class="rounded-lg overflow-hidden bg_primary_color flex justify-center items-center mt-xl h-72">
+            <img
+              :src="postData?.image || postData?.postImage"
+              :alt="postData?.title"
+              class="w-full max-w-md object-contain"
+            />
+          </div>
+        </div>
+          <!-- Caption -->
+           <div class="flex mt-6xl items-center gap-md">
+            <p class="label_2_semibold primary_text_color">Label</p> 
+            <img :src="Iicon" alt="" class="w-5 h-5">
+           </div>
+          
+          <div class="relative mt-md">
+            <textarea
+              v-model="repostCaption"
+              class="w-full rounded-lg primary_border_color p-xl label_1_regular primary_text_color bg_secondary_color min-h-[140px] resize-none"
+              placeholder="Write your caption here..."
+            ></textarea>
+            <!-- AI Sparkle Icon -->
+            <button class="absolute bottom-3 right-3 p-md">
+              <img :src="AiIcon" alt="">
+            </button>
+          </div>
+
+          <!-- Platforms -->
+          <p class="label_2_medium primary_text_color mt-6xl">Platforms</p>
+          <div class="flex items-center gap-xl mt-md overflow-auto hide-scrollbar">
+            <img
+              v-for="platform in repostPlatforms"
+              :key="platform"
+              :src="getPlatformIcon(platform)"
+              :alt="platform"
+              class="w-10 h-10"
+            />
+            <img
+              @click="openRepostPlatformModal"
+              :src="ImageEditIcon"
+              alt=""
+              class="primary_border_color rounded-lg p-md cursor-pointer w-10 h-10"
+            >
+          </div>
+
+          <!-- Scheduled For -->
+          <div class="mt-6xl p-3xl primary_border_color rounded-lg bg_secondary_color">
+            <p
+              class="flex justify-between"
+              v-html="formatRepostScheduledTime()"
+              @click="handleRepostTimeClick"
+            ></p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-6xl mt-6xl relative">
+            <button
+              @click="handleSchedulePost"
+              class="w-full primary_button label_1_semibold flex items-center justify-center gap-md rounded-lg"
+            >
+              <img :src="CalendarIconWhite" alt="">
+              Schedule post
+            </button>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Media Platform Modal -->
+  <SocialMediaModal
+    :open="showRepostPlatformModal"
+    :selected-platforms="repostPlatforms"
+    @close="closeRepostPlatformModal"
+    @update:selected-platforms="updateRepostPlatforms"
+  />
+
+  <!-- Scheduler Calendar Modal -->
+  <SchedulerCalendarModal
+    :open="showRepostSchedulerModal"
+    :initial-date="repostSchedulerInitialDate"
+    :initial-time="repostSchedulerInitialTime"
+    @close="closeRepostSchedulerModal"
+    @schedule="handleRepostSchedule"
+  />
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import PostScheduledModal from './PostScheduledModal.vue';
 import AnalyticsStatCard from "./AnalyticsCard.vue"
+import SocialMediaModal from '../../Calendar/SocialMediaModal.vue';
+import SchedulerCalendarModal from '../../Calendar/SchedulerCalendarModal.vue';
 import LogoImage from '../../../assets/images/LogoImage.png';
 import PublishIcon from '../../../assets/images/PublishIcon.svg';
 import DownArrow from '../../../assets/images/DownArrow.svg';
@@ -141,6 +273,18 @@ import MessageIcon from '../../../assets/images/MessageIcon.svg';
 import LikeIcon from '../../../assets/images/LikeIcon.svg';
 import CommentIcon from '../../../assets/images/CommentIcon.svg';
 import RepostBottonIcon from "../../../assets/images/RepostBottonIcon.svg";
+import AiIcon from '../../../assets/images/AiIcon.svg';
+import ImageEditIcon from '../../../assets/images/ImageEditIcon.svg';
+import CalendarIconWhite from '../../../assets/images/CalendarIconWhite.svg';
+import SaveIcon from '../../../assets/images/SaveIcon.svg';
+import closeIcon from '../../../assets/images/BlackCloseIcon.svg';
+import InstagramIcon from '../../../assets/images/InstagramIcon.svg';
+import FacebookIcon from '../../../assets/images/FacebookIcon.svg';
+import LinkedInIcon from '../../../assets/images/LinkedInIcon.svg';
+import TwitterIcon from '../../../assets/images/TwitterIcon.svg';
+import TikTokIcon from '../../../assets/images/TikTokIcon.svg';
+import YoutubeIcon from '../../../assets/images/YoutubeIcon.svg';
+import Iicon from '../../../assets/images/Iicon.svg';
 
 
 const props = defineProps({
@@ -153,6 +297,18 @@ const emit = defineEmits(['close', 'repost', 'viewCalendar']);
 const showScheduledModal = ref(false);
 const showPlatformDropdown = ref(false);
 const selectedPlatform = ref(null);
+const showRepostModal = ref(false);
+const repostPostType = ref('Instagram post (4:5)');
+const repostCaption = ref('');
+const repostPlatforms = ref([]);
+const repostScheduledDate = ref(null); // Date object
+const repostScheduledTime = ref('00:00'); // HH:mm format
+const originalRepostData = ref(null); // Store original repost data to track changes
+const hasRepostUnsavedChanges = ref(false); // Track if there are unsaved changes
+const showRepostPlatformModal = ref(false); // State for platform modal
+const showRepostSchedulerModal = ref(false); // State for scheduler modal
+const repostSchedulerInitialDate = ref(null); // Initial date for scheduler
+const repostSchedulerInitialTime = ref(null); // Initial time for scheduler
 
 const statusClass = (status) => {
   if (status === 'Published') return ' bg-blue-25 text-blue-200';
@@ -216,10 +372,213 @@ const scheduledDate = computed(() => {
   return `${date} at ${time}`;
 });
 
+// Format date to YYYY-MM-DD
+const formatDateToString = (date) => {
+  if (!date) return '';
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+// Format time from HH:mm to readable format
+const formatTime = (timeString) => {
+  if (!timeString) return '12:00 AM';
+  const [hours, minutes] = timeString.split(':').map(Number);
+  const h = hours % 12 || 12;
+  const ampm = hours < 12 ? 'AM' : 'PM';
+  const m = minutes > 0 ? `:${String(minutes).padStart(2, '0')}` : '';
+  return `${h}${m} ${ampm}`;
+};
+
+// Format scheduled time for repost modal
+const formatRepostScheduledTime = () => {
+  if (!repostScheduledDate.value) return '';
+  
+  const date = new Date(repostScheduledDate.value);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const isToday = date.toDateString() === today.toDateString();
+  const isTomorrow = date.toDateString() === tomorrow.toDateString();
+
+  let dateLabel = '';
+  if (isToday) {
+    dateLabel = 'Today';
+  } else if (isTomorrow) {
+    dateLabel = 'Tomorrow';
+  } else {
+    dateLabel = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+  }
+
+  const timeDisplay = formatTime(repostScheduledTime.value);
+
+  return `<span class="label_2_medium secondary_text_color">Scheduled for </span><span class="body_3_medium primary_text_color cursor-pointer" data-time-clickable="true"> ${dateLabel} <span class="inline-block w-[1px] h-4 mx-1 xl:mx-2 bg-gray-400 align-middle"></span>${timeDisplay}</span>`;
+};
+
 const handleRepost = () => {
-  emit('repost', props.postData);
-  // Show scheduled modal instead of closing
+  // Initialize repost data from postData
+  const captionHtml = getFullCaption();
+  repostCaption.value = captionHtml.replace(/<[^>]*>/g, ''); // Remove HTML tags
+  
+  // Normalize platforms to lowercase for icon mapping
+  const platforms = props.postData?.platforms || ['instagram', 'facebook', 'tiktok', 'linkedin'];
+  repostPlatforms.value = platforms.map(p => typeof p === 'string' ? p.toLowerCase() : p);
+  
+  repostPostType.value = 'Instagram post (4:5)';
+  
+  // Set default scheduled time to today at 12:00 AM
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  repostScheduledDate.value = today;
+  repostScheduledTime.value = '00:00';
+  
+  // Store original data for change tracking
+  originalRepostData.value = {
+    postType: repostPostType.value,
+    caption: repostCaption.value,
+    platforms: [...repostPlatforms.value],
+    scheduledDate: new Date(repostScheduledDate.value),
+    scheduledTime: repostScheduledTime.value,
+  };
+  
+  hasRepostUnsavedChanges.value = false;
+  
+  // Show repost modal
+  showRepostModal.value = true;
+};
+
+const closeRepostModal = () => {
+  showRepostModal.value = false;
+  hasRepostUnsavedChanges.value = false;
+  originalRepostData.value = null;
+};
+
+// Platform modal handlers
+const openRepostPlatformModal = () => {
+  showRepostPlatformModal.value = true;
+};
+
+const closeRepostPlatformModal = () => {
+  showRepostPlatformModal.value = false;
+};
+
+const updateRepostPlatforms = (platforms) => {
+  repostPlatforms.value = platforms;
+  checkRepostForChanges();
+};
+
+// Scheduler modal handlers
+const openRepostSchedulerModal = () => {
+  if (repostScheduledDate.value) {
+    repostSchedulerInitialDate.value = new Date(repostScheduledDate.value);
+    repostSchedulerInitialTime.value = repostScheduledTime.value;
+  } else {
+    repostSchedulerInitialDate.value = new Date();
+    repostSchedulerInitialTime.value = '00:00';
+  }
+  showRepostSchedulerModal.value = true;
+};
+
+const closeRepostSchedulerModal = () => {
+  showRepostSchedulerModal.value = false;
+};
+
+const handleRepostSchedule = (scheduleData) => {
+  const newDate = scheduleData.date;
+  const newTime = scheduleData.time;
+
+  repostScheduledDate.value = newDate;
+  repostScheduledTime.value = newTime;
+
+  checkRepostForChanges();
+};
+
+// Handle click on time in scheduled time display
+const handleRepostTimeClick = (event) => {
+  if (event.target.dataset.timeClickable === 'true') {
+    openRepostSchedulerModal();
+  }
+};
+
+// Check if there are unsaved changes
+const checkRepostForChanges = () => {
+  if (!originalRepostData.value) {
+    hasRepostUnsavedChanges.value = false;
+    return;
+  }
+
+  // Check if platforms changed
+  const platformsChanged = JSON.stringify(repostPlatforms.value.sort()) !==
+    JSON.stringify(originalRepostData.value.platforms.sort());
+
+  // Check if date changed
+  const dateChanged = formatDateToString(repostScheduledDate.value) !==
+    formatDateToString(originalRepostData.value.scheduledDate);
+
+  // Check if time changed
+  const timeChanged = repostScheduledTime.value !== originalRepostData.value.scheduledTime;
+
+  // Check if other fields changed (caption, postType)
+  const otherFieldsChanged =
+    repostCaption.value !== originalRepostData.value.caption ||
+    repostPostType.value !== originalRepostData.value.postType;
+
+  hasRepostUnsavedChanges.value = platformsChanged || dateChanged || timeChanged || otherFieldsChanged;
+};
+
+const handleSchedulePost = () => {
+  // Emit repost event with the repost data
+  emit('repost', {
+    ...props.postData,
+    postType: repostPostType.value,
+    caption: repostCaption.value,
+    platforms: repostPlatforms.value,
+    postDate: formatDateToString(repostScheduledDate.value),
+    postTime: repostScheduledTime.value,
+  });
+
+  // Close repost modal and show scheduled confirmation
+  closeRepostModal();
   showScheduledModal.value = true;
+};
+
+// Watch for changes in repost fields
+watch(() => repostCaption.value, () => {
+  checkRepostForChanges();
+});
+
+watch(() => repostPostType.value, () => {
+  checkRepostForChanges();
+});
+
+watch(() => repostPlatforms.value, () => {
+  checkRepostForChanges();
+}, { deep: true });
+
+watch(() => repostScheduledDate.value, () => {
+  checkRepostForChanges();
+});
+
+watch(() => repostScheduledTime.value, () => {
+  checkRepostForChanges();
+});
+
+// Get platform icon
+const getPlatformIcon = (platform) => {
+  const platformMap = {
+    instagram: InstagramIcon,
+    facebook: FacebookIcon,
+    linkedin: LinkedInIcon,
+    twitter: TwitterIcon,
+    tiktok: TikTokIcon,
+    youtube: YoutubeIcon,
+  };
+  return platformMap[platform.toLowerCase()] || InstagramIcon;
 };
 
 const closeScheduledModal = () => {
