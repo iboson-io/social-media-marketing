@@ -290,9 +290,10 @@ import Iicon from '../../../assets/images/Iicon.svg';
 const props = defineProps({
   open: Boolean,
   postData: Object,
+  openRepostModal: Boolean,
 });
 
-const emit = defineEmits(['close', 'repost', 'viewCalendar']);
+const emit = defineEmits(['close', 'repost', 'viewCalendar', 'closeRepostModal']);
 
 const showScheduledModal = ref(false);
 const showPlatformDropdown = ref(false);
@@ -309,6 +310,7 @@ const showRepostPlatformModal = ref(false); // State for platform modal
 const showRepostSchedulerModal = ref(false); // State for scheduler modal
 const repostSchedulerInitialDate = ref(null); // Initial date for scheduler
 const repostSchedulerInitialTime = ref(null); // Initial time for scheduler
+const openedViaEditDesign = ref(false); // Track if repost modal was opened via Edit design
 
 const statusClass = (status) => {
   if (status === 'Published') return ' bg-blue-25 text-blue-200';
@@ -456,6 +458,13 @@ const closeRepostModal = () => {
   showRepostModal.value = false;
   hasRepostUnsavedChanges.value = false;
   originalRepostData.value = null;
+  emit('closeRepostModal');
+  
+  // If opened via Edit design, close the parent ViewPostModal as well
+  if (openedViaEditDesign.value) {
+    openedViaEditDesign.value = false;
+    emit('close');
+  }
 };
 
 // Platform modal handlers
@@ -597,6 +606,14 @@ watch(() => props.postData, (newData) => {
     selectedPlatform.value = availablePlatforms.value[0];
   }
 }, { immediate: true });
+
+// Watch for openRepostModal prop to open repost modal
+watch(() => props.openRepostModal, (shouldOpen) => {
+  if (shouldOpen && props.postData && !showRepostModal.value) {
+    openedViaEditDesign.value = true; // Mark that it was opened via Edit design
+    handleRepost();
+  }
+});
 
 // Initialize selected platform
 onMounted(() => {

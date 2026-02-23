@@ -175,8 +175,10 @@
   <ViewPostModal
     :open="showViewPostModal"
     :postData="selectedPost"
+    :openRepostModal="showRepostModal"
     @close="closeViewPostModal"
     @repost="handleRepostFromModal"
+    @closeRepostModal="showRepostModal = false"
   />
 
   <!-- Delete Post Modal -->
@@ -208,6 +210,7 @@ const selectedPost = ref(null);
 const selectedRows = ref([]);
 const showDeleteModal = ref(false);
 const postToDelete = ref(null);
+const showRepostModal = ref(false);
 const dropdownPositions = ref({});
 const dropdownStyles = ref({});
 const buttonRefs = ref({});
@@ -359,6 +362,7 @@ const handleViewPost = (row) => {
 const closeViewPostModal = () => {
   showViewPostModal.value = false;
   selectedPost.value = null;
+  showRepostModal.value = false;
 };
 
 const handleRepost = (row) => {
@@ -396,7 +400,10 @@ const handleEditDesign = (row) => {
     delete dropdownPositions.value[currentIndex];
     delete dropdownStyles.value[currentIndex];
   }
-  // Add your edit design logic here
+  // Set selected post and open repost modal
+  selectedPost.value = row;
+  showViewPostModal.value = true;
+  showRepostModal.value = true;
 };
 
 const handleDeletePost = (row) => {
